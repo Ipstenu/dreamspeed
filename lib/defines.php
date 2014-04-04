@@ -22,7 +22,8 @@ if (!defined('ABSPATH')) {
 }
 
 // Set up defaults
-define( 'DHDS', true);
+define( 'DHDS', 'DHDS');
+define( 'DHDSSET', 'DHDSSET');
 defined( 'DHDS_PLUGIN_DIR') || define('DHDS_PLUGIN_DIR', realpath(dirname(__FILE__) . '/..'));
 
 // Auto-discovery disabled
@@ -38,27 +39,3 @@ if (version_compare(phpversion(), '5.3', '<')) {
 
 // Standard content folder defines.
 if ( ! defined( 'WP_CONTENT_DIR' ) )  define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
-
-// Translations
-if ( !defined('dreamspeed')) {define('dreamspeed','dreamspeed');}
-
-// Setting Options
-if (!get_option( 'dhds_options' )) {
-    $dreamspeed_options = get_option( 'dhds_options' );
-        if ( !isset($dreamspeed_options['key']) ) $dreamspeed_options['key'] = 'Enter Key Here';
-        if ( !isset($dreamspeed_options['secretkey']) ) $dreamspeed_options['secretkey'] = 'Enter Secret Key Here';
-        if ( !isset($dreamspeed_options['url']) ) $dreamspeed_options['url'] = 'https://objects.dreamhost.com';
-    update_option('dhds_options', $dreamspeed_options);
-} else {
-    $dreamspeed_options = get_option( 'dhds_options' );
-}
-
-// The Help Screen
-function dreamhost_dreamspeed_plugin_help() {
-	include_once( DHDS_PLUGIN_DIR . '/admin/help.php' );
-}
-//add_action('contextual_help', 'dreamhost_dreamspeed_plugin_help', 10, 3);
-
-// Etc
-add_action('admin_menu', array('DHDSSET', 'add_settings_page'));
-add_action( 'init', array( 'DHDS', 'init' ) );

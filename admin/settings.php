@@ -32,20 +32,9 @@ $dreamspeed_options = get_option( 'dhds_options' );
 
  				<form method="post" action="options.php">
 				<?php
-                    settings_fields( 'dh-ds-keypair-settings' );
-                    do_settings_sections( 'dh-ds-keypair_page' );
-                    settings_fields( 'dh-ds-domain-settings' );
-                    do_settings_sections( 'dh-ds-domain_page' );                    
+                    settings_fields( 'dh-ds-settings_fields' );
+                    do_settings_sections( 'dh-ds-settings_sections' );                 
                     submit_button();
 				?>
-                </form>
-
-                <h3><?php echo __('Reset Options', dreamspeed); ?></h3>
-                <p><?php echo __('Click the button to wipe out all settings. This will reset your keypair, as well as all plugin options and wipe the debug log. It will <em>not</em> remove any backups.', dreamspeed); ?></p>
-                	<form method="post" action="options.php">
-                <?php settings_fields( 'dh-ds-reset-settings' ); ?>
-                <input type="hidden" name="page_options" value="dh-ds-reset" />
-                <input type="hidden" name="dhdo-reset" value="Y">
-                <?php submit_button('Reset Options', 'primary'); ?>
                 </form>
 			</div>

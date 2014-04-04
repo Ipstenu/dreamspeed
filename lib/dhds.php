@@ -21,22 +21,70 @@ if (!defined('ABSPATH')) {
     die();
 }
 
-include_once( DHDS_PLUGIN_DIR. '/aws/aws-autoloader.php');
-
 class DHDS {
-    // INIT - hooking into this lets us run things when a page is hit.
 
+    public static $options;
+    public static $defaults;
+
+	    public function __construct() {
+	        add_action( 'init', array( &$this, 'init' ) );
+	        
+	    	// Setting plugin defaults here:
+			DHDS::$defaults = array(
+		        'key'       => '1',
+		        'secretkey' => '1',
+		        'url'       => '1',
+		    );
+
+            if( !get_option('dhds_options') || is_null( get_option('dhds_options') ) ) {
+                update_option('dhds_options', DHDS::$defaults);
+            }
+
+	    }
+
+    // INIT - hooking into this lets us run things when a page is hit.
     public static function init() {
 
-        $dreamspeed_options = get_option( 'dhds_options' );
-
-        // RESET
-        if ( current_user_can('manage_options') && isset($_POST['dhds-reset']) && $_POST['dhds-reset'] == 'Y'  ) {
-            delete_option( 'dhds_options' );
-           }
+    // Translations
+    if ( !defined('dreamspeed')) {define('dreamspeed','dreamspeed');}
+    
+    // The Help Screen
+    function dreamhost_dreamspeed_plugin_help() {
+        include_once( DHDS_PLUGIN_DIR . '/admin/help.php' );
+    }
+    //add_action('contextual_help', 'dreamhost_dreamspeed_plugin_help', 10, 3);
+    add_action('admin_menu', array('DHDSSET', 'add_settings_page'));
         
         // UPDATE OPTIONS
-        if ( isset($_GET['settings-updated']) && isset($_GET['page']) && ( $_GET['page'] == 'dreamspeed-menu' || $_GET['page'] == 'dreamspeed-menu-backup' || $_GET['page'] == 'dreamspeed-menu-uploader' ) ) add_action('admin_notices', array('DHDSMESS','updateMessage'));
+        if ( isset($_GET['settings-updated']) && isset($_GET['page']) && ( $_GET['page'] == 'dreamspeed-menu') ) {
+            add_action('admin_notices', array('DHDSMESS','updateMessage'));            
+        }
+/*
+        // Actually copy files
+        
+        if (all the options are set) {
+            1. Copy up images in batches
+            2. Activate the function DHDS::image_filter
+            add_filter( 'init', array( 'DHDS', 'image_filter' ) );
+        }
+        
+*/        
     }
-   
+    
+    public static function image_filter() {
+        /* 
+        if (image exists on the cloud) {
+            filter content
+        } else {
+            return
+        }
+        */
+    }
+}
+
+DHDS::$options = get_option('dhds_options');
+
+//instantiate the class
+if (class_exists('DHDS')) {
+	new DHDS();
 }

@@ -21,9 +21,6 @@ if (!defined('ABSPATH')) {
     die();
 }
 
-
-include_once( DHDS_PLUGIN_DIR. '/aws/aws-autoloader.php');
-
 class DHDSSET {
     /**
      * Generates the settings page
@@ -47,41 +44,46 @@ class DHDSSET {
     
         $dreamspeed_options = get_option( 'dhds_options' );
 
-     // Keypair settings
-        add_settings_section( 'keypair_id', __('Key / Access Settings', 'dreamspeed'), 'keypair_callback', 'dh-ds-keypair_page' );
+        // Keypair settings
+        add_settings_section( 'settings_id', __('Key / Access Settings', 'dreamspeed'), array( DHDSSET, 'settings_callback'), 'dh-ds-settings_sections' );
         
-        register_setting( 'dh-ds-keypair-settings','dh-ds-key');
-        add_settings_field( 'key_id', __('Access Key', 'dreamspeed'), 'key_callback', 'dh-ds-keypair_page', 'keypair_id' );
+        register_setting( 'dh-ds-settings_fields','dhds_options', array( DHDSSET, 'validate_options') );
+        add_settings_field( 'key_id', __('Access Key', 'dreamspeed'), array( DHDSSET, 'key_callback'), 'dh-ds-settings_sections', 'settings_id' );
         
-        register_setting( 'dh-ds-keypair-settings','dh-ds-secretkey');
-        add_settings_field( 'secretkey_id', __('Secret Key', 'dreamspeed'), 'secretkey_callback', 'dh-ds-keypair_page', 'keypair_id' );
-
-        function keypair_callback() { 
-            echo '<p>'. __("Once you've configured your keypair here, you'll be able to use the features of this plugin.", dreamspeed).'</p>';
-            var_dump($dreamspeed_options);
-            var_dump( get_option( 'dhds_options' ) );
-        }
-    	function key_callback() {
-        	echo '<input type="text" name="dh-ds-key" value="'. $dreamspeed_options['key'] .'" class="regular-text"/>';
-    	}
-    	function secretkey_callback() {
-        	echo '<input type="text" name="dh-ds-secretkey" value="'. $dreamspeed_options['secretkey'] .'" class="regular-text"/>';
-    	}
-
-     // Domain Settings
-        add_settings_section( 'domain_id', __('Domain Settings', 'dreamspeed'), 'domain_callback', 'dh-ds-domain_page' );
+        register_setting( 'dh-ds-settings_fields','dhds_options', array( DHDSSET, 'validate_options') );
+        add_settings_field( 'secretkey_id', __('Secret Key', 'dreamspeed'), array( DHDSSET, 'secretkey_callback'), 'dh-ds-settings_sections', 'settings_id' );
         
-        register_setting( 'dh-ds-domain-settings','dh-ds-domain');
-        add_settings_field( 'dh-ds-domain_id',  __('URL', 'dreamspeed'), 'domain_url_callback', 'dh-ds-domain_page', 'domain_id' );
-        
-        function domain_callback() { 
-            echo '<p>'. __("Configure your site for CDN by entering your CDN name (or alias if you made one).", dreamspeed).'</p>';
-        }
-        function domain_url_callback() { 
-            echo '<input type="text" name="dh-ds-key" value="'. $dreamspeed_options['url'] .'" class="regular-text"/>';
-        }
-        
-    // Reset Settings
-        register_setting( 'dh-ds-reset-settings', 'dh-ds-reset');
+        register_setting( 'dh-ds-settings_fields','dhds_options', array( DHDSSET, 'validate_options') );
+        add_settings_field( 'dh-ds-domain_id',  __('URL', 'dreamspeed'), array( DHDSSET, 'domain_callback'), 'dh-ds-settings_sections', 'settings_id' );
     }
+    
+    // And all the callbacks:
+    static function settings_callback() { 
+        echo '<p>'. __("Once you've configured your keypair here, you'll be able to use the features of this plugin.", dreamspeed).'</p>';
+    }
+	static function key_callback() {
+    	echo '<input type="text" name="dhds_options[key]" value="'. DHDS::$options['key'] .'" class="regular-text"/>';	
+	}
+	static function secretkey_callback() {
+    	echo '<input type="text" name="dhds_options[secretkey]" value="'. DHDS::$options['secretkey'] .'" class="regular-text"/>';
+	}
+    static function domain_callback() { 
+        echo '<input type="text" name="dhds_options[url]" value="'. DHDS::$options['url'] .'" class="regular-text"/>';
+    }
+    
+    static function validate_options( $input ) {
+	    $options = wp_parse_args(get_option('dhds_options'), DHDS::$defaults );
+		$valid = array();
+
+	    foreach ($options as $key=>$value) {
+    	    if (!isset($input[$key])) $input[$key]=DHDS::$defaults;
+        }
+	    
+	    foreach ($options as $key=>$value) {
+    	    $valid[$key] = $input[$key];
+        }
+
+		unset( $input );
+		return $valid;
+	}
 }
