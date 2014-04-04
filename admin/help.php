@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
 $screen = get_current_screen();
 
 // For the DreamSpeed Page
-if ($screen->id == 'toplevel_page_dreamspeed-menu') {
+if ($screen->id == 'media_page_dreamspeed-menu') {
 
     // Introduction
     $screen->add_help_tab( array(

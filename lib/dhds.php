@@ -49,10 +49,10 @@ class DHDS {
     if ( !defined('dreamspeed')) {define('dreamspeed','dreamspeed');}
     
     // The Help Screen
-    function dreamhost_dreamspeed_plugin_help() {
+    function plugin_help() {
         include_once( DHDS_PLUGIN_DIR . '/admin/help.php' );
     }
-    //add_action('contextual_help', 'dreamhost_dreamspeed_plugin_help', 10, 3);
+    add_action('contextual_help', 'plugin_help', 10, 3);
     add_action('admin_menu', array('DHDSSET', 'add_settings_page'));
         
         // UPDATE OPTIONS
