@@ -1,33 +1,27 @@
-dreamspeed
+DreamSpeed CDN
 ==========
 
-DreamSpeed CDN
-
-Requirements
+# Requirements
 
 * PHP 5.3 or higher
 * A DreamHost DreamObjects account
 
+# Status
 
-DFAQ
+Right now this connects to your DHO account and lets you pick a bucket. It **does not** copy the images up yet.
+
+## To Do
+
+* Replace content dir settings
+* replace old URLs (filter)
+* Cron upload extant media
+
+# FAQ
 
 * Why is this separate from DreamObjects Connection?
 
-Because
+A few reasons
 
-== Notes
-
-require 'aws-autoloader.php';
-
-use Aws\Common\Aws;
-
-// Use custom config file
-$aws = Aws::factory('/home/user/dreamobjects_sdk_v2.php');
-
-$dreamobjects = $aws->get('DreamObjects');
-
-// List Buckets
-$result = $dreamobjects->listBuckets();
-foreach ($result['Buckets'] as $bucket) {
-   echo "- {$bucket['Name']}\n";
-}
+# Code. This plugin uses the new version of the SDK.
+# Susatainability. The original plugin may become a backup only.
+# Doing_it_right. This plugin has better code.
