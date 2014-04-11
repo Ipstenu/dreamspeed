@@ -32,5 +32,4 @@ class DHDSMESS {
         echo "<div id='message' class='error fade'><p><strong>".__('Error: The DreamSpeed CDN plugin requires PHP 5.3 or higher to run. Please upgrade your PHP or this plugin will not function correctly.)', dreamspeed)."</strong></p></div>";
     }
 
-
 }

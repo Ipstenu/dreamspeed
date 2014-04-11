@@ -24,6 +24,7 @@ if (!defined('ABSPATH')) {
 // Set up defaults
 define( 'DHDS', 'DHDS');
 define( 'DHDSSET', 'DHDSSET');
+define( 'DHDSMESS', 'DHDSMESS');
 defined( 'DHDS_PLUGIN_DIR') || define('DHDS_PLUGIN_DIR', realpath(dirname(__FILE__) . '/..'));
 
 // Auto-discovery disabled
@@ -33,7 +34,7 @@ if( !defined('AWS_DISABLE_CONFIG_AUTO_DISCOVERY') ) {
 
 // Error for PHP 5.2
 if (version_compare(phpversion(), '5.3', '<')) {
-    add_action('admin_notices', array('DHDOMESS','oldPHPError'));
+    add_action('admin_notices', array('DHDSMESS','oldPHPError'));
     return;
 }
 

@@ -34,7 +34,8 @@ Copyright 2012 Mika Epstein (email: ipstenu@ipstenu.org)
  * @package dh-ds-backups
  */
  
-require_once dirname(__FILE__) . '/lib/defines.php';
-require_once dirname(__FILE__) . '/lib/dhds.php';
-require_once dirname(__FILE__) . '/lib/messages.php';
-require_once dirname(__FILE__) . '/lib/settings.php';
+require_once dirname(__FILE__) . '/lib/defines.php';        // Default settings
+require_once dirname(__FILE__) . '/lib/dhds.php';           // The actual code
+require_once dirname(__FILE__) . '/lib/messages.php';       // Default messages
+require_once dirname(__FILE__) . '/lib/settings.php';       // Admin Settings
+require_once dirname(__FILE__) . '/aws/aws-autoloader.php'; // AWS SDK v2

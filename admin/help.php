@@ -50,9 +50,10 @@ if ($screen->id == 'media_page_dreamspeed-menu') {
 		'content' =>
 		'<h3>' . __('Setup', 'dreamspeed') .'</h3>' .
 		'<ol>' .
-		  '<li>' . __( 'Sign up for <a href="http://dreamhost.com/cloud/dreamspeed/">DreamSpeed</a>', dreamspeed ) . '</li>' .
+		  '<li>' . __( 'Sign up for <a href="http://dreamhost.com/cloud/dreamspeed/">DreamSpeed</a> and <a href="http://wiki.dreamhost.com/DreamSpeed_CDN_Overview">configure it</a>', dreamspeed ) . '</li>' .
 		  '<li>' . __( 'Install and Activate the plugin', dreamspeed ) . '</li>' .
 		  '<li>' . __( 'Fill in your Key and Secret Key', dreamspeed ) . '</li>' .
+		  '<li>' . __( 'Enter your desired domain name', dreamspeed ) . '</li>' .
         '</ol>'
 	  ));
     

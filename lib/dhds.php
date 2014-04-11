@@ -31,14 +31,15 @@ class DHDS {
 	        
 	    	// Setting plugin defaults here:
 			DHDS::$defaults = array(
-		        'key'       => '1',
-		        'secretkey' => '1',
-		        'url'       => '1',
+		        'key'       => null,
+		        'secretkey' => null,
+		        'url'       => null,
+		        'bucket'    => null,
 		    );
 
-            if( !get_option('dhds_options') || is_null( get_option('dhds_options') ) ) {
+            if( !get_option('dhds_options') || is_null( get_option('dhds_options') ) || !is_array( get_option('dhds_options') ) ) {
                 update_option('dhds_options', DHDS::$defaults);
-            }
+            } 
 
 	    }
 

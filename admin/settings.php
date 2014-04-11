@@ -21,8 +21,6 @@ if (!defined('ABSPATH')) {
     die();
 }
 
-include_once( DHDS_PLUGIN_DIR. '/aws/aws-autoloader.php');
-$dreamspeed_options = get_option( 'dhds_options' );
 ?>
 			<div class="wrap">
 				<div id="icon-dreamspeed" class="icon32"></div>
@@ -33,7 +31,28 @@ $dreamspeed_options = get_option( 'dhds_options' );
  				<form method="post" action="options.php">
 				<?php
                     settings_fields( 'dh-ds-settings_fields' );
-                    do_settings_sections( 'dh-ds-settings_sections' );                 
+                    do_settings_sections( 'dh-ds-settings1_sections' );
+                    
+                    // Validate!
+                    if ( DHDS::$options['key'] && DHDS::$options['secretkey'] ) {
+
+                        $dreamobjects = \Aws\S3\S3Client::factory( array(
+                                        'key'   => DHDS::$options['key'],
+                                        'secret'    => DHDS::$options['secretkey'],
+                                        'base_url'  => 'https://objects.dreamhost.com'
+                            )
+                        );
+                        
+                        // checking access_key, secret_key and bucket_name
+                        try {
+                            $result = $dreamobjects->listBuckets();
+                            do_settings_sections( 'dh-ds-settings2_sections' );  
+                        } catch (\Aws\S3\Exception\AccessDeniedException $e) {
+                            echo "<p><strong>".__('Access denied. Please check your keys.', dreamspeed)."</strong></p>";
+                        }
+                
+                    }
+
                     submit_button();
 				?>
                 </form>
