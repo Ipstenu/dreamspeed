@@ -22,6 +22,6 @@ Right now this connects to your DHO account and lets you pick a bucket. It **doe
 
 A few reasons
 
-# Code. This plugin uses the new version of the SDK.
-# Susatainability. The original plugin may become a backup only.
-# Doing_it_right. This plugin has better code.
+1. Code. This plugin uses the new version of the SDK.
+2. Susatainability. The original plugin may become a backup only.
+3. Doing_it_right. This plugin has better code.
