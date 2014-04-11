@@ -35,12 +35,12 @@ class DHDS {
 		        'secretkey' => null,
 		        'url'       => null,
 		        'bucket'    => null,
+		        'inuse'     => null,
 		    );
 
             if( !get_option('dhds_options') || is_null( get_option('dhds_options') ) || !is_array( get_option('dhds_options') ) ) {
                 update_option('dhds_options', DHDS::$defaults);
             } 
-
 	    }
 
     // INIT - hooking into this lets us run things when a page is hit.

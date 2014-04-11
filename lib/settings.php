@@ -54,12 +54,17 @@ class DHDSSET {
         // Bucket and Domain settings
         add_settings_section( 'settings2_id', __('Bucket and Domain Settings', dreamspeed), array( DHDSSET, 'settings2_callback'), 'dh-ds-settings2_sections' );
 
-        
         register_setting( 'dh-ds-settings_fields','dhds_options', array( DHDSSET, 'validate_options') );
         add_settings_field( 'dh-ds-domain_id',  __('Domain (URL)', dreamspeed), array( DHDSSET, 'domain_callback'), 'dh-ds-settings2_sections', 'settings2_id' );
 
         register_setting( 'dh-ds-settings_fields','dhds_options', array( DHDSSET, 'validate_options') );
         add_settings_field( 'dh-ds-bucket_id',  __('Bucket', dreamspeed), array( DHDSSET, 'bucket_callback'), 'dh-ds-settings2_sections', 'settings2_id' );
+        
+        // For realz use me settings
+        add_settings_section( 'settings3_id', __('Activation Settings', dreamspeed), array( DHDSSET, 'settings3_callback'), 'dh-ds-settings3_sections' );
+
+        register_setting( 'dh-ds-settings_fields','dhds_options', array( DHDSSET, 'validate_options') );
+        add_settings_field( 'dh-ds-inuse_id',  __('Use DreamSpeed CDN', dreamspeed), array( DHDSSET, 'inuse_callback'), 'dh-ds-settings3_sections', 'settings3_id' );
     }
     
     // And all the callbacks:
@@ -111,6 +116,14 @@ class DHDSSET {
                 echo "<p><strong>".__('Access denied. Please check your keys.', dreamspeed)."</strong></p>";
             }
         }
+    }
+
+    static function settings3_callback() { 
+        echo '<p>'. __("Activating this plugin will upload all current and future media to DreamSpeed.", dreamspeed).'</p>';
+    }
+    
+    static function inuse_callback() { 
+        echo '<input id="comments" name="dhds_options[inuse]" type="checkbox" value="1"'. checked( DHDS::$options['inuse'] , 1 ) .' />';
     }
 
     static function validate_options( $input ) {

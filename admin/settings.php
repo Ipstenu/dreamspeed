@@ -46,13 +46,16 @@ if (!defined('ABSPATH')) {
                         // checking access_key, secret_key and bucket_name
                         try {
                             $result = $dreamobjects->listBuckets();
-                            do_settings_sections( 'dh-ds-settings2_sections' );  
+                            do_settings_sections( 'dh-ds-settings2_sections' );
                         } catch (\Aws\S3\Exception\AccessDeniedException $e) {
                             echo "<p><strong>".__('Access denied. Please check your keys.', dreamspeed)."</strong></p>";
                         }
-                
                     }
-
+                    
+                    if ( DHDS::$options['key'] && DHDS::$options['secretkey'] && DHDS::$options['url'] && DHDS::$options['bucket'] ) {
+                        do_settings_sections( 'dh-ds-settings3_sections' );
+                    }
+                    
                     submit_button();
 				?>
                 </form>
