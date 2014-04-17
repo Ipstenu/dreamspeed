@@ -4,7 +4,7 @@ Plugin Name: DreamSpeed CDN
 Plugin URI: http://wordpress.org/extend/plugins/amazon-web-services/
 Description: Copies files to DreamSpeed as they are uploaded to the Media Library. Optionally configure a custom domain name as an alias.
 Author: Mika Epstein
-Version: 0.1
+Version: 0.1.1
 Author URI: http://dreamhost.com
 */
 
