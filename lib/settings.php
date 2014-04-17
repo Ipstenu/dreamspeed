@@ -2,18 +2,12 @@
 /*
     This file is part of DreamSpeed CDN , a plugin for WordPress.
 
-    DreamSpeed CDN  is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 2 of the License, or
-    (at your option) any later version.
-
-    DreamSpeed CDN  is distributed in the hope that it will be useful,
+    DreamSpeed CDN is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+    GNU General Public License v 3 for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with WordPress.  If not, see <http://www.gnu.org/licenses/>.
+    https://www.gnu.org/licenses/gpl-3.0.html
 
 */
 
@@ -69,7 +63,11 @@ class DHDSSET {
     
     // And all the callbacks:
     static function settings1_callback() { 
+<<<<<<< HEAD
         echo '<p>'. __("Once you've configured your keypair here, you'll be able to use the features of this plugin.", dreamspeed).'</p>';
+=======
+        echo '<p>'. __("Configuring your keypair is  blah blah blah.", dreamspeed).'</p>';
+>>>>>>> master
     }
 	static function key_callback() {
     	echo '<input type="text" name="dhds_options[key]" value="'. DHDS::$options['key'] .'" class="regular-text"/>';	
@@ -123,7 +121,11 @@ class DHDSSET {
     }
     
     static function inuse_callback() { 
+<<<<<<< HEAD
         echo '<input id="comments" name="dhds_options[inuse]" type="checkbox" value="1"'. checked( DHDS::$options['inuse'] , 1 ) .' />';
+=======
+        echo '<input id="comments" name="dhds_options[inuse]" type="checkbox" value="1"  '. checked( DHDS::$options['inuse'] , 1 ) .' />';
+>>>>>>> master
     }
 
     static function validate_options( $input ) {
