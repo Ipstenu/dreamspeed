@@ -2,18 +2,12 @@
 /*
     This file is part of DreamSpeed CDN, a plugin for WordPress.
 
-    DreamSpeed CDN is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 2 of the License, or
-    (at your option) any later version.
-
     DreamSpeed CDN is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+    GNU General Public License v 3 for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with WordPress.  If not, see <http://www.gnu.org/licenses/>.
+    https://www.gnu.org/licenses/gpl-3.0.html
 
 */
 
@@ -50,9 +44,10 @@ if ($screen->id == 'media_page_dreamspeed-menu') {
 		'content' =>
 		'<h3>' . __('Setup', 'dreamspeed') .'</h3>' .
 		'<ol>' .
-		  '<li>' . __( 'Sign up for <a href="http://dreamhost.com/cloud/dreamspeed/">DreamSpeed</a>', dreamspeed ) . '</li>' .
+		  '<li>' . __( 'Sign up for <a href="http://dreamhost.com/cloud/dreamspeed/">DreamSpeed</a> and <a href="http://wiki.dreamhost.com/DreamSpeed_CDN_Overview">configure it</a>', dreamspeed ) . '</li>' .
 		  '<li>' . __( 'Install and Activate the plugin', dreamspeed ) . '</li>' .
 		  '<li>' . __( 'Fill in your Key and Secret Key', dreamspeed ) . '</li>' .
+		  '<li>' . __( 'Enter your desired domain name', dreamspeed ) . '</li>' .
         '</ol>'
 	  ));
     
