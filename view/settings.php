@@ -24,8 +24,6 @@
 	
 		<p><?php printf( __( 'If you do have DreamSpeed, you can find your keys in your <a href="%s">panel</a>:', 'dreamspeed' ), 'https://panel.dreamhost.com/index.cgi?tree=cloud.objects&' ); ?></p>
 		
-		<p><img src="<?php echo plugins_url( 'tools/images/keys.png', $this->plugin_file_path ); ?>" width="90%" /></p>
-		
     <?php } // endif 
     else {
 	    
@@ -38,8 +36,8 @@
 	if ( isset( $_POST['access_key_id'] ) ) {
 		?>
 		<div class="updated">
-			<p>
-				<?php _e( 'Settings saved.', 'dreamspeed' ); ?>
+			<p class="description">
+				<div class="dashicons dashicons-yes"></div> <?php _e( 'Settings saved.', 'dreamspeed' ); ?>
 			</p>
 		</div>
 		<?php
@@ -60,7 +58,7 @@
 		<th width="33%" scope="row"><?php _e( 'Secret Key:', 'dreamspeed' ); ?></th>
 		<td><input type="text" name="secret_access_key" value="<?php echo $this->get_secret_access_key() ? '-- not shown --' : ''; ?>" size="50" autocomplete="off" />
 		
-		<p class="description"><?php _e( 'Your secret key will not display for your own security.', 'dreamspeed' ); ?></p>
+		<p class="description"><div class="dashicons dashicons-shield"></div>  <?php _e( 'Your secret key will not display for your own security.', 'dreamspeed' ); ?></p>
 		</td>
 	</tr>
 	<tr valign="top">

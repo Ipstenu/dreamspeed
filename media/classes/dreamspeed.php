@@ -15,14 +15,14 @@
 use Aws\S3\S3Client;
 
 class DreamSpeed_Services extends DreamObjects_Plugin_Base {
-	private $aws, $s3client;
+	private $dos, $doclient;
 
 	const SETTINGS_KEY = 'dreamspeed_cdn';
 
-	function __construct( $plugin_file_path, $aws ) {
+	function __construct( $plugin_file_path, $dos ) {
 		parent::__construct( $plugin_file_path );
 
-		$this->aws = $aws;
+		$this->aws = $dos;
 		add_action( 'aws_admin_menu', array( $this, 'admin_menu' ) );
 
 		$this->plugin_title = __( 'DreamSpeed CDN Configuration', 'dreamspeed' );
@@ -66,11 +66,11 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 				$intermediate_sizes[] = $intermediate;
 		}
 
-		if ( !( $s3object = $this->get_attachment_s3_info( $post_id ) ) ) {
+		if ( !( $dsobject = $this->get_attachment_dreamspeed_info( $post_id ) ) ) {
 			return;
 		}
 
-		$amazon_path = dirname( $s3object['key'] );
+		$amazon_path = dirname( $dsobject['key'] );
 		$objects = array();
 
 		// remove intermediate and backup images if there are any
@@ -98,8 +98,8 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 			}
 
 			try {
-				$this->get_s3client()->deleteObjects( array( 
-					'Bucket' => $s3object['bucket'],
+				$this->get_doclient()->deleteObjects( array( 
+					'Bucket' => $dsobject['bucket'],
 					'Objects' => $hidpi_images
 				) );
 			}
@@ -107,12 +107,12 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 		}
 
 		$objects[] = array(
-			'Key' => $s3object['key']
+			'Key' => $dsobject['key']
 		);
 
 		try {
-			$this->get_s3client()->deleteObjects( array( 
-				'Bucket' => $s3object['bucket'],
+			$this->get_doclient()->deleteObjects( array( 
+				'Bucket' => $dsobject['bucket'],
 				'Objects' => $objects
 			) );
 		}
@@ -153,7 +153,7 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 		$file_name = basename( $file_path );
 		$files_to_remove = array( $file_path );
 
-		$s3client = $this->get_s3client();
+		$doclient = $this->get_doclient();
 
 		$bucket = $this->get_setting( 'bucket' );
 
@@ -170,7 +170,7 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 		}
 
 		try {
-			$s3client->putObject( $args );
+			$doclient->putObject( $args );
 		}
 		catch ( Exception $e ) {
 			error_log( 'Error uploading ' . $file_path . ' to S3: ' . $e->getMessage() );
@@ -227,10 +227,10 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 		foreach ( $additional_images as $image ) {
 			try {
 				$args = array_merge( $args, $image );
-				$s3client->putObject( $args );
+				$doclient->putObject( $args );
 			}
 			catch ( Exception $e ) {
-				error_log( 'Error uploading ' . $args['SourceFile'] . ' to S3: ' . $e->getMessage() );
+				error_log( 'Error uploading ' . $args['SourceFile'] . ' to DreamSpeed: ' . $e->getMessage() );
 			}
 		}
 
@@ -301,13 +301,12 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 			return $url;
 		}
 		
-		$new_url = apply_filters( 'wps3_get_attachment_url', $new_url, $post_id, $this ); // Old naming convention, will be deprecated soon
 		$new_url = apply_filters( 'dreamspeed_wp_get_attachment_url', $new_url, $post_id );
 
 		return $new_url;
 	}
 
-	function get_attachment_s3_info( $post_id ) {
+	function get_attachment_dreamspeed_info( $post_id ) {
 		return get_post_meta( $post_id, 'amazonS3_info', true );
 	}
 
@@ -327,7 +326,7 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 	}
 
 	function get_attachment_url( $post_id, $expires = null ) {
-		if ( !$this->get_setting( 'serve-from-s3' ) || !( $s3object = $this->get_attachment_s3_info( $post_id ) ) ) {
+		if ( !$this->get_setting( 'serve-from-s3' ) || !( $dsobject = $this->get_attachment_dreamspeed_info( $post_id ) ) ) {
 			return false;
 		}
 
@@ -342,21 +341,21 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 			$domain_bucket = $this->get_setting( 'cloudfront' );
 		}
 		elseif ( $this->get_setting( 'virtual-host' ) ) {
-			$domain_bucket = $s3object['bucket'];
+			$domain_bucket = $dsobject['bucket'];
 		}
 		elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
-			$domain_bucket = 's3.amazonaws.com/' . $s3object['bucket'];
+			$domain_bucket = 'objects.dreamhost.com/' . $dsobject['bucket'];
 		}
 		else {
-			$domain_bucket = $s3object['bucket'] . '.s3.amazonaws.com';
+			$domain_bucket = $dsobject['bucket'] . '.objects.dreamhost.com';
 		}
 
-		$url = $scheme . '://' . $domain_bucket . '/' . $s3object['key'];
+		$url = $scheme . '://' . $domain_bucket . '/' . $dsobject['key'];
 
 		if ( !is_null( $expires ) ) {
 			try {
 				$expires = time() + $expires;
-				$secure_url = $this->get_s3client()->getObjectUrl( $s3object['bucket'], $s3object['key'], $expires );
+				$secure_url = $this->get_doclient()->getObjectUrl( $dsobject['bucket'], $dsobject['key'], $expires );
 				$url .= substr( $secure_url, strpos( $secure_url, '?' ) );
 			}
 			catch ( Exception $e ) {
@@ -364,7 +363,7 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 			}
 		}
 
-		return apply_filters( 'dreamspeed_get_attachment_url', $url, $s3object, $post_id, $expires );
+		return apply_filters( 'dreamspeed_get_attachment_url', $url, $dsobject, $post_id, $expires );
 	}
 
 	function verify_ajax_request() {
@@ -398,7 +397,7 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 
 	function create_bucket( $bucket_name ) {
 		try {
-			$this->get_s3client()->createBucket( array( 'Bucket' => $bucket_name ) );
+			$this->get_doclient()->createBucket( array( 'Bucket' => $bucket_name ) );
 		}
 		catch ( Exception $e ) {
 			return new WP_Error( 'exception', $e->getMessage() );
@@ -407,22 +406,22 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 		return true;
 	}
 
-	function admin_menu( $aws ) {
-		$hook_suffix = $aws->add_page( $this->plugin_title, $this->plugin_menu_title, 'manage_options', $this->plugin_slug, array( $this, 'render_page' ) );
+	function admin_menu( $dos ) {
+		$hook_suffix = $dos->add_page( $this->plugin_title, $this->plugin_menu_title, 'manage_options', $this->plugin_slug, array( $this, 'render_page' ) );
 		add_action( 'load-' . $hook_suffix , array( $this, 'plugin_load' ) );
 	}
 
-	function get_s3client() {
-		if ( is_null( $this->s3client ) ) {
-			$this->s3client = $this->aws->get_client()->get( 's3' );
+	function get_doclient() {
+		if ( is_null( $this->doclient ) ) {
+			$this->doclient = $this->aws->get_client()->get( 's3' );
 		}
 
-		return $this->s3client;
+		return $this->doclient;
 	}
 
 	function get_buckets() {
 		try {
-			$result = $this->get_s3client()->listBuckets();
+			$result = $this->get_doclient()->listBuckets();
 		}
 		catch ( Exception $e ) {
 			return new WP_Error( 'exception', $e->getMessage() );
@@ -473,10 +472,10 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 	function render_page() {
 		$this->aws->render_view( 'header', array( 'page_title' => $this->plugin_title ) );
 		
-		$aws_client = $this->aws->get_client();
+		$dos_client = $this->aws->get_client();
 
-		if ( is_wp_error( $aws_client ) ) {
-			$this->render_view( 'error', array( 'error' => $aws_client ) );
+		if ( is_wp_error( $dos_client ) ) {
+			$this->render_view( 'error', array( 'error' => $dos_client ) );
 		}
 		else {
 			$this->render_view( 'settings' );

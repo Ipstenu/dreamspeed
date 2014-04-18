@@ -34,7 +34,7 @@ if ( isset( $_GET['updated'] ) ) {
 	?>
 	<div class="updated">
 		<p>
-			<?php _e( 'Settings saved.', 'dreamspeed' ); ?>
+			<div class="dashicons dashicons-yes"></div> <?php _e( 'Settings saved.', 'dreamspeed' ); ?>
 		</p>
 	</div>
 	<?php
