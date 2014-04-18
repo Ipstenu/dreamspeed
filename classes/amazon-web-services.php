@@ -45,23 +45,13 @@ class Amazon_Web_Services extends AWS_Plugin_Base {
 		foreach ( $hook_suffixes as $hook_suffix ) {
 			add_action( 'load-' . $hook_suffix , array( $this, 'plugin_load' ) );
 		}
-
-		add_action( 'admin_print_styles', array( $this, 'enqueue_menu_styles' ) );
 	}
 
 	function add_page( $page_title, $menu_title, $capability, $menu_slug, $function = '' ) {
 		return add_submenu_page( $this->plugin_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
 	}
 
-	function enqueue_menu_styles() {
-		$src = plugins_url( 'assets/css/global.css', $this->plugin_file_path );
-		wp_enqueue_style( 'aws-global-styles', $src, array(), $this->get_installed_version() );
-	}
-
 	function plugin_load() {
-		$src = plugins_url( 'assets/css/styles.css', $this->plugin_file_path );
-		wp_enqueue_style( 'aws-styles', $src, array(), $this->get_installed_version() );
-		
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 		$src = plugins_url( 'assets/js/script' . $suffix . '.js', $this->plugin_file_path );

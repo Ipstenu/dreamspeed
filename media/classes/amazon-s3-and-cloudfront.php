@@ -420,9 +420,6 @@ class Amazon_S3_And_CloudFront extends AWS_Plugin_Base {
 	}
 
 	function plugin_load() {
-		$src = plugins_url( 'assets/css/styles.css', $this->plugin_file_path );
-		wp_enqueue_style( 'dreamspeed-styles', $src, array(), $this->get_installed_version() );
-
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 		$src = plugins_url( 'assets/js/script' . $suffix . '.js', $this->plugin_file_path );
