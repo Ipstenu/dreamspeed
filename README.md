@@ -5,15 +5,14 @@ DreamSpeed CDN
 
 * PHP 5.3 or higher
 * A DreamHost DreamObjects account
+* A pony
 
 # Status
 
-Right now this connects to your DHO account and lets you pick a bucket. It **does not** copy the images up yet.
+Functional. It will upload your new media only.
 
 ## To Do
 
-* Replace content dir settings
-* replace old URLs (filter)
 * Cron upload extant media
 
 # FAQ

@@ -11,11 +11,13 @@ Connect your WordPress install to your DreamHost DreamSpeed CDN for supercharged
 
 == Description ==
 
+<em>Note: If you have issues with the plugin, please post in the support forums here. Don't open a support ticket unless it's for setting up DreamSpeed in your Panel.</em>
+
 This plugin automatically copies images, videos, documents, and any other media added through WordPress' media uploader to DreamSpeed. It then automatically replaces the URL to each media file with their respective DreamObjects URL or, if you have configured a CDN Alias, the respective custom URL. Image thumbnails are also copied to DreamSpeed and delivered similarly.
 
-Uploading files directly to DreamSpeed is not currently supported by this plugin. They are uploaded to your server first, then copied to DreamSpeed. There is an option to automatically remove the files from your server once they are copied to DreamSpeed however.
+Uploading files directly to DreamSpeed is not currently supported by this plugin. They are uploaded to your server first, then copied to DreamSpeed.
 
-If you're adding this plugin to a site that's been around for a while, your existing media files will <em>not</em> be copied or served from DreamSpeed. Only newly uploaded files will be copied and served from DreamSpeed.
+If you're adding this plugin to a site that's been around for a while, your existing media files will <em>not</em> be copied or served from DreamSpeed. Only newly uploaded files will be copied and served from DreamSpeed at this time.
 
 Development happens on <a href="https://github.com/Ipstenu/dreamspeed/">Github</a>.
 
@@ -37,19 +39,15 @@ DreamSpeed CDN connects your WordPress site to the DreamSpeed CDN, automatically
 
 <strong>Do you work for DreamHost?</strong>
 
-Yes, but this isn't an official DreamHost plugin at this time. It just works.
+Yes, but this isn't an official DreamHost plugin at this time. I know that's a weird concept, but right now since I'm the only one writing and supporting it, it's not officially supported via DreamHost support. If you have problems, please post in the forums.
 
 <strong>Do I have to host my website on DreamHost?</strong>
 
-No, but using it anywhere else is unsupported. You have to use Dream<em>Speed</em>, which belongs to Dream<em>Host</em>. This plugin was built on and specifically for DreamHost servers, so I can give you no assurance it'll work on other hosts
-
-<strong>Can I use this on a Windows Server?</strong>
-
-This is unsupported. You can try, and let me know how it goes. I built this for DreamHost, so it has only been tested on Linux boxes.
+You have to use Dream<em>Speed</em>, which belongs to Dream<em>Host</em>. It should work on any modern host with PHP 5.3.3+ and cURL 7.16.2+ (with zLib and OpenSSL) and was tested on a few different Linux hosts, with both Apache and nginx. I have not tested on Windows Servers.
 
 <strong>Can I use this on Multisite?</strong>
 
-Not at this time.
+Yes, but it has to be configured per site.
 
 = Using the Plugin =
 
@@ -66,9 +64,11 @@ Not yet.
 
 
 == Screenshots ==
-1. DreamObjects Private Key
-1. Your DreamObjects Public Key
-1. The Settings Page
+
+1. DreamObjects Keys
+1. DreamObjects Buckets
+2. DreamObjects Bucket Settings
+
 
 == Changelog ==
 

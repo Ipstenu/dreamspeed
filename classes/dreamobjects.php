@@ -1,19 +1,19 @@
 <?php
 use Aws\Common\Aws;
 
-class Amazon_Web_Services extends AWS_Plugin_Base {
+class DreamObjects_Services extends DreamObjects_Plugin_Base {
 
 	private $plugin_title, $plugin_menu_title, $client;
 
-	const SETTINGS_KEY = 'aws_settings';
+	const SETTINGS_KEY = 'dreampress_settings';
 
 	function __construct( $plugin_file_path ) {
 		parent::__construct( $plugin_file_path );
 
-		do_action( 'aws_init', $this );
+		do_action( 'dreamspeed_init', $this );
 
 		if ( is_admin() ) {
-			do_action( 'aws_admin_init', $this );
+			do_action( 'dreamspeed_admin_init', $this );
 		}
 
 		if ( is_multisite() ) {
@@ -37,7 +37,7 @@ class Amazon_Web_Services extends AWS_Plugin_Base {
     		$submenu[$this->plugin_slug][0][0] = __( 'Settings', 'dreamspeed' );
 		}
 
-		$title = __( 'Settings', 'amazon-web-services' );
+		$title = __( 'Settings', 'dreamspeed' );
 		$hook_suffixes[] = $this->add_page( $title, $title, $this->plugin_permission, $this->plugin_slug, array( $this, 'render_page' ) );
 
 		do_action( 'aws_admin_menu', $this );
@@ -52,18 +52,12 @@ class Amazon_Web_Services extends AWS_Plugin_Base {
 	}
 
 	function plugin_load() {
-		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-
-		$src = plugins_url( 'assets/js/script' . $suffix . '.js', $this->plugin_file_path );
-		wp_enqueue_script( 'aws-script', $src, array( 'jquery' ), $this->get_installed_version(), true );
-
-		if ( isset( $_GET['page'] ) && 'aws-addons' == $_GET['page'] ) {
-			add_thickbox();
-		}
+		$src = plugins_url( 'tools/js/script.js', $this->plugin_file_path );
+		wp_enqueue_script( 'dreamspeed-script', $src, array( 'jquery' ), $this->get_installed_version(), true );
 
 		$this->handle_post_request();
 
-		do_action( 'aws_plugin_load', $this );
+		do_action( 'dreamspeed_plugin_load', $this );
 	}
 
 	function handle_post_request() {
@@ -71,7 +65,7 @@ class Amazon_Web_Services extends AWS_Plugin_Base {
 			return;
 		}
 
-		if ( empty( $_POST['_wpnonce'] ) || !wp_verify_nonce( $_POST['_wpnonce'], 'aws-save-settings' ) ) {
+		if ( empty( $_POST['_wpnonce'] ) || !wp_verify_nonce( $_POST['_wpnonce'], 'dreamspeed-save-settings' ) ) {
 			die( __( "Cheatin' eh?", 'dreamspeed' ) );
 		}
 
@@ -101,41 +95,22 @@ class Amazon_Web_Services extends AWS_Plugin_Base {
 		}
 
 		$view = 'settings';
-		if ( preg_match( '@^aws-(.*)$@', $_GET['page'], $matches ) ) {
-			$allowed = array( 'addons' );
-			if ( in_array( $matches[1], $allowed ) ) {
-				$view = $matches[1];
-			}
-		}
-
 		$this->render_view( 'header' );
 		$this->render_view( $view );
 		$this->render_view( 'footer' );
 	}
 
-	function are_key_constants_set() {
-		return defined( 'DREAMSPEED_KEY' ) && defined( 'DREAMSPEED_SECRET_KEY' );
-	}
-
 	function get_access_key_id() {
-		if ( $this->are_key_constants_set() ) {
-			return DREAMSPEED_KEY;
-		}
-
 		return $this->get_setting( 'access_key_id' );
 	}
 
 	function get_secret_access_key() {
-		if ( $this->are_key_constants_set() ) {
-			return DREAMSPEED_SECRET_KEY;
-		}
-
 		return $this->get_setting( 'secret_access_key' );
 	}
 
 	function get_client() {
 		if ( !$this->get_access_key_id() || !$this->get_secret_access_key() ) {
-			return new WP_Error( 'access_keys_missing', sprintf( __( 'Please set your <a href="%s">set your access keys</a> first.', 'dreamspeed' ), 'admin.php?page=' . $this->plugin_slug ) );
+			return new WP_Error( 'access_keys_missing', sprintf( __( 'Please <a href="%s">set your access keys</a> first.', 'dreamspeed' ), 'admin.php?page=' . $this->plugin_slug ) );
 		}
 
 		if ( is_null( $this->client ) ) {
@@ -151,30 +126,4 @@ class Amazon_Web_Services extends AWS_Plugin_Base {
 		return $this->client;
 	}
 
-	/*
-	function get_tabs() {
-		$tabs = array( 'addons' => 'Addons', 'settings' => 'Settings', 'about' => 'About' );
-		return apply_filters( 'aws_get_tabs', $tabs, $this );
-	}
-
-	function get_active_tab() {
-		if ( isset( $_GET['tab'] ) ) {
-			$tab = $_GET['tab'];
-			$tabs = $this->get_tabs();
-			if ( isset( $tabs[$tab] ) ) {
-				return $tab;
-			}
-		}
-
-		if ( !$this->get_access_key_id() ) {
-			return 'settings';
-		}
-
-		return 'addons'; // Default
-	}
-	*/
-
-	function get_plugin_install_url( $slug ) {
-		return wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $slug ), 'install-plugin_' . $slug );
-	}
 }

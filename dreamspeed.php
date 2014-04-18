@@ -48,14 +48,14 @@ if ( is_admin() && ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) ) {
 	}
 }
 
-require_once 'classes/aws-plugin-base.php';
-require_once 'classes/amazon-web-services.php';
-require_once 'media/wordpress-s3.php';
+require_once 'classes/plugin-base.php';
+require_once 'classes/dreamobjects.php';
+require_once 'media/media.php';
 require_once 'vendor/aws/aws-autoloader.php';
 
 function amazon_web_services_init() {
     global $amazon_web_services;
-    $amazon_web_services = new Amazon_Web_Services( __FILE__ );
+    $amazon_web_services = new DreamObjects_Services( __FILE__ );
 }
 
 add_action( 'init', 'amazon_web_services_init' );
@@ -65,8 +65,8 @@ function amazon_web_services_activation() {
 		return;
 	}
 
-	if ( !get_site_option( Amazon_Web_Services::SETTINGS_KEY ) ) {
-		add_site_option( Amazon_Web_Services::SETTINGS_KEY, array(
+	if ( !get_site_option( DreamObjects_Services::SETTINGS_KEY ) ) {
+		add_site_option( DreamObjects_Services::SETTINGS_KEY, array(
 			'access_key_id' => $dreamspeed['key'],
 			'secret_access_key' => $dreamspeed['secret']
 		) );

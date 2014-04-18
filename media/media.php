@@ -16,7 +16,7 @@
 // Then completely rewritten.
 
 function dreamspeed_check_required_plugin() {
-    if ( class_exists( 'Amazon_Web_Services' ) || !is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+    if ( class_exists( 'DreamObjects_Services' ) || !is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
         return;
     }
 
@@ -43,8 +43,8 @@ add_action( 'plugins_loaded', 'dreamspeed_check_required_plugin' );
 
 function dreamspeed_init( $aws ) {
     global $dreamspeed;
-    require_once 'classes/amazon-s3-and-cloudfront.php';
-    $dreamspeed = new Amazon_S3_And_CloudFront( __FILE__, $aws );
+    require_once 'classes/dreamspeed.php';
+    $dreamspeed = new DreamSpeed_Services( __FILE__, $aws );
 }
 
-add_action( 'aws_init', 'dreamspeed_init' );
+add_action( 'dreamspeed_init', 'dreamspeed_init' );

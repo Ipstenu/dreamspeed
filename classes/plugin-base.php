@@ -1,5 +1,5 @@
 <?php
-class AWS_Plugin_Base {
+class DreamObjects_Plugin_Base {
 
 	protected $plugin_file_path, $plugin_dir_path, $plugin_slug, $plugin_basename;
 	private $settings;

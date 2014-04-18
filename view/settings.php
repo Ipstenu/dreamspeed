@@ -2,27 +2,38 @@
 
 	<h3>Access Keys</h3>
 	
-	<?php if ( !$this->get_secret_access_key() ) : ?>
-    <p>
-		<?php printf( __( 'If you don&#8217;t have an DreamSpeed CDN and DreamObjects account yet, you need to <a href="%s">sign up</a>.', 'dreamspeed' ), 'http://www.dreamhost.com/cloud/dreamspeedcdn/' ); ?>
-	</p>
+	<?php 
+	if ( !$this->get_secret_access_key() ) { ?>
+    	<p><?php printf( __( 'If you don&#8217;t have an DreamSpeed CDN and DreamObjects account yet, you need to <a href="%s">sign up</a>.', 'dreamspeed' ), 'http://www.dreamhost.com/cloud/dreamspeedcdn/' ); ?></p>
 	
-	<p>
-	    <?php printf( __( 'If you do have DreamSpeed, you can find your keys in your <a href="%s">panel</a>.', 'dreamspeed' ), 'https://panel.dreamhost.com/index.cgi?tree=cloud.objects&' ); ?>
-	</p>
-	
-    <?php endif; ?>
+		<p><?php printf( __( 'If you do have DreamSpeed, you can find your keys in your <a href="%s">panel</a>:', 'dreamspeed' ), 'https://panel.dreamhost.com/index.cgi?tree=cloud.objects&' ); ?></p>
+		
+		<p><img src="<?php echo plugins_url( 'tools/images/keys.png', $this->plugin_file_path ); ?>" width="90%" /></p>
+		
+    <?php } // endif 
+    else {
+	    
+    }  
+    ?>
 	
 	<form method="post">
 
-	<?php if ( isset( $_POST['access_key_id'] ) ) : ?>
-	<div class="aws-updated">
-		<p><strong>Settings saved.</strong></p>
-	</div>
-	<?php endif; ?>
+	<?php 
+	if ( isset( $_POST['access_key_id'] ) ) {
+		?>
+		<div class="updated">
+			<p>
+				<?php _e( 'Settings saved.', 'dreamspeed' ); ?>
+			</p>
+		</div>
+		<?php
+	}
+	?>
+
+
 
 	<input type="hidden" name="action" value="save" />
-	<?php wp_nonce_field( 'aws-save-settings' ) ?>
+	<?php wp_nonce_field( 'dreamspeed-save-settings' ) ?>
 
 	<table class="form-table">
 	<tr valign="top">
