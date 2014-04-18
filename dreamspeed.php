@@ -1,28 +1,30 @@
 <?php
 /*
 Plugin Name: DreamSpeed CDN
-Plugin URI: http://wordpress.org/extend/plugins/amazon-web-services/
+Plugin URI: https://github.com/Ipstenu/dreamspeed/
 Description: Copies files to DreamSpeed as they are uploaded to the Media Library. Optionally configure a custom domain name as an alias.
 Author: Mika Epstein
 Version: 0.1
 Author URI: http://dreamhost.com
-*/
 
-// Copyright (c) 2013 Brad Touesnard. All rights reserved.
-// Copyright (c) 2014 Mika A Epstein. All rights reserved.
-//
-// This plugin is a fork of the following:
-// * http://wordpress.org/extend/plugins/amazon-web-services/
-// * https://wordpress.org/plugins/amazon-web-services/
-//
-// Released under the GPL license v3
-// http://www.opensource.org/licenses/gpl-license.php
-//
-// **********************************************************************
-// This program is distributed in the hope that it will be useful, but
-// WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// **********************************************************************
+
+Copyright (c) 2013 Brad Touesnard. All rights reserved.
+Copyright (c) 2014 Mika A Epstein. All rights reserved.
+
+This plugin is a fork of the following:
+ * http://wordpress.org/extend/plugins/amazon-web-services/
+ * https://wordpress.org/plugins/amazon-web-services/
+
+    This file is part of DreamSpeed CDN, a plugin for WordPress.
+
+    DreamSpeed CDN is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License v 3 for more details.
+
+    https://www.gnu.org/licenses/gpl-3.0.html
+
+*/
 
 function amazon_web_services_incompatibile( $msg ) {
 	require_once ABSPATH . '/wp-admin/includes/plugin.php';

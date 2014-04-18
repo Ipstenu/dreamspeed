@@ -1,4 +1,17 @@
 <?php
+
+/*
+    This file is part of DreamSpeed CDN, a plugin for WordPress.
+
+    DreamSpeed CDN is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License v 3 for more details.
+
+    https://www.gnu.org/licenses/gpl-3.0.html
+
+*/
+
 use Aws\S3\S3Client;
 
 class DreamSpeed_Services extends DreamObjects_Plugin_Base {

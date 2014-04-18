@@ -1,19 +1,17 @@
 <?php
 
-// Copyright (c) 2013 Brad Touesnard. All rights reserved.
-//
-// Released under the GPL license
-// http://www.opensource.org/licenses/gpl-license.php
-//
-// **********************************************************************
-// This program is distributed in the hope that it will be useful, but
-// WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// **********************************************************************
-//
-// Forked Amazon S3 for WordPress with CloudFront (http://wordpress.org/extend/plugins/tantan-s3-cloudfront/)
-// which is a fork of Amazon S3 for WordPress (http://wordpress.org/extend/plugins/tantan-s3/).
-// Then completely rewritten.
+/*
+    This file is part of DreamSpeed CDN, a plugin for WordPress.
+
+    DreamSpeed CDN is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License v 3 for more details.
+
+    https://www.gnu.org/licenses/gpl-3.0.html
+
+*/
+
 
 function dreamspeed_check_required_plugin() {
     if ( class_exists( 'DreamObjects_Services' ) || !is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {

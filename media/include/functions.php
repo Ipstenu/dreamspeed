@@ -1,8 +1,18 @@
 <?php
+
+/*
+    This file is part of DreamSpeed CDN, a plugin for WordPress.
+
+    DreamSpeed CDN is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License v 3 for more details.
+
+    https://www.gnu.org/licenses/gpl-3.0.html
+
+*/
+
 /**
- * Alias of dreamspeed_get_secure_attachment_url for backward compatibility
- * Will be depreated in a later version
- *
  * @since 2.0
  * @access public
  * @param mixed $post_id Post ID of the attachment or null to use the loop
