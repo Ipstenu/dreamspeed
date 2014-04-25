@@ -12,7 +12,7 @@
 
 */
 
-use Aws\Common\Aws;
+use Aws\Common\Aws as AwsCDN;
 
 class DreamObjects_Services extends DreamObjects_Plugin_Base {
 
@@ -133,7 +133,7 @@ class DreamObjects_Services extends DreamObjects_Plugin_Base {
 			    'base_url' => 'http://objects.dreamhost.com',
 			);
 			$args = apply_filters( 'aws_get_client_args', $args );
-			$this->client = Aws::factory( $args );
+			$this->client = AwsCDN::factory( $args );
 		}
 
 		return $this->client;

@@ -97,14 +97,14 @@ if ( isset( $_GET['updated'] ) ) {
 		<input type="checkbox" name="serve-from-s3" value="1" id="serve-from-s3" <?php echo $this->get_setting( 'serve-from-s3' ) ? 'checked="checked" ' : ''; ?> />
 		<label for="serve-from-s3"> <?php _e( 'Point file URLs to DreamSpeed/DNS Alias for files that have been copied to S3 <em>(recommended)</em>', 'dreamspeed' ); ?></label>
 		<br />
-
+<!--
 		<input type="checkbox" name="force-ssl" value="1" id="force-ssl" <?php echo $this->get_setting( 'force-ssl' ) ? 'checked="checked" ' : ''; ?> />
 		<label for="force-ssl"> <?php _e( 'Always serve files over https (SSL)', 'dreamspeed' ); ?></label>
 		<br />
 
 		<input type="checkbox" name="hidpi-images" value="1" id="hidpi-images" <?php echo $this->get_setting( 'hidpi-images' ) ? 'checked="checked" ' : ''; ?> />
 		<label for="hidpi-images"> <?php _e( 'Copy any HiDPI (@2x) images to CDN (works with WP Retina 2x plugin)', 'dreamspeed' ); ?></label>
-
+-->
 	</td>
 </tr>
 <tr valign="top">
@@ -116,4 +116,37 @@ if ( isset( $_GET['updated'] ) ) {
 
 </form>
 
-</div>
+
+<?php if ( count($this->get_attachment_without_dreamspeed_info()) != 0 ) {
+	?>
+	<form method="post">
+	<input type="hidden" name="action" value="migrate" />
+	<?php wp_nonce_field( 'dreamspeed-save-settings' ) ?>
+	
+	<table class="form-table">
+	<tr valign="top">
+		<td>
+			<h3><?php _e( 'Migrate Exisiting Files', 'dreamspeed' ); ?></h3>
+	
+			<p><?php _e( 'If want to upload existing images, check the following box and they will begin to upload to DreamSpeed. If you have a high number of images, the uploader will run as long as it can, and then <em>schedule</em> a retry in an hour. To see if your images are uploaded to the Cloud, check the <a href="upload.php">Media Library</a>. Any item with a Y under CDN is uploaded. The uploader will automattically rerun itself on your images, no need to re-run!', 'dreamspeed' ); ?></p>
+	
+			<p><input type="checkbox" name="migrate-to-dreamspeed" value="1" id="migrate-to-dreamspeed" />
+			<label for="migrate-to-dreamspeed"> <?php printf( __( '%d file(s) can be migrated to DreamSpeed.', 'dreamspeed' ), count($this->get_attachment_without_dreamspeed_info()) ); ?></label>
+			</p>
+	
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<button type="submit" class="button button-primary"><?php _e( 'Start Upload', 'dreamspeed' ); ?></button>
+		</td>
+	</tr>
+	</table>
+	</form>
+<?php } else { ?>
+
+	<h3><?php _e( 'Migrate Exisiting Files', 'dreamspeed' ); ?></h3>
+
+	<p><?php _e( 'All your media files are uploaded to the cloud! Celebrate!', 'dreamspeed' ); ?></p>
+
+<?php } ?>

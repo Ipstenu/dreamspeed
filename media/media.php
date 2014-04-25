@@ -19,3 +19,21 @@ function dreamspeed_init( $dos ) {
 }
 
 add_action( 'dreamspeed_init', 'dreamspeed_init' );
+
+// Columns to show where media is
+function dreamspeed_media_column( $cols ) {
+        $cols["dreamspeed"] = "CDN";
+        return $cols;
+}
+function dreamspeed_media_column_content( $column_name, $id ) {
+
+    switch ($column_name) {
+    case 'dreamspeed' :
+    	
+    	$meta = get_post_meta($id, 'amazonS3_info' );
+        if( !empty( $meta ) ) { echo '<div title="YES!" class="dashicons dashicons-yes"></div>'; }
+    break;
+    }
+}
+add_filter( 'manage_media_columns', 'dreamspeed_media_column' );
+add_action( 'manage_media_custom_column', 'dreamspeed_media_column_content', 10, 2 );

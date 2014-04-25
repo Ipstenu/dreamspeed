@@ -12,7 +12,7 @@
 
 */
 
-use Aws\S3\S3Client;
+use Aws\S3\S3Client as AwsS3CDN;
 
 class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 	private $dos, $doclient;
@@ -444,7 +444,7 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 	}
 
 	function handle_post_request() {
-		if ( empty( $_POST['action'] ) || 'save' != $_POST['action'] ) {
+		if ( empty( $_POST['action'] ) || !in_array($_POST['action'], array('save', 'migrate')) ) {
 			return;
 		}
 
@@ -452,18 +452,24 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 			die( __( "Cheatin' eh?", 'dreamspeed' ) );
 		}
 
-		$this->set_settings( array() );
+		if ( 'migrate' == $_POST['action'] ) {
+			$this->bulk_upload_to_dreamspeed();
+		}
+		elseif ( 'save' == $_POST['action'] ) {
 
-		$post_vars = array( 'bucket', 'virtual-host', 'expires', 'permissions', 'cloudfront', 'object-prefix', 'copy-to-s3', 'serve-from-s3', 'remove-local-file', 'force-ssl', 'hidpi-images', 'object-versioning' );
-		foreach ( $post_vars as $var ) {
-			if ( !isset( $_POST[$var] ) ) {
-				continue;
+			$this->set_settings( array() );
+
+			$post_vars = array( 'bucket', 'virtual-host', 'expires', 'permissions', 'cloudfront', 'object-prefix', 'copy-to-s3', 'serve-from-s3', 'remove-local-file', 'force-ssl', 'hidpi-images', 'object-versioning' );
+			foreach ( $post_vars as $var ) {
+				if ( !isset( $_POST[$var] ) ) {
+					continue;
+				}
+
+				$this->set_setting( $var, $_POST[$var] );
 			}
 
-			$this->set_setting( $var, $_POST[$var] );
+			$this->save_settings();
 		}
-
-		$this->save_settings();
 
 		wp_redirect( 'admin.php?page=' . $this->plugin_slug . '&updated=1' );
 		exit;
@@ -505,6 +511,66 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 		} else {
 			return $upload_path;
 		}
+	}
+
+	// Upload things that already exist 
+	// CREDIT: https://github.com/bradt/wp-tantan-s3/pull/45
+
+	function bulk_upload_to_dreamspeed() {
+	
+		$max_time = ini_get('max_execution_time');
+        $time_start = microtime(true);
+        
+		$attachments = $this->get_attachment_without_dreamspeed_info();
+		
+		if($attachments && !empty($attachments) ) {
+			foreach ($attachments as $attachment) {
+				if( microtime(true) - $time_start >= $max_time - 5 ) {
+	                // Check to see if we are getting close to the max_execution_time
+	                // We give ourselves a 5 second window to be safe.
+	                
+	                if ( ! wp_next_scheduled( 'dreamspeed_media_sync' ) ) {
+						wp_schedule_event( time(), 'hourly', 'dreamspeed_media_sync');
+					}
+	                
+	                break;
+	            }
+			
+				$file   = get_attached_file( $attachment->ID );
+				$oldURL = wp_get_attachment_url( $attachment->ID);
+				$data   = wp_generate_attachment_metadata( $attachment->ID, $file );
+				$this->wp_generate_attachment_metadata(array(), $attachment->ID);
+				
+				if( $item->post_parent > 0  ) {
+	                if($parent_post = get_post($attachment->post_parent)) {
+	                    $upload_dir = wp_upload_dir();
+	                    $parent_post->post_content = str_replace( $oldURL, $this->get_attachment_url($attachment->ID), $parent_post->post_content );
+	                    wp_update_post($parent_post);
+	                }
+	            }
+	
+			}
+		} else if(empty($attachments)) {
+            wp_clear_scheduled_hook( 'dreamspeed_media_sync' );			
+		}
+	}
+
+	function get_attachment_without_dreamspeed_info() {
+		$args = array(
+				'posts_per_page'   => -1,
+				'meta_query' => array(
+						array(
+								'key' => 'amazonS3_info',
+								'compare' => 'NOT EXISTS'
+						)
+				),
+				'post_type'        => 'attachment',
+		);
+		return get_posts( $args );
+	}
+	
+	function dreamspeed_media_sync() {
+		$this->bulk_upload_to_dreamspeed();
 	}
 
 }
