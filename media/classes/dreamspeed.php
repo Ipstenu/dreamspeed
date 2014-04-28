@@ -70,8 +70,14 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 		// Default object prefix
 		if ( 'object-prefix' == $key && !isset( $settings['object-prefix'] ) ) {
 			$uploads = wp_upload_dir();
-			$parts = parse_url( $uploads['baseurl'] );
-			return substr( $parts['path'], 1 ) . '/';
+
+			if ( !is_multisite() ) {
+				$path = $uploads['path'];
+			} else {
+				$path = $uploads['subdir'];
+			}
+
+			return substr( $path, 1 ) . '/';
 		}
 
 		return parent::get_setting( $key );
@@ -526,7 +532,14 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 
 	function get_dynamic_prefix( $time = null ) {
 		$uploads = wp_upload_dir( $time );
-		return str_replace( $this->get_base_upload_path(), '', $uploads['path'] );
+
+		if ( !is_multisite() ) {
+			$path = $uploads['path'];
+		} else {
+			$path = $uploads['subdir'];
+		}
+
+		return str_replace( $this->get_base_upload_path(), '', $path );
 	}
 
 	// Without the multisite subdirectory
@@ -536,7 +549,7 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 		}
 
 		$upload_path = trim( get_option( 'upload_path' ) );
-
+		
 		if ( empty( $upload_path ) || 'wp-content/uploads' == $upload_path ) {
 			return WP_CONTENT_DIR . '/uploads';
 		} elseif ( 0 !== strpos( $upload_path, ABSPATH ) ) {
@@ -564,12 +577,12 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 	                // We give ourselves a 5 second window to be safe.
 	                
 	                if ( ! wp_next_scheduled( 'dreamspeed_media_sync' ) ) {
-						wp_schedule_event( time(), 'hourly', 'dreamspeed_media_sync');
+						wp_schedule_event( time(), 'hourly', array($this,'dreamspeed_media_sync') );
 					}
 	                
 	                break;
 	            }
-			
+
 				$file   = get_attached_file( $attachment->ID );
 				$oldURL = wp_get_attachment_url( $attachment->ID);
 				$data   = wp_generate_attachment_metadata( $attachment->ID, $file );

@@ -71,7 +71,7 @@ if ( isset( $_GET['updated'] ) ) {
 		<p><label><?php _e( 'Object Path:', 'dreamspeed' ); ?></label>
 		<input type="text" name="object-prefix" value="<?php echo esc_attr( $this->get_setting( 'object-prefix' ) ); ?>" size="30" />
 		<label><?php echo trailingslashit( $this->get_dynamic_prefix() ); ?></label></p>
-		<p class="description"><?php _e( 'For example, <code>wp-content/uploads/</code> and so on.', 'dreamspeed' ); ?></p>
+		<p class="description"><?php _e( 'The default is <code>wp-content/uploads/</code> for everyone, even Multisite.', 'dreamspeed' ); ?></p>
 	</td>
 </tr>
 
@@ -138,7 +138,7 @@ if ( isset( $_GET['updated'] ) ) {
 	</tr>
 	<tr valign="top">
 		<td>
-			<button type="submit" class="button button-primary"><?php _e( 'Start Upload', 'dreamspeed' ); ?></button>
+			<button type="submit" class="button button-secondary"><?php _e( 'Upload Existing Media', 'dreamspeed' ); ?></button>
 		</td>
 	</tr>
 	</table>

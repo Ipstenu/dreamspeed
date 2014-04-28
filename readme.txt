@@ -27,6 +27,7 @@ Development happens on <a href="https://github.com/Ipstenu/dreamspeed/">Github</
 
 * Figure out why sometimes the existing media URLs are wrong and fix that
 * Prettify and clean language
+* Different message for uploading media vs updating plugin settings
 * Create cleanup script
 * Drink moar
 * Install a unicorn
