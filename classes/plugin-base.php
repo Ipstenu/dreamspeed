@@ -26,7 +26,7 @@ class DreamObjects_Plugin_Base {
 
 	function get_settings( $force = false ) {
 		if ( is_null( $this->settings ) || $force ) {
-			$this->settings = get_site_option( static::SETTINGS_KEY );
+			$this->settings = get_option( static::SETTINGS_KEY );
 		}
 		return $this->settings;
 	}
@@ -55,7 +55,7 @@ class DreamObjects_Plugin_Base {
 	}
 
 	function save_settings() {
-		update_site_option( static::SETTINGS_KEY, $this->settings );
+		update_option( static::SETTINGS_KEY, $this->settings );
 	}
 
 	function get_installed_version() {

@@ -29,14 +29,8 @@ class DreamObjects_Services extends DreamObjects_Plugin_Base {
 			do_action( 'dreamspeed_admin_init', $this );
 		}
 
-		if ( is_multisite() ) {
-			add_action( 'network_admin_menu', array( $this, 'admin_menu' ) );
-			$this->plugin_permission = 'manage_network_options';
-		}
-		else {
-			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-			$this->plugin_permission = 'manage_options';
-		}
+		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		$this->plugin_permission = 'manage_options';
 
 		$this->plugin_title = __( 'DreamSpeed CDN', 'dreamspeed' );
 		$this->plugin_menu_title = __( 'DreamSpeed', 'dreamspeed' );

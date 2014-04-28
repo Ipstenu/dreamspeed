@@ -7,7 +7,6 @@ Author: Mika Epstein
 Version: 0.1-beta
 Author URI: http://dreamhost.com
 
-
 Copyright (c) 2013 Brad Touesnard. All rights reserved.
 Copyright (c) 2014 Mika A Epstein. All rights reserved.
 
