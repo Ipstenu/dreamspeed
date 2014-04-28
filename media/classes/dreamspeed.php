@@ -167,6 +167,7 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 
 		$file_path = get_attached_file( $post_id, true );
 
+		$acl = apply_filters( 'wps3_upload_acl', 'public-read', $type, $data, $post_id, $this ); // Old naming convention, will be deprecated soon
 		$acl = apply_filters( 'dreamspeed_upload_acl', $acl, $data, $post_id );
 
 		if ( !file_exists( $file_path ) ) {
