@@ -125,7 +125,7 @@ class DreamObjects_Services extends DreamObjects_Plugin_Base {
 		if ( !$this->get_access_key_id() || !$this->get_secret_access_key() ) {
 			return new WP_Error( 'access_keys_missing', sprintf( __( '<div class="dashicons dashicons-no"></div> Please <a href="%s">set your access keys</a> first.', 'dreamspeed' ), 'admin.php?page=' . $this->plugin_slug ) );
 		}
-
+		
 		if ( is_null( $this->client ) ) {
 			$args = array(
 			    'key'      => $this->get_access_key_id(),

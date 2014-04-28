@@ -27,6 +27,7 @@ Development happens on <a href="https://github.com/Ipstenu/dreamspeed/">Github</
 
 * Figure out why sometimes the existing media URLs are wrong and fix that
 * Prettify and clean language
+* Create cleanup script
 * Drink moar
 * Install a unicorn
 
@@ -93,6 +94,9 @@ Let me explain that second one, it's weird, and yes, it's a bug. So if you uploa
 
 Again. Yes, its a bug. The fallback right now is that it simply won't edit your existing posts that don't match URLs 100%.
 
+<strong>Why aren't my images found?</strong>
+
+Check if they're failing on the CDN alias, but they do work at the objects.dreamhost.com URL. If so, you somehow goofed your permissions. You have to go into the DreamObjects editor andf set permissions from PRIVATE to PUBLIC. This happens usually because the bucket was private when you made it.
 
 == Screenshots ==
 

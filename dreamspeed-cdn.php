@@ -26,7 +26,7 @@ This plugin is a fork of the following:
 
 */
 
-function amazon_web_services_incompatibile( $msg ) {
+function dreamspeed_core_incompatibile( $msg ) {
 	require_once ABSPATH . '/wp-admin/includes/plugin.php';
 	deactivate_plugins( __FILE__ );
     wp_die( $msg );
@@ -34,49 +34,30 @@ function amazon_web_services_incompatibile( $msg ) {
 
 if ( is_admin() && ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) ) {
 	if ( version_compare( PHP_VERSION, '5.3.3', '<' ) ) {
-		amazon_web_services_incompatibile( __( 'The official Amazon Web Services SDK, which DreamSpeed relies on, requires PHP 5.3 or higher. The plugin has now disabled itself.', 'dreamspeed' ) );
+		dreamspeed_core_incompatibile( __( 'The official Amazon Web Services SDK, which DreamSpeed relies on, requires PHP 5.3 or higher. The plugin has now disabled itself.', 'dreamspeed' ) );
 	}
 	elseif ( !function_exists( 'curl_version' ) 
 		|| !( $curl = curl_version() ) || empty( $curl['version'] ) || empty( $curl['features'] )
 		|| version_compare( $curl['version'], '7.16.2', '<' ) )
 	{
-		amazon_web_services_incompatibile( __( 'The official Amazon Web Services SDK, which DreamSpeed relies on requires cURL 7.16.2+. The plugin has now disabled itself.', 'dreamspeed' ) );
+		dreamspeed_core_incompatibile( __( 'The official Amazon Web Services SDK, which DreamSpeed relies on requires cURL 7.16.2+. The plugin has now disabled itself.', 'dreamspeed' ) );
 	}
 	elseif ( !( $curl['features'] & CURL_VERSION_SSL ) ) {
-		amazon_web_services_incompatibile( __( 'The official Amazon Web Services SDK, which DreamSpeed relies on requires that cURL is compiled with OpenSSL. The plugin has now disabled itself.', 'dreamspeed' ) );
+		dreamspeed_core_incompatibile( __( 'The official Amazon Web Services SDK, which DreamSpeed relies on requires that cURL is compiled with OpenSSL. The plugin has now disabled itself.', 'dreamspeed' ) );
 	}
 	elseif ( !( $curl['features'] & CURL_VERSION_LIBZ ) ) {
-		amazon_web_services_incompatibile( __( 'The official Amazon Web Services SDK, which DreamSpeed relies on requires that cURL is compiled with zlib. The plugin has now disabled itself.', 'dreamspeed' ) );
+		dreamspeed_core_incompatibile( __( 'The official Amazon Web Services SDK, which DreamSpeed relies on requires that cURL is compiled with zlib. The plugin has now disabled itself.', 'dreamspeed' ) );
 	}
 }
 
 require_once 'classes/plugin-base.php';
 require_once 'classes/dreamobjects.php';
-require_once 'media/media.php';
 require_once 'vendor/aws/aws-autoloader.php';
-
-function amazon_web_services_init() {
-    global $amazon_web_services;
-    $amazon_web_services = new DreamObjects_Services( __FILE__ );
+require_once 'media/media.php';
+		
+function dreamspeed_core_init() {
+    global $dreamspeed_core;
+    $dreamspeed_core = new DreamObjects_Services( __FILE__ );
 }
 
-add_action( 'init', 'amazon_web_services_init' );
-
-function amazon_web_services_activation() {
-	if ( !isset( $dreamspeed['key'] ) || !isset( $dreamspeed['secret'] ) ) {
-		return;
-	}
-
-	if ( !get_site_option( DreamObjects_Services::SETTINGS_KEY ) ) {
-		add_site_option( DreamObjects_Services::SETTINGS_KEY, array(
-			'access_key_id' => $dreamspeed['key'],
-			'secret_access_key' => $dreamspeed['secret']
-		) );
-	}
-
-	unset( $dreamspeed['key'] );
-	unset( $dreamspeed['secret'] );
-
-	update_option( 'dreamspeed_cdn', $dreamspeed );
-}
-register_activation_hook( __FILE__, 'amazon_web_services_activation' );
+add_action( 'init', 'dreamspeed_core_init' );

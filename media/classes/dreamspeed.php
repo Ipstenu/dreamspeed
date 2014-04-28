@@ -20,19 +20,43 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 	const SETTINGS_KEY = 'dreamspeed_cdn';
 
 	function __construct( $plugin_file_path, $dos ) {
+
 		parent::__construct( $plugin_file_path );
 
 		$this->aws = $dos;
 		add_action( 'aws_admin_menu', array( $this, 'admin_menu' ) );
-
+	
 		$this->plugin_title = __( 'DreamSpeed CDN Configuration', 'dreamspeed' );
 		$this->plugin_menu_title = __( 'CDN', 'dreamspeed' );
-
+	
 		add_action( 'wp_ajax_dreamspeed-create-bucket', array( $this, 'ajax_create_bucket' ) );
 
-		add_filter( 'wp_get_attachment_url', array( $this, 'wp_get_attachment_url' ), 9, 2 );
-		add_filter( 'wp_generate_attachment_metadata', array( $this, 'wp_generate_attachment_metadata' ), 20, 2 );
-		add_filter( 'delete_attachment', array( $this, 'delete_attachment' ), 20 );
+		if ( $this->is_plugin_setup() && ( $this->get_setting( 'copy-to-s3' ) == 1 ) ) {
+			add_filter( 'wp_get_attachment_url', array( $this, 'wp_get_attachment_url' ), 9, 2 );
+			add_filter( 'wp_generate_attachment_metadata', array( $this, 'wp_generate_attachment_metadata' ), 20, 2 );
+			add_filter( 'delete_attachment', array( $this, 'delete_attachment' ), 20 );
+			add_filter( 'manage_media_columns', array( $this, 'media_column' ) );
+			add_action( 'manage_media_custom_column', array( $this, 'media_column_content' ), 10, 2 );
+		}	
+	}
+
+	// Columns to show where media is
+	function media_column( $cols ) {
+	        $cols["dreamspeed"] = "CDN";
+	        return $cols;
+	}
+	function media_column_content( $column_name, $id ) {
+	
+	    switch ($column_name) {
+		    case 'dreamspeed' :
+		    	$meta = get_post_meta($id, 'amazonS3_info' );
+		        if( !empty( $meta ) ) { 
+		        	echo '<div title="YES!" class="dashicons dashicons-yes" style="color: #7ad03a;"></div>';
+		        } else {
+			        echo '<div title="No :(" class="dashicons dashicons-no" style="color: #dd3d36;"></div>';
+		        }
+		    break;
+	    }
 	}
 
 	function get_setting( $key ) {
@@ -143,7 +167,6 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 
 		$file_path = get_attached_file( $post_id, true );
 
-		$acl = apply_filters( 'wps3_upload_acl', 'public-read', $type, $data, $post_id, $this ); // Old naming convention, will be deprecated soon
 		$acl = apply_filters( 'dreamspeed_upload_acl', $acl, $data, $post_id );
 
 		if ( !file_exists( $file_path ) ) {
@@ -463,9 +486,19 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 			foreach ( $post_vars as $var ) {
 				if ( !isset( $_POST[$var] ) ) {
 					continue;
+				}		
+				$cleanvar =  esc_html( $_POST[$var] );
+
+				if ( $var == 'cloudfront' ) {
+					$cloudfront_url = $cleanvar;
+					if (!preg_match('#^http(s)?://#', $cleanvar) ) {
+						$cloudfront_url = 'http://' . $cleanvar;
+					}
+					$cloudfront_url = parse_url($cloudfront_url);
+					$cleanvar = $cloudfront_url['host'];
 				}
 
-				$this->set_setting( $var, $_POST[$var] );
+				$this->set_setting( $var, $cleanvar );
 			}
 
 			$this->save_settings();
