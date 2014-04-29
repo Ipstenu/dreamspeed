@@ -19,7 +19,7 @@
 <?php
 $buckets = $this->get_buckets();
 
-if ( is_wp_error( $buckets ) ) :
+if ( is_wp_error( $buckets ) ) {
 	?>
 	<div class="error">
 		<p>
@@ -28,14 +28,20 @@ if ( is_wp_error( $buckets ) ) :
 		</p>
 	</div>
 	<?php
-endif;
+}
 
 if ( isset( $_GET['updated'] ) ) {
 	?>
 	<div class="updated">
-		<p>
 			<div class="dashicons dashicons-yes"></div> <?php _e( 'Settings saved.', 'dreamspeed' ); ?>
-		</p>
+	</div>
+	<?php
+}
+
+if ( isset( $_GET['migrated'] ) ) {
+	?>
+	<div class="updated">
+			<div class="dashicons dashicons-upload"></div> <?php _e( 'Existing files migrating.', 'dreamspeed' ); ?>
 	</div>
 	<?php
 }
