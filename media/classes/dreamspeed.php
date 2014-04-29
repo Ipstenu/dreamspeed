@@ -477,10 +477,10 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 			die( __( "Cheatin' eh?", 'dreamspeed' ) );
 		}
 
-		if ( 'migrate' == $_POST['action'] ) {
+		if ( 'migrate' == $_POST['action'] && ( 1 == $_POST['migrate-to-dreamspeed'] ) ) {
 			$this->bulk_upload_to_dreamspeed();
-		}
-		elseif ( 'save' == $_POST['action'] ) {
+			wp_redirect( 'admin.php?page=' . $this->plugin_slug . '&migrated=1' );
+		} elseif ( 'save' == $_POST['action'] ) {
 
 			$this->set_settings( array() );
 
@@ -499,14 +499,16 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 					$cloudfront_url = parse_url($cloudfront_url);
 					$cleanvar = $cloudfront_url['host'];
 				}
-
 				$this->set_setting( $var, $cleanvar );
 			}
 
 			$this->save_settings();
-		}
 
-		wp_redirect( 'admin.php?page=' . $this->plugin_slug . '&updated=1' );
+			wp_redirect( 'admin.php?page=' . $this->plugin_slug . '&updated=1' );
+		} else {
+			wp_redirect( 'admin.php?page=' . $this->plugin_slug . '&error=1' );
+		}
+		
 		exit;
 	}
 

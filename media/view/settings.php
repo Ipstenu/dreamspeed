@@ -33,18 +33,27 @@ if ( is_wp_error( $buckets ) ) {
 if ( isset( $_GET['updated'] ) ) {
 	?>
 	<div class="updated">
-			<div class="dashicons dashicons-yes"></div> <?php _e( 'Settings saved.', 'dreamspeed' ); ?>
+			<p><div class="dashicons dashicons-yes"></div> <?php _e( 'Settings saved.', 'dreamspeed' ); ?></p>
 	</div>
 	<?php
-}
+} 
 
 if ( isset( $_GET['migrated'] ) ) {
 	?>
 	<div class="updated">
-			<div class="dashicons dashicons-upload"></div> <?php _e( 'Existing files migrating.', 'dreamspeed' ); ?>
+			<p><div class="dashicons dashicons-info"></div> <?php _e( 'Existing files migrating.', 'dreamspeed' ); ?></p>
 	</div>
 	<?php
 }
+
+if (isset( $_GET['error'] ) ) {
+	?>
+	<div class="error">
+			<p><div class="dashicons dashicons-no"></div> <?php _e( 'Warning. You cannot migrate existing files without that checkbox.', 'dreamspeed' ); ?></p>
+	</div>
+	<?php
+}
+
 ?>
 
 <form method="post">
@@ -77,16 +86,17 @@ if ( isset( $_GET['migrated'] ) ) {
 		<p><label><?php _e( 'Object Path:', 'dreamspeed' ); ?></label>
 		<input type="text" name="object-prefix" value="<?php echo esc_attr( $this->get_setting( 'object-prefix' ) ); ?>" size="30" />
 		<label><?php echo trailingslashit( $this->get_dynamic_prefix() ); ?></label></p>
-		<p class="description"><?php _e( 'The default is <code>wp-content/uploads/</code> for everyone, even Multisite.', 'dreamspeed' ); ?></p>
+		<p class="description"><?php _e( 'The default is <code>wp-content/uploads/</code> (or <code>wp-content/uploads/site/#/</code> for Multisite).', 'dreamspeed' ); ?></p>
 	</td>
 </tr>
 
 <tr valign="top">
 	<td>
 		<h3><?php _e( 'CDN Path Settings', 'dreamspeed' ); ?></h3>
+		
+		<p><?php _e( 'If you use an alias for your CDN (like http://cdn.example.com) then you can tell DreamSpeed to use that instead of the default http://objects.dreamhost.com/bucketname. Both URLs will always work, but pretty CDN is pretty.', 'dreamspeed' ); ?></p>
 	
-		<label><?php _e( 'Domain Name', 'dreamspeed' ); ?></label><br />
-		http:// <input type="text" name="cloudfront" value="<?php echo esc_attr( $this->get_setting( 'cloudfront' ) ); ?>" size="50" />
+		<label><?php _e( 'Domain Name:', 'dreamspeed' ); ?></label> <br />http:// <input type="text" name="cloudfront" value="<?php echo esc_attr( $this->get_setting( 'cloudfront' ) ); ?>" size="50" />
 		<p class="description"><?php _e( 'Leave blank if you aren&#8217;t using a DNS alias.', 'dreamspeed' ); ?></p>
 
 	</td>
@@ -97,7 +107,7 @@ if ( isset( $_GET['migrated'] ) ) {
 		<h3><?php _e( 'Plugin Options', 'dreamspeed' ); ?></h3>
 
 		<input type="checkbox" name="copy-to-s3" value="1" id="copy-to-s3" <?php echo $this->get_setting( 'copy-to-s3' ) ? 'checked="checked" ' : ''; ?> />
-		<label for="copy-to-s3"> <?php _e( 'Copy files to DreamSpeed as they are uploaded to the Media Library', 'dreamspeed' ); ?></label>
+		<label for="copy-to-s3"> <?php _e( 'Copy files to DreamSpeed as they are uploaded to the Media Library <em>(recommended)</em>', 'dreamspeed' ); ?></label>
 		<br />
 
 		<input type="checkbox" name="serve-from-s3" value="1" id="serve-from-s3" <?php echo $this->get_setting( 'serve-from-s3' ) ? 'checked="checked" ' : ''; ?> />
@@ -144,7 +154,7 @@ if ( isset( $_GET['migrated'] ) ) {
 	</tr>
 	<tr valign="top">
 		<td>
-			<button type="submit" class="button button-secondary"><?php _e( 'Upload Existing Media', 'dreamspeed' ); ?></button>
+			<button type="submit" class="button button-secondary"><?php _e( '<div class="dashicons dashicons-upload"></div> Upload Existing Media', 'dreamspeed' ); ?></button>
 		</td>
 	</tr>
 	</table>
@@ -153,6 +163,6 @@ if ( isset( $_GET['migrated'] ) ) {
 
 	<h3><?php _e( 'Migrate Exisiting Files', 'dreamspeed' ); ?></h3>
 
-	<p><?php _e( 'All your media files are uploaded to the cloud! Celebrate!', 'dreamspeed' ); ?></p>
+	<p><div class="dashicons dashicons-smiley"></div> <?php _e( 'All your media files are uploaded to the cloud! Celebrate!', 'dreamspeed' ); ?> </p>
 
 <?php } ?>
