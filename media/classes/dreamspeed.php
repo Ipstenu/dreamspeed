@@ -70,12 +70,13 @@ class DreamSpeed_Services extends DreamObjects_Plugin_Base {
 		// Default object prefix
 		if ( 'object-prefix' == $key && !isset( $settings['object-prefix'] ) ) {
 			$uploads = wp_upload_dir();
+			$parts = parse_url( $uploads['baseurl'] );
 
-			if ( !is_multisite() ) {
-				$path = $uploads['path'];
-			} else {
-				$path = $uploads['subdir'];
-			}
+			//if ( !is_multisite() ) {
+			//	$path = $parts['path'];
+			//} else {
+				$path = $parts['path'];
+			//}
 
 			return substr( $path, 1 ) . '/';
 		}
