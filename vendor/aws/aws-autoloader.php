@@ -14,9 +14,10 @@
  * permissions and limitations under the License.
  */
 
-if ( !class_exists('UniversalClassLoader') ) {
+if (false === class_exists('Symfony\Component\ClassLoader\UniversalClassLoader', false)) {
 	require_once __DIR__ . '/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 }
+
 
 if (!defined('AWS_FILE_PREFIX')) {
     define('AWS_FILE_PREFIX', __DIR__);
