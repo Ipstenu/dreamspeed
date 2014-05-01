@@ -14,7 +14,7 @@
 
 use Aws\Common\Aws as AwsCDN;
 
-class DreamObjects_Services extends DreamObjects_Plugin_Base {
+class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 
 	private $plugin_title, $plugin_menu_title, $client;
 

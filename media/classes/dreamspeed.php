@@ -14,7 +14,7 @@
 
 use Aws\S3\S3Client as AwsS3CDN;
 
-class DreamSpeed_Services extends DreamObjects_Plugin_Base {
+class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	private $dos, $doclient;
 
 	const SETTINGS_KEY = 'dreamspeed_cdn';

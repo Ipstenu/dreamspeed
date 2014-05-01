@@ -12,7 +12,7 @@
 
 */
 
-class DreamObjects_Plugin_Base {
+class DreamSpeed_Plugin_Base {
 
 	protected $plugin_file_path, $plugin_dir_path, $plugin_slug, $plugin_basename;
 	private $settings;

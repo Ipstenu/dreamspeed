@@ -56,7 +56,7 @@ require_once 'media/media.php';
 		
 function dreamspeed_core_init() {
     global $dreamspeed_core;
-    $dreamspeed_core = new DreamObjects_Services( __FILE__ );
+    $dreamspeed_core = new DreamSpeed_DHO_Services( __FILE__ );
 }
 
 add_action( 'init', 'dreamspeed_core_init' );
