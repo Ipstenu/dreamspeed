@@ -84,6 +84,10 @@ It does edit. It saves as a post revision, so you can roll back. But there's no 
 
 = Errors, Bugs, and Weird Stuff =
 
+<strong>Why, when my URLs changed to the CDN, are they all broken images?</strong>
+
+Make sure your CDN URL is working. If you have Cloudflare or something proxy-ish in front of your domain, you may need to edit DNS directly and point your CDN alias to DreamSpeed.
+
 <strong>I have a post and the links still are local, even though the images are on CDN. What gives?</strong>
 
 One of two possibilities:
