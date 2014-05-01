@@ -12,10 +12,7 @@
 
 */
 
-if ( !class_exists(Aws) ) {
-	require_once 'vendor/aws/aws-autoloader.php';
-	use Aws\Common\Aws as Aws;
-}
+use Aws\Common\Aws as AwsCDN;
 
 class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 
@@ -130,7 +127,7 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 			    'base_url' => 'http://objects.dreamhost.com',
 			);
 			$args = apply_filters( 'aws_get_client_args', $args );
-			$this->client = Aws::factory( $args );
+			$this->client = AwsCDN::factory( $args );
 		}
 
 		return $this->client;
