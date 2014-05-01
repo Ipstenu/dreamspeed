@@ -28,6 +28,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	
 		$this->plugin_title = __( 'DreamSpeed CDN Configuration', 'dreamspeed' );
 		$this->plugin_menu_title = __( 'CDN', 'dreamspeed' );
+		$this->plugin_slug = 'dreamspeed-media';
 	
 		add_action( 'wp_ajax_dreamspeed-create-bucket', array( $this, 'ajax_create_bucket' ) );
 
