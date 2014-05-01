@@ -51,7 +51,6 @@ if ( is_admin() && ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) ) {
 
 require_once 'classes/plugin-base.php';
 require_once 'classes/dreamobjects.php';
-require_once 'vendor/aws/aws-autoloader.php';
 require_once 'media/media.php';
 		
 function dreamspeed_core_init() {
