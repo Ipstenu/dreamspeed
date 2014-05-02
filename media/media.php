@@ -23,6 +23,12 @@ add_action( 'dreamspeed_init', 'dreamspeed_init' );
 
 
 /**
+ * Upload existing media on a schedule
+ */
+
+add_action('dreamspeed_media_sync', array( $dreamspeed, 'bulk_upload_to_dreamspeed') );
+
+/**
  * @since 2.0
  * @access public
  * @param mixed $post_id Post ID of the attachment or null to use the loop
@@ -32,9 +38,3 @@ add_action( 'dreamspeed_init', 'dreamspeed_init' );
 function dreamspeed_get_secure_attachment_url( $post_id, $expires = 900, $operation = 'GET' ) {
 
 }
-
-/**
- * Upload existing media on a schedule
- */
-
-add_action('dreamspeed_media_sync', array('DreamSpeed_Services', 'bulk_upload_to_dreamspeed') );
