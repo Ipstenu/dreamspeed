@@ -575,7 +575,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	                // We give ourselves a 5 second window to be safe.
 	                
 	                if ( ! wp_next_scheduled( 'dreamspeed_media_sync' ) ) {
-						wp_schedule_event( time(), 'hourly', array($this,'dreamspeed_media_sync') );
+						wp_schedule_event( time(), 'hourly', 'dreamspeed_media_sync' );
 					}
 	                
 	                break;
@@ -612,6 +612,10 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 				'post_type'        => 'attachment',
 		);
 		return get_posts( $args );
+	}
+	
+	function cron_media_sync() {
+		$this->bulk_upload_to_dreamspeed();
 	}
 
 }
