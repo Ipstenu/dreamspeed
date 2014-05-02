@@ -26,7 +26,7 @@ add_action( 'dreamspeed_init', 'dreamspeed_init' );
  * Upload existing media on a schedule
  */
 
-add_action('dreamspeed_media_sync', array( $dreamspeed, 'bulk_upload_to_dreamspeed') );
+add_action('dreamspeed_media_sync', array('DreamSpeed_Services', 'bulk_upload_to_dreamspeed') );
 
 /**
  * @since 2.0
