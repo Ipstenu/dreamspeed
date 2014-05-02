@@ -457,7 +457,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	}
 
 	function plugin_load() {
-		$src = plugins_url( 'tools/js/script.js', $this->plugin_file_path );
+		$src = plugins_url( 'script.js', $this->plugin_file_path );
 		wp_enqueue_script( 'dreamspeed-script', $src, array( 'jquery' ), $this->get_installed_version(), true );
 		
 		wp_localize_script( 'dreamspeed-script', 'dreamspeed_i18n', array(
@@ -612,10 +612,6 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 				'post_type'        => 'attachment',
 		);
 		return get_posts( $args );
-	}
-	
-	function dreamspeed_media_sync() {
-		$this->bulk_upload_to_dreamspeed();
 	}
 
 }

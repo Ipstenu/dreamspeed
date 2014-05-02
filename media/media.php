@@ -20,3 +20,22 @@ function dreamspeed_init( $dos ) {
 
 // IF everything is set...
 add_action( 'dreamspeed_init', 'dreamspeed_init' );
+
+
+/**
+ * @since 2.0
+ * @access public
+ * @param mixed $post_id Post ID of the attachment or null to use the loop
+ * @param int $expires Secondes for the link to live
+ * @return array
+ */
+function dreamspeed_get_secure_attachment_url( $post_id, $expires = 900, $operation = 'GET' ) {
+
+}
+
+/**
+ * Upload existing media on a schedule
+ */
+function dreamspeed_media_sync() {
+	DreamSpeed_Services::bulk_upload_to_dreamspeed();
+}
