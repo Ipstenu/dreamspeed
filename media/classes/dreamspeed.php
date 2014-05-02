@@ -570,14 +570,10 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		
 		if($attachments && !empty($attachments) ) {
 			foreach ($attachments as $attachment) {
-				if( microtime(true) - $time_start >= $max_time - 5 ) {
-	                // Check to see if we are getting close to the max_execution_time
-	                // We give ourselves a 5 second window to be safe.
-	                
-	                if ( ! wp_next_scheduled( 'dreamspeed_media_sync' ) ) {
+				if( microtime(true) - $time_start >= $max_time - 5 ) {	                
+	                if ( !wp_next_scheduled( 'dreamspeed_media_sync' ) ) {
 						wp_schedule_event( time(), 'hourly', 'dreamspeed_media_sync' );
 					}
-	                
 	                break;
 	            }
 
@@ -595,7 +591,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	            }
 	
 			}
-		} else if(empty($attachments)) {
+		} else {
             wp_clear_scheduled_hook( 'dreamspeed_media_sync' );			
 		}
 	}
@@ -616,7 +612,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	
 	function cron_media_sync() {
 		$this->bulk_upload_to_dreamspeed();
-		wp_mail( 'ipstenu@elftest.net', 'Automatic email', 'Automatic scheduled email from WordPress.');
+		wp_mail( 'ipstenu@elftest.net', 'Run Backup', 'Backup shit should run.');
 	}
 
 }
