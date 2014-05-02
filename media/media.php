@@ -25,13 +25,14 @@ add_action( 'dreamspeed_init', 'dreamspeed_init' );
 /**
  * Upload existing media on a schedule
  */
+
  
-function dreamspeed_media_sync( ) {
+function old_dreamspeed_media_sync( ) {
     wp_mail( 'ipstenu@elftest.net', 'Automatic email', 'Automatic scheduled email from WordPress.');
     $dreamspeed_bulk->bulk_upload_to_dreamspeed();
 }
 
-add_action('dreamspeed_media_sync', 'dreamspeed_media_sync' );
+add_action('dreamspeed_media_sync', array('DreamSpeed_Services', 'cron_media_sync') );
 
 /**
  * @since 2.0
@@ -40,6 +41,4 @@ add_action('dreamspeed_media_sync', 'dreamspeed_media_sync' );
  * @param int $expires Secondes for the link to live
  * @return array
  */
-function dreamspeed_get_secure_attachment_url( $post_id, $expires = 900, $operation = 'GET' ) {
-
-}
+function dreamspeed_get_secure_attachment_url( $post_id, $expires = 900, $operation = 'GET' ) {}
