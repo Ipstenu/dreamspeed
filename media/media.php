@@ -26,10 +26,8 @@ add_action( 'dreamspeed_init', 'dreamspeed_init' );
  * Upload existing media on a schedule
  */
  
-function dreamspeed_media_sync( $dos ) {
-    global $dreamspeed_bulk;
-    require_once 'classes/dreamspeed.php';
-    $dreamspeed_bulk = new DreamSpeed_Services( __FILE__, $dos );
+function dreamspeed_media_sync( ) {
+    wp_mail( 'ipstenu@elftest.net', 'Automatic email', 'Automatic scheduled email from WordPress.');
     $dreamspeed_bulk->bulk_upload_to_dreamspeed();
 }
 
