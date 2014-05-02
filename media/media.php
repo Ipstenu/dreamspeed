@@ -25,8 +25,15 @@ add_action( 'dreamspeed_init', 'dreamspeed_init' );
 /**
  * Upload existing media on a schedule
  */
+ 
+function dreamspeed_media_sync( $dos ) {
+    global $dreamspeed_bulk;
+    require_once 'classes/dreamspeed.php';
+    $dreamspeed_bulk = new DreamSpeed_Services( __FILE__, $dos );
+    $dreamspeed_bulk->bulk_upload_to_dreamspeed();
+}
 
-add_action('dreamspeed_media_sync', array('DreamSpeed_Services', 'bulk_upload_to_dreamspeed') );
+add_action('dreamspeed_media_sync', 'dreamspeed_media_sync' );
 
 /**
  * @since 2.0
