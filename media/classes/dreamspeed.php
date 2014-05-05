@@ -566,6 +566,9 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		$max_time = ini_get('max_execution_time');
         $time_start = microtime(true);
         
+        // Since cron can't see wp_generate_attachment_metadata without this
+        include( ABSPATH . 'wp-admin/includes/image.php' );
+        
 		$attachments = $this->get_attachment_without_dreamspeed_info();
 		
 		if($attachments && !empty($attachments) ) {
@@ -579,8 +582,8 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 
 				$file   = get_attached_file( $attachment->ID );
 				$oldURL = wp_get_attachment_url( $attachment->ID);
-				$data   = $this->wp_generate_attachment_metadata( $attachment->ID, $file );
-				$this->wp_generate_attachment_metadata(array(), $attachment->ID);
+				$data   = wp_generate_attachment_metadata( $attachment->ID, $file );
+				$this->wp_generate_attachment_metadata( array(), $attachment->ID);
 				
 				if( $item->post_parent > 0  ) {
 	                if($parent_post = get_post($attachment->post_parent)) {
@@ -611,7 +614,6 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	}
 	
 	function cron_media_sync() {
-		wp_mail( 'ipstenu@elftest.net', 'Run Backup', 'Backup shit should run.');
 		DreamSpeed_Services::bulk_upload_to_dreamspeed();
 	}
 
