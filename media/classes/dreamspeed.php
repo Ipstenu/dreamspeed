@@ -56,6 +56,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		        } else {
 			        echo '<div title="No :(" class="dashicons dashicons-no" style="color: #dd3d36;"></div>';
 		        }
+		        echo '<br />'.wp_get_attachment_url($id).'';
 		    break;
 	    }
 	}
@@ -587,7 +588,6 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 				
 				if( $item->post_parent > 0  ) {
 	                if($parent_post = get_post($attachment->post_parent)) {
-	                    $upload_dir = wp_upload_dir();
 	                    $parent_post->post_content = str_replace( $oldURL, $this->get_attachment_url($attachment->ID), $parent_post->post_content );
 	                    wp_update_post($parent_post);
 	                }

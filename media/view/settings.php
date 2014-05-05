@@ -132,37 +132,35 @@ if (isset( $_GET['error'] ) ) {
 
 </form>
 
+<?php if ( $this->get_setting( 'copy-to-s3' ) == 1 ) {
+	?><h3><?php _e( 'Migrate Exisiting Files', 'dreamspeed' ); ?></h3><?php
 
-<?php if ( count($this->get_attachment_without_dreamspeed_info()) != 0 ) {
-	?>
-	<form method="post">
-	<input type="hidden" name="action" value="migrate" />
-	<?php wp_nonce_field( 'dreamspeed-save-settings' ) ?>
+	if ( count($this->get_attachment_without_dreamspeed_info()) != 0 ) {
+		?>
+		<form method="post">
+		<input type="hidden" name="action" value="migrate" />
+		<?php wp_nonce_field( 'dreamspeed-save-settings' ) ?>
+		
+		<table class="form-table">
+		<tr valign="top">
+			<td>
+				<p><?php _e( 'If want to upload existing images, check the following box and they will begin to upload to DreamSpeed. If you have a high number of images, the uploader will run as long as it can, and then <em>schedule</em> a retry in an hour. To see if your images are uploaded to the Cloud, check the <a href="upload.php">Media Library</a>. Any item with a green checkmark under the CDN column is uploaded (and the red X means it\'s not). The uploader will automatically rerun itself on your images, no need to re-run!', 'dreamspeed' ); ?></p>
+		
+				<p><input type="checkbox" name="migrate-to-dreamspeed" value="1" id="migrate-to-dreamspeed" />
+				<label for="migrate-to-dreamspeed"> <?php printf( __( '%d file(s) can be migrated to DreamSpeed.', 'dreamspeed' ), count($this->get_attachment_without_dreamspeed_info()) ); ?></label>
+				</p>
+		
+			</td>
+		</tr>
+		<tr valign="top">
+			<td>
+				<button type="submit" class="button button-secondary"><?php _e( '<div class="dashicons dashicons-upload"></div> Upload Existing Media', 'dreamspeed' ); ?></button>
+			</td>
+		</tr>
+		</table>
+		</form>
+	<?php } else { ?>
+		<p><div class="dashicons dashicons-smiley"></div> <?php _e( 'All your media files are uploaded to the cloud! Celebrate!', 'dreamspeed' ); ?> </p>
 	
-	<table class="form-table">
-	<tr valign="top">
-		<td>
-			<h3><?php _e( 'Migrate Exisiting Files', 'dreamspeed' ); ?></h3>
-	
-			<p><?php _e( 'If want to upload existing images, check the following box and they will begin to upload to DreamSpeed. If you have a high number of images, the uploader will run as long as it can, and then <em>schedule</em> a retry in an hour. To see if your images are uploaded to the Cloud, check the <a href="upload.php">Media Library</a>. Any item with a green checkmark under the CDN column is uploaded (and the red X means it\'s not). The uploader will automatically rerun itself on your images, no need to re-run!', 'dreamspeed' ); ?></p>
-	
-			<p><input type="checkbox" name="migrate-to-dreamspeed" value="1" id="migrate-to-dreamspeed" />
-			<label for="migrate-to-dreamspeed"> <?php printf( __( '%d file(s) can be migrated to DreamSpeed.', 'dreamspeed' ), count($this->get_attachment_without_dreamspeed_info()) ); ?></label>
-			</p>
-	
-		</td>
-	</tr>
-	<tr valign="top">
-		<td>
-			<button type="submit" class="button button-secondary"><?php _e( '<div class="dashicons dashicons-upload"></div> Upload Existing Media', 'dreamspeed' ); ?></button>
-		</td>
-	</tr>
-	</table>
-	</form>
-<?php } else { ?>
-
-	<h3><?php _e( 'Migrate Exisiting Files', 'dreamspeed' ); ?></h3>
-
-	<p><div class="dashicons dashicons-smiley"></div> <?php _e( 'All your media files are uploaded to the cloud! Celebrate!', 'dreamspeed' ); ?> </p>
-
-<?php } ?>
+	<?php }
+}

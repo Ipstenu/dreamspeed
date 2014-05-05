@@ -79,7 +79,7 @@ Make sure your CDN URL is working. If you have Cloudflare or something proxy-ish
 
 <strong>I have a post and the links still are local, even though the images are on CDN. What gives?</strong>
 
-One of two possibilities:
+One of three possibilities:
 
 1) The media wasn't <em>attached</em> to the post.
 2) You uploaded the media at a time different than the post.
