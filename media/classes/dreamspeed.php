@@ -612,9 +612,5 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		);
 		return get_posts( $args );
 	}
-	
-	function cron_media_sync() {
-		DreamSpeed_Services::bulk_upload_to_dreamspeed();
-	}
 
 }

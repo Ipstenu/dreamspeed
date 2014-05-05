@@ -17,10 +17,11 @@ function dreamspeed_init( $dos ) {
     require_once 'classes/dreamspeed.php';
     $dreamspeed = new DreamSpeed_Services( __FILE__, $dos );
     
-    add_action( 'dreamspeed_media_sync', array( $dreamspeed, 'cron_media_sync') );
+    // Sync existing media if called
+    add_action( 'dreamspeed_media_sync', array( $dreamspeed, 'bulk_upload_to_dreamspeed') );
 }
 
-// IF everything is set...
+// If everything is set...
 add_action( 'dreamspeed_init', 'dreamspeed_init' );
 
 /**
