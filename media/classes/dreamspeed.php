@@ -579,7 +579,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 
 				$file   = get_attached_file( $attachment->ID );
 				$oldURL = wp_get_attachment_url( $attachment->ID);
-				$data   = wp_generate_attachment_metadata( $attachment->ID, $file );
+				$data   = $this->wp_generate_attachment_metadata( $attachment->ID, $file );
 				$this->wp_generate_attachment_metadata(array(), $attachment->ID);
 				
 				if( $item->post_parent > 0  ) {
@@ -611,8 +611,8 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	}
 	
 	function cron_media_sync() {
-		$this->bulk_upload_to_dreamspeed();
 		wp_mail( 'ipstenu@elftest.net', 'Run Backup', 'Backup shit should run.');
+		DreamSpeed_Services::bulk_upload_to_dreamspeed();
 	}
 
 }

@@ -57,6 +57,7 @@ require_once 'vendor/aws/aws-autoloader.php';
 function dreamspeed_core_init() {
     global $dreamspeed_core;
     $dreamspeed_core = new DreamSpeed_DHO_Services( __FILE__ );
+    define('DreamSpeed_Services', true);
 }
 
 add_action( 'init', 'dreamspeed_core_init' );

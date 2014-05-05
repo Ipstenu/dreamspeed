@@ -16,23 +16,12 @@ function dreamspeed_init( $dos ) {
     global $dreamspeed;
     require_once 'classes/dreamspeed.php';
     $dreamspeed = new DreamSpeed_Services( __FILE__, $dos );
+    
+    add_action( 'dreamspeed_media_sync', array( $dreamspeed, 'cron_media_sync') );
 }
 
 // IF everything is set...
 add_action( 'dreamspeed_init', 'dreamspeed_init' );
-
-
-/**
- * Upload existing media on a schedule
- */
-
- 
-function old_dreamspeed_media_sync( ) {
-    wp_mail( 'ipstenu@elftest.net', 'Automatic email', 'Automatic scheduled email from WordPress.');
-    $dreamspeed_bulk->bulk_upload_to_dreamspeed();
-}
-
-add_action('dreamspeed_media_sync', array('DreamSpeed_Services', 'cron_media_sync') );
 
 /**
  * @since 2.0
