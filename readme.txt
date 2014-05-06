@@ -79,7 +79,7 @@ Make sure your CDN URL is working. If you have Cloudflare or something proxy-ish
 
 <strong>I have a post and the links still are local, even though the images are on CDN. What gives?</strong>
 
-This is a very rare case, and currently only happens in two places. When you bulk-import content via the WordPress importer, it will (correctly) use the default URL of the site, not the changed one. Also when you have a mapped domain, it doesn't correctly filter the URLs to the mapped on
+This is a very rare case, and currently only happens when you bulk-import content via the WordPress importer. Currently it will (correctly) use the default URL of the site, not the changed one, so you'll have to search/replace them after the fact for post content.
 
 <strong>Why aren't my images found?</strong>
 

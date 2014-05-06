@@ -327,7 +327,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 			return $url;
 		}
 		
-		$new_url = apply_filters( 'wps3_get_attachment_url', $new_url, $post_id, $this );
+		//$new_url = apply_filters( 'wps3_get_attachment_url', $new_url, $post_id, $this );
 		$new_url = apply_filters( 'dreamspeed_wp_get_attachment_url', $new_url, $post_id );
 
 		return $new_url;
