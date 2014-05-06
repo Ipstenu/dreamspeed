@@ -151,10 +151,7 @@ if (isset( $_GET['error'] ) ) {
 		
 				<p><input type="checkbox" name="migrate-to-dreamspeed" value="1" id="migrate-to-dreamspeed" />
 				<label for="migrate-to-dreamspeed"> <?php printf( __( '%d file(s) can be migrated to DreamSpeed.', 'dreamspeed' ), count($this->get_attachment_without_dreamspeed_info()) ); ?></label>
-				</p>
-		
-				<?php echo $this->get_attachment_without_dreamspeed_info(); ?>
-		
+				</p>		
 			</td>
 		</tr>
 		<tr valign="top">

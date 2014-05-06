@@ -79,14 +79,7 @@ Make sure your CDN URL is working. If you have Cloudflare or something proxy-ish
 
 <strong>I have a post and the links still are local, even though the images are on CDN. What gives?</strong>
 
-One of three possibilities:
-
-1) The media wasn't <em>attached</em> to the post.
-2) You uploaded the media at a time different than the post.
-
-Let me explain that second one, it's weird, and yes, it's a bug. So if you upload media and write your post and post it on the same day, no problem. But if you upload media in January and then decide to attach it to a post in June (or even schedule your post for June), there's a small disconnect in how WP thinks the attachment should be uploaded. Basically it wants to 'fix' the attachment and put it in the folder for June, when the post was published.
-
-Again. Yes, its a bug. The fallback right now is that it simply won't edit your existing posts that don't match URLs 100%.
+This is a very rare case, and currently only happens in two places. When you bulk-import content via the WordPress importer, it will (correctly) use the default URL of the site, not the changed one. Also when you have a mapped domain, it doesn't correctly filter the URLs to the mapped on
 
 <strong>Why aren't my images found?</strong>
 

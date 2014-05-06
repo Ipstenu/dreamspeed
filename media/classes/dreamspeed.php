@@ -578,15 +578,21 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	                break;
 	            }
 
-				$file   = get_attached_file( $attachment->ID );
-				$oldURL = wp_get_attachment_url( $attachment->ID);
-				$data   = wp_generate_attachment_metadata( $attachment->ID, $file );
 				$this->wp_generate_attachment_metadata( array(), $attachment->ID);
 				
 				if( $attachment->post_parent > 0  ) {
 	                if( $parent_post = get_post($attachment->post_parent)) {
-	                	$upload_dir = wp_upload_dir();
-	                	$parent_post->post_content = str_replace($upload_dir['baseurl'].'/', $this->get_base_url(), $parent_post->post_content );
+
+						$upload_dir = wp_upload_dir();
+						$base_url = $upload_dir['baseurl'];
+						
+						// Quick check to make sure Multisite old school isn't being Midvale School for the Gifted.
+						if ( defined( 'DOMAIN_MAPPING' ) ) {
+							$base_url_ms = str_replace( get_original_url( 'siteurl' ), site_url(), $base_url );
+							$parent_post->post_content = str_replace($base_url_ms.'/', $this->get_base_url(), $parent_post->post_content );
+						}
+												
+	                	$parent_post->post_content = str_replace($base_url.'/', $this->get_base_url(), $parent_post->post_content );
 	                    wp_update_post($parent_post);
 	                }
 	            }
