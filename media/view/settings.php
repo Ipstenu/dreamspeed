@@ -132,7 +132,10 @@ if (isset( $_GET['error'] ) ) {
 
 </form>
 
-<?php if ( $this->get_setting( 'copy-to-s3' ) == 1 ) {
+<?php 
+	$all_attachments = wp_count_attachments();
+
+	if ( $this->get_setting( 'copy-to-s3' ) == 1 ) {
 	?><h3><?php _e( 'Migrate Exisiting Files', 'dreamspeed' ); ?></h3><?php
 
 	if ( count($this->get_attachment_without_dreamspeed_info()) != 0 ) {
@@ -150,6 +153,8 @@ if (isset( $_GET['error'] ) ) {
 				<label for="migrate-to-dreamspeed"> <?php printf( __( '%d file(s) can be migrated to DreamSpeed.', 'dreamspeed' ), count($this->get_attachment_without_dreamspeed_info()) ); ?></label>
 				</p>
 		
+				<?php echo $this->get_attachment_without_dreamspeed_info(); ?>
+		
 			</td>
 		</tr>
 		<tr valign="top">
@@ -158,9 +163,8 @@ if (isset( $_GET['error'] ) ) {
 			</td>
 		</tr>
 		</table>
-		</form>
+		</form>		  
 	<?php } else { ?>
 		<p><div class="dashicons dashicons-smiley"></div> <?php _e( 'All your media files are uploaded to the cloud! Celebrate!', 'dreamspeed' ); ?> </p>
-	
 	<?php }
 }

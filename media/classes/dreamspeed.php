@@ -327,6 +327,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 			return $url;
 		}
 		
+		$new_url = apply_filters( 'wps3_get_attachment_url', $new_url, $post_id, $this );
 		$new_url = apply_filters( 'dreamspeed_wp_get_attachment_url', $new_url, $post_id );
 
 		return $new_url;
@@ -457,8 +458,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	}
 
 	function plugin_load() {
-		$src = plugins_url( 'script.js', $this->plugin_file_path );
-		wp_enqueue_script( 'dreamspeed-script', $src, array( 'jquery' ), $this->get_installed_version(), true );
+		wp_enqueue_script( 'dreamspeed-script', plugins_url( 'script.js', $this->plugin_file_path ), array( 'jquery' ), $this->get_installed_version(), true );
 		
 		wp_localize_script( 'dreamspeed-script', 'dreamspeed_i18n', array(
 			'create_bucket_prompt'  => __( 'Bucket Name:', 'dreamspeed' ),
@@ -472,13 +472,9 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	function handle_post_request() {
 		if ( empty( $_POST['action'] ) || !in_array($_POST['action'], array('save', 'migrate')) ) {
 			return;
-		}
-
-		if ( empty( $_POST['_wpnonce'] ) || !wp_verify_nonce( $_POST['_wpnonce'], 'dreamspeed-save-settings' ) ) {
+		} elseif ( empty( $_POST['_wpnonce'] ) || !wp_verify_nonce( $_POST['_wpnonce'], 'dreamspeed-save-settings' ) ) {
 			die( __( "Cheatin' eh?", 'dreamspeed' ) );
-		}
-
-		if ( 'migrate' == $_POST['action'] && ( 1 == $_POST['migrate-to-dreamspeed'] ) ) {
+		} elseif ( 'migrate' == $_POST['action'] && ( 1 == $_POST['migrate-to-dreamspeed'] ) ) {
 			$this->bulk_upload_to_dreamspeed();
 			wp_redirect( 'admin.php?page=' . $this->plugin_slug . '&migrated=1' );
 		} elseif ( 'save' == $_POST['action'] ) {
@@ -587,10 +583,10 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 				$data   = wp_generate_attachment_metadata( $attachment->ID, $file );
 				$this->wp_generate_attachment_metadata( array(), $attachment->ID);
 				
-				if( $item->post_parent > 0  ) {
-	                if($parent_post = get_post($attachment->post_parent)) {
+				if( $attachment->post_parent > 0  ) {
+	                if( $parent_post = get_post($attachment->post_parent)) {
 	                	$upload_dir = wp_upload_dir();
-	                    $parent_post->post_content = str_replace( $oldURL, $this->get_attachment_url($attachment->ID), $parent_post->post_content );
+	                	$parent_post->post_content = str_replace($upload_dir['baseurl'].'/', $this->get_base_url(), $parent_post->post_content );
 	                    wp_update_post($parent_post);
 	                }
 	            }
@@ -599,6 +595,30 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		} else {
             wp_clear_scheduled_hook( 'dreamspeed_media_sync' );			
 		}
+	}
+
+	function get_base_url( ) {
+		if ( !$this->get_setting( 'serve-from-s3' ) ) {
+			return false;
+		}
+
+		if ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
+			$scheme = 'https';
+		} else {
+			$scheme = 'http';
+		}
+
+		if ( $this->get_setting( 'cloudfront' ) ) {
+			$domain_base = $this->get_setting( 'cloudfront' );
+		} elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
+			$domain_base = 'objects.dreamhost.com/'.$this->get_setting( 'bucket' );
+		} else {
+			$domain_base = $this->get_setting( 'bucket' ) . '.objects.dreamhost.com';
+		}
+
+		$url = $scheme . '://' . $domain_base . '/' . esc_attr( $this->get_setting( 'object-prefix' ) );
+
+		return $url;
 	}
 
 	function get_attachment_without_dreamspeed_info() {
