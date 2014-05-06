@@ -56,7 +56,6 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		        } else {
 			        echo '<div title="No :(" class="dashicons dashicons-no" style="color: #dd3d36;"></div>';
 		        }
-		        echo '<br />'.wp_get_attachment_url($id).'';
 		    break;
 	    }
 	}
@@ -567,9 +566,11 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		$max_time = ini_get('max_execution_time');
         $time_start = microtime(true);
         
-        // Since cron can't see wp_generate_attachment_metadata without this
-        include( ABSPATH . 'wp-admin/includes/image.php' );
-        
+        // make sure this exists
+        if ( !function_exists('wp_generate_attachment_metadata') ) {
+			include( ABSPATH . 'wp-admin/includes/image.php' );
+        }
+                
 		$attachments = $this->get_attachment_without_dreamspeed_info();
 		
 		if($attachments && !empty($attachments) ) {
@@ -588,6 +589,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 				
 				if( $item->post_parent > 0  ) {
 	                if($parent_post = get_post($attachment->post_parent)) {
+	                	$upload_dir = wp_upload_dir();
 	                    $parent_post->post_content = str_replace( $oldURL, $this->get_attachment_url($attachment->ID), $parent_post->post_content );
 	                    wp_update_post($parent_post);
 	                }
