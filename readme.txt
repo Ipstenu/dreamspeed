@@ -101,7 +101,7 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 == Changelog ==
 
 = 0.1 =
-* DATE May 2014 by Ipstenu
+* 07 May 2014 by Ipstenu
 * Multisite works
 * Uploading old media works
 * Imports work
