@@ -56,6 +56,8 @@ require_once 'media/media.php';
 if (false === class_exists('Symfony\Component\ClassLoader\UniversalClassLoader', false)) {
 	require_once 'vendor/aws/aws-autoloader.php';
 }
+
+if ( !get_option('dreamspeed_importer')) {update_option( 'dreamspeed_importer', 0 );}
 		
 function dreamspeed_core_init() {
     global $dreamspeed_core;

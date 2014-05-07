@@ -25,6 +25,8 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 
 		$this->aws = $dos;
 		add_action( 'aws_admin_menu', array( $this, 'admin_menu' ) );
+		
+		$this->plugin_vars = array( 'bucket', 'virtual-host', 'expires', 'permissions', 'cloudfront', 'object-prefix', 'copy-to-s3', 'serve-from-s3', 'remove-local-file', 'force-ssl', 'hidpi-images', 'object-versioning' );
 	
 		$this->plugin_title = __( 'DreamSpeed CDN Configuration', 'dreamspeed' );
 		$this->plugin_menu_title = __( 'CDN', 'dreamspeed' );
@@ -32,13 +34,13 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	
 		add_action( 'wp_ajax_dreamspeed-create-bucket', array( $this, 'ajax_create_bucket' ) );
 
-		if ( $this->is_plugin_setup() && ( $this->get_setting( 'copy-to-s3' ) == 1 ) ) {
+		if ( $this->is_plugin_setup() && ( $this->get_setting( 'copy-to-s3' ) == 1 ) && ( get_option('dreamspeed_importer') != 0 ) ) {
 			add_filter( 'wp_get_attachment_url', array( $this, 'wp_get_attachment_url' ), 9, 2 );
 			add_filter( 'wp_generate_attachment_metadata', array( $this, 'wp_generate_attachment_metadata' ), 20, 2 );
 			add_filter( 'delete_attachment', array( $this, 'delete_attachment' ), 20 );
-			add_filter( 'manage_media_columns', array( $this, 'media_column' ) );
-			add_action( 'manage_media_custom_column', array( $this, 'media_column_content' ), 10, 2 );
 		}	
+		add_filter( 'manage_media_columns', array( $this, 'media_column' ) );
+		add_action( 'manage_media_custom_column', array( $this, 'media_column_content' ), 10, 2 );
 	}
 
 	// Columns to show where media is
@@ -481,7 +483,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 
 			$this->set_settings( array() );
 
-			$post_vars = array( 'bucket', 'virtual-host', 'expires', 'permissions', 'cloudfront', 'object-prefix', 'copy-to-s3', 'serve-from-s3', 'remove-local-file', 'force-ssl', 'hidpi-images', 'object-versioning' );
+			$post_vars = $this->plugin_vars;
 			foreach ( $post_vars as $var ) {
 				if ( !isset( $_POST[$var] ) ) {
 					continue;
@@ -639,6 +641,19 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 				'post_type'        => 'attachment',
 		);
 		return get_posts( $args );
+	}
+	
+	function import_start() {
+		update_option( 'dreamspeed_importer', 1 );
+	}
+
+	function import_end() {
+		update_option( 'dreamspeed_importer', 0 );
+		if ( !wp_next_scheduled( 'dreamspeed_media_sync' ) ) {
+			wp_schedule_event( time(), 'hourly', 'dreamspeed_media_sync' );
+		}
+		
+		echo "All of your imported media has not <em>YET</em> been uploaded to the Dream Cloud, but it will be soon!";
 	}
 
 }

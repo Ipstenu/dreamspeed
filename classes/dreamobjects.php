@@ -31,7 +31,7 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		$this->plugin_permission = 'manage_options';
-
+		$this->plugin_vars = array( 'access_key_id', 'secret_access_key' );
 		$this->plugin_title = __( 'DreamSpeed CDN', 'dreamspeed' );
 		$this->plugin_menu_title = __( 'DreamSpeed', 'dreamspeed' );
 	}
@@ -79,7 +79,7 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 		// Make sure $this->settings has been loaded
 		$this->get_settings();
 
-		$post_vars = array( 'access_key_id', 'secret_access_key' );
+		$post_vars = $this->plugin_vars;
 		foreach ( $post_vars as $var ) {
 			if ( !isset( $_POST[$var] ) ) {
 				continue;

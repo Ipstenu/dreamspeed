@@ -19,6 +19,8 @@ function dreamspeed_init( $dos ) {
     
     // Sync existing media if called
     add_action( 'dreamspeed_media_sync', array( $dreamspeed, 'bulk_upload_to_dreamspeed') );
+    add_action( 'import_start', array( $dreamspeed, 'import_start') );
+    add_action( 'import_end', array( $dreamspeed, 'import_end') );
 }
 
 // If everything is set...
