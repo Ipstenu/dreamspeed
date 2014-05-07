@@ -18,8 +18,6 @@
 
 <?php
 
-echo defined(WP_LOAD_IMPORTERS);
-
 $buckets = $this->get_buckets();
 
 if ( is_wp_error( $buckets ) ) {

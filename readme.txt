@@ -3,7 +3,7 @@ Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, backup
 Requires at least: 3.8
 Tested up to: 3.9
-Stable tag: 0.1-beta
+Stable tag: 0.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -11,15 +11,15 @@ Connect your WordPress install to your DreamHost DreamSpeed CDN for supercharged
 
 == Description ==
 
-<em>Note: If you have issues with the plugin, please post in the support forums here. Don't open a support ticket unless it's for setting up DreamSpeed in your Panel.</em>
+<em>Note: If you have issues with the plugin, please post in the support forums here. Don't open a support ticket at DreamHost or use LiveChat unless it's for setting up DreamSpeed in your Panel.</em>
 
 This plugin automatically copies images, videos, documents, and any other media added through WordPress' media uploader to DreamSpeed. It then automatically replaces the URL to each media file with their respective DreamObjects URL or, if you have configured a CDN Alias, the respective custom URL. Image thumbnails are also copied to DreamSpeed and delivered similarly.
 
-Uploading files directly to DreamSpeed is not currently supported by this plugin. They are uploaded to your server first, via the WordPress media uploader, then copied to DreamSpeed. This allows you to roll back if needed!
+Uploading files directly to DreamSpeed is not supported by this plugin. They are uploaded to your server first, via the WordPress media uploader, then copied to DreamSpeed. This allows you to roll back if needed!
 
 Development happens on <a href="https://github.com/Ipstenu/dreamspeed/">Github</a>. Issues and Pull Requests welcome.
 
-<em>This plugin is a fork and combination of <a href="https://wordpress.org/plugins/amazon-s3-and-cloudfront/">Amazon S3 and Cloudfront</a> and <a href="https://github.com/deliciousbrains/wp-amazon-web-services">Amazon Web Services</a>, both by the awesome Brad Touesnard.</em>
+<em>This plugin is a spork (fork and combination) of <a href="https://wordpress.org/plugins/amazon-s3-and-cloudfront/">Amazon S3 and Cloudfront</a> and <a href="https://github.com/deliciousbrains/wp-amazon-web-services">Amazon Web Services</a>, both by the awesome Brad Touesnard.</em>
 
 == Installation ==
 
@@ -90,9 +90,13 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 == Screenshots ==
 
 1. DreamObjects Keys
-1. DreamObjects Buckets
-2. DreamObjects Bucket Settings
-
+2. DreamObjects Buckets
+3. DreamObjects Bucket Settings
+4. DreamSpeed CDN Key Settings (empty)
+5. DreamSpeed CDN Key Settings (filled in)
+6. DreamSpeed CDN Configuration Settings
+7. Media Library with CDN checkmarks
+8. Migrate Exisiting Files section (on DreamSpeed CDN Configuration page)
 
 == Changelog ==
 
@@ -100,6 +104,7 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 * DATE May 2014 by Ipstenu
 * Multisite works
 * Uploading old media works
+* Imports work
 
 = 0.1-beta = 
 * 01 April 2014 by Ipstenu

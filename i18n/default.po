@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DreamSpeed CDN\n"
-"POT-Creation-Date: 2014-05-01 12:35-0800\n"
-"PO-Revision-Date: 2014-05-01 12:35-0800\n"
+"POT-Creation-Date: 2014-05-07 14:54-0800\n"
+"PO-Revision-Date: 2014-05-07 14:54-0800\n"
 "Last-Translator: \n"
 "Language-Team: DreamHost\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: ../classes/dreamobjects.php:76 ../media/classes/dreamspeed.php:477
+#: ../classes/dreamobjects.php:76 ../media/classes/dreamspeed.php:478
 msgid "Cheatin' eh?"
 msgstr ""
 
@@ -60,76 +60,83 @@ msgid ""
 "access keys</a> first."
 msgstr ""
 
-#: ../media/classes/dreamspeed.php:29
+#: ../media/classes/dreamspeed.php:31
 msgid "DreamSpeed CDN Configuration"
 msgstr ""
 
-#: ../media/classes/dreamspeed.php:30
+#: ../media/classes/dreamspeed.php:32
 msgid "CDN"
 msgstr ""
 
-#: ../media/classes/dreamspeed.php:396
+#: ../media/classes/dreamspeed.php:400
 msgid "Cheatin&#8217; eh?"
 msgstr ""
 
-#: ../media/classes/dreamspeed.php:400
+#: ../media/classes/dreamspeed.php:404
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: ../media/classes/dreamspeed.php:408
+#: ../media/classes/dreamspeed.php:412
 msgid "No bucket name provided."
 msgstr ""
 
-#: ../media/classes/dreamspeed.php:463
+#: ../media/classes/dreamspeed.php:466
 msgid "Bucket Name:"
 msgstr ""
 
-#: ../media/classes/dreamspeed.php:464
+#: ../media/classes/dreamspeed.php:467
 msgid "Error creating bucket: "
 msgstr ""
 
-#: ../media/view/settings.php:26
+#: ../media/classes/dreamspeed.php:657
+msgid ""
+"All of your imported media has not <em>YET</em> been uploaded to the Dream "
+"Cloud, but it will be soon! The uploads are scheduled via the bulk uploader "
+"feature."
+msgstr ""
+
+#: ../media/view/settings.php:27
 msgid "Error retrieving a list of your buckets from DreamObjects:"
 msgstr ""
 
-#: ../media/view/settings.php:36 ../view/settings.php:40
+#: ../media/view/settings.php:37 ../view/settings.php:40
 msgid "Settings saved."
 msgstr ""
 
-#: ../media/view/settings.php:44
+#: ../media/view/settings.php:45
 msgid "Existing files migrating."
 msgstr ""
 
-#: ../media/view/settings.php:52
+#: ../media/view/settings.php:53
 msgid "Warning. You cannot migrate existing files without that checkbox."
 msgstr ""
 
-#: ../media/view/settings.php:66
+#: ../media/view/settings.php:67
 msgid "Bucket and Path Settings"
 msgstr ""
 
-#: ../media/view/settings.php:68
+#: ../media/view/settings.php:69
 msgid ""
 "Select which bucket to use for uploading your media. You should not change "
 "this once set, as it will break any existing CDN uploads."
 msgstr ""
 
-#: ../media/view/settings.php:71
-msgid "Select an S3 Bucket"
+#: ../media/view/settings.php:72
+msgid "Select a Bucket"
 msgstr ""
 
-#: ../media/view/settings.php:75
+#: ../media/view/settings.php:76
 msgid "Create a new bucket..."
 msgstr ""
 
-#: ../media/view/settings.php:79
+#: ../media/view/settings.php:80
 #, php-format
 msgid ""
 "Set a <a href=\"%s\" target=\"_blank\">far future HTTP expiration header</a> "
 "for uploaded files <em>(recommended)</em>"
 msgstr ""
 
-#: ../media/view/settings.php:85
+#: ../media/view/settings.php:86
 msgid ""
 "Determine the name of your folder structure for your media. At this time, "
 "you cannot remove the year or month in order to prevent file-name "
@@ -137,68 +144,68 @@ msgid ""
 "make sure to select a new location."
 msgstr ""
 
-#: ../media/view/settings.php:86
+#: ../media/view/settings.php:87
 msgid "Object Path:"
 msgstr ""
 
-#: ../media/view/settings.php:89
+#: ../media/view/settings.php:90
 msgid ""
 "The default is <code>wp-content/uploads/</code> (or <code>wp-content/uploads/"
 "site/#/</code> for Multisite)."
 msgstr ""
 
-#: ../media/view/settings.php:95
+#: ../media/view/settings.php:96
 msgid "CDN Path Settings"
 msgstr ""
 
-#: ../media/view/settings.php:97
+#: ../media/view/settings.php:98
 msgid ""
 "If you use an alias for your CDN (like http://cdn.example.com) then you can "
 "tell DreamSpeed to use that instead of the default http://objects.dreamhost."
 "com/bucketname. Both URLs will always work, but pretty CDN is pretty."
 msgstr ""
 
-#: ../media/view/settings.php:99
+#: ../media/view/settings.php:100
 msgid "Domain Name:"
 msgstr ""
 
-#: ../media/view/settings.php:100
+#: ../media/view/settings.php:101
 msgid "Leave blank if you aren&#8217;t using a DNS alias."
 msgstr ""
 
-#: ../media/view/settings.php:107
+#: ../media/view/settings.php:108
 msgid "Plugin Options"
 msgstr ""
 
-#: ../media/view/settings.php:110
+#: ../media/view/settings.php:111
 msgid ""
 "Copy files to DreamSpeed as they are uploaded to the Media Library <em>"
 "(recommended)</em>"
 msgstr ""
 
-#: ../media/view/settings.php:114
+#: ../media/view/settings.php:115
 msgid ""
 "Point file URLs to DreamSpeed/DNS Alias for files that have been copied to "
 "S3 <em>(recommended)</em>"
 msgstr ""
 
-#: ../media/view/settings.php:118
+#: ../media/view/settings.php:119
 msgid "Always serve files over https (SSL)"
 msgstr ""
 
-#: ../media/view/settings.php:122
+#: ../media/view/settings.php:123
 msgid "Copy any HiDPI (@2x) images to CDN (works with WP Retina 2x plugin)"
 msgstr ""
 
-#: ../media/view/settings.php:128 ../view/settings.php:66
+#: ../media/view/settings.php:129 ../view/settings.php:66
 msgid "Save Changes"
 msgstr ""
 
-#: ../media/view/settings.php:145 ../media/view/settings.php:164
+#: ../media/view/settings.php:140
 msgid "Migrate Exisiting Files"
 msgstr ""
 
-#: ../media/view/settings.php:147
+#: ../media/view/settings.php:151
 msgid ""
 "If want to upload existing images, check the following box and they will "
 "begin to upload to DreamSpeed. If you have a high number of images, the "
@@ -209,12 +216,12 @@ msgid ""
 "automatically rerun itself on your images, no need to re-run!"
 msgstr ""
 
-#: ../media/view/settings.php:150
+#: ../media/view/settings.php:154
 #, php-format
 msgid "%d file(s) can be migrated to DreamSpeed."
 msgstr ""
 
-#: ../media/view/settings.php:157
+#: ../media/view/settings.php:160
 msgid "<div class=\"dashicons dashicons-upload\"></div> Upload Existing Media"
 msgstr ""
 
