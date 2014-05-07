@@ -18,6 +18,7 @@ if ( !defined( 'WP_UNINSTALL_PLUGIN' ) )
 // Deregister
     delete_option( 'dreamspeed_cdn' );
     delete_option( 'dreamspeed_settings' );
+    delete_option( 'dreamspeed_importer' );
 
 // Multisite
 global $wpdb;
@@ -27,6 +28,7 @@ $blogs = $wpdb->get_results("SELECT blog_id FROM {$wpdb->blogs}", ARRAY_A);
             switch_to_blog($blog['blog_id']);
             	delete_option( 'dreamspeed_cdn' );
             	delete_option( 'dreamspeed_settings' );
+            	delete_option( 'dreamspeed_importer' );
 	        }
 	    restore_current_blog();
     }
