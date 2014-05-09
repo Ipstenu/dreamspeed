@@ -28,8 +28,8 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		
 		$this->plugin_vars = array( 'bucket', 'virtual-host', 'expires', 'permissions', 'cloudfront', 'object-prefix', 'copy-to-s3', 'serve-from-s3', 'remove-local-file', 'force-ssl', 'hidpi-images', 'object-versioning' );
 	
-		$this->plugin_title = __( 'DreamSpeed CDN Configuration', 'dreamspeed' );
-		$this->plugin_menu_title = __( 'CDN', 'dreamspeed' );
+		$this->plugin_title = __( 'DreamSpeed CDN Configuration', 'dreamspeed-cdn' );
+		$this->plugin_menu_title = __( 'CDN', 'dreamspeed-cdn' );
 		$this->plugin_slug = 'dreamspeed-media';
 	
 		add_action( 'wp_ajax_dreamspeed-create-bucket', array( $this, 'ajax_create_bucket' ) );
@@ -51,7 +51,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	function media_column_content( $column_name, $id ) {
 	
 	    switch ($column_name) {
-		    case 'dreamspeed' :
+		    case 'dreamspeed-cdn' :
 		    	$meta = get_post_meta($id, 'amazonS3_info' );
 		        if( !empty( $meta ) ) { 
 		        	echo '<div title="YES!" class="dashicons dashicons-yes" style="color: #7ad03a;"></div>';
@@ -397,11 +397,11 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 
 	function verify_ajax_request() {
 		if ( !is_admin() || !wp_verify_nonce( $_POST['_nonce'], $_POST['action'] ) ) {
-			wp_die( __( 'Cheatin&#8217; eh?', 'dreamspeed' ) );
+			wp_die( __( 'Cheatin&#8217; eh?', 'dreamspeed-cdn' ) );
 		}
 
 		if ( !current_user_can( 'manage_options' ) ) {
-			wp_die( __( 'You do not have sufficient permissions to access this page.', 'dreamspeed' ) );
+			wp_die( __( 'You do not have sufficient permissions to access this page.', 'dreamspeed-cdn' ) );
 		}
 	}
 
@@ -409,7 +409,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		$this->verify_ajax_request();
 
 		if ( !isset( $_POST['bucket_name'] ) || !$_POST['bucket_name'] ) {
-			wp_die( __( 'No bucket name provided.', 'dreamspeed' ) );
+			wp_die( __( 'No bucket name provided.', 'dreamspeed-cdn' ) );
 		}
 
 		$result = $this->create_bucket( $_POST['bucket_name'] );
@@ -463,8 +463,8 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		wp_enqueue_script( 'dreamspeed-script', plugins_url( 'script.js', $this->plugin_file_path ), array( 'jquery' ), $this->get_installed_version(), true );
 		
 		wp_localize_script( 'dreamspeed-script', 'dreamspeed_i18n', array(
-			'create_bucket_prompt'  => __( 'Bucket Name:', 'dreamspeed' ),
-			'create_bucket_error'	=> __( 'Error creating bucket: ', 'dreamspeed' ),
+			'create_bucket_prompt'  => __( 'Bucket Name:', 'dreamspeed-cdn' ),
+			'create_bucket_error'	=> __( 'Error creating bucket: ', 'dreamspeed-cdn' ),
 			'create_bucket_nonce'	=> wp_create_nonce( 'dreamspeed-create-bucket' )
 		) );
 
@@ -475,7 +475,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		if ( empty( $_POST['action'] ) || !in_array($_POST['action'], array('save', 'migrate')) ) {
 			return;
 		} elseif ( empty( $_POST['_wpnonce'] ) || !wp_verify_nonce( $_POST['_wpnonce'], 'dreamspeed-save-settings' ) ) {
-			die( __( "Cheatin' eh?", 'dreamspeed' ) );
+			die( __( "Cheatin' eh?", 'dreamspeed-cdn' ) );
 		} elseif ( 'migrate' == $_POST['action'] && ( 1 == $_POST['migrate-to-dreamspeed'] ) ) {
 			$this->bulk_upload_to_dreamspeed();
 			wp_redirect( 'admin.php?page=' . $this->plugin_slug . '&migrated=1' );
@@ -654,7 +654,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		}
 		
 		
-		echo "<p>".__( 'All of your imported media has not <em>YET</em> been uploaded to the Dream Cloud, but it will be soon! The uploads are scheduled via the bulk uploader feature.', 'dreamspeed')."</p>";
+		echo "<p>".__( 'All of your imported media has not <em>YET</em> been uploaded to the Dream Cloud, but it will be soon! The uploads are scheduled via the bulk uploader feature.', 'dreamspeed-cdn')."</p>";
 	}
 
 }

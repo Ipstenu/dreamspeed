@@ -1,19 +1,6 @@
 DreamSpeed CDN
 ==========
 
-WARNING! While this plugin does work, it's NOT NOT NOT the final released version. In fact, this is the most beta beta that has ever graced the land of beta!
-
-This plugin is in active BETA development and could potentially cause problems/require resets if you use it now. If you have issues, please report them at https://github.com/Ipstenu/dreamspeed/issues
-
-If this blows up your site, well... now you know why it's NOT on WordPress.org yet! :D
-
----
-
-* Contributors: Ipstenu
-* Tags: cloud, dreamhost, dreamspeed, backup
-* Requires at least: 3.8
-* Tested up to: 3.9
-* Stable tag: 0.1-beta
 * License: GPLv3
 * License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

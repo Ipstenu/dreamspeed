@@ -32,8 +32,8 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		$this->plugin_permission = 'manage_options';
 		$this->plugin_vars = array( 'access_key_id', 'secret_access_key' );
-		$this->plugin_title = __( 'DreamSpeed CDN', 'dreamspeed' );
-		$this->plugin_menu_title = __( 'DreamSpeed', 'dreamspeed' );
+		$this->plugin_title = __( 'DreamSpeed CDN', 'dreamspeed-cdn' );
+		$this->plugin_menu_title = __( 'DreamSpeed', 'dreamspeed-cdn' );
 	}
 
 	function admin_menu() {
@@ -41,10 +41,10 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
     	
     	global $submenu;
     	if ( isset( $submenu[$this->plugin_slug][0][0] ) ) {
-    		$submenu[$this->plugin_slug][0][0] = __( 'Settings', 'dreamspeed' );
+    		$submenu[$this->plugin_slug][0][0] = __( 'Settings', 'dreamspeed-cdn' );
 		}
 
-		$title = __( 'Settings', 'dreamspeed' );
+		$title = __( 'Settings', 'dreamspeed-cdn' );
 		$hook_suffixes[] = $this->add_page( $title, $title, $this->plugin_permission, $this->plugin_slug, array( $this, 'render_page' ) );
 
 		do_action( 'aws_admin_menu', $this );
@@ -73,7 +73,7 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 		}
 
 		if ( empty( $_POST['_wpnonce'] ) || !wp_verify_nonce( $_POST['_wpnonce'], 'dreamspeed-save-settings' ) ) {
-			die( __( "Cheatin' eh?", 'dreamspeed' ) );
+			die( __( "Cheatin' eh?", 'dreamspeed-cdn' ) );
 		}
 
 		// Make sure $this->settings has been loaded
@@ -117,7 +117,7 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 
 	function get_client() {
 		if ( !$this->get_access_key_id() || !$this->get_secret_access_key() ) {
-			return new WP_Error( 'access_keys_missing', sprintf( __( '<div class="dashicons dashicons-no"></div> Please <a href="%s">set your access keys</a> first.', 'dreamspeed' ), 'admin.php?page=' . $this->plugin_slug ) );
+			return new WP_Error( 'access_keys_missing', sprintf( __( '<div class="dashicons dashicons-no"></div> Please <a href="%s">set your access keys</a> first.', 'dreamspeed-cdn' ), 'admin.php?page=' . $this->plugin_slug ) );
 		}
 		
 		if ( is_null( $this->client ) ) {

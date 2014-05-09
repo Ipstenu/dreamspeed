@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DreamSpeed CDN\n"
-"POT-Creation-Date: 2014-05-07 14:54-0800\n"
-"PO-Revision-Date: 2014-05-07 14:54-0800\n"
+"POT-Creation-Date: 2014-05-09 13:49-0500\n"
+"PO-Revision-Date: 2014-05-09 13:49-0500\n"
 "Last-Translator: \n"
 "Language-Team: DreamHost\n"
 "MIME-Version: 1.0\n"
@@ -13,25 +13,25 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../dreamspeed-cdn.php:36
+#: ../dreamspeed-cdn.php:38
 msgid ""
 "The official Amazon Web Services SDK, which DreamSpeed relies on, requires "
 "PHP 5.3 or higher. The plugin has now disabled itself."
 msgstr ""
 
-#: ../dreamspeed-cdn.php:42
+#: ../dreamspeed-cdn.php:44
 msgid ""
 "The official Amazon Web Services SDK, which DreamSpeed relies on requires "
 "cURL 7.16.2+. The plugin has now disabled itself."
 msgstr ""
 
-#: ../dreamspeed-cdn.php:45
+#: ../dreamspeed-cdn.php:47
 msgid ""
 "The official Amazon Web Services SDK, which DreamSpeed relies on requires "
 "that cURL is compiled with OpenSSL. The plugin has now disabled itself."
 msgstr ""
 
-#: ../dreamspeed-cdn.php:48
+#: ../dreamspeed-cdn.php:50
 msgid ""
 "The official Amazon Web Services SDK, which DreamSpeed relies on requires "
 "that cURL is compiled with zlib. The plugin has now disabled itself."
