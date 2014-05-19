@@ -34,7 +34,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	
 		add_action( 'wp_ajax_dreamspeed-create-bucket', array( $this, 'ajax_create_bucket' ) );
 
-		if ( $this->is_plugin_setup() && ( $this->get_setting( 'copy-to-s3' ) == 1 ) && ( get_option('dreamspeed_importer') == 0 ) && !defined( 'WP_IMPORTING' ) ) {
+		if ( $this->is_plugin_setup() && ( $this->get_setting( 'copy-to-s3' ) == 1 ) && ( get_option('dreamspeed_importer') != 1 ) && !defined( 'WP_IMPORTING' ) ) {
 			add_filter( 'wp_get_attachment_url', array( $this, 'wp_get_attachment_url' ), 9, 2 );
 			add_filter( 'wp_generate_attachment_metadata', array( $this, 'wp_generate_attachment_metadata' ), 20, 2 );
 			add_filter( 'delete_attachment', array( $this, 'delete_attachment' ), 20 );
@@ -580,6 +580,8 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	                break;
 	            }
 
+				$file   = get_attached_file( $attachment->ID );
+				$data   = wp_generate_attachment_metadata( $attachment->ID, $file );
 				$this->wp_generate_attachment_metadata( array(), $attachment->ID);
 				
 				if( $attachment->post_parent > 0  ) {
