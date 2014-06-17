@@ -45,7 +45,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 
 	// Columns to show where media is
 	function media_column( $cols ) {
-	        $cols["dreamspeed"] = "CDN";
+	        $cols["dreamspeed-cdn"] = "CDN";
 	        return $cols;
 	}
 	function media_column_content( $column_name, $id ) {
