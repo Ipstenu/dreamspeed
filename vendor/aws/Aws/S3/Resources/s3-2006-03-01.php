@@ -65,6 +65,11 @@ return array (
             'https' => true,
             'hostname' => 's3-sa-east-1.amazonaws.com',
         ),
+        'cn-north-1' => array(
+            'http' => true,
+            'https' => true,
+            'hostname' => 's3.cn-north-1.amazonaws.com.cn',
+        ),
         'us-gov-west-1' => array(
             'http' => true,
             'https' => true,
@@ -78,7 +83,7 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'AbortMultipartUploadOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadAbort.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadAbort.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
@@ -113,10 +118,10 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'CompleteMultipartUploadOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadComplete.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadComplete.html',
             'data' => array(
                 'xmlRoot' => array(
-                    'name' => 'MultipartUpload',
+                    'name' => 'CompleteMultipartUpload',
                     'namespaces' => array(
                         'http://s3.amazonaws.com/doc/2006-03-01/',
                     ),
@@ -143,6 +148,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'CompletedPart',
                         'type' => 'object',
                         'sentAs' => 'Part',
                         'properties' => array(
@@ -173,20 +179,20 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'CopyObjectOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectCOPY.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html',
+            'data' => array(
+                'xmlRoot' => array(
+                    'name' => 'CopyObjectRequest',
+                    'namespaces' => array(
+                        'http://s3.amazonaws.com/doc/2006-03-01/',
+                    ),
+                ),
+            ),
             'parameters' => array(
                 'ACL' => array(
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-acl',
-                    'enum' => array(
-                        'private',
-                        'public-read',
-                        'public-read-write',
-                        'authenticated-read',
-                        'bucket-owner-read',
-                        'bucket-owner-full-control',
-                    ),
                 ),
                 'Bucket' => array(
                     'required' => true,
@@ -225,12 +231,7 @@ return array (
                     'sentAs' => 'x-amz-copy-source',
                 ),
                 'CopySourceIfMatch' => array(
-                    'type' => array(
-                        'object',
-                        'string',
-                        'integer',
-                    ),
-                    'format' => 'date-time-http',
+                    'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-copy-source-if-match',
                 ),
@@ -245,12 +246,7 @@ return array (
                     'sentAs' => 'x-amz-copy-source-if-modified-since',
                 ),
                 'CopySourceIfNoneMatch' => array(
-                    'type' => array(
-                        'object',
-                        'string',
-                        'integer',
-                    ),
-                    'format' => 'date-time-http',
+                    'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-copy-source-if-none-match',
                 ),
@@ -313,32 +309,51 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-metadata-directive',
-                    'enum' => array(
-                        'COPY',
-                        'REPLACE',
-                    ),
                 ),
                 'ServerSideEncryption' => array(
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption',
-                    'enum' => array(
-                        'AES256',
-                    ),
                 ),
                 'StorageClass' => array(
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-storage-class',
-                    'enum' => array(
-                        'STANDARD',
-                        'REDUCED_REDUNDANCY',
-                    ),
                 ),
                 'WebsiteRedirectLocation' => array(
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-website-redirect-location',
+                ),
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
+                ),
+                'SSECustomerKey' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
+                'CopySourceSSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-copy-source-server-side-encryption-customer-algorithm',
+                ),
+                'CopySourceSSECustomerKey' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-copy-source-server-side-encryption-customer-key',
+                ),
+                'CopySourceSSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-copy-source-server-side-encryption-customer-key-MD5',
                 ),
                 'ACP' => array(
                     'type' => 'object',
@@ -362,7 +377,7 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'CreateBucketOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUT.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html',
             'data' => array(
                 'xmlRoot' => array(
                     'name' => 'CreateBucketConfiguration',
@@ -376,14 +391,6 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-acl',
-                    'enum' => array(
-                        'private',
-                        'public-read',
-                        'public-read-write',
-                        'authenticated-read',
-                        'bucket-owner-read',
-                        'bucket-owner-full-control',
-                    ),
                 ),
                 'Bucket' => array(
                     'required' => true,
@@ -393,15 +400,6 @@ return array (
                 'LocationConstraint' => array(
                     'type' => 'string',
                     'location' => 'xml',
-                    'enum' => array(
-                        'EU',
-                        'eu-west-1',
-                        'us-west-1',
-                        'us-west-2',
-                        'ap-southeast-1',
-                        'ap-northeast-1',
-                        'sa-east-1',
-                    ),
                 ),
                 'GrantFullControl' => array(
                     'type' => 'string',
@@ -442,24 +440,24 @@ return array (
         ),
         'CreateMultipartUpload' => array(
             'httpMethod' => 'POST',
-            'uri' => '/{Bucket}{/Key*}',
+            'uri' => '/{Bucket}{/Key*}?uploads',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'CreateMultipartUploadOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadInitiate.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html',
+            'data' => array(
+                'xmlRoot' => array(
+                    'name' => 'CreateMultipartUploadRequest',
+                    'namespaces' => array(
+                        'http://s3.amazonaws.com/doc/2006-03-01/',
+                    ),
+                ),
+            ),
             'parameters' => array(
                 'ACL' => array(
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-acl',
-                    'enum' => array(
-                        'private',
-                        'public-read',
-                        'public-read-write',
-                        'authenticated-read',
-                        'bucket-owner-read',
-                        'bucket-owner-full-control',
-                    ),
                 ),
                 'Bucket' => array(
                     'required' => true,
@@ -540,30 +538,31 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption',
-                    'enum' => array(
-                        'AES256',
-                    ),
                 ),
                 'StorageClass' => array(
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-storage-class',
-                    'enum' => array(
-                        'STANDARD',
-                        'REDUCED_REDUNDANCY',
-                    ),
                 ),
                 'WebsiteRedirectLocation' => array(
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-website-redirect-location',
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'uploads',
-                    'default' => '_guzzle_blank_',
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
+                ),
+                'SSECustomerKey' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
                 ),
                 'ACP' => array(
                     'type' => 'object',
@@ -581,7 +580,7 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'DeleteBucketOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETE.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETE.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
@@ -592,111 +591,76 @@ return array (
         ),
         'DeleteBucketCors' => array(
             'httpMethod' => 'DELETE',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?cors',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'DeleteBucketCorsOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEcors.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'cors',
-                    'default' => '_guzzle_blank_',
                 ),
             ),
         ),
         'DeleteBucketLifecycle' => array(
             'httpMethod' => 'DELETE',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?lifecycle',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'DeleteBucketLifecycleOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'lifecycle',
-                    'default' => '_guzzle_blank_',
                 ),
             ),
         ),
         'DeleteBucketPolicy' => array(
             'httpMethod' => 'DELETE',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?policy',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'DeleteBucketPolicyOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'policy',
-                    'default' => '_guzzle_blank_',
                 ),
             ),
         ),
         'DeleteBucketTagging' => array(
             'httpMethod' => 'DELETE',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?tagging',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'DeleteBucketTaggingOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'tagging',
-                    'default' => '_guzzle_blank_',
                 ),
             ),
         ),
         'DeleteBucketWebsite' => array(
             'httpMethod' => 'DELETE',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?website',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'DeleteBucketWebsiteOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'website',
-                    'default' => '_guzzle_blank_',
                 ),
             ),
         ),
@@ -706,7 +670,7 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'DeleteObjectOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectDELETE.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
@@ -735,11 +699,11 @@ return array (
         ),
         'DeleteObjects' => array(
             'httpMethod' => 'POST',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?delete',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'DeleteObjectsOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/multiobjectdeleteapi.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/multiobjectdeleteapi.html',
             'data' => array(
                 'xmlRoot' => array(
                     'name' => 'Delete',
@@ -747,6 +711,7 @@ return array (
                         'http://s3.amazonaws.com/doc/2006-03-01/',
                     ),
                 ),
+                'contentMd5' => true,
             ),
             'parameters' => array(
                 'Bucket' => array(
@@ -762,6 +727,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'ObjectIdentifier',
                         'type' => 'object',
                         'sentAs' => 'Object',
                         'properties' => array(
@@ -785,17 +751,6 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-mfa',
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'delete',
-                    'default' => '_guzzle_blank_',
-                ),
-                'ContentMD5' => array(
-                    'required' => true,
-                    'default' => true,
-                ),
                 'command.expects' => array(
                     'static' => true,
                     'default' => 'application/xml',
@@ -804,23 +759,16 @@ return array (
         ),
         'GetBucketAcl' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?acl',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetBucketAclOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETacl.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETacl.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'acl',
-                    'default' => '_guzzle_blank_',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -830,23 +778,16 @@ return array (
         ),
         'GetBucketCors' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?cors',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetBucketCorsOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETcors.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'cors',
-                    'default' => '_guzzle_blank_',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -856,23 +797,16 @@ return array (
         ),
         'GetBucketLifecycle' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?lifecycle',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetBucketLifecycleOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'lifecycle',
-                    'default' => '_guzzle_blank_',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -882,45 +816,31 @@ return array (
         ),
         'GetBucketLocation' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?location',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetBucketLocationOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlocation.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'location',
-                    'default' => '_guzzle_blank_',
                 ),
             ),
         ),
         'GetBucketLogging' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?logging',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetBucketLoggingOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlogging.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlogging.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'logging',
-                    'default' => '_guzzle_blank_',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -930,23 +850,16 @@ return array (
         ),
         'GetBucketNotification' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?notification',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetBucketNotificationOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETnotification.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETnotification.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'notification',
-                    'default' => '_guzzle_blank_',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -956,45 +869,31 @@ return array (
         ),
         'GetBucketPolicy' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?policy',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetBucketPolicyOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETpolicy.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETpolicy.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'policy',
-                    'default' => '_guzzle_blank_',
                 ),
             ),
         ),
         'GetBucketRequestPayment' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?requestPayment',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetBucketRequestPaymentOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentGET.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTrequestPaymentGET.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'requestPayment',
-                    'default' => '_guzzle_blank_',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -1004,23 +903,16 @@ return array (
         ),
         'GetBucketTagging' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?tagging',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetBucketTaggingOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETtagging.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETtagging.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'tagging',
-                    'default' => '_guzzle_blank_',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -1030,23 +922,16 @@ return array (
         ),
         'GetBucketVersioning' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?versioning',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetBucketVersioningOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'versioning',
-                    'default' => '_guzzle_blank_',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -1056,23 +941,16 @@ return array (
         ),
         'GetBucketWebsite' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?website',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetBucketWebsiteOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETwebsite.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETwebsite.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'website',
-                    'default' => '_guzzle_blank_',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -1086,7 +964,7 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetObjectOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGET.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
@@ -1175,6 +1053,21 @@ return array (
                     'location' => 'query',
                     'sentAs' => 'versionId',
                 ),
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
+                ),
+                'SSECustomerKey' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
                 'SaveAs' => array(
                     'location' => 'response_body',
                 ),
@@ -1188,11 +1081,11 @@ return array (
         ),
         'GetObjectAcl' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}{/Key*}',
+            'uri' => '/{Bucket}{/Key*}?acl',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetObjectAclOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETacl.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETacl.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
@@ -1212,13 +1105,6 @@ return array (
                     'location' => 'query',
                     'sentAs' => 'versionId',
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'acl',
-                    'default' => '_guzzle_blank_',
-                ),
                 'command.expects' => array(
                     'static' => true,
                     'default' => 'application/xml',
@@ -1233,11 +1119,11 @@ return array (
         ),
         'GetObjectTorrent' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}{/Key*}',
+            'uri' => '/{Bucket}{/Key*}?torrent',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'GetObjectTorrentOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETtorrent.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtorrent.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
@@ -1252,13 +1138,6 @@ return array (
                         'Aws\\S3\\S3Client::explodeKey',
                     ),
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'torrent',
-                    'default' => '_guzzle_blank_',
-                ),
             ),
         ),
         'HeadBucket' => array(
@@ -1267,7 +1146,7 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'HeadBucketOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketHEAD.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketHEAD.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
@@ -1288,7 +1167,7 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'HeadObjectOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectHEAD.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
@@ -1342,6 +1221,21 @@ return array (
                     'location' => 'query',
                     'sentAs' => 'versionId',
                 ),
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
+                ),
+                'SSECustomerKey' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
             ),
             'errorResponses' => array(
                 array(
@@ -1356,7 +1250,7 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'ListBucketsOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTServiceGET.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html',
             'parameters' => array(
                 'command.expects' => array(
                     'static' => true,
@@ -1366,11 +1260,11 @@ return array (
         ),
         'ListMultipartUploads' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?uploads',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'ListMultipartUploadsOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadListMPUpload.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadListMPUpload.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
@@ -1381,6 +1275,11 @@ return array (
                     'type' => 'string',
                     'location' => 'query',
                     'sentAs' => 'delimiter',
+                ),
+                'EncodingType' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'encoding-type',
                 ),
                 'KeyMarker' => array(
                     'type' => 'string',
@@ -1402,13 +1301,6 @@ return array (
                     'location' => 'query',
                     'sentAs' => 'upload-id-marker',
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'uploads',
-                    'default' => '_guzzle_blank_',
-                ),
                 'command.expects' => array(
                     'static' => true,
                     'default' => 'application/xml',
@@ -1417,11 +1309,11 @@ return array (
         ),
         'ListObjectVersions' => array(
             'httpMethod' => 'GET',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?versions',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'ListObjectVersionsOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETVersion.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETVersion.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
@@ -1432,6 +1324,11 @@ return array (
                     'type' => 'string',
                     'location' => 'query',
                     'sentAs' => 'delimiter',
+                ),
+                'EncodingType' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'encoding-type',
                 ),
                 'KeyMarker' => array(
                     'type' => 'string',
@@ -1453,13 +1350,6 @@ return array (
                     'location' => 'query',
                     'sentAs' => 'version-id-marker',
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'versions',
-                    'default' => '_guzzle_blank_',
-                ),
                 'command.expects' => array(
                     'static' => true,
                     'default' => 'application/xml',
@@ -1472,7 +1362,7 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'ListObjectsOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGET.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
@@ -1483,6 +1373,11 @@ return array (
                     'type' => 'string',
                     'location' => 'query',
                     'sentAs' => 'delimiter',
+                ),
+                'EncodingType' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'encoding-type',
                 ),
                 'Marker' => array(
                     'type' => 'string',
@@ -1517,7 +1412,7 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'ListPartsOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadListParts.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadListParts.html',
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
@@ -1538,7 +1433,7 @@ return array (
                     'sentAs' => 'max-parts',
                 ),
                 'PartNumberMarker' => array(
-                    'type' => 'string',
+                    'type' => 'numeric',
                     'location' => 'query',
                     'sentAs' => 'part-number-marker',
                 ),
@@ -1556,11 +1451,11 @@ return array (
         ),
         'PutBucketAcl' => array(
             'httpMethod' => 'PUT',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?acl',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'PutBucketAclOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTacl.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTacl.html',
             'data' => array(
                 'xmlRoot' => array(
                     'name' => 'AccessControlPolicy',
@@ -1574,14 +1469,6 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-acl',
-                    'enum' => array(
-                        'private',
-                        'public-read',
-                        'public-read-write',
-                        'authenticated-read',
-                        'bucket-owner-read',
-                        'bucket-owner-full-control',
-                    ),
                 ),
                 'Grants' => array(
                     'type' => 'array',
@@ -1611,11 +1498,6 @@ return array (
                                             'xmlAttribute' => true,
                                             'xmlNamespace' => 'http://www.w3.org/2001/XMLSchema-instance',
                                         ),
-                                        'enum' => array(
-                                            'CanonicalUser',
-                                            'AmazonCustomerByEmail',
-                                            'Group',
-                                        ),
                                     ),
                                     'URI' => array(
                                         'type' => 'string',
@@ -1624,13 +1506,6 @@ return array (
                             ),
                             'Permission' => array(
                                 'type' => 'string',
-                                'enum' => array(
-                                    'FULL_CONTROL',
-                                    'WRITE',
-                                    'WRITE_ACP',
-                                    'READ',
-                                    'READ_ACP',
-                                ),
                             ),
                         ),
                     ),
@@ -1651,9 +1526,6 @@ return array (
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'ContentMD5' => array(
-                    'default' => true,
                 ),
                 'GrantFullControl' => array(
                     'type' => 'string',
@@ -1680,13 +1552,6 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-grant-write-acp',
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'acl',
-                    'default' => '_guzzle_blank_',
-                ),
                 'ACP' => array(
                     'type' => 'object',
                     'additionalProperties' => true,
@@ -1695,11 +1560,11 @@ return array (
         ),
         'PutBucketCors' => array(
             'httpMethod' => 'PUT',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?cors',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'PutBucketCorsOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTcors.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTcors.html',
             'data' => array(
                 'xmlRoot' => array(
                     'name' => 'CORSConfiguration',
@@ -1707,6 +1572,7 @@ return array (
                         'http://s3.amazonaws.com/doc/2006-03-01/',
                     ),
                 ),
+                'contentMd5' => true,
             ),
             'parameters' => array(
                 'Bucket' => array(
@@ -1721,6 +1587,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'CORSRule',
                         'type' => 'object',
                         'sentAs' => 'CORSRule',
                         'properties' => array(
@@ -1730,6 +1597,7 @@ return array (
                                     'xmlFlattened' => true,
                                 ),
                                 'items' => array(
+                                    'name' => 'AllowedHeader',
                                     'type' => 'string',
                                     'sentAs' => 'AllowedHeader',
                                 ),
@@ -1740,6 +1608,7 @@ return array (
                                     'xmlFlattened' => true,
                                 ),
                                 'items' => array(
+                                    'name' => 'AllowedMethod',
                                     'type' => 'string',
                                     'sentAs' => 'AllowedMethod',
                                 ),
@@ -1750,6 +1619,7 @@ return array (
                                     'xmlFlattened' => true,
                                 ),
                                 'items' => array(
+                                    'name' => 'AllowedOrigin',
                                     'type' => 'string',
                                     'sentAs' => 'AllowedOrigin',
                                 ),
@@ -1760,6 +1630,7 @@ return array (
                                     'xmlFlattened' => true,
                                 ),
                                 'items' => array(
+                                    'name' => 'ExposeHeader',
                                     'type' => 'string',
                                     'sentAs' => 'ExposeHeader',
                                 ),
@@ -1770,25 +1641,15 @@ return array (
                         ),
                     ),
                 ),
-                'ContentMD5' => array(
-                    'default' => true,
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'cors',
-                    'default' => '_guzzle_blank_',
-                ),
             ),
         ),
         'PutBucketLifecycle' => array(
             'httpMethod' => 'PUT',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?lifecycle',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'PutBucketLifecycleOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html',
             'data' => array(
                 'xmlRoot' => array(
                     'name' => 'LifecycleConfiguration',
@@ -1796,15 +1657,13 @@ return array (
                         'http://s3.amazonaws.com/doc/2006-03-01/',
                     ),
                 ),
+                'contentMd5' => true,
             ),
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'ContentMD5' => array(
-                    'default' => true,
                 ),
                 'Rules' => array(
                     'required' => true,
@@ -1814,6 +1673,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'Rule',
                         'type' => 'object',
                         'sentAs' => 'Rule',
                         'properties' => array(
@@ -1843,10 +1703,6 @@ return array (
                             'Status' => array(
                                 'required' => true,
                                 'type' => 'string',
-                                'enum' => array(
-                                    'Enabled',
-                                    'Disabled',
-                                ),
                             ),
                             'Transition' => array(
                                 'type' => 'object',
@@ -1864,33 +1720,40 @@ return array (
                                     ),
                                     'StorageClass' => array(
                                         'type' => 'string',
-                                        'enum' => array(
-                                            'STANDARD',
-                                            'REDUCED_REDUNDANCY',
-                                            'GLACIER',
-                                        ),
+                                    ),
+                                ),
+                            ),
+                            'NoncurrentVersionTransition' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'NoncurrentDays' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'StorageClass' => array(
+                                        'type' => 'string',
+                                    ),
+                                ),
+                            ),
+                            'NoncurrentVersionExpiration' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'NoncurrentDays' => array(
+                                        'type' => 'numeric',
                                     ),
                                 ),
                             ),
                         ),
                     ),
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'lifecycle',
-                    'default' => '_guzzle_blank_',
-                ),
             ),
         ),
         'PutBucketLogging' => array(
             'httpMethod' => 'PUT',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?logging',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'PutBucketLoggingOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlogging.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html',
             'data' => array(
                 'xmlRoot' => array(
                     'name' => 'BucketLoggingStatus',
@@ -1898,6 +1761,7 @@ return array (
                         'http://s3.amazonaws.com/doc/2006-03-01/',
                     ),
                 ),
+                'xmlAllowEmpty' => true,
             ),
             'parameters' => array(
                 'Bucket' => array(
@@ -1906,7 +1770,6 @@ return array (
                     'location' => 'uri',
                 ),
                 'LoggingEnabled' => array(
-                    'required' => true,
                     'type' => 'object',
                     'location' => 'xml',
                     'properties' => array(
@@ -1939,11 +1802,6 @@ return array (
                                                     'xmlAttribute' => true,
                                                     'xmlNamespace' => 'http://www.w3.org/2001/XMLSchema-instance',
                                                 ),
-                                                'enum' => array(
-                                                    'CanonicalUser',
-                                                    'AmazonCustomerByEmail',
-                                                    'Group',
-                                                ),
                                             ),
                                             'URI' => array(
                                                 'type' => 'string',
@@ -1961,25 +1819,15 @@ return array (
                         ),
                     ),
                 ),
-                'ContentMD5' => array(
-                    'default' => true,
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'logging',
-                    'default' => '_guzzle_blank_',
-                ),
             ),
         ),
         'PutBucketNotification' => array(
             'httpMethod' => 'PUT',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?notification',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'PutBucketNotificationOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTnotification.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTnotification.html',
             'data' => array(
                 'xmlRoot' => array(
                     'name' => 'NotificationConfiguration',
@@ -1994,9 +1842,6 @@ return array (
                     'type' => 'string',
                     'location' => 'uri',
                 ),
-                'ContentMD5' => array(
-                    'default' => true,
-                ),
                 'TopicConfiguration' => array(
                     'required' => true,
                     'type' => 'object',
@@ -2004,39 +1849,34 @@ return array (
                     'properties' => array(
                         'Event' => array(
                             'type' => 'string',
-                            'enum' => array(
-                                's3:ReducedRedundancyLostObject',
-                            ),
                         ),
                         'Topic' => array(
                             'type' => 'string',
                         ),
                     ),
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'notification',
-                    'default' => '_guzzle_blank_',
-                ),
             ),
         ),
         'PutBucketPolicy' => array(
             'httpMethod' => 'PUT',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?policy',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'PutBucketPolicyOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html',
+            'data' => array(
+                'xmlRoot' => array(
+                    'name' => 'PutBucketPolicyRequest',
+                    'namespaces' => array(
+                        'http://s3.amazonaws.com/doc/2006-03-01/',
+                    ),
+                ),
+            ),
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'ContentMD5' => array(
-                    'default' => true,
                 ),
                 'Policy' => array(
                     'required' => true,
@@ -2046,22 +1886,15 @@ return array (
                     ),
                     'location' => 'body',
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'policy',
-                    'default' => '_guzzle_blank_',
-                ),
             ),
         ),
         'PutBucketRequestPayment' => array(
             'httpMethod' => 'PUT',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?requestPayment',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'PutBucketRequestPaymentOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentPUT.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTrequestPaymentPUT.html',
             'data' => array(
                 'xmlRoot' => array(
                     'name' => 'RequestPaymentConfiguration',
@@ -2076,34 +1909,20 @@ return array (
                     'type' => 'string',
                     'location' => 'uri',
                 ),
-                'ContentMD5' => array(
-                    'default' => true,
-                ),
                 'Payer' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'xml',
-                    'enum' => array(
-                        'Requester',
-                        'BucketOwner',
-                    ),
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'requestPayment',
-                    'default' => '_guzzle_blank_',
                 ),
             ),
         ),
         'PutBucketTagging' => array(
             'httpMethod' => 'PUT',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?tagging',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'PutBucketTaggingOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTtagging.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTtagging.html',
             'data' => array(
                 'xmlRoot' => array(
                     'name' => 'Tagging',
@@ -2111,6 +1930,7 @@ return array (
                         'http://s3.amazonaws.com/doc/2006-03-01/',
                     ),
                 ),
+                'contentMd5' => true,
             ),
             'parameters' => array(
                 'Bucket' => array(
@@ -2118,16 +1938,12 @@ return array (
                     'type' => 'string',
                     'location' => 'uri',
                 ),
-                'ContentMD5' => array(
-                    'default' => true,
-                ),
                 'TagSet' => array(
                     'required' => true,
                     'type' => 'array',
                     'location' => 'xml',
                     'items' => array(
                         'name' => 'Tag',
-                        'required' => true,
                         'type' => 'object',
                         'properties' => array(
                             'Key' => array(
@@ -2141,22 +1957,15 @@ return array (
                         ),
                     ),
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'tagging',
-                    'default' => '_guzzle_blank_',
-                ),
             ),
         ),
         'PutBucketVersioning' => array(
             'httpMethod' => 'PUT',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?versioning',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'PutBucketVersioningOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html',
             'data' => array(
                 'xmlRoot' => array(
                     'name' => 'VersioningConfiguration',
@@ -2171,9 +1980,6 @@ return array (
                     'type' => 'string',
                     'location' => 'uri',
                 ),
-                'ContentMD5' => array(
-                    'default' => true,
-                ),
                 'MFA' => array(
                     'type' => 'string',
                     'location' => 'header',
@@ -2182,35 +1988,21 @@ return array (
                 'MFADelete' => array(
                     'type' => 'string',
                     'location' => 'xml',
-                    'enum' => array(
-                        'Enabled',
-                        'Disabled',
-                    ),
+                    'sentAs' => 'MfaDelete',
                 ),
                 'Status' => array(
                     'type' => 'string',
                     'location' => 'xml',
-                    'enum' => array(
-                        'Enabled',
-                        'Suspended',
-                    ),
-                ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'versioning',
-                    'default' => '_guzzle_blank_',
                 ),
             ),
         ),
         'PutBucketWebsite' => array(
             'httpMethod' => 'PUT',
-            'uri' => '/{Bucket}',
+            'uri' => '/{Bucket}?website',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'PutBucketWebsiteOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html',
             'data' => array(
                 'xmlRoot' => array(
                     'name' => 'WebsiteConfiguration',
@@ -2225,9 +2017,6 @@ return array (
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'ContentMD5' => array(
-                    'default' => true,
                 ),
                 'ErrorDocument' => array(
                     'type' => 'object',
@@ -2259,10 +2048,6 @@ return array (
                         ),
                         'Protocol' => array(
                             'type' => 'string',
-                            'enum' => array(
-                                'http',
-                                'https',
-                            ),
                         ),
                     ),
                 ),
@@ -2296,10 +2081,6 @@ return array (
                                     ),
                                     'Protocol' => array(
                                         'type' => 'string',
-                                        'enum' => array(
-                                            'http',
-                                            'https',
-                                        ),
                                     ),
                                     'ReplaceKeyPrefixWith' => array(
                                         'type' => 'string',
@@ -2312,13 +2093,6 @@ return array (
                         ),
                     ),
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'website',
-                    'default' => '_guzzle_blank_',
-                ),
             ),
         ),
         'PutObject' => array(
@@ -2327,20 +2101,20 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'PutObjectOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUT.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html',
+            'data' => array(
+                'xmlRoot' => array(
+                    'name' => 'PutObjectRequest',
+                    'namespaces' => array(
+                        'http://s3.amazonaws.com/doc/2006-03-01/',
+                    ),
+                ),
+            ),
             'parameters' => array(
                 'ACL' => array(
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-acl',
-                    'enum' => array(
-                        'private',
-                        'public-read',
-                        'public-read-write',
-                        'authenticated-read',
-                        'bucket-owner-read',
-                        'bucket-owner-full-control',
-                    ),
                 ),
                 'Body' => array(
                     'type' => array(
@@ -2380,7 +2154,12 @@ return array (
                     'sentAs' => 'Content-Length',
                 ),
                 'ContentMD5' => array(
-                    'default' => true,
+                    'type' => array(
+                        'string',
+                        'boolean',
+                    ),
+                    'location' => 'header',
+                    'sentAs' => 'Content-MD5',
                 ),
                 'ContentType' => array(
                     'type' => 'string',
@@ -2436,26 +2215,31 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption',
-                    'enum' => array(
-                        'AES256',
-                    ),
                 ),
                 'StorageClass' => array(
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-storage-class',
-                    'enum' => array(
-                        'STANDARD',
-                        'REDUCED_REDUNDANCY',
-                    ),
                 ),
                 'WebsiteRedirectLocation' => array(
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-website-redirect-location',
                 ),
-                'ValidateMD5' => array(
-                    'default' => true,
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
+                ),
+                'SSECustomerKey' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
                 ),
                 'ACP' => array(
                     'type' => 'object',
@@ -2465,11 +2249,11 @@ return array (
         ),
         'PutObjectAcl' => array(
             'httpMethod' => 'PUT',
-            'uri' => '/{Bucket}{/Key*}',
+            'uri' => '/{Bucket}{/Key*}?acl',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'PutObjectAclOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUTacl.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html',
             'data' => array(
                 'xmlRoot' => array(
                     'name' => 'AccessControlPolicy',
@@ -2483,14 +2267,6 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-acl',
-                    'enum' => array(
-                        'private',
-                        'public-read',
-                        'public-read-write',
-                        'authenticated-read',
-                        'bucket-owner-read',
-                        'bucket-owner-full-control',
-                    ),
                 ),
                 'Grants' => array(
                     'type' => 'array',
@@ -2520,11 +2296,6 @@ return array (
                                             'xmlAttribute' => true,
                                             'xmlNamespace' => 'http://www.w3.org/2001/XMLSchema-instance',
                                         ),
-                                        'enum' => array(
-                                            'CanonicalUser',
-                                            'AmazonCustomerByEmail',
-                                            'Group',
-                                        ),
                                     ),
                                     'URI' => array(
                                         'type' => 'string',
@@ -2533,13 +2304,6 @@ return array (
                             ),
                             'Permission' => array(
                                 'type' => 'string',
-                                'enum' => array(
-                                    'FULL_CONTROL',
-                                    'WRITE',
-                                    'WRITE_ACP',
-                                    'READ',
-                                    'READ_ACP',
-                                ),
                             ),
                         ),
                     ),
@@ -2560,9 +2324,6 @@ return array (
                     'required' => true,
                     'type' => 'string',
                     'location' => 'uri',
-                ),
-                'ContentMD5' => array(
-                    'default' => true,
                 ),
                 'GrantFullControl' => array(
                     'type' => 'string',
@@ -2597,13 +2358,6 @@ return array (
                         'Aws\\S3\\S3Client::explodeKey',
                     ),
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'acl',
-                    'default' => '_guzzle_blank_',
-                ),
                 'ACP' => array(
                     'type' => 'object',
                     'additionalProperties' => true,
@@ -2618,11 +2372,11 @@ return array (
         ),
         'RestoreObject' => array(
             'httpMethod' => 'POST',
-            'uri' => '/{Bucket}{/Key*}',
+            'uri' => '/{Bucket}{/Key*}?restore',
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'RestoreObjectOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectRestore.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectRestore.html',
             'data' => array(
                 'xmlRoot' => array(
                     'name' => 'RestoreRequest',
@@ -2650,13 +2404,6 @@ return array (
                     'type' => 'numeric',
                     'location' => 'xml',
                 ),
-                'SubResource' => array(
-                    'required' => true,
-                    'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'restore',
-                    'default' => '_guzzle_blank_',
-                ),
             ),
             'errorResponses' => array(
                 array(
@@ -2671,7 +2418,15 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'UploadPartOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPart.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPart.html',
+            'data' => array(
+                'xmlRoot' => array(
+                    'name' => 'UploadPartRequest',
+                    'namespaces' => array(
+                        'http://s3.amazonaws.com/doc/2006-03-01/',
+                    ),
+                ),
+            ),
             'parameters' => array(
                 'Body' => array(
                     'type' => array(
@@ -2690,6 +2445,14 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'Content-Length',
                 ),
+                'ContentMD5' => array(
+                    'type' => array(
+                        'string',
+                        'boolean',
+                    ),
+                    'location' => 'header',
+                    'sentAs' => 'Content-MD5',
+                ),
                 'Key' => array(
                     'required' => true,
                     'type' => 'string',
@@ -2700,7 +2463,7 @@ return array (
                 ),
                 'PartNumber' => array(
                     'required' => true,
-                    'type' => 'string',
+                    'type' => 'numeric',
                     'location' => 'query',
                     'sentAs' => 'partNumber',
                 ),
@@ -2710,11 +2473,20 @@ return array (
                     'location' => 'query',
                     'sentAs' => 'uploadId',
                 ),
-                'ContentMD5' => array(
-                    'default' => true,
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
                 ),
-                'ValidateMD5' => array(
-                    'default' => true,
+                'SSECustomerKey' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
                 ),
             ),
         ),
@@ -2724,7 +2496,15 @@ return array (
             'class' => 'Aws\\S3\\Command\\S3Command',
             'responseClass' => 'UploadPartCopyOutput',
             'responseType' => 'model',
-            'documentationUrl' => 'http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html',
+            'documentationUrl' => 'http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html',
+            'data' => array(
+                'xmlRoot' => array(
+                    'name' => 'UploadPartCopyRequest',
+                    'namespaces' => array(
+                        'http://s3.amazonaws.com/doc/2006-03-01/',
+                    ),
+                ),
+            ),
             'parameters' => array(
                 'Bucket' => array(
                     'required' => true,
@@ -2738,12 +2518,7 @@ return array (
                     'sentAs' => 'x-amz-copy-source',
                 ),
                 'CopySourceIfMatch' => array(
-                    'type' => array(
-                        'object',
-                        'string',
-                        'integer',
-                    ),
-                    'format' => 'date-time-http',
+                    'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-copy-source-if-match',
                 ),
@@ -2758,12 +2533,7 @@ return array (
                     'sentAs' => 'x-amz-copy-source-if-modified-since',
                 ),
                 'CopySourceIfNoneMatch' => array(
-                    'type' => array(
-                        'object',
-                        'string',
-                        'integer',
-                    ),
-                    'format' => 'date-time-http',
+                    'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-copy-source-if-none-match',
                 ),
@@ -2792,7 +2562,7 @@ return array (
                 ),
                 'PartNumber' => array(
                     'required' => true,
-                    'type' => 'string',
+                    'type' => 'numeric',
                     'location' => 'query',
                     'sentAs' => 'partNumber',
                 ),
@@ -2801,6 +2571,36 @@ return array (
                     'type' => 'string',
                     'location' => 'query',
                     'sentAs' => 'uploadId',
+                ),
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
+                ),
+                'SSECustomerKey' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
+                'CopySourceSSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-copy-source-server-side-encryption-customer-algorithm',
+                ),
+                'CopySourceSSECustomerKey' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-copy-source-server-side-encryption-customer-key',
+                ),
+                'CopySourceSSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-copy-source-server-side-encryption-customer-key-MD5',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -2888,6 +2688,16 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption',
                 ),
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
                 'RequestId' => array(
                     'location' => 'header',
                     'sentAs' => 'x-amz-request-id',
@@ -2929,6 +2739,16 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption',
+                ),
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
                 ),
                 'RequestId' => array(
                     'location' => 'header',
@@ -3001,7 +2821,7 @@ return array (
             'additionalProperties' => true,
             'properties' => array(
                 'DeleteMarker' => array(
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'location' => 'header',
                     'sentAs' => 'x-amz-delete-marker',
                 ),
@@ -3027,6 +2847,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'DeletedObject',
                         'type' => 'object',
                         'properties' => array(
                             'Key' => array(
@@ -3052,6 +2873,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'Error',
                         'type' => 'object',
                         'sentAs' => 'Error',
                         'properties' => array(
@@ -3084,10 +2906,10 @@ return array (
                     'type' => 'object',
                     'location' => 'xml',
                     'properties' => array(
-                        'ID' => array(
+                        'DisplayName' => array(
                             'type' => 'string',
                         ),
-                        'DisplayName' => array(
+                        'ID' => array(
                             'type' => 'string',
                         ),
                     ),
@@ -3104,6 +2926,15 @@ return array (
                             'Grantee' => array(
                                 'type' => 'object',
                                 'properties' => array(
+                                    'DisplayName' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'EmailAddress' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'ID' => array(
+                                        'type' => 'string',
+                                    ),
                                     'Type' => array(
                                         'type' => 'string',
                                         'sentAs' => 'xsi:type',
@@ -3111,15 +2942,6 @@ return array (
                                             'xmlAttribute' => true,
                                             'xmlNamespace' => 'http://www.w3.org/2001/XMLSchema-instance',
                                         ),
-                                    ),
-                                    'ID' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'DisplayName' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'EmailAddress' => array(
-                                        'type' => 'string',
                                     ),
                                     'URI' => array(
                                         'type' => 'string',
@@ -3150,6 +2972,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'CORSRule',
                         'type' => 'object',
                         'sentAs' => 'CORSRule',
                         'properties' => array(
@@ -3160,19 +2983,9 @@ return array (
                                     'xmlFlattened' => true,
                                 ),
                                 'items' => array(
+                                    'name' => 'AllowedHeader',
                                     'type' => 'string',
                                     'sentAs' => 'AllowedHeader',
-                                ),
-                            ),
-                            'AllowedOrigins' => array(
-                                'type' => 'array',
-                                'sentAs' => 'AllowedOrigin',
-                                'data' => array(
-                                    'xmlFlattened' => true,
-                                ),
-                                'items' => array(
-                                    'type' => 'string',
-                                    'sentAs' => 'AllowedOrigin',
                                 ),
                             ),
                             'AllowedMethods' => array(
@@ -3182,12 +2995,22 @@ return array (
                                     'xmlFlattened' => true,
                                 ),
                                 'items' => array(
+                                    'name' => 'AllowedMethod',
                                     'type' => 'string',
                                     'sentAs' => 'AllowedMethod',
                                 ),
                             ),
-                            'MaxAgeSeconds' => array(
-                                'type' => 'numeric',
+                            'AllowedOrigins' => array(
+                                'type' => 'array',
+                                'sentAs' => 'AllowedOrigin',
+                                'data' => array(
+                                    'xmlFlattened' => true,
+                                ),
+                                'items' => array(
+                                    'name' => 'AllowedOrigin',
+                                    'type' => 'string',
+                                    'sentAs' => 'AllowedOrigin',
+                                ),
                             ),
                             'ExposeHeaders' => array(
                                 'type' => 'array',
@@ -3196,9 +3019,13 @@ return array (
                                     'xmlFlattened' => true,
                                 ),
                                 'items' => array(
+                                    'name' => 'ExposeHeader',
                                     'type' => 'string',
                                     'sentAs' => 'ExposeHeader',
                                 ),
+                            ),
+                            'MaxAgeSeconds' => array(
+                                'type' => 'numeric',
                             ),
                         ),
                     ),
@@ -3221,9 +3048,21 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'Rule',
                         'type' => 'object',
                         'sentAs' => 'Rule',
                         'properties' => array(
+                            'Expiration' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'Date' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'Days' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                ),
+                            ),
                             'ID' => array(
                                 'type' => 'string',
                             ),
@@ -3236,25 +3075,33 @@ return array (
                             'Transition' => array(
                                 'type' => 'object',
                                 'properties' => array(
-                                    'Days' => array(
-                                        'type' => 'numeric',
-                                    ),
                                     'Date' => array(
                                         'type' => 'string',
+                                    ),
+                                    'Days' => array(
+                                        'type' => 'numeric',
                                     ),
                                     'StorageClass' => array(
                                         'type' => 'string',
                                     ),
                                 ),
                             ),
-                            'Expiration' => array(
+                            'NoncurrentVersionTransition' => array(
                                 'type' => 'object',
                                 'properties' => array(
-                                    'Days' => array(
+                                    'NoncurrentDays' => array(
                                         'type' => 'numeric',
                                     ),
-                                    'Date' => array(
+                                    'StorageClass' => array(
                                         'type' => 'string',
+                                    ),
+                                ),
+                            ),
+                            'NoncurrentVersionExpiration' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'NoncurrentDays' => array(
+                                        'type' => 'numeric',
                                     ),
                                 ),
                             ),
@@ -3293,9 +3140,6 @@ return array (
                         'TargetBucket' => array(
                             'type' => 'string',
                         ),
-                        'TargetPrefix' => array(
-                            'type' => 'string',
-                        ),
                         'TargetGrants' => array(
                             'type' => 'array',
                             'items' => array(
@@ -3306,6 +3150,15 @@ return array (
                                     'Grantee' => array(
                                         'type' => 'object',
                                         'properties' => array(
+                                            'DisplayName' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'EmailAddress' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'ID' => array(
+                                                'type' => 'string',
+                                            ),
                                             'Type' => array(
                                                 'type' => 'string',
                                                 'sentAs' => 'xsi:type',
@@ -3313,15 +3166,6 @@ return array (
                                                     'xmlAttribute' => true,
                                                     'xmlNamespace' => 'http://www.w3.org/2001/XMLSchema-instance',
                                                 ),
-                                            ),
-                                            'ID' => array(
-                                                'type' => 'string',
-                                            ),
-                                            'DisplayName' => array(
-                                                'type' => 'string',
-                                            ),
-                                            'EmailAddress' => array(
-                                                'type' => 'string',
                                             ),
                                             'URI' => array(
                                                 'type' => 'string',
@@ -3333,6 +3177,9 @@ return array (
                                     ),
                                 ),
                             ),
+                        ),
+                        'TargetPrefix' => array(
+                            'type' => 'string',
                         ),
                     ),
                 ),
@@ -3350,10 +3197,10 @@ return array (
                     'type' => 'object',
                     'location' => 'xml',
                     'properties' => array(
-                        'Topic' => array(
+                        'Event' => array(
                             'type' => 'string',
                         ),
-                        'Event' => array(
+                        'Topic' => array(
                             'type' => 'string',
                         ),
                     ),
@@ -3431,6 +3278,7 @@ return array (
                 'MFADelete' => array(
                     'type' => 'string',
                     'location' => 'xml',
+                    'sentAs' => 'MfaDelete',
                 ),
                 'RequestId' => array(
                     'location' => 'header',
@@ -3483,10 +3331,10 @@ return array (
                             'Condition' => array(
                                 'type' => 'object',
                                 'properties' => array(
-                                    'KeyPrefixEquals' => array(
+                                    'HttpErrorCodeReturnedEquals' => array(
                                         'type' => 'string',
                                     ),
-                                    'HttpErrorCodeReturnedEquals' => array(
+                                    'KeyPrefixEquals' => array(
                                         'type' => 'string',
                                     ),
                                 ),
@@ -3497,16 +3345,16 @@ return array (
                                     'HostName' => array(
                                         'type' => 'string',
                                     ),
-                                    'ReplaceKeyPrefixWith' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'ReplaceKeyWith' => array(
-                                        'type' => 'string',
-                                    ),
                                     'HttpRedirectCode' => array(
                                         'type' => 'string',
                                     ),
                                     'Protocol' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'ReplaceKeyPrefixWith' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'ReplaceKeyWith' => array(
                                         'type' => 'string',
                                     ),
                                 ),
@@ -3530,7 +3378,7 @@ return array (
                     'location' => 'body',
                 ),
                 'DeleteMarker' => array(
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'location' => 'header',
                     'sentAs' => 'x-amz-delete-marker',
                 ),
@@ -3620,6 +3468,16 @@ return array (
                         'type' => 'string',
                     ),
                 ),
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
                 'RequestId' => array(
                     'location' => 'header',
                     'sentAs' => 'x-amz-request-id',
@@ -3634,10 +3492,10 @@ return array (
                     'type' => 'object',
                     'location' => 'xml',
                     'properties' => array(
-                        'ID' => array(
+                        'DisplayName' => array(
                             'type' => 'string',
                         ),
-                        'DisplayName' => array(
+                        'ID' => array(
                             'type' => 'string',
                         ),
                     ),
@@ -3654,6 +3512,15 @@ return array (
                             'Grantee' => array(
                                 'type' => 'object',
                                 'properties' => array(
+                                    'DisplayName' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'EmailAddress' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'ID' => array(
+                                        'type' => 'string',
+                                    ),
                                     'Type' => array(
                                         'type' => 'string',
                                         'sentAs' => 'xsi:type',
@@ -3661,15 +3528,6 @@ return array (
                                             'xmlAttribute' => true,
                                             'xmlNamespace' => 'http://www.w3.org/2001/XMLSchema-instance',
                                         ),
-                                    ),
-                                    'ID' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'DisplayName' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'EmailAddress' => array(
-                                        'type' => 'string',
                                     ),
                                     'URI' => array(
                                         'type' => 'string',
@@ -3718,7 +3576,7 @@ return array (
             'additionalProperties' => true,
             'properties' => array(
                 'DeleteMarker' => array(
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'location' => 'header',
                     'sentAs' => 'x-amz-delete-marker',
                 ),
@@ -3808,6 +3666,16 @@ return array (
                         'type' => 'string',
                     ),
                 ),
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
                 'RequestId' => array(
                     'location' => 'header',
                     'sentAs' => 'x-amz-request-id',
@@ -3839,10 +3707,10 @@ return array (
                     'type' => 'object',
                     'location' => 'xml',
                     'properties' => array(
-                        'ID' => array(
+                        'DisplayName' => array(
                             'type' => 'string',
                         ),
-                        'DisplayName' => array(
+                        'ID' => array(
                             'type' => 'string',
                         ),
                     ),
@@ -3873,6 +3741,10 @@ return array (
                     'type' => 'string',
                     'location' => 'xml',
                 ),
+                'Prefix' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
                 'NextUploadIdMarker' => array(
                     'type' => 'string',
                     'location' => 'xml',
@@ -3893,6 +3765,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'MultipartUpload',
                         'type' => 'object',
                         'sentAs' => 'Upload',
                         'properties' => array(
@@ -3911,10 +3784,10 @@ return array (
                             'Owner' => array(
                                 'type' => 'object',
                                 'properties' => array(
-                                    'ID' => array(
+                                    'DisplayName' => array(
                                         'type' => 'string',
                                     ),
-                                    'DisplayName' => array(
+                                    'ID' => array(
                                         'type' => 'string',
                                     ),
                                 ),
@@ -3933,10 +3806,6 @@ return array (
                         ),
                     ),
                 ),
-                'Prefix' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                ),
                 'CommonPrefixes' => array(
                     'type' => 'array',
                     'location' => 'xml',
@@ -3944,6 +3813,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'CommonPrefix',
                         'type' => 'object',
                         'properties' => array(
                             'Prefix' => array(
@@ -3951,6 +3821,10 @@ return array (
                             ),
                         ),
                     ),
+                ),
+                'EncodingType' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
                 ),
                 'RequestId' => array(
                     'location' => 'header',
@@ -3990,6 +3864,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'ObjectVersion',
                         'type' => 'object',
                         'sentAs' => 'Version',
                         'properties' => array(
@@ -3997,7 +3872,7 @@ return array (
                                 'type' => 'string',
                             ),
                             'Size' => array(
-                                'type' => 'string',
+                                'type' => 'numeric',
                             ),
                             'StorageClass' => array(
                                 'type' => 'string',
@@ -4017,10 +3892,10 @@ return array (
                             'Owner' => array(
                                 'type' => 'object',
                                 'properties' => array(
-                                    'ID' => array(
+                                    'DisplayName' => array(
                                         'type' => 'string',
                                     ),
-                                    'DisplayName' => array(
+                                    'ID' => array(
                                         'type' => 'string',
                                     ),
                                 ),
@@ -4036,16 +3911,17 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'DeleteMarkerEntry',
                         'type' => 'object',
                         'sentAs' => 'DeleteMarker',
                         'properties' => array(
                             'Owner' => array(
                                 'type' => 'object',
                                 'properties' => array(
-                                    'ID' => array(
+                                    'DisplayName' => array(
                                         'type' => 'string',
                                     ),
-                                    'DisplayName' => array(
+                                    'ID' => array(
                                         'type' => 'string',
                                     ),
                                 ),
@@ -4084,6 +3960,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'CommonPrefix',
                         'type' => 'object',
                         'properties' => array(
                             'Prefix' => array(
@@ -4091,6 +3968,10 @@ return array (
                             ),
                         ),
                     ),
+                ),
+                'EncodingType' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
                 ),
                 'RequestId' => array(
                     'location' => 'header',
@@ -4110,6 +3991,10 @@ return array (
                     'type' => 'string',
                     'location' => 'xml',
                 ),
+                'NextMarker' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
                 'Contents' => array(
                     'type' => 'array',
                     'location' => 'xml',
@@ -4117,6 +4002,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'Object',
                         'type' => 'object',
                         'properties' => array(
                             'Key' => array(
@@ -4137,10 +4023,10 @@ return array (
                             'Owner' => array(
                                 'type' => 'object',
                                 'properties' => array(
-                                    'ID' => array(
+                                    'DisplayName' => array(
                                         'type' => 'string',
                                     ),
-                                    'DisplayName' => array(
+                                    'ID' => array(
                                         'type' => 'string',
                                     ),
                                 ),
@@ -4167,6 +4053,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'CommonPrefix',
                         'type' => 'object',
                         'properties' => array(
                             'Prefix' => array(
@@ -4174,6 +4061,10 @@ return array (
                             ),
                         ),
                     ),
+                ),
+                'EncodingType' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
                 ),
                 'RequestId' => array(
                     'location' => 'header',
@@ -4221,6 +4112,7 @@ return array (
                         'xmlFlattened' => true,
                     ),
                     'items' => array(
+                        'name' => 'Part',
                         'type' => 'object',
                         'sentAs' => 'Part',
                         'properties' => array(
@@ -4255,10 +4147,10 @@ return array (
                     'type' => 'object',
                     'location' => 'xml',
                     'properties' => array(
-                        'ID' => array(
+                        'DisplayName' => array(
                             'type' => 'string',
                         ),
-                        'DisplayName' => array(
+                        'ID' => array(
                             'type' => 'string',
                         ),
                     ),
@@ -4396,6 +4288,16 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-version-id',
                 ),
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
                 'RequestId' => array(
                     'location' => 'header',
                     'sentAs' => 'x-amz-request-id',
@@ -4437,6 +4339,16 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                 ),
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
                 'RequestId' => array(
                     'location' => 'header',
                     'sentAs' => 'x-amz-request-id',
@@ -4465,11 +4377,76 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption',
                 ),
+                'SSECustomerAlgorithm' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-algorithm',
+                ),
+                'SSECustomerKeyMD5' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
                 'RequestId' => array(
                     'location' => 'header',
                     'sentAs' => 'x-amz-request-id',
                 ),
             ),
+        ),
+    ),
+    'iterators' => array(
+        'ListBuckets' => array(
+            'result_key' => 'Buckets',
+        ),
+        'ListMultipartUploads' => array(
+            'limit_key' => 'MaxUploads',
+            'more_results' => 'IsTruncated',
+            'output_token' => array(
+                'NextKeyMarker',
+                'NextUploadIdMarker',
+            ),
+            'input_token' => array(
+                'KeyMarker',
+                'UploadIdMarker',
+            ),
+            'result_key' => array(
+                'Uploads',
+                'CommonPrefixes',
+            ),
+        ),
+        'ListObjectVersions' => array(
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxKeys',
+            'output_token' => array(
+                'NextKeyMarker',
+                'NextVersionIdMarker',
+            ),
+            'input_token' => array(
+                'KeyMarker',
+                'VersionIdMarker',
+            ),
+            'result_key' => array(
+                'Versions',
+                'DeleteMarkers',
+                'CommonPrefixes',
+            ),
+        ),
+        'ListObjects' => array(
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxKeys',
+            'output_token' => 'NextMarker',
+            'input_token' => 'Marker',
+            'result_key' => array(
+                'Contents',
+                'CommonPrefixes',
+            ),
+        ),
+        'ListParts' => array(
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxParts',
+            'output_token' => 'NextPartNumberMarker',
+            'input_token' => 'PartNumberMarker',
+            'result_key' => 'Parts',
         ),
     ),
     'waiters' => array(

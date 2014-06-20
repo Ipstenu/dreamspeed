@@ -63,6 +63,16 @@ return array (
             'https' => true,
             'hostname' => 'cloudformation.sa-east-1.amazonaws.com',
         ),
+        'cn-north-1' => array(
+            'http' => false,
+            'https' => true,
+            'hostname' => 'cloudformation.cn-north-1.amazonaws.com.cn',
+        ),
+        'us-gov-west-1' => array(
+            'http' => false,
+            'https' => true,
+            'hostname' => 'cloudformation.us-gov-west-1.amazonaws.com',
+        ),
     ),
     'operations' => array(
         'CancelUpdateStack' => array(
@@ -115,7 +125,6 @@ return array (
                     'type' => 'string',
                     'location' => 'aws.query',
                     'minLength' => 1,
-                    'maxLength' => 51200,
                 ),
                 'TemplateURL' => array(
                     'type' => 'string',
@@ -136,6 +145,10 @@ return array (
                             ),
                             'ParameterValue' => array(
                                 'type' => 'string',
+                            ),
+                            'UsePreviousValue' => array(
+                                'type' => 'boolean',
+                                'format' => 'boolean-string',
                             ),
                         ),
                     ),
@@ -167,19 +180,23 @@ return array (
                     'items' => array(
                         'name' => 'Capability',
                         'type' => 'string',
-                        'enum' => array(
-                            'CAPABILITY_IAM',
-                        ),
                     ),
                 ),
                 'OnFailure' => array(
                     'type' => 'string',
                     'location' => 'aws.query',
-                    'enum' => array(
-                        'DO_NOTHING',
-                        'ROLLBACK',
-                        'DELETE',
-                    ),
+                ),
+                'StackPolicyBody' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 16384,
+                ),
+                'StackPolicyURL' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 1350,
                 ),
                 'Tags' => array(
                     'type' => 'array',
@@ -377,7 +394,6 @@ return array (
                     'type' => 'string',
                     'location' => 'aws.query',
                     'minLength' => 1,
-                    'maxLength' => 51200,
                 ),
                 'TemplateURL' => array(
                     'type' => 'string',
@@ -399,8 +415,36 @@ return array (
                             'ParameterValue' => array(
                                 'type' => 'string',
                             ),
+                            'UsePreviousValue' => array(
+                                'type' => 'boolean',
+                                'format' => 'boolean-string',
+                            ),
                         ),
                     ),
+                ),
+            ),
+        ),
+        'GetStackPolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GetStackPolicyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GetStackPolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-15',
+                ),
+                'StackName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
                 ),
             ),
         ),
@@ -488,25 +532,43 @@ return array (
                     'items' => array(
                         'name' => 'StackStatus',
                         'type' => 'string',
-                        'enum' => array(
-                            'CREATE_IN_PROGRESS',
-                            'CREATE_FAILED',
-                            'CREATE_COMPLETE',
-                            'ROLLBACK_IN_PROGRESS',
-                            'ROLLBACK_FAILED',
-                            'ROLLBACK_COMPLETE',
-                            'DELETE_IN_PROGRESS',
-                            'DELETE_FAILED',
-                            'DELETE_COMPLETE',
-                            'UPDATE_IN_PROGRESS',
-                            'UPDATE_COMPLETE_CLEANUP_IN_PROGRESS',
-                            'UPDATE_COMPLETE',
-                            'UPDATE_ROLLBACK_IN_PROGRESS',
-                            'UPDATE_ROLLBACK_FAILED',
-                            'UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS',
-                            'UPDATE_ROLLBACK_COMPLETE',
-                        ),
                     ),
+                ),
+            ),
+        ),
+        'SetStackPolicy' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'SetStackPolicy',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-15',
+                ),
+                'StackName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'StackPolicyBody' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 16384,
+                ),
+                'StackPolicyURL' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 1350,
                 ),
             ),
         ),
@@ -536,13 +598,29 @@ return array (
                     'type' => 'string',
                     'location' => 'aws.query',
                     'minLength' => 1,
-                    'maxLength' => 51200,
                 ),
                 'TemplateURL' => array(
                     'type' => 'string',
                     'location' => 'aws.query',
                     'minLength' => 1,
                     'maxLength' => 1024,
+                ),
+                'UsePreviousTemplate' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'StackPolicyDuringUpdateBody' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 16384,
+                ),
+                'StackPolicyDuringUpdateURL' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 1350,
                 ),
                 'Parameters' => array(
                     'type' => 'array',
@@ -558,6 +636,10 @@ return array (
                             'ParameterValue' => array(
                                 'type' => 'string',
                             ),
+                            'UsePreviousValue' => array(
+                                'type' => 'boolean',
+                                'format' => 'boolean-string',
+                            ),
                         ),
                     ),
                 ),
@@ -568,9 +650,28 @@ return array (
                     'items' => array(
                         'name' => 'Capability',
                         'type' => 'string',
-                        'enum' => array(
-                            'CAPABILITY_IAM',
-                        ),
+                    ),
+                ),
+                'StackPolicyBody' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 16384,
+                ),
+                'StackPolicyURL' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 1350,
+                ),
+                'NotificationARNs' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'NotificationARNs.member',
+                    'maxItems' => 5,
+                    'items' => array(
+                        'name' => 'NotificationARN',
+                        'type' => 'string',
                     ),
                 ),
             ),
@@ -602,7 +703,6 @@ return array (
                     'type' => 'string',
                     'location' => 'aws.query',
                     'minLength' => 1,
-                    'maxLength' => 51200,
                 ),
                 'TemplateURL' => array(
                     'type' => 'string',
@@ -799,6 +899,9 @@ return array (
                                         'ParameterValue' => array(
                                             'type' => 'string',
                                         ),
+                                        'UsePreviousValue' => array(
+                                            'type' => 'boolean',
+                                        ),
                                     ),
                                 ),
                             ),
@@ -885,6 +988,16 @@ return array (
             'additionalProperties' => true,
             'properties' => array(
                 'Url' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
+        'GetStackPolicyOutput' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'StackPolicyBody' => array(
                     'type' => 'string',
                     'location' => 'xml',
                 ),
@@ -1042,27 +1155,28 @@ return array (
         ),
     ),
     'iterators' => array(
-        'operations' => array(
-            'DescribeStackEvents' => array(
-                'token_param' => 'NextToken',
-                'token_key' => 'NextToken',
-                'result_key' => 'StackEvents',
-            ),
-            'DescribeStacks' => array(
-                'token_param' => 'NextToken',
-                'token_key' => 'NextToken',
-                'result_key' => 'Stacks',
-            ),
-            'ListStackResources' => array(
-                'token_param' => 'NextToken',
-                'token_key' => 'NextToken',
-                'result_key' => 'StackResourceSummaries',
-            ),
-            'ListStacks' => array(
-                'token_param' => 'NextToken',
-                'token_key' => 'NextToken',
-                'result_key' => 'StackSummaries',
-            ),
+        'DescribeStackEvents' => array(
+            'input_token' => 'NextToken',
+            'output_token' => 'NextToken',
+            'result_key' => 'StackEvents',
+        ),
+        'DescribeStackResources' => array(
+            'result_key' => 'StackResources',
+        ),
+        'DescribeStacks' => array(
+            'input_token' => 'NextToken',
+            'output_token' => 'NextToken',
+            'result_key' => 'Stacks',
+        ),
+        'ListStackResources' => array(
+            'input_token' => 'NextToken',
+            'output_token' => 'NextToken',
+            'result_key' => 'StackResourceSummaries',
+        ),
+        'ListStacks' => array(
+            'input_token' => 'NextToken',
+            'output_token' => 'NextToken',
+            'result_key' => 'StackSummaries',
         ),
     ),
 );
