@@ -100,6 +100,10 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 
 == Changelog ==
 
+= 0.2 = 
+* June 2014, by Ipstenu
+* Changed SDK to newest version: 2.6.9 (<a href="http://blogs.aws.amazon.com/php/post/Tx2Q8T2MTERKJS4/Release-AWS-SDK-for-PHP-Version-2-6-9">official release notes</a>)
+
 = 0.1 =
 * 07 May 2014 by Ipstenu
 * Multisite works

@@ -24,16 +24,13 @@ class StreamHandler extends AbstractProcessingHandler
 {
     protected $stream;
     protected $url;
-    private $errorMessage;
-    protected $filePermission;
 
     /**
      * @param string  $stream
-     * @param integer $level           The minimum logging level at which this handler will be triggered
-     * @param Boolean $bubble          Whether the messages that are handled can bubble up the stack or not
-     * @param int     $filePermissions Optional file permissions (default (0644) are only for owner read/write)
+     * @param integer $level  The minimum logging level at which this handler will be triggered
+     * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct($stream, $level = Logger::DEBUG, $bubble = true, $filePermission = null)
+    public function __construct($stream, $level = Logger::DEBUG, $bubble = true)
     {
         parent::__construct($level, $bubble);
         if (is_resource($stream)) {
@@ -41,8 +38,6 @@ class StreamHandler extends AbstractProcessingHandler
         } else {
             $this->url = $stream;
         }
-
-        $this->filePermission = $filePermission;
     }
 
     /**
@@ -61,27 +56,21 @@ class StreamHandler extends AbstractProcessingHandler
      */
     protected function write(array $record)
     {
-        if (!is_resource($this->stream)) {
+        if (null === $this->stream) {
             if (!$this->url) {
                 throw new \LogicException('Missing stream url, the stream can not be opened. This may be caused by a premature call to close().');
             }
-            $this->errorMessage = null;
-            set_error_handler(array($this, 'customErrorHandler'));
+            $errorMessage = null;
+            set_error_handler(function ($code, $msg) use (&$errorMessage) {
+                $errorMessage = preg_replace('{^fopen\(.*?\): }', '', $msg);
+            });
             $this->stream = fopen($this->url, 'a');
-            if ($this->filePermission !== null) {
-                @chmod($this->url, $this->filePermission);
-            }
             restore_error_handler();
             if (!is_resource($this->stream)) {
                 $this->stream = null;
-                throw new \UnexpectedValueException(sprintf('The stream or file "%s" could not be opened: '.$this->errorMessage, $this->url));
+                throw new \UnexpectedValueException(sprintf('The stream or file "%s" could not be opened: '.$errorMessage, $this->url));
             }
         }
         fwrite($this->stream, (string) $record['formatted']);
-    }
-
-    private function customErrorHandler($code, $msg)
-    {
-        $this->errorMessage = preg_replace('{^fopen\(.*?\): }', '', $msg);
     }
 }
