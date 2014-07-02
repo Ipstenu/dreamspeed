@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DreamSpeed CDN\n"
-"POT-Creation-Date: 2014-05-09 13:49-0500\n"
-"PO-Revision-Date: 2014-05-09 13:49-0500\n"
+"POT-Creation-Date: 2014-06-27 20:45-0800\n"
+"PO-Revision-Date: 2014-06-27 20:45-0800\n"
 "Last-Translator: \n"
 "Language-Team: DreamHost\n"
 "MIME-Version: 1.0\n"
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Error creating bucket: "
 msgstr ""
 
-#: ../media/classes/dreamspeed.php:657
+#: ../media/classes/dreamspeed.php:659
 msgid ""
 "All of your imported media has not <em>YET</em> been uploaded to the Dream "
 "Cloud, but it will be soon! The uploads are scheduled via the bulk uploader "
