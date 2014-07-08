@@ -100,6 +100,10 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 
 == Changelog ==
 
+= 0.3 =
+* July 8, 2014 by Ipstenu
+* Wouldn't upload media anymore. Redownloaded and applied SDK.
+
 = 0.2 = 
 * July 2, 2014, by Ipstenu
 * Changed SDK to newest version: 2.6.10 (<a href="http://blogs.aws.amazon.com/php/post/TxDRVCHQYZSNN7/Release-AWS-SDK-for-PHP-Version-2-6-10">official release notes</a>)
