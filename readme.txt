@@ -3,7 +3,7 @@ Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, backup
 Requires at least: 3.8
 Tested up to: 3.9
-Stable tag: 0.2
+Stable tag: 0.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
