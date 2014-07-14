@@ -100,6 +100,10 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 
 == Changelog ==
 
+= 0.3 =
+* July 13, 2014, by Ipstenu
+* Changed SDK to newest version: 2.6.11 (<a href="http://blogs.aws.amazon.com/php/post/Tx3AE1VLZ5C77R0/Release-AWS-SDK-for-PHP-Version-2-6-11">official release notes</a>)
+
 = 0.2 = 
 * July 2, 2014, by Ipstenu
 * Changed SDK to newest version: 2.6.10 (<a href="http://blogs.aws.amazon.com/php/post/TxDRVCHQYZSNN7/Release-AWS-SDK-for-PHP-Version-2-6-10">official release notes</a>)
