@@ -3,7 +3,7 @@ Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, backup
 Requires at least: 3.8
 Tested up to: 3.9
-Stable tag: 0.3
+Stable tag: 0.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -71,6 +71,12 @@ Generally no. The Migrate Existing Files features will edit the posts for you.
 
 It does edit. It saves as a post revision, so you can roll back. But there's no filter because you may not have all your images uploaded to the cloud yet.
 
+= Advanced Stuff =
+
+<strong>Can I use SSL?</strong>
+
+Yes. If you set your WordPress home/site URLs to https, then the plugin will auto-detect that you're on https and attempt to serve up the files securely. If for any reason that doesn't work, there's an option to activate force SSL on the settings page.
+
 = Errors, Bugs, and Weird Stuff =
 
 <strong>Why, when my URLs changed to the CDN, are they all broken images?</strong>
@@ -101,8 +107,12 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 == Changelog ==
 
 = 0.4 =
-* July 13, 2014, by Ipstenu
-* Changed SDK to newest version: 2.6.11 (<a href="http://blogs.aws.amazon.com/php/post/Tx3AE1VLZ5C77R0/Release-AWS-SDK-for-PHP-Version-2-6-11">official release notes</a>)
+* Aug 7, 2014, by Ipstenu
+* Enabled SSL force option
+
+= 0.3.1 =
+* July 24, 2014, by Ipstenu
+* Changed SDK to newest version: 2.6.12 (<a href="http://blogs.aws.amazon.com/php/post/Tx2PDR0J3NL0YKN/Release-AWS-SDK-for-PHP-Version-2-6-12">official release notes</a>)
 
 = 0.2 = 
 * July 2, 2014, by Ipstenu

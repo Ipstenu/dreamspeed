@@ -97,7 +97,15 @@ if (isset( $_GET['error'] ) ) {
 		
 		<p><?php _e( 'If you use an alias for your CDN (like http://cdn.example.com) then you can tell DreamSpeed to use that instead of the default http://objects.dreamhost.com/bucketname. Both URLs will always work, but pretty CDN is pretty.', 'dreamspeed-cdn' ); ?></p>
 	
-		<label><?php _e( 'Domain Name:', 'dreamspeed-cdn' ); ?></label> <br />http:// <input type="text" name="cloudfront" value="<?php echo esc_attr( $this->get_setting( 'cloudfront' ) ); ?>" size="50" />
+		<label><?php _e( 'Domain Name:', 'dreamspeed-cdn' ); ?></label> <br />
+			<?php 
+				if (is_ssl()) {
+						?> https:// <?php
+				} else {
+						?> http:// <?php
+				} 
+			?>
+		<input type="text" name="cloudfront" value="<?php echo esc_attr( $this->get_setting( 'cloudfront' ) ); ?>" size="50" />
 		<p class="description"><?php _e( 'Leave blank if you aren&#8217;t using a DNS alias.', 'dreamspeed-cdn' ); ?></p>
 
 	</td>
@@ -114,11 +122,10 @@ if (isset( $_GET['error'] ) ) {
 		<input type="checkbox" name="serve-from-s3" value="1" id="serve-from-s3" <?php echo $this->get_setting( 'serve-from-s3' ) ? 'checked="checked" ' : ''; ?> />
 		<label for="serve-from-s3"> <?php _e( 'Point file URLs to DreamSpeed/DNS Alias for files that have been copied to S3 <em>(recommended)</em>', 'dreamspeed-cdn' ); ?></label>
 		<br />
-<!--
 		<input type="checkbox" name="force-ssl" value="1" id="force-ssl" <?php echo $this->get_setting( 'force-ssl' ) ? 'checked="checked" ' : ''; ?> />
 		<label for="force-ssl"> <?php _e( 'Always serve files over https (SSL)', 'dreamspeed-cdn' ); ?></label>
 		<br />
-
+<!--
 		<input type="checkbox" name="hidpi-images" value="1" id="hidpi-images" <?php echo $this->get_setting( 'hidpi-images' ) ? 'checked="checked" ' : ''; ?> />
 		<label for="hidpi-images"> <?php _e( 'Copy any HiDPI (@2x) images to CDN (works with WP Retina 2x plugin)', 'dreamspeed-cdn' ); ?></label>
 -->
