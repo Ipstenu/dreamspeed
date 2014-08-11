@@ -77,6 +77,8 @@ It does edit. It saves as a post revision, so you can roll back. But there's no 
 
 Yes. If you set your WordPress home/site URLs to https, then the plugin will auto-detect that you're on https and attempt to serve up the files securely. If for any reason that doesn't work, there's an option to activate force SSL on the settings page.
 
+Keep in mind, you cannot use a custom CDN (like cdn.yourdomain.com) with HTTPs at this time, due to issues with certificates outside the control of this plugin.
+
 = Errors, Bugs, and Weird Stuff =
 
 <strong>Why, when my URLs changed to the CDN, are they all broken images?</strong>
