@@ -93,6 +93,30 @@ if (isset( $_GET['error'] ) ) {
 
 <tr valign="top">
 	<td>
+		<h3><?php _e( 'Plugin Options', 'dreamspeed-cdn' ); ?></h3>
+
+		<input type="checkbox" name="copy-to-s3" value="1" id="copy-to-s3" <?php echo $this->get_setting( 'copy-to-s3' ) ? 'checked="checked" ' : ''; ?> />
+		<label for="copy-to-s3"> <?php _e( 'Copy files to DreamSpeed as they are uploaded to the Media Library <em>(recommended)</em>', 'dreamspeed-cdn' ); ?></label>
+		<br />
+		<input type="checkbox" name="serve-from-s3" value="1" id="serve-from-s3" <?php echo $this->get_setting( 'serve-from-s3' ) ? 'checked="checked" ' : ''; ?> />
+		<label for="serve-from-s3"> <?php _e( 'Point file URLs to DreamSpeed/DNS Alias for files that have been copied to S3 <em>(recommended - can be used with dream.io below)</em>', 'dreamspeed-cdn' ); ?></label>
+		<br />
+		<input type="checkbox" name="fullspeed" value="1" id="force-ssl" <?php echo $this->get_setting( 'fullspeed' ) ? 'checked="checked" ' : ''; ?> />
+		<label for="fullspeed"> <?php _e( 'Serve files from dream.io <em>(recommended & fastest)</em>', 'dreamspeed-cdn' ); ?></label>
+		<br />
+		<input type="checkbox" name="force-ssl" value="1" id="force-ssl" <?php echo $this->get_setting( 'force-ssl' ) ? 'checked="checked" ' : ''; ?> />
+		<label for="force-ssl"> <?php _e( 'Always serve files over https (SSL) <em>(slowest - overrides CDN alias and dream.io)</em>', 'dreamspeed-cdn' ); ?></label>
+		<br />
+
+<!--
+		<input type="checkbox" name="hidpi-images" value="1" id="hidpi-images" <?php echo $this->get_setting( 'hidpi-images' ) ? 'checked="checked" ' : ''; ?> />
+		<label for="hidpi-images"> <?php _e( 'Copy any HiDPI (@2x) images to CDN (works with WP Retina 2x plugin)', 'dreamspeed-cdn' ); ?></label>
+-->
+	</td>
+</tr>
+
+<tr valign="top">
+	<td>
 		<h3><?php _e( 'CDN Path Settings', 'dreamspeed-cdn' ); ?></h3>
 		
 		<p><?php _e( 'If you use an alias for your CDN (like http://cdn.example.com) then you can tell DreamSpeed to use that instead of the default http://objects.dreamhost.com/bucketname. Both URLs will always work, but pretty CDN is pretty.', 'dreamspeed-cdn' ); ?></p>
@@ -106,31 +130,17 @@ if (isset( $_GET['error'] ) ) {
 				} 
 			?>
 		<input type="text" name="cloudfront" value="<?php echo esc_attr( $this->get_setting( 'cloudfront' ) ); ?>" size="50" />
-		<p class="description"><?php _e( 'Leave blank if you aren&#8217;t using a DNS alias.', 'dreamspeed-cdn' ); ?></p>
+		<p class="description"><?php _e( 'Leave blank if you meet any of the following conditions:', 'dreamspeed-cdn' ); ?></p>
+		
+		<p class="description">&bull; <?php _e( 'You aren&#8217;t using a DNS alias.', 'dreamspeed-cdn' ); ?>
+		<br />&bull; <?php _e( 'You are using SSL.', 'dreamspeed-cdn' ); ?>
+		</p>
 
 	</td>
 </tr>
 
-<tr valign="top">
-	<td>
-		<h3><?php _e( 'Plugin Options', 'dreamspeed-cdn' ); ?></h3>
 
-		<input type="checkbox" name="copy-to-s3" value="1" id="copy-to-s3" <?php echo $this->get_setting( 'copy-to-s3' ) ? 'checked="checked" ' : ''; ?> />
-		<label for="copy-to-s3"> <?php _e( 'Copy files to DreamSpeed as they are uploaded to the Media Library <em>(recommended)</em>', 'dreamspeed-cdn' ); ?></label>
-		<br />
 
-		<input type="checkbox" name="serve-from-s3" value="1" id="serve-from-s3" <?php echo $this->get_setting( 'serve-from-s3' ) ? 'checked="checked" ' : ''; ?> />
-		<label for="serve-from-s3"> <?php _e( 'Point file URLs to DreamSpeed/DNS Alias for files that have been copied to S3 <em>(recommended)</em>', 'dreamspeed-cdn' ); ?></label>
-		<br />
-		<input type="checkbox" name="force-ssl" value="1" id="force-ssl" <?php echo $this->get_setting( 'force-ssl' ) ? 'checked="checked" ' : ''; ?> />
-		<label for="force-ssl"> <?php _e( 'Always serve files over https (SSL)', 'dreamspeed-cdn' ); ?></label>
-		<br />
-<!--
-		<input type="checkbox" name="hidpi-images" value="1" id="hidpi-images" <?php echo $this->get_setting( 'hidpi-images' ) ? 'checked="checked" ' : ''; ?> />
-		<label for="hidpi-images"> <?php _e( 'Copy any HiDPI (@2x) images to CDN (works with WP Retina 2x plugin)', 'dreamspeed-cdn' ); ?></label>
--->
-	</td>
-</tr>
 <tr valign="top">
 	<td>
 		<button type="submit" class="button button-primary"><?php _e( 'Save Changes', 'dreamspeed-cdn' ); ?></button>
@@ -144,7 +154,7 @@ if (isset( $_GET['error'] ) ) {
 	$all_attachments = wp_count_attachments();
 
 	if ( $this->get_setting( 'copy-to-s3' ) == 1 ) {
-	?><h3><?php _e( 'Migrate Exisiting Files', 'dreamspeed-cdn' ); ?></h3><?php
+	?><h3><?php _e( 'Migrate Existing Files', 'dreamspeed-cdn' ); ?></h3><?php
 
 	if ( count($this->get_attachment_without_dreamspeed_info()) != 0 ) {
 		?>

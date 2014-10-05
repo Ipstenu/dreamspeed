@@ -26,7 +26,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		$this->aws = $dos;
 		add_action( 'aws_admin_menu', array( $this, 'admin_menu' ) );
 		
-		$this->plugin_vars = array( 'bucket', 'virtual-host', 'expires', 'permissions', 'cloudfront', 'object-prefix', 'copy-to-s3', 'serve-from-s3', 'remove-local-file', 'force-ssl', 'hidpi-images', 'object-versioning' );
+		$this->plugin_vars = array( 'bucket', 'virtual-host', 'expires', 'permissions', 'cloudfront', 'object-prefix', 'copy-to-s3', 'serve-from-s3', 'remove-local-file', 'force-ssl', 'fullspeed', 'hidpi-images', 'object-versioning' );
 	
 		$this->plugin_title = __( 'DreamSpeed CDN Configuration', 'dreamspeed-cdn' );
 		$this->plugin_menu_title = __( 'CDN', 'dreamspeed-cdn' );
@@ -375,6 +375,9 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
 			$domain_bucket = 'objects.dreamhost.com/' . $dsobject['bucket'];
 		}
+		elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
+			$domain_bucket = $dsobject['bucket'] . '.objects.cdn.dream.io';
+		}
 		else {
 			$domain_bucket = $dsobject['bucket'] . '.objects.dreamhost.com';
 		}
@@ -622,6 +625,8 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 			$domain_base = $this->get_setting( 'cloudfront' );
 		} elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
 			$domain_base = 'objects.dreamhost.com/'.$this->get_setting( 'bucket' );
+		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
+			$domain_base = $this->get_setting( 'bucket' ) . '.objects.cdn.dream.io';
 		} else {
 			$domain_base = $this->get_setting( 'bucket' ) . '.objects.dreamhost.com';
 		}
