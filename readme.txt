@@ -125,7 +125,7 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 
 == Changelog ==
 
-= 0.4 =
+= 0.5 =
 * Oct 5, 2014, by Ipstenu
 * Fixing dream.io code
 
