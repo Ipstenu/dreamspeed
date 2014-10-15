@@ -127,7 +127,8 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 
 = 0.5 =
 * Oct 5, 2014, by Ipstenu
-* Fixing dream.io code
+* Fixing dream.io code, new options
+* SSL improvements
 
 = 0.4 =
 * Aug 7, 2014, by Ipstenu
@@ -150,3 +151,8 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 = 0.1-beta = 
 * 01 April 2014 by Ipstenu
 * First Release
+
+== Upgrade Notice ==
+
+= 0.5 =
+For faster serving images, please check the DreamSpeed dream.io option in the settings page.
