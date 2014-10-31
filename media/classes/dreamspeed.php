@@ -373,7 +373,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 			$domain_bucket = $dsobject['bucket'];
 		}
 		elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
-			$domain_bucket = 'objects.dreamhost.com/' . $dsobject['bucket'];
+			$domain_bucket = 'objects.dreamhost.com:433/' . $dsobject['bucket'];
 		}
 		elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
 			$domain_bucket = $dsobject['bucket'] . '.objects.cdn.dream.io';
