@@ -3,7 +3,7 @@ Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, backup
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 0.5.1
+Stable tag: 0.5.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -55,7 +55,7 @@ I would personally suggest checking the following:
 
 * Copy files to DreamSpeed as they are uploaded to the Media Library
 * Point file URLs to DreamSpeed/DNS Alias for files that have been copied to S3
-* Serve files from dream.io 
+* Serve files from dream.io
 
 This will be the fastest
 
@@ -125,6 +125,10 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 
 == Changelog ==
 
+= 0.5.1 && 0.5.2 =
+* Nov 4, 2014 by Ipstenu
+* SSL Fix
+
 = 0.5 =
 * Oct 5, 2014, by Ipstenu
 * Fixing dream.io code, new options
@@ -138,7 +142,7 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 * July 24, 2014, by Ipstenu
 * Changed SDK to newest version: 2.6.12 (<a href="http://blogs.aws.amazon.com/php/post/Tx2PDR0J3NL0YKN/Release-AWS-SDK-for-PHP-Version-2-6-12">official release notes</a>)
 
-= 0.2 = 
+= 0.2 =
 * July 2, 2014, by Ipstenu
 * Changed SDK to newest version: 2.6.10 (<a href="http://blogs.aws.amazon.com/php/post/TxDRVCHQYZSNN7/Release-AWS-SDK-for-PHP-Version-2-6-10">official release notes</a>)
 
@@ -148,7 +152,7 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 * Uploading old media works
 * Imports work
 
-= 0.1-beta = 
+= 0.1-beta =
 * 01 April 2014 by Ipstenu
 * First Release
 

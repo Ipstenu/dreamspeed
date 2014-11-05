@@ -4,7 +4,7 @@ Plugin Name: DreamSpeed CDN
 Plugin URI: https://github.com/Ipstenu/dreamspeed/
 Description: Copies files to DreamSpeed as they are uploaded to the Media Library. Optionally configure a custom domain name as an alias.
 Author: Mika Epstein
-Version: 0.5.1
+Version: 0.5.2
 Author URI: http://dreamhost.com
 Text Domain: dreamspeed-cdn
 Domain Path: i18n
@@ -37,7 +37,7 @@ if ( is_admin() && ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) ) {
 	if ( version_compare( PHP_VERSION, '5.3.3', '<' ) ) {
 		dreamspeed_core_incompatibile( __( 'The official Amazon Web Services SDK, which DreamSpeed relies on, requires PHP 5.3 or higher. The plugin has now disabled itself.', 'dreamspeed-cdn' ) );
 	}
-	elseif ( !function_exists( 'curl_version' ) 
+	elseif ( !function_exists( 'curl_version' )
 		|| !( $curl = curl_version() ) || empty( $curl['version'] ) || empty( $curl['features'] )
 		|| version_compare( $curl['version'], '7.16.2', '<' ) )
 	{
@@ -60,7 +60,7 @@ if (false === class_exists('Symfony\Component\ClassLoader\UniversalClassLoader',
 }
 
 if ( !get_option('dreamspeed_importer')) {update_option( 'dreamspeed_importer', 0 );}
-		
+
 function dreamspeed_core_init() {
     global $dreamspeed_core;
     $dreamspeed_core = new DreamSpeed_DHO_Services( __FILE__ );
