@@ -2,8 +2,13 @@
 Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, backup
 Requires at least: 3.8
+<<<<<<< HEAD
 Tested up to: 3.9
 Stable tag: 0.3.1
+=======
+Tested up to: 4.0
+Stable tag: 0.5.2
+>>>>>>> REL_0.5.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -54,6 +59,16 @@ Yes, but it has to be configured per site.
 
 = Using the Plugin =
 
+<strong>There are a lot of options, which ones do I want?</strong>
+
+I would personally suggest checking the following:
+
+* Copy files to DreamSpeed as they are uploaded to the Media Library
+* Point file URLs to DreamSpeed/DNS Alias for files that have been copied to S3
+* Serve files from dream.io
+
+This will be the fastest
+
 <strong>Do I have to manually push images?</strong>
 
 Nope! New image uploads are copied first to your normal location, then sync'd up.
@@ -62,7 +77,7 @@ Nope! New image uploads are copied first to your normal location, then sync'd up
 
 Yes. Go to the CDN page and at the bottom is a section "Migrate Exisiting Files" - If there's a checkbox and a button, you have files to upload, so check the box and press the button.
 
-The uploader runs in chunks per hour, since it has to upload <em>all</em> image sizes, as well as edit your posts.
+The uploader runs in chunks per hour, since it has to upload <em>all</em> image sizes, as well as edit your posts. If you have over 20k images, it may NOT work right, however.
 
 <strong>How long will it take to upload everything?</strong>
 
@@ -79,6 +94,21 @@ Generally no. The Migrate Existing Files features will edit the posts for you.
 <strong>It <em>edits</em> my posts? Why not use a filter?</strong?>
 
 It does edit. It saves as a post revision, so you can roll back. But there's no filter because you may not have all your images uploaded to the cloud yet.
+
+= Advanced Stuff =
+
+<strong>Can I use SSL?</strong>
+
+Yes. If you set your WordPress home/site URLs to https, then the plugin will auto-detect that you're on https and attempt to serve up the files securely. If for any reason that doesn't work, there's an option to activate force SSL on the settings page.
+
+Keep in mind, you cannot use a custom CDN (like cdn.yourdomain.com) with HTTPs at this time, due to issues with certificates outside the control of this plugin.
+
+<strong>If I wanted to push my existing images up manually, how do I do that?</strong>
+
+First copy it all up via a desktop tool like Cyberduck. Once all the images are in the right place, do a search/replace on your content:
+
+# Find `example.com/wp-content/uploads/`
+# Replace with `bucketname.objects.cdn.dream.io/wp-content/uploads/`
 
 = Errors, Bugs, and Weird Stuff =
 
@@ -109,11 +139,27 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 
 == Changelog ==
 
+<<<<<<< HEAD
+=======
+= 0.5.1 && 0.5.2 =
+* Nov 4, 2014 by Ipstenu
+* SSL Fix
+
+= 0.5 =
+* Oct 5, 2014, by Ipstenu
+* Fixing dream.io code, new options
+* SSL improvements
+
+= 0.4 =
+* Aug 7, 2014, by Ipstenu
+* Enabled SSL force option
+
+>>>>>>> REL_0.5.1
 = 0.3.1 =
 * July 24, 2014, by Ipstenu
 * Changed SDK to newest version: 2.6.12 (<a href="http://blogs.aws.amazon.com/php/post/Tx2PDR0J3NL0YKN/Release-AWS-SDK-for-PHP-Version-2-6-12">official release notes</a>)
 
-= 0.2 = 
+= 0.2 =
 * July 2, 2014, by Ipstenu
 * Changed SDK to newest version: 2.6.10 (<a href="http://blogs.aws.amazon.com/php/post/TxDRVCHQYZSNN7/Release-AWS-SDK-for-PHP-Version-2-6-10">official release notes</a>)
 
@@ -123,6 +169,11 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 * Uploading old media works
 * Imports work
 
-= 0.1-beta = 
+= 0.1-beta =
 * 01 April 2014 by Ipstenu
 * First Release
+
+== Upgrade Notice ==
+
+= 0.5 =
+For faster serving images, please check the DreamSpeed dream.io option in the settings page.

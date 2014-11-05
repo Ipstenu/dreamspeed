@@ -25,20 +25,20 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 
 		$this->aws = $dos;
 		add_action( 'aws_admin_menu', array( $this, 'admin_menu' ) );
-		
-		$this->plugin_vars = array( 'bucket', 'virtual-host', 'expires', 'permissions', 'cloudfront', 'object-prefix', 'copy-to-s3', 'serve-from-s3', 'remove-local-file', 'force-ssl', 'hidpi-images', 'object-versioning' );
-	
+
+		$this->plugin_vars = array( 'bucket', 'virtual-host', 'expires', 'permissions', 'cloudfront', 'object-prefix', 'copy-to-s3', 'serve-from-s3', 'remove-local-file', 'force-ssl', 'fullspeed', 'hidpi-images', 'object-versioning' );
+
 		$this->plugin_title = __( 'DreamSpeed CDN Configuration', 'dreamspeed-cdn' );
 		$this->plugin_menu_title = __( 'CDN', 'dreamspeed-cdn' );
 		$this->plugin_slug = 'dreamspeed-media';
-	
+
 		add_action( 'wp_ajax_dreamspeed-create-bucket', array( $this, 'ajax_create_bucket' ) );
 
 		if ( $this->is_plugin_setup() && ( $this->get_setting( 'copy-to-s3' ) == 1 ) && ( get_option('dreamspeed_importer') != 1 ) && !defined( 'WP_IMPORTING' ) ) {
 			add_filter( 'wp_get_attachment_url', array( $this, 'wp_get_attachment_url' ), 9, 2 );
 			add_filter( 'wp_generate_attachment_metadata', array( $this, 'wp_generate_attachment_metadata' ), 20, 2 );
 			add_filter( 'delete_attachment', array( $this, 'delete_attachment' ), 20 );
-		}	
+		}
 		add_filter( 'manage_media_columns', array( $this, 'media_column' ) );
 		add_action( 'manage_media_custom_column', array( $this, 'media_column_content' ), 10, 2 );
 	}
@@ -49,11 +49,11 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	        return $cols;
 	}
 	function media_column_content( $column_name, $id ) {
-	
+
 	    switch ($column_name) {
 		    case 'dreamspeed-cdn' :
 		    	$meta = get_post_meta($id, 'amazonS3_info' );
-		        if( !empty( $meta ) ) { 
+		        if( !empty( $meta ) ) {
 		        	echo '<div title="YES!" class="dashicons dashicons-yes" style="color: #7ad03a;"></div>';
 		        } else {
 			        echo '<div title="No :(" class="dashicons dashicons-no" style="color: #dd3d36;"></div>';
@@ -126,7 +126,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 			}
 
 			try {
-				$this->get_doclient()->deleteObjects( array( 
+				$this->get_doclient()->deleteObjects( array(
 					'Bucket' => $dsobject['bucket'],
 					'Objects' => $hidpi_images
 				) );
@@ -139,7 +139,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		);
 
 		try {
-			$this->get_doclient()->deleteObjects( array( 
+			$this->get_doclient()->deleteObjects( array(
 				'Bucket' => $dsobject['bucket'],
 				'Objects' => $objects
 			) );
@@ -221,7 +221,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 				'SourceFile' => $path
 			);
 			$files_to_remove[] = $path;
-		} 
+		}
 		elseif ( !empty( $data['sizes'] ) ) {
 			foreach ( $data['sizes'] as $size ) {
 				$path = str_replace( $file_name, $size['file'], $file_path );
@@ -295,11 +295,11 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 
 		$object_version = date( $date_format, $time ) . '/';
 		$object_version = apply_filters( 'dreamspeed_get_object_version_string', $object_version );
-		
+
 		return $object_version;
 	}
 
-	// Media files attached to a post use the post's date 
+	// Media files attached to a post use the post's date
 	// to determine the folder path they are placed in
 	function get_attachment_folder_time( $post_id ) {
 		$time = current_time( 'timestamp' );
@@ -328,7 +328,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		if ( false === $new_url ) {
 			return $url;
 		}
-		
+
 		//$new_url = apply_filters( 'wps3_get_attachment_url', $new_url, $post_id, $this );
 		$new_url = apply_filters( 'dreamspeed_wp_get_attachment_url', $new_url, $post_id );
 
@@ -373,7 +373,10 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 			$domain_bucket = $dsobject['bucket'];
 		}
 		elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
-			$domain_bucket = 'objects.dreamhost.com/' . $dsobject['bucket'];
+			$domain_bucket = 'objects.dreamhost.com:443/' . $dsobject['bucket'];
+		}
+		elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
+			$domain_bucket = $dsobject['bucket'] . '.objects.cdn.dream.io';
 		}
 		else {
 			$domain_bucket = $dsobject['bucket'] . '.objects.dreamhost.com';
@@ -421,7 +424,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		}
 
 		echo json_encode( $out );
-		exit;		
+		exit;
 	}
 
 	function create_bucket( $bucket_name ) {
@@ -461,7 +464,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 
 	function plugin_load() {
 		wp_enqueue_script( 'dreamspeed-script', plugins_url( 'script.js', $this->plugin_file_path ), array( 'jquery' ), $this->get_installed_version(), true );
-		
+
 		wp_localize_script( 'dreamspeed-script', 'dreamspeed_i18n', array(
 			'create_bucket_prompt'  => __( 'Bucket Name:', 'dreamspeed-cdn' ),
 			'create_bucket_error'	=> __( 'Error creating bucket: ', 'dreamspeed-cdn' ),
@@ -487,7 +490,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 			foreach ( $post_vars as $var ) {
 				if ( !isset( $_POST[$var] ) ) {
 					continue;
-				}		
+				}
 				$cleanvar =  esc_html( $_POST[$var] );
 
 				if ( $var == 'cloudfront' ) {
@@ -507,13 +510,13 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		} else {
 			wp_redirect( 'admin.php?page=' . $this->plugin_slug . '&error=1' );
 		}
-		
+
 		exit;
 	}
 
 	function render_page() {
 		$this->aws->render_view( 'header', array( 'page_title' => $this->plugin_title ) );
-		
+
 		$dos_client = $this->aws->get_client();
 
 		if ( is_wp_error( $dos_client ) ) {
@@ -522,7 +525,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		else {
 			$this->render_view( 'settings' );
 		}
-		
+
 		$this->aws->render_view( 'footer' );
 	}
 
@@ -539,13 +542,13 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	}
 
 	// Without the multisite subdirectory
-	function get_base_upload_path() {	
+	function get_base_upload_path() {
 		if ( defined( 'UPLOADS' ) && ! ( is_multisite() && get_site_option( 'ms_files_rewriting' ) ) ) {
 			return ABSPATH . UPLOADS;
 		}
 
 		$upload_path = trim( get_option( 'upload_path' ) );
-		
+
 		if ( empty( $upload_path ) || 'wp-content/uploads' == $upload_path ) {
 			return WP_CONTENT_DIR . '/uploads';
 		} elseif ( 0 !== strpos( $upload_path, ABSPATH ) ) {
@@ -556,24 +559,24 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		}
 	}
 
-	// Upload things that already exist 
+	// Upload things that already exist
 	// CREDIT: https://github.com/bradt/wp-tantan-s3/pull/45
 
 	function bulk_upload_to_dreamspeed() {
-	
+
 		$max_time = ini_get('max_execution_time');
         $time_start = microtime(true);
-        
+
         // make sure this exists
         if ( !function_exists('wp_generate_attachment_metadata') ) {
 			include( ABSPATH . 'wp-admin/includes/image.php' );
         }
-                
+
 		$attachments = $this->get_attachment_without_dreamspeed_info();
-		
+
 		if($attachments && !empty($attachments) ) {
 			foreach ($attachments as $attachment) {
-				if( microtime(true) - $time_start >= $max_time - 5 ) {	                
+				if( microtime(true) - $time_start >= $max_time - 5 ) {
 	                if ( !wp_next_scheduled( 'dreamspeed_media_sync' ) ) {
 						wp_schedule_event( time(), 'hourly', 'dreamspeed_media_sync' );
 					}
@@ -583,27 +586,27 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 				$file   = get_attached_file( $attachment->ID );
 				$data   = wp_generate_attachment_metadata( $attachment->ID, $file );
 				$this->wp_generate_attachment_metadata( array(), $attachment->ID);
-				
+
 				if( $attachment->post_parent > 0  ) {
 	                if( $parent_post = get_post($attachment->post_parent)) {
 
 						$upload_dir = wp_upload_dir();
 						$base_url = $upload_dir['baseurl'];
-						
+
 						// Quick check to make sure Multisite old school isn't being Midvale School for the Gifted.
 						if ( defined( 'DOMAIN_MAPPING' ) ) {
 							$base_url_ms = str_replace( get_original_url( 'siteurl' ), site_url(), $base_url );
 							$parent_post->post_content = str_replace($base_url_ms.'/', $this->get_base_url(), $parent_post->post_content );
 						}
-												
+
 	                	$parent_post->post_content = str_replace($base_url.'/', $this->get_base_url(), $parent_post->post_content );
 	                    wp_update_post($parent_post);
 	                }
 	            }
-	
+
 			}
 		} else {
-            wp_clear_scheduled_hook( 'dreamspeed_media_sync' );			
+            wp_clear_scheduled_hook( 'dreamspeed_media_sync' );
 		}
 	}
 
@@ -622,6 +625,8 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 			$domain_base = $this->get_setting( 'cloudfront' );
 		} elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
 			$domain_base = 'objects.dreamhost.com/'.$this->get_setting( 'bucket' );
+		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
+			$domain_base = $this->get_setting( 'bucket' ) . '.objects.cdn.dream.io';
 		} else {
 			$domain_base = $this->get_setting( 'bucket' ) . '.objects.dreamhost.com';
 		}
@@ -644,7 +649,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		);
 		return get_posts( $args );
 	}
-	
+
 	function import_start() {
 		update_option( 'dreamspeed_importer', 1 );
 	}
@@ -654,8 +659,8 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		if ( !wp_next_scheduled( 'dreamspeed_media_sync' ) ) {
 			wp_schedule_event( time(), 'hourly', 'dreamspeed_media_sync' );
 		}
-		
-		
+
+
 		echo "<p>".__( 'All of your imported media has not <em>YET</em> been uploaded to the Dream Cloud, but it will be soon! The uploads are scheduled via the bulk uploader feature.', 'dreamspeed-cdn')."</p>";
 	}
 
