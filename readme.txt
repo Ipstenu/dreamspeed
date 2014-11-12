@@ -3,7 +3,7 @@ Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, backup
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 0.5.2
+Stable tag: 0.5.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,10 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 8. Migrate Exisiting Files section (on DreamSpeed CDN Configuration page)
 
 == Changelog ==
+
+= 0.5.3 =
+* Nov 12, 2014 by Ipstenu
+* AWS SDK 2.7.4
 
 = 0.5.1 && 0.5.2 =
 * Nov 4, 2014 by Ipstenu
