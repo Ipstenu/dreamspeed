@@ -77,6 +77,53 @@ return array (
         ),
     ),
     'operations' => array(
+        'AddClientIDToOpenIDConnectProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'AddClientIDToOpenIDConnectProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'OpenIDConnectProviderArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+                'ClientID' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 255,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+            ),
+        ),
         'AddRoleToInstanceProfile' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -215,6 +262,10 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that is temporarily unmodifiable, such as a user name that was deleted and then recreated. The error indicates that the request is likely to succeed if you try again after waiting several minutes. The error message describes the entity.',
                     'class' => 'EntityTemporarilyUnmodifiableException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because the provided password did not meet the requirements imposed by the account password policy.',
+                    'class' => 'PasswordPolicyViolationException',
                 ),
             ),
         ),
@@ -408,6 +459,11 @@ return array (
                     'minLength' => 1,
                     'maxLength' => 128,
                 ),
+                'PasswordResetRequired' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
             ),
             'errorResponses' => array(
                 array(
@@ -421,6 +477,69 @@ return array (
                 array(
                     'reason' => 'The request was rejected because the provided password did not meet the requirements imposed by the account password policy.',
                     'class' => 'PasswordPolicyViolationException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+            ),
+        ),
+        'CreateOpenIDConnectProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'CreateOpenIDConnectProviderResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'CreateOpenIDConnectProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'Url' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 255,
+                ),
+                'ClientIDList' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'ClientIDList.member',
+                    'items' => array(
+                        'name' => 'clientIDType',
+                        'type' => 'string',
+                        'minLength' => 1,
+                        'maxLength' => 255,
+                    ),
+                ),
+                'ThumbprintList' => array(
+                    'required' => true,
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'ThumbprintList.member',
+                    'items' => array(
+                        'name' => 'thumbprintType',
+                        'type' => 'string',
+                        'minLength' => 40,
+                        'maxLength' => 40,
+                    ),
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create a resource that already exists.',
+                    'class' => 'EntityAlreadyExistsException',
                 ),
                 array(
                     'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
@@ -515,6 +634,7 @@ return array (
             ),
             'errorResponses' => array(
                 array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
                     'class' => 'InvalidInputException',
                 ),
                 array(
@@ -762,6 +882,10 @@ return array (
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
                 ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
             ),
         ),
         'DeleteGroup' => array(
@@ -927,6 +1051,42 @@ return array (
                 ),
             ),
         ),
+        'DeleteOpenIDConnectProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DeleteOpenIDConnectProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'OpenIDConnectProviderArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+            ),
+        ),
         'DeleteRole' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -1037,7 +1197,16 @@ return array (
             ),
             'errorResponses' => array(
                 array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
                     'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
                 ),
             ),
         ),
@@ -1315,6 +1484,31 @@ return array (
                 ),
             ),
         ),
+        'GenerateCredentialReport' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GenerateCredentialReportResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GenerateCredentialReport',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
+                    'class' => 'LimitExceededException',
+                ),
+            ),
+        ),
         'GetAccountPasswordPolicy' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -1356,6 +1550,39 @@ return array (
                     'static' => true,
                     'location' => 'aws.query',
                     'default' => '2010-05-08',
+                ),
+            ),
+        ),
+        'GetCredentialReport' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GetCredentialReportResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GetCredentialReport',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because the credential report does not exist. To generate a credential report, use GenerateCredentialReport.',
+                    'class' => 'CredentialReportNotPresentException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because the most recent credential report has expired. To generate a new credential report, use GenerateCredentialReport. For more information about credential report expiration, see Getting Credential Reports in the Using IAM guide.',
+                    'class' => 'CredentialReportExpiredException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because the credential report is still being generated.',
+                    'class' => 'CredentialReportNotReadyException',
                 ),
             ),
         ),
@@ -1506,6 +1733,42 @@ return array (
                 ),
             ),
         ),
+        'GetOpenIDConnectProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'GetOpenIDConnectProviderResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'GetOpenIDConnectProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'OpenIDConnectProviderArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+            ),
+        ),
         'GetRole' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -1608,6 +1871,7 @@ return array (
                     'class' => 'NoSuchEntityException',
                 ),
                 array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
                     'class' => 'InvalidInputException',
                 ),
             ),
@@ -2034,6 +2298,25 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
                     'class' => 'NoSuchEntityException',
+                ),
+            ),
+        ),
+        'ListOpenIDConnectProviders' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ListOpenIDConnectProvidersResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ListOpenIDConnectProviders',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
                 ),
             ),
         ),
@@ -2495,6 +2778,49 @@ return array (
                 ),
             ),
         ),
+        'RemoveClientIDFromOpenIDConnectProvider' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'RemoveClientIDFromOpenIDConnectProvider',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'OpenIDConnectProviderArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+                'ClientID' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 1,
+                    'maxLength' => 255,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
+                ),
+            ),
+        ),
         'RemoveRoleFromInstanceProfile' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -2737,6 +3063,23 @@ return array (
                     'format' => 'boolean-string',
                     'location' => 'aws.query',
                 ),
+                'MaxPasswordAge' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                    'minimum' => 1,
+                    'maximum' => 1095,
+                ),
+                'PasswordReusePrevention' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                    'minimum' => 1,
+                    'maximum' => 24,
+                ),
+                'HardExpiry' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
             ),
             'errorResponses' => array(
                 array(
@@ -2877,11 +3220,15 @@ return array (
                     'maxLength' => 64,
                 ),
                 'Password' => array(
-                    'required' => true,
                     'type' => 'string',
                     'location' => 'aws.query',
                     'minLength' => 1,
                     'maxLength' => 128,
+                ),
+                'PasswordResetRequired' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
                 ),
             ),
             'errorResponses' => array(
@@ -2900,6 +3247,54 @@ return array (
                 array(
                     'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
                     'class' => 'LimitExceededException',
+                ),
+            ),
+        ),
+        'UpdateOpenIDConnectProviderThumbprint' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'UpdateOpenIDConnectProviderThumbprint',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2010-05-08',
+                ),
+                'OpenIDConnectProviderArn' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                    'minLength' => 20,
+                    'maxLength' => 2048,
+                ),
+                'ThumbprintList' => array(
+                    'required' => true,
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'ThumbprintList.member',
+                    'items' => array(
+                        'name' => 'thumbprintType',
+                        'type' => 'string',
+                        'minLength' => 40,
+                        'maxLength' => 40,
+                    ),
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
+                    'class' => 'NoSuchEntityException',
                 ),
             ),
         ),
@@ -2941,6 +3336,7 @@ return array (
                     'class' => 'NoSuchEntityException',
                 ),
                 array(
+                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
                     'class' => 'InvalidInputException',
                 ),
                 array(
@@ -3361,7 +3757,20 @@ return array (
                         'CreateDate' => array(
                             'type' => 'string',
                         ),
+                        'PasswordResetRequired' => array(
+                            'type' => 'boolean',
+                        ),
                     ),
+                ),
+            ),
+        ),
+        'CreateOpenIDConnectProviderResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'OpenIDConnectProviderArn' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
                 ),
             ),
         ),
@@ -3428,6 +3837,9 @@ return array (
                         'CreateDate' => array(
                             'type' => 'string',
                         ),
+                        'PasswordLastUsed' => array(
+                            'type' => 'string',
+                        ),
                     ),
                 ),
             ),
@@ -3467,12 +3879,29 @@ return array (
                                 'CreateDate' => array(
                                     'type' => 'string',
                                 ),
+                                'PasswordLastUsed' => array(
+                                    'type' => 'string',
+                                ),
                             ),
                         ),
                         'EnableDate' => array(
                             'type' => 'string',
                         ),
                     ),
+                ),
+            ),
+        ),
+        'GenerateCredentialReportResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'State' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'Description' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
                 ),
             ),
         ),
@@ -3507,6 +3936,12 @@ return array (
                         ),
                         'MaxPasswordAge' => array(
                             'type' => 'numeric',
+                        ),
+                        'PasswordReusePrevention' => array(
+                            'type' => 'numeric',
+                        ),
+                        'HardExpiry' => array(
+                            'type' => 'boolean',
                         ),
                     ),
                 ),
@@ -3566,6 +4001,24 @@ return array (
                 ),
             ),
         ),
+        'GetCredentialReportResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Content' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'ReportFormat' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'GeneratedTime' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+            ),
+        ),
         'GetGroupResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -3612,6 +4065,9 @@ return array (
                                 'type' => 'string',
                             ),
                             'CreateDate' => array(
+                                'type' => 'string',
+                            ),
+                            'PasswordLastUsed' => array(
                                 'type' => 'string',
                             ),
                         ),
@@ -3714,7 +4170,42 @@ return array (
                         'CreateDate' => array(
                             'type' => 'string',
                         ),
+                        'PasswordResetRequired' => array(
+                            'type' => 'boolean',
+                        ),
                     ),
+                ),
+            ),
+        ),
+        'GetOpenIDConnectProviderResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Url' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'ClientIDList' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'clientIDType',
+                        'type' => 'string',
+                        'sentAs' => 'member',
+                    ),
+                ),
+                'ThumbprintList' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'thumbprintType',
+                        'type' => 'string',
+                        'sentAs' => 'member',
+                    ),
+                ),
+                'CreateDate' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
                 ),
             ),
         ),
@@ -3810,6 +4301,9 @@ return array (
                                 'UploadDate' => array(
                                     'type' => 'string',
                                 ),
+                                'Expiration' => array(
+                                    'type' => 'string',
+                                ),
                             ),
                         ),
                         'CertificateBody' => array(
@@ -3843,6 +4337,9 @@ return array (
                             'type' => 'string',
                         ),
                         'CreateDate' => array(
+                            'type' => 'string',
+                        ),
+                        'PasswordLastUsed' => array(
                             'type' => 'string',
                         ),
                     ),
@@ -4200,6 +4697,26 @@ return array (
                 ),
             ),
         ),
+        'ListOpenIDConnectProvidersResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'OpenIDConnectProviderList' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'OpenIDConnectProviderListEntry',
+                        'type' => 'object',
+                        'sentAs' => 'member',
+                        'properties' => array(
+                            'Arn' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
         'ListRolePoliciesResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -4319,6 +4836,9 @@ return array (
                             'UploadDate' => array(
                                 'type' => 'string',
                             ),
+                            'Expiration' => array(
+                                'type' => 'string',
+                            ),
                         ),
                     ),
                 ),
@@ -4422,6 +4942,9 @@ return array (
                             'CreateDate' => array(
                                 'type' => 'string',
                             ),
+                            'PasswordLastUsed' => array(
+                                'type' => 'string',
+                            ),
                         ),
                     ),
                 ),
@@ -4474,6 +4997,9 @@ return array (
                                     'CreateDate' => array(
                                         'type' => 'string',
                                     ),
+                                    'PasswordLastUsed' => array(
+                                        'type' => 'string',
+                                    ),
                                 ),
                             ),
                             'EnableDate' => array(
@@ -4523,6 +5049,9 @@ return array (
                             'type' => 'string',
                         ),
                         'UploadDate' => array(
+                            'type' => 'string',
+                        ),
+                        'Expiration' => array(
                             'type' => 'string',
                         ),
                     ),
