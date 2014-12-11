@@ -66,6 +66,73 @@ return array (
         ),
     ),
     'operations' => array(
+        'AssociateVPCWithHostedZone' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/2013-04-01/hostedzone/{HostedZoneId}/associatevpc',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'AssociateVPCWithHostedZoneResponse',
+            'responseType' => 'model',
+            'data' => array(
+                'xmlRoot' => array(
+                    'name' => 'AssociateVPCWithHostedZoneRequest',
+                    'namespaces' => array(
+                        'https://route53.amazonaws.com/doc/2013-04-01/',
+                    ),
+                ),
+            ),
+            'parameters' => array(
+                'HostedZoneId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                    'maxLength' => 32,
+                ),
+                'VPC' => array(
+                    'required' => true,
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'VPCRegion' => array(
+                            'type' => 'string',
+                            'minLength' => 1,
+                            'maxLength' => 64,
+                        ),
+                        'VPCId' => array(
+                            'type' => 'string',
+                            'maxLength' => 1024,
+                        ),
+                    ),
+                ),
+                'Comment' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/xml',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'class' => 'NoSuchHostedZoneException',
+                ),
+                array(
+                    'reason' => 'The hosted zone you are trying to create for your VPC_ID does not belong to you. Route 53 returns this error when the VPC specified by VPCId does not belong to you.',
+                    'class' => 'InvalidVPCIdException',
+                ),
+                array(
+                    'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The hosted zone you are trying to associate VPC with doesn\'t have any VPC association. Route 53 currently doesn\'t support associate a VPC with a public hosted zone.',
+                    'class' => 'PublicZoneVPCAssociationException',
+                ),
+                array(
+                    'class' => 'ConflictingDomainExistsException',
+                ),
+            ),
+        ),
         'ChangeResourceRecordSets' => array(
             'httpMethod' => 'POST',
             'uri' => '/2013-04-01/hostedzone/{HostedZoneId}/rrset/',
@@ -137,6 +204,26 @@ return array (
                                                 'type' => 'string',
                                                 'minLength' => 1,
                                                 'maxLength' => 64,
+                                            ),
+                                            'GeoLocation' => array(
+                                                'type' => 'object',
+                                                'properties' => array(
+                                                    'ContinentCode' => array(
+                                                        'type' => 'string',
+                                                        'minLength' => 2,
+                                                        'maxLength' => 2,
+                                                    ),
+                                                    'CountryCode' => array(
+                                                        'type' => 'string',
+                                                        'minLength' => 1,
+                                                        'maxLength' => 2,
+                                                    ),
+                                                    'SubdivisionCode' => array(
+                                                        'type' => 'string',
+                                                        'minLength' => 1,
+                                                        'maxLength' => 3,
+                                                    ),
+                                                ),
                                             ),
                                             'Failover' => array(
                                                 'type' => 'string',
@@ -286,6 +373,9 @@ return array (
                     'class' => 'NoSuchHealthCheckException',
                 ),
                 array(
+                    'class' => 'NoSuchHostedZoneException',
+                ),
+                array(
                     'reason' => 'The request was rejected because Route 53 was still processing a prior request.',
                     'class' => 'PriorRequestNotCompleteException',
                 ),
@@ -398,6 +488,21 @@ return array (
                     'location' => 'xml',
                     'maxLength' => 1024,
                 ),
+                'VPC' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'VPCRegion' => array(
+                            'type' => 'string',
+                            'minLength' => 1,
+                            'maxLength' => 64,
+                        ),
+                        'VPCId' => array(
+                            'type' => 'string',
+                            'maxLength' => 1024,
+                        ),
+                    ),
+                ),
                 'CallerReference' => array(
                     'required' => true,
                     'type' => 'string',
@@ -413,7 +518,16 @@ return array (
                             'type' => 'string',
                             'maxLength' => 256,
                         ),
+                        'PrivateZone' => array(
+                            'type' => 'boolean',
+                            'format' => 'boolean-string',
+                        ),
                     ),
+                ),
+                'DelegationSetId' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'maxLength' => 32,
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -434,12 +548,90 @@ return array (
                     'class' => 'TooManyHostedZonesException',
                 ),
                 array(
+                    'reason' => 'The hosted zone you are trying to create for your VPC_ID does not belong to you. Route 53 returns this error when the VPC specified by VPCId does not belong to you.',
+                    'class' => 'InvalidVPCIdException',
+                ),
+                array(
                     'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
                     'class' => 'InvalidInputException',
                 ),
                 array(
                     'reason' => 'Route 53 allows some duplicate domain names, but there is a maximum number of duplicate names. This error indicates that you have reached that maximum. If you want to create another hosted zone with the same name and Route 53 generates this error, you can request an increase to the limit on the Contact Us page.',
                     'class' => 'DelegationSetNotAvailableException',
+                ),
+                array(
+                    'class' => 'ConflictingDomainExistsException',
+                ),
+                array(
+                    'reason' => 'The specified delegation set does not exist.',
+                    'class' => 'NoSuchDelegationSetException',
+                ),
+                array(
+                    'reason' => 'The specified delegation set has not been marked as reusable.',
+                    'class' => 'DelegationSetNotReusableException',
+                ),
+            ),
+        ),
+        'CreateReusableDelegationSet' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/2013-04-01/delegationset',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'CreateReusableDelegationSetResponse',
+            'responseType' => 'model',
+            'data' => array(
+                'xmlRoot' => array(
+                    'name' => 'CreateReusableDelegationSetRequest',
+                    'namespaces' => array(
+                        'https://route53.amazonaws.com/doc/2013-04-01/',
+                    ),
+                ),
+            ),
+            'parameters' => array(
+                'CallerReference' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'minLength' => 1,
+                    'maxLength' => 128,
+                ),
+                'HostedZoneId' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'maxLength' => 32,
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/xml',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'A delegation set with the same owner and caller reference combination has already been created.',
+                    'class' => 'DelegationSetAlreadyCreatedException',
+                ),
+                array(
+                    'reason' => 'The limits specified for a resource have been exceeded.',
+                    'class' => 'LimitsExceededException',
+                ),
+                array(
+                    'reason' => 'The specified HostedZone cannot be found.',
+                    'class' => 'HostedZoneNotFoundException',
+                ),
+                array(
+                    'reason' => 'At least one of the specified arguments is invalid.',
+                    'class' => 'InvalidArgumentException',
+                ),
+                array(
+                    'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'Route 53 allows some duplicate domain names, but there is a maximum number of duplicate names. This error indicates that you have reached that maximum. If you want to create another hosted zone with the same name and Route 53 generates this error, you can request an increase to the limit on the Contact Us page.',
+                    'class' => 'DelegationSetNotAvailableException',
+                ),
+                array(
+                    'reason' => 'The specified delegation set has already been marked as reusable.',
+                    'class' => 'DelegationSetAlreadyReusableException',
                 ),
             ),
         ),
@@ -511,6 +703,107 @@ return array (
                 ),
             ),
         ),
+        'DeleteReusableDelegationSet' => array(
+            'httpMethod' => 'DELETE',
+            'uri' => '/2013-04-01/delegationset/{Id}',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'DeleteReusableDelegationSetResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Id' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                    'maxLength' => 32,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The specified delegation set does not exist.',
+                    'class' => 'NoSuchDelegationSetException',
+                ),
+                array(
+                    'reason' => 'The specified delegation contains associated hosted zones which must be deleted before the reusable delegation set can be deleted.',
+                    'class' => 'DelegationSetInUseException',
+                ),
+                array(
+                    'reason' => 'The specified delegation set has not been marked as reusable.',
+                    'class' => 'DelegationSetNotReusableException',
+                ),
+                array(
+                    'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
+                    'class' => 'InvalidInputException',
+                ),
+            ),
+        ),
+        'DisassociateVPCFromHostedZone' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/2013-04-01/hostedzone/{HostedZoneId}/disassociatevpc',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'DisassociateVPCFromHostedZoneResponse',
+            'responseType' => 'model',
+            'data' => array(
+                'xmlRoot' => array(
+                    'name' => 'DisassociateVPCFromHostedZoneRequest',
+                    'namespaces' => array(
+                        'https://route53.amazonaws.com/doc/2013-04-01/',
+                    ),
+                ),
+            ),
+            'parameters' => array(
+                'HostedZoneId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                    'maxLength' => 32,
+                ),
+                'VPC' => array(
+                    'required' => true,
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'VPCRegion' => array(
+                            'type' => 'string',
+                            'minLength' => 1,
+                            'maxLength' => 64,
+                        ),
+                        'VPCId' => array(
+                            'type' => 'string',
+                            'maxLength' => 1024,
+                        ),
+                    ),
+                ),
+                'Comment' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/xml',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'class' => 'NoSuchHostedZoneException',
+                ),
+                array(
+                    'reason' => 'The hosted zone you are trying to create for your VPC_ID does not belong to you. Route 53 returns this error when the VPC specified by VPCId does not belong to you.',
+                    'class' => 'InvalidVPCIdException',
+                ),
+                array(
+                    'reason' => 'The VPC you specified is not currently associated with the hosted zone.',
+                    'class' => 'VPCAssociationNotFoundException',
+                ),
+                array(
+                    'reason' => 'The VPC you are trying to disassociate from the hosted zone is the last the VPC that is associated with the hosted zone. Route 53 currently doesn\'t support disassociate the last VPC from the hosted zone.',
+                    'class' => 'LastVPCAssociationException',
+                ),
+                array(
+                    'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
+                    'class' => 'InvalidInputException',
+                ),
+            ),
+        ),
         'GetChange' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/change/{Id}',
@@ -552,6 +845,50 @@ return array (
                 'command.expects' => array(
                     'static' => true,
                     'default' => 'application/xml',
+                ),
+            ),
+        ),
+        'GetGeoLocation' => array(
+            'httpMethod' => 'GET',
+            'uri' => '/2013-04-01/geolocation',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'GetGeoLocationResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'ContinentCode' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'continentcode',
+                    'minLength' => 2,
+                    'maxLength' => 2,
+                ),
+                'CountryCode' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'countrycode',
+                    'minLength' => 1,
+                    'maxLength' => 2,
+                ),
+                'SubdivisionCode' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'subdivisioncode',
+                    'minLength' => 1,
+                    'maxLength' => 3,
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/xml',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The geo location you are trying to get does not exist.',
+                    'class' => 'NoSuchGeoLocationException',
+                ),
+                array(
+                    'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
+                    'class' => 'InvalidInputException',
                 ),
             ),
         ),
@@ -601,6 +938,56 @@ return array (
                 ),
             ),
         ),
+        'GetHealthCheckLastFailureReason' => array(
+            'httpMethod' => 'GET',
+            'uri' => '/2013-04-01/healthcheck/{HealthCheckId}/lastfailurereason',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'GetHealthCheckLastFailureReasonResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'HealthCheckId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                    'maxLength' => 64,
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/xml',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The health check you are trying to get or delete does not exist.',
+                    'class' => 'NoSuchHealthCheckException',
+                ),
+            ),
+        ),
+        'GetHealthCheckStatus' => array(
+            'httpMethod' => 'GET',
+            'uri' => '/2013-04-01/healthcheck/{HealthCheckId}/status',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'GetHealthCheckStatusResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'HealthCheckId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                    'maxLength' => 64,
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/xml',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The health check you are trying to get or delete does not exist.',
+                    'class' => 'NoSuchHealthCheckException',
+                ),
+            ),
+        ),
         'GetHostedZone' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/hostedzone/{Id}',
@@ -626,6 +1013,84 @@ return array (
                 array(
                     'class' => 'NoSuchHostedZoneException',
                 ),
+                array(
+                    'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
+                    'class' => 'InvalidInputException',
+                ),
+            ),
+        ),
+        'GetReusableDelegationSet' => array(
+            'httpMethod' => 'GET',
+            'uri' => '/2013-04-01/delegationset/{Id}',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'GetReusableDelegationSetResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Id' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                    'maxLength' => 32,
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/xml',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The specified delegation set does not exist.',
+                    'class' => 'NoSuchDelegationSetException',
+                ),
+                array(
+                    'reason' => 'The specified delegation set has not been marked as reusable.',
+                    'class' => 'DelegationSetNotReusableException',
+                ),
+                array(
+                    'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
+                    'class' => 'InvalidInputException',
+                ),
+            ),
+        ),
+        'ListGeoLocations' => array(
+            'httpMethod' => 'GET',
+            'uri' => '/2013-04-01/geolocations',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'ListGeoLocationsResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'StartContinentCode' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'startcontinentcode',
+                    'minLength' => 2,
+                    'maxLength' => 2,
+                ),
+                'StartCountryCode' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'startcountrycode',
+                    'minLength' => 1,
+                    'maxLength' => 2,
+                ),
+                'StartSubdivisionCode' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'startsubdivisioncode',
+                    'minLength' => 1,
+                    'maxLength' => 3,
+                ),
+                'MaxItems' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'maxitems',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/xml',
+                ),
+            ),
+            'errorResponses' => array(
                 array(
                     'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
                     'class' => 'InvalidInputException',
@@ -684,6 +1149,12 @@ return array (
                     'location' => 'query',
                     'sentAs' => 'maxitems',
                 ),
+                'DelegationSetId' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'delegationsetid',
+                    'maxLength' => 32,
+                ),
                 'command.expects' => array(
                     'static' => true,
                     'default' => 'application/xml',
@@ -693,6 +1164,14 @@ return array (
                 array(
                     'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
                     'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The specified delegation set does not exist.',
+                    'class' => 'NoSuchDelegationSetException',
+                ),
+                array(
+                    'reason' => 'The specified delegation set has not been marked as reusable.',
+                    'class' => 'DelegationSetNotReusableException',
                 ),
             ),
         ),
@@ -750,6 +1229,36 @@ return array (
                 ),
             ),
         ),
+        'ListReusableDelegationSets' => array(
+            'httpMethod' => 'GET',
+            'uri' => '/2013-04-01/delegationset',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'ListReusableDelegationSetsResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'marker',
+                    'maxLength' => 64,
+                ),
+                'MaxItems' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'maxitems',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/xml',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
+                    'class' => 'InvalidInputException',
+                ),
+            ),
+        ),
         'ListTagsForResource' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/tags/{ResourceType}/{ResourceId}',
@@ -781,6 +1290,9 @@ return array (
                 array(
                     'reason' => 'The health check you are trying to get or delete does not exist.',
                     'class' => 'NoSuchHealthCheckException',
+                ),
+                array(
+                    'class' => 'NoSuchHostedZoneException',
                 ),
                 array(
                     'reason' => 'The request was rejected because Route 53 was still processing a prior request.',
@@ -836,6 +1348,9 @@ return array (
                 array(
                     'reason' => 'The health check you are trying to get or delete does not exist.',
                     'class' => 'NoSuchHealthCheckException',
+                ),
+                array(
+                    'class' => 'NoSuchHostedZoneException',
                 ),
                 array(
                     'reason' => 'The request was rejected because Route 53 was still processing a prior request.',
@@ -923,8 +1438,77 @@ return array (
                 ),
             ),
         ),
+        'UpdateHostedZoneComment' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/2013-04-01/hostedzone/{Id}',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'UpdateHostedZoneCommentResponse',
+            'responseType' => 'model',
+            'data' => array(
+                'xmlRoot' => array(
+                    'name' => 'UpdateHostedZoneCommentRequest',
+                    'namespaces' => array(
+                        'https://route53.amazonaws.com/doc/2013-04-01/',
+                    ),
+                ),
+            ),
+            'parameters' => array(
+                'Id' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'uri',
+                    'maxLength' => 32,
+                ),
+                'Comment' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'maxLength' => 256,
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/xml',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'class' => 'NoSuchHostedZoneException',
+                ),
+                array(
+                    'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
+                    'class' => 'InvalidInputException',
+                ),
+            ),
+        ),
     ),
     'models' => array(
+        'AssociateVPCWithHostedZoneResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ChangeInfo' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'Id' => array(
+                            'type' => 'string',
+                        ),
+                        'Status' => array(
+                            'type' => 'string',
+                        ),
+                        'SubmittedAt' => array(
+                            'type' => 'string',
+                        ),
+                        'Comment' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+                'RequestId' => array(
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-request-id',
+                ),
+            ),
+        ),
         'ChangeResourceRecordSetsResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -1044,6 +1628,9 @@ return array (
                                 'Comment' => array(
                                     'type' => 'string',
                                 ),
+                                'PrivateZone' => array(
+                                    'type' => 'boolean',
+                                ),
                             ),
                         ),
                         'ResourceRecordSetCount' => array(
@@ -1073,6 +1660,58 @@ return array (
                     'type' => 'object',
                     'location' => 'xml',
                     'properties' => array(
+                        'Id' => array(
+                            'type' => 'string',
+                        ),
+                        'CallerReference' => array(
+                            'type' => 'string',
+                        ),
+                        'NameServers' => array(
+                            'type' => 'array',
+                            'items' => array(
+                                'name' => 'NameServer',
+                                'type' => 'string',
+                                'sentAs' => 'NameServer',
+                            ),
+                        ),
+                    ),
+                ),
+                'VPC' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'VPCRegion' => array(
+                            'type' => 'string',
+                        ),
+                        'VPCId' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+                'Location' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                ),
+                'RequestId' => array(
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-request-id',
+                ),
+            ),
+        ),
+        'CreateReusableDelegationSetResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'DelegationSet' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'Id' => array(
+                            'type' => 'string',
+                        ),
+                        'CallerReference' => array(
+                            'type' => 'string',
+                        ),
                         'NameServers' => array(
                             'type' => 'array',
                             'items' => array(
@@ -1104,6 +1743,44 @@ return array (
             ),
         ),
         'DeleteHostedZoneResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ChangeInfo' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'Id' => array(
+                            'type' => 'string',
+                        ),
+                        'Status' => array(
+                            'type' => 'string',
+                        ),
+                        'SubmittedAt' => array(
+                            'type' => 'string',
+                        ),
+                        'Comment' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+                'RequestId' => array(
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-request-id',
+                ),
+            ),
+        ),
+        'DeleteReusableDelegationSetResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'RequestId' => array(
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-request-id',
+                ),
+            ),
+        ),
+        'DisassociateVPCFromHostedZoneResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
             'properties' => array(
@@ -1169,6 +1846,40 @@ return array (
                     'items' => array(
                         'name' => 'IPAddressCidr',
                         'type' => 'string',
+                    ),
+                ),
+                'RequestId' => array(
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-request-id',
+                ),
+            ),
+        ),
+        'GetGeoLocationResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'GeoLocationDetails' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'ContinentCode' => array(
+                            'type' => 'string',
+                        ),
+                        'ContinentName' => array(
+                            'type' => 'string',
+                        ),
+                        'CountryCode' => array(
+                            'type' => 'string',
+                        ),
+                        'CountryName' => array(
+                            'type' => 'string',
+                        ),
+                        'SubdivisionCode' => array(
+                            'type' => 'string',
+                        ),
+                        'SubdivisionName' => array(
+                            'type' => 'string',
+                        ),
                     ),
                 ),
                 'RequestId' => array(
@@ -1245,6 +1956,76 @@ return array (
                 ),
             ),
         ),
+        'GetHealthCheckLastFailureReasonResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'HealthCheckObservations' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'HealthCheckObservation',
+                        'type' => 'object',
+                        'sentAs' => 'HealthCheckObservation',
+                        'properties' => array(
+                            'IPAddress' => array(
+                                'type' => 'string',
+                            ),
+                            'StatusReport' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'Status' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'CheckedTime' => array(
+                                        'type' => 'string',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'RequestId' => array(
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-request-id',
+                ),
+            ),
+        ),
+        'GetHealthCheckStatusResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'HealthCheckObservations' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'HealthCheckObservation',
+                        'type' => 'object',
+                        'sentAs' => 'HealthCheckObservation',
+                        'properties' => array(
+                            'IPAddress' => array(
+                                'type' => 'string',
+                            ),
+                            'StatusReport' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'Status' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'CheckedTime' => array(
+                                        'type' => 'string',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'RequestId' => array(
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-request-id',
+                ),
+            ),
+        ),
         'GetHostedZoneResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -1268,6 +2049,9 @@ return array (
                                 'Comment' => array(
                                     'type' => 'string',
                                 ),
+                                'PrivateZone' => array(
+                                    'type' => 'boolean',
+                                ),
                             ),
                         ),
                         'ResourceRecordSetCount' => array(
@@ -1279,6 +2063,12 @@ return array (
                     'type' => 'object',
                     'location' => 'xml',
                     'properties' => array(
+                        'Id' => array(
+                            'type' => 'string',
+                        ),
+                        'CallerReference' => array(
+                            'type' => 'string',
+                        ),
                         'NameServers' => array(
                             'type' => 'array',
                             'items' => array(
@@ -1288,6 +2078,112 @@ return array (
                             ),
                         ),
                     ),
+                ),
+                'VPCs' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'VPC',
+                        'type' => 'object',
+                        'sentAs' => 'VPC',
+                        'properties' => array(
+                            'VPCRegion' => array(
+                                'type' => 'string',
+                            ),
+                            'VPCId' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'RequestId' => array(
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-request-id',
+                ),
+            ),
+        ),
+        'GetReusableDelegationSetResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'DelegationSet' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'Id' => array(
+                            'type' => 'string',
+                        ),
+                        'CallerReference' => array(
+                            'type' => 'string',
+                        ),
+                        'NameServers' => array(
+                            'type' => 'array',
+                            'items' => array(
+                                'name' => 'NameServer',
+                                'type' => 'string',
+                                'sentAs' => 'NameServer',
+                            ),
+                        ),
+                    ),
+                ),
+                'RequestId' => array(
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-request-id',
+                ),
+            ),
+        ),
+        'ListGeoLocationsResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'GeoLocationDetailsList' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'GeoLocationDetails',
+                        'type' => 'object',
+                        'sentAs' => 'GeoLocationDetails',
+                        'properties' => array(
+                            'ContinentCode' => array(
+                                'type' => 'string',
+                            ),
+                            'ContinentName' => array(
+                                'type' => 'string',
+                            ),
+                            'CountryCode' => array(
+                                'type' => 'string',
+                            ),
+                            'CountryName' => array(
+                                'type' => 'string',
+                            ),
+                            'SubdivisionCode' => array(
+                                'type' => 'string',
+                            ),
+                            'SubdivisionName' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'IsTruncated' => array(
+                    'type' => 'boolean',
+                    'location' => 'xml',
+                ),
+                'NextContinentCode' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'NextCountryCode' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'NextSubdivisionCode' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'MaxItems' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
                 ),
                 'RequestId' => array(
                     'location' => 'header',
@@ -1397,6 +2293,9 @@ return array (
                                     'Comment' => array(
                                         'type' => 'string',
                                     ),
+                                    'PrivateZone' => array(
+                                        'type' => 'boolean',
+                                    ),
                                 ),
                             ),
                             'ResourceRecordSetCount' => array(
@@ -1454,6 +2353,20 @@ return array (
                             'Region' => array(
                                 'type' => 'string',
                             ),
+                            'GeoLocation' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'ContinentCode' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'CountryCode' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'SubdivisionCode' => array(
+                                        'type' => 'string',
+                                    ),
+                                ),
+                            ),
                             'Failover' => array(
                                 'type' => 'string',
                             ),
@@ -1506,6 +2419,57 @@ return array (
                     'location' => 'xml',
                 ),
                 'NextRecordIdentifier' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'MaxItems' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'RequestId' => array(
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-request-id',
+                ),
+            ),
+        ),
+        'ListReusableDelegationSetsResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'DelegationSets' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'DelegationSet',
+                        'type' => 'object',
+                        'sentAs' => 'DelegationSet',
+                        'properties' => array(
+                            'Id' => array(
+                                'type' => 'string',
+                            ),
+                            'CallerReference' => array(
+                                'type' => 'string',
+                            ),
+                            'NameServers' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'NameServer',
+                                    'type' => 'string',
+                                    'sentAs' => 'NameServer',
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'Marker' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'IsTruncated' => array(
+                    'type' => 'boolean',
+                    'location' => 'xml',
+                ),
+                'NextMarker' => array(
                     'type' => 'string',
                     'location' => 'xml',
                 ),
@@ -1644,6 +2608,45 @@ return array (
                             ),
                         ),
                         'HealthCheckVersion' => array(
+                            'type' => 'numeric',
+                        ),
+                    ),
+                ),
+                'RequestId' => array(
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-request-id',
+                ),
+            ),
+        ),
+        'UpdateHostedZoneCommentResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'HostedZone' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'Id' => array(
+                            'type' => 'string',
+                        ),
+                        'Name' => array(
+                            'type' => 'string',
+                        ),
+                        'CallerReference' => array(
+                            'type' => 'string',
+                        ),
+                        'Config' => array(
+                            'type' => 'object',
+                            'properties' => array(
+                                'Comment' => array(
+                                    'type' => 'string',
+                                ),
+                                'PrivateZone' => array(
+                                    'type' => 'boolean',
+                                ),
+                            ),
+                        ),
+                        'ResourceRecordSetCount' => array(
                             'type' => 'numeric',
                         ),
                     ),

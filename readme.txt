@@ -2,7 +2,7 @@
 Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, backup
 Requires at least: 3.8
-Tested up to: 4.0
+Tested up to: 4.1
 Stable tag: 0.5.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -70,7 +70,7 @@ Nope! New image uploads are copied first to your normal location, then sync'd up
 
 <strong>Can I force older images to be pushed?</strong>
 
-Yes. Go to the CDN page and at the bottom is a section "Migrate Exisiting Files" - If there's a checkbox and a button, you have files to upload, so check the box and press the button.
+Yes. Go to the CDN page and at the bottom is a section "Migrate Existing Files" - If there's a checkbox and a button, you have files to upload, so check the box and press the button.
 
 The uploader runs in chunks per hour, since it has to upload <em>all</em> image sizes, as well as edit your posts. If you have over 20k images, it may NOT work right, however.
 
@@ -130,12 +130,23 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 5. DreamSpeed CDN Key Settings (filled in)
 6. DreamSpeed CDN Configuration Settings
 7. Media Library with CDN checkmarks
-8. Migrate Exisiting Files section (on DreamSpeed CDN Configuration page)
+8. Migrate Existing Files section (on DreamSpeed CDN Configuration page)
 
 == Changelog ==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+= 0.5.3 =
+* Dec 11, 2014 by Ipstenu
+* AWS SDK 2.7.9
+
+= 0.5.2b =
+* Dec 2, 2014 by Ipstenu
+* Adding Plugin icons, no code changed.
+
+>>>>>>> REL_0.5.3
 = 0.5.1 && 0.5.2 =
 * Nov 4, 2014 by Ipstenu
 * SSL Fix
