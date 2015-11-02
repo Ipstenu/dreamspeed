@@ -463,7 +463,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	}
 
 	function plugin_load() {
-		wp_enqueue_script( 'dreamspeed-script', plugins_url( 'script.js', $this->plugin_file_path ), array( 'jquery' ), $this->get_installed_version(), true );
+		wp_enqueue_script( 'dreamspeed-script', plugins_url( 'classes/script.js', $this->plugin_file_path ), array( 'jquery' ), $this->get_installed_version(), true );
 
 		wp_localize_script( 'dreamspeed-script', 'dreamspeed_i18n', array(
 			'create_bucket_prompt'  => __( 'Bucket Name:', 'dreamspeed-cdn' ),

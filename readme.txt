@@ -2,8 +2,8 @@
 Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, cdn
 Requires at least: 3.8
-Tested up to: 4.3
-Stable tag: 0.5.3
+Tested up to: 4.4
+Stable tag: 0.5.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -21,7 +21,7 @@ Development happens on <a href="https://github.com/Ipstenu/dreamspeed/">Github</
 
 = Known Conflicts =
 
-* Broken Link Checker - This plugin will cause the "Migrate Exisiting Files" to fail.
+* Broken Link Checker - This plugin will cause the "Migrate Existing Files" to fail.
 
 = Credits =
 <em>This plugin is a spork (fork and combination) of <a href="https://wordpress.org/plugins/amazon-s3-and-cloudfront/">Amazon S3 and Cloudfront</a> and <a href="https://github.com/deliciousbrains/wp-amazon-web-services">Amazon Web Services</a>, both by the awesome Brad Touesnard.</em>
@@ -134,10 +134,10 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 
 == Changelog ==
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
+= 0.5.4 =
+* Nov 02, 2015 by Ipstenu
+* Correction to 'Create a Bucket' script.
+
 = 0.5.3 =
 * Dec 11, 2014 by Ipstenu
 * AWS SDK 2.7.9
@@ -146,7 +146,6 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 * Dec 2, 2014 by Ipstenu
 * Adding Plugin icons, no code changed.
 
->>>>>>> REL_0.5.3
 = 0.5.1 && 0.5.2 =
 * Nov 4, 2014 by Ipstenu
 * SSL Fix
@@ -160,7 +159,6 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 * Aug 7, 2014, by Ipstenu
 * Enabled SSL force option
 
->>>>>>> REL_0.5.1
 = 0.3.1 =
 * July 24, 2014, by Ipstenu
 * Changed SDK to newest version: 2.6.12 (<a href="http://blogs.aws.amazon.com/php/post/Tx2PDR0J3NL0YKN/Release-AWS-SDK-for-PHP-Version-2-6-12">official release notes</a>)
@@ -180,6 +178,3 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 * First Release
 
 == Upgrade Notice ==
-
-= 0.5 =
-For faster serving images, please check the DreamSpeed dream.io option in the settings page.
