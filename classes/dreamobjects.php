@@ -72,8 +72,8 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 			return;
 		}
 
-		if ( empty( $_POST['_wpnonce'] ) || !wp_verify_nonce( $_POST['_wpnonce'], 'dreamspeed-save-settings' ) ) {
-			die( __( "Cheatin' eh?", 'dreamspeed-cdn' ) );
+		if ( !wp_verify_nonce( $_POST['_wpnonce'], 'dreamspeed-save-settings' ) ) {
+			die( );
 		}
 
 		// Make sure $this->settings has been loaded
@@ -89,7 +89,7 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 				continue;
 			}
 
-			$this->set_setting( $var, $_POST[$var] );
+			$this->set_setting( $var, sanitize_text_field($_POST[$var]) );
 		}
 
 		$this->save_settings();
@@ -102,9 +102,7 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 		}
 
 		$view = 'settings';
-		$this->render_view( 'header' );
 		$this->render_view( $view );
-		$this->render_view( 'footer' );
 	}
 
 	function get_access_key_id() {

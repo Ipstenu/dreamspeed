@@ -455,7 +455,6 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		if ( is_null( $this->doclient ) ) {
 			$this->doclient = $this->aws->get_client()->get( 's3' );
 		}
-
 		return $this->doclient;
 	}
 
@@ -523,8 +522,6 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	}
 
 	function render_page() {
-		$this->aws->render_view( 'header', array( 'page_title' => $this->plugin_title ) );
-
 		$dos_client = $this->aws->get_client();
 
 		if ( is_wp_error( $dos_client ) ) {
@@ -533,8 +530,6 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		else {
 			$this->render_view( 'settings' );
 		}
-
-		$this->aws->render_view( 'footer' );
 	}
 
 	function get_dynamic_prefix( $time = null ) {

@@ -154,8 +154,7 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 * Updating SDK
 * Changing dev environment to use Composer
 * Fixed SSL to work with Dream.io URLs
-
-TO DO!!
-* Update to work with srcset
+* Improved sanitization and escaping.
 
 == Upgrade Notice ==
+Version 0.6.0 comes with a re-vamped layout for the settings page, making it look more WordPressy. No functionality was changed.

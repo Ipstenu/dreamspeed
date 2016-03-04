@@ -4,17 +4,16 @@ Plugin Name: DreamSpeed CDN
 Plugin URI: https://github.com/Ipstenu/dreamspeed/
 Description: Copies files to DreamSpeed as they are uploaded to the Media Library. Optionally configure a custom domain name as an alias.
 Author: Mika Epstein
-Version: 0.5.4
+Version: 0.6.0
 Author URI: http://dreamhost.com
 Text Domain: dreamspeed-cdn
-Domain Path: i18n
 
-Copyright (c) 2013 Brad Touesnard. All rights reserved.
-Copyright (c) 2014-2016 Mika A Epstein. All rights reserved.
+	Copyright (c) 2013 Brad Touesnard. All rights reserved.
+	Copyright (c) 2014-2016 Mika A Epstein. All rights reserved.
 
-This plugin is a fork of the following:
- * http://wordpress.org/extend/plugins/amazon-web-services/
- * https://wordpress.org/plugins/amazon-web-services/
+	This plugin is a fork of the following:
+	 * http://wordpress.org/extend/plugins/amazon-web-services/
+	 * https://wordpress.org/plugins/amazon-web-services/
 
     This file is part of DreamSpeed CDN, a plugin for WordPress.
 
