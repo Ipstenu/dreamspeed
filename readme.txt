@@ -33,6 +33,8 @@ Development happens on <a href="https://github.com/Ipstenu/dreamspeed/">Github</
 1. Sign up for <a href="http://dreamhost.com/cloud/dreamspeed/">DreamSpeed</a>
 1. Install and Activate the plugin
 1. Fill in your Key and Secret Key
+1. Configure your settings
+1. Watch your site load faster
 
 == Frequently asked questions ==
 
@@ -64,7 +66,7 @@ I would personally suggest checking the following:
 * Point file URLs to DreamSpeed/DNS Alias for files that have been copied to S3
 * Serve files from dream.io
 
-This will be the fastest
+This will be the fastest.
 
 <strong>Do I have to manually push images?</strong>
 
@@ -82,11 +84,11 @@ That depends on how many files you have. It averages uploading 20 images per-hou
 
 <strong>How can I check if an image is uploaded?</strong>
 
-Go to the Media Library. There's a column called 'CDN' and that will have a checkmark if it's uploaded.
+Go to the Media Library and change to the list view. There's a column called 'CDN' and that will have a checkmark if it's uploaded.
 
 <strong>Do I have to edit my posts to use the new URLs?</strong>
 
-Generally no. The Migrate Existing Files features will edit the posts for you.
+Generally no. The Migrate Existing Files features should edit the posts for you.
 
 <strong>It <em>edits</em> my posts? Why not use a filter?</strong?>
 
@@ -98,7 +100,7 @@ It does edit. It saves as a post revision, so you can roll back. But there's no 
 
 Yes. If you set your WordPress home/site URLs to https, then the plugin will auto-detect that you're on https and attempt to serve up the files securely. If for any reason that doesn't work, there's an option to activate force SSL on the settings page.
 
-Keep in mind, you cannot use a custom CDN (like cdn.yourdomain.com) with HTTPs at this time, due to issues with certificates outside the control of this plugin.
+Keep in mind, you cannot use a custom CDN (like cdn.yourdomain.com) with HTTPs at this time, due to issues with certificates outside the control of this plugin. You <em>can</em> use `dream.io` however.
 
 <strong>If I wanted to push my existing images up manually, how do I do that?</strong>
 
@@ -135,6 +137,10 @@ Of note: Currently the official WordPress importers aren't standardized, so ther
 <strong>Why aren't my images found?</strong>
 
 Check if they're failing on the CDN alias, but they do work at the objects.dreamhost.com URL. If so, you somehow goofed your permissions. You have to go into the DreamObjects editor and set permissions from PRIVATE to PUBLIC. This happens usually because the bucket was private when you made it.
+
+<strong>I viewed source and the srcset images are all local. Why is this happening?</strong>
+
+There are weird issues with srcset. Basically it's impossible to be 100% sure that all the media is uploaded to the CDN, so auto-generating the srcset URLs is very tricky. This is being tracked in [Github Issue #20](https://github.com/Ipstenu/dreamspeed/issues/20)
 
 == Screenshots ==
 

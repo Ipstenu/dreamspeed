@@ -158,6 +158,7 @@
 			<tr valign="top">
 				<td>
 					<button type="submit" class="button button-secondary"><?php _e( '<div class="dashicons dashicons-upload"></div> Upload Existing Media', 'dreamspeed-cdn' ); ?></button>
+					<p>
 				</td>
 			</tr>
 			</table>

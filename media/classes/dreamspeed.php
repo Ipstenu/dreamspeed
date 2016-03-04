@@ -36,7 +36,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 
 		if ( $this->is_plugin_setup() && ( $this->get_setting( 'copy-to-s3' ) == 1 ) && ( get_option('dreamspeed_importer') != 1 ) && !defined( 'WP_IMPORTING' ) ) {
 			add_filter( 'wp_get_attachment_url', array( $this, 'wp_get_attachment_url' ), 9, 2 );
-			add_filter( 'wp_calculate_image_srcset_meta' , array( $this, 'wp_calculate_image_srcset_meta' ) );
+			//add_filter( 'wp_calculate_image_srcset_meta' , array( $this, 'wp_calculate_image_srcset_meta' ) );
 			add_filter( 'wp_generate_attachment_metadata', array( $this, 'wp_generate_attachment_metadata' ), 20, 2 );
 			add_filter( 'delete_attachment', array( $this, 'delete_attachment' ), 20 );
 		}
@@ -341,13 +341,11 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	 * WP 4.4 added in srcsets so we must filter. 
 	 */
 	 //apply_filters( 'wp_calculate_image_srcset_meta', $image_meta, $size_array, $image_src, $attachment_id )
-/*
-	function wp_calculate_image_srcset_meta( ??? ) {
+	function wp_calculate_image_srcset_meta( ) {
 		
-		IF the image exists in CDN (that is if the attachment ID has amazons3 tagged) then change the URL
+		//IF the image exists in CDN (that is if the attachment ID has amazons3 tagged) then change the URL
 	
 	}
-*/
 
 	function get_attachment_dreamspeed_info( $post_id ) {
 		return get_post_meta( $post_id, 'amazonS3_info', true );
