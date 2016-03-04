@@ -10,7 +10,7 @@ Text Domain: dreamspeed-cdn
 Domain Path: i18n
 
 Copyright (c) 2013 Brad Touesnard. All rights reserved.
-Copyright (c) 2014 Mika A Epstein. All rights reserved.
+Copyright (c) 2014-2016 Mika A Epstein. All rights reserved.
 
 This plugin is a fork of the following:
  * http://wordpress.org/extend/plugins/amazon-web-services/

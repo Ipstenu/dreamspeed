@@ -1,0 +1,42 @@
+= 0.5.4 =
+* Nov 02, 2015 by Ipstenu
+* Correction to 'Create a Bucket' script.
+
+= 0.5.3 =
+* Dec 11, 2014 by Ipstenu
+* AWS SDK 2.7.9
+
+= 0.5.2b =
+* Dec 2, 2014 by Ipstenu
+* Adding Plugin icons, no code changed.
+
+= 0.5.1 && 0.5.2 =
+* Nov 4, 2014 by Ipstenu
+* SSL Fix
+
+= 0.5 =
+* Oct 5, 2014, by Ipstenu
+* Fixing dream.io code, new options
+* SSL improvements
+
+= 0.4 =
+* Aug 7, 2014, by Ipstenu
+* Enabled SSL force option
+
+= 0.3.1 =
+* July 24, 2014, by Ipstenu
+* Changed SDK to newest version: 2.6.12 (<a href="http://blogs.aws.amazon.com/php/post/Tx2PDR0J3NL0YKN/Release-AWS-SDK-for-PHP-Version-2-6-12">official release notes</a>)
+
+= 0.2 =
+* July 2, 2014, by Ipstenu
+* Changed SDK to newest version: 2.6.10 (<a href="http://blogs.aws.amazon.com/php/post/TxDRVCHQYZSNN7/Release-AWS-SDK-for-PHP-Version-2-6-10">official release notes</a>)
+
+= 0.1 =
+* 07 May 2014 by Ipstenu
+* Multisite works
+* Uploading old media works
+* Imports work
+
+= 0.1-beta =
+* 01 April 2014 by Ipstenu
+* First Release

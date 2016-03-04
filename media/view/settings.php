@@ -33,25 +33,19 @@ if ( is_wp_error( $buckets ) ) {
 
 if ( isset( $_GET['updated'] ) ) {
 	?>
-	<div class="updated">
-			<p><div class="dashicons dashicons-yes"></div> <?php _e( 'Settings saved.', 'dreamspeed-cdn' ); ?></p>
-	</div>
+	<div class="updated"><p><?php _e( 'Settings saved.', 'dreamspeed-cdn' ); ?></p></div>
 	<?php
 } 
 
 if ( isset( $_GET['migrated'] ) ) {
 	?>
-	<div class="updated">
-			<p><div class="dashicons dashicons-info"></div> <?php _e( 'Existing files migrating.', 'dreamspeed-cdn' ); ?></p>
-	</div>
+	<div class="updated"><p><?php _e( 'Existing files migrating.', 'dreamspeed-cdn' ); ?></p></div>
 	<?php
 }
 
 if (isset( $_GET['error'] ) ) {
 	?>
-	<div class="error">
-			<p><div class="dashicons dashicons-no"></div> <?php _e( 'Warning. You cannot migrate existing files without that checkbox.', 'dreamspeed-cdn' ); ?></p>
-	</div>
+	<div class="error"><p><?php _e( 'Warning. You cannot migrate existing files without that checkbox.', 'dreamspeed-cdn' ); ?></p></div>
 	<?php
 }
 
@@ -105,13 +99,8 @@ if (isset( $_GET['error'] ) ) {
 		<label for="fullspeed"> <?php _e( 'Serve files from dream.io <em>(recommended & fastest)</em>', 'dreamspeed-cdn' ); ?></label>
 		<br />
 		<input type="checkbox" name="force-ssl" value="1" id="force-ssl" <?php echo $this->get_setting( 'force-ssl' ) ? 'checked="checked" ' : ''; ?> />
-		<label for="force-ssl"> <?php _e( 'Always serve files over https (SSL) <em>(slowest - overrides CDN alias and dream.io)</em>', 'dreamspeed-cdn' ); ?></label>
+		<label for="force-ssl"> <?php _e( 'Always serve files over https (SSL) <em>(slowest - overrides CDN alias)</em>', 'dreamspeed-cdn' ); ?></label>
 		<br />
-
-<!--
-		<input type="checkbox" name="hidpi-images" value="1" id="hidpi-images" <?php echo $this->get_setting( 'hidpi-images' ) ? 'checked="checked" ' : ''; ?> />
-		<label for="hidpi-images"> <?php _e( 'Copy any HiDPI (@2x) images to CDN (works with WP Retina 2x plugin)', 'dreamspeed-cdn' ); ?></label>
--->
 	</td>
 </tr>
 

@@ -2,8 +2,8 @@
 Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, cdn
 Requires at least: 3.8
-Tested up to: 4.4
-Stable tag: 0.5.4
+Tested up to: 4.4.1
+Stable tag: 0.6.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -13,7 +13,9 @@ Connect your WordPress install to your DreamHost DreamSpeed CDN for supercharged
 
 <em>Note: If you have issues with the plugin, please post in the support forums here. Don't open a support ticket at DreamHost or use LiveChat unless it's for setting up DreamSpeed in your Panel.</em>
 
-This plugin automatically copies images, videos, documents, and any other media added through WordPress' media uploader to DreamSpeed. It then automatically replaces the URL to each media file with their respective DreamObjects URL or, if you have configured a CDN Alias, the respective custom URL. Image thumbnails are also copied to DreamSpeed and delivered similarly.
+DreamHost has its own Cloud - <a href="http://dreamhost.com/cloud/dreamobjects/">DreamObjects&#153;</a> - an inexpensive, scalable object storage service that was developed from the ground up to provide a reliable, flexible cloud storage solution for entrepreneurs and developers. It provides a perfect, scalable storage solution for your WordPress media.
+
+This plugin will automatically copy images, videos, documents, and any other media added through WordPress' media uploader to DreamSpeed. It then automatically replaces the URL to each media file with their respective DreamObjects URL or, if you have configured a CDN Alias, the respective custom URL. Image thumbnails are also copied to DreamSpeed and delivered similarly.
 
 Uploading files directly to DreamSpeed is not supported by this plugin. They are uploaded to your server first, via the WordPress media uploader, then copied to DreamSpeed.
 
@@ -105,6 +107,19 @@ First copy it all up via a desktop tool like Cyberduck. Once all the images are 
 # Find `example.com/wp-content/uploads/`
 # Replace with `bucketname.objects.cdn.dream.io/wp-content/uploads/`
 
+<strong>I'm tired of this plugin. How do I go back?</strong>
+
+I'm sad to see you go, but I understand. Right now you'll need to do the following:
+
+1. Deactivate the plugin
+2. search/replace your content for your DreamSpeed URLs and change it back to local
+
+For example, if your DreamSpeed URL was `example.objects.cdn.dream.io` and your site is `example.com` then you could use WP-CLI to do this:
+
+`wp search-replace example.objects.cdn.dream.io example.com --dry-run`
+
+If that looked 'about right' then run it again without the dry-run flag. I recommend making a DB backup first (`wp db export	`). Keep in mind, if you changed up where it saves images and it wasn't in wp-content, you may need to be more precise with your changes.
+
 = Errors, Bugs, and Weird Stuff =
 
 <strong>Why, when my URLs changed to the CDN, are they all broken images?</strong>
@@ -134,47 +149,13 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 
 == Changelog ==
 
-= 0.5.4 =
-* Nov 02, 2015 by Ipstenu
-* Correction to 'Create a Bucket' script.
+= 0.6.0 =
+* March 2016 by Ipstenu
+* Updating SDK
+* Changing dev environment to use Composer
+* Fixed SSL to work with Dream.io URLs
 
-= 0.5.3 =
-* Dec 11, 2014 by Ipstenu
-* AWS SDK 2.7.9
-
-= 0.5.2b =
-* Dec 2, 2014 by Ipstenu
-* Adding Plugin icons, no code changed.
-
-= 0.5.1 && 0.5.2 =
-* Nov 4, 2014 by Ipstenu
-* SSL Fix
-
-= 0.5 =
-* Oct 5, 2014, by Ipstenu
-* Fixing dream.io code, new options
-* SSL improvements
-
-= 0.4 =
-* Aug 7, 2014, by Ipstenu
-* Enabled SSL force option
-
-= 0.3.1 =
-* July 24, 2014, by Ipstenu
-* Changed SDK to newest version: 2.6.12 (<a href="http://blogs.aws.amazon.com/php/post/Tx2PDR0J3NL0YKN/Release-AWS-SDK-for-PHP-Version-2-6-12">official release notes</a>)
-
-= 0.2 =
-* July 2, 2014, by Ipstenu
-* Changed SDK to newest version: 2.6.10 (<a href="http://blogs.aws.amazon.com/php/post/TxDRVCHQYZSNN7/Release-AWS-SDK-for-PHP-Version-2-6-10">official release notes</a>)
-
-= 0.1 =
-* 07 May 2014 by Ipstenu
-* Multisite works
-* Uploading old media works
-* Imports work
-
-= 0.1-beta =
-* 01 April 2014 by Ipstenu
-* First Release
+TO DO!!
+* Update to work with srcset
 
 == Upgrade Notice ==

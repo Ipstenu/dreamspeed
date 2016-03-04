@@ -35,16 +35,10 @@
 	<?php 
 	if ( isset( $_POST['access_key_id'] ) ) {
 		?>
-		<div class="updated">
-			<p class="description">
-				<div class="dashicons dashicons-yes"></div> <?php _e( 'Settings saved.', 'dreamspeed-cdn' ); ?>
-			</p>
-		</div>
+		<div class="updated"><p><?php _e( 'Settings saved.', 'dreamspeed-cdn' ); ?></p></div>
 		<?php
 	}
 	?>
-
-
 
 	<input type="hidden" name="action" value="save" />
 	<?php wp_nonce_field( 'dreamspeed-save-settings' ) ?>
