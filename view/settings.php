@@ -20,9 +20,9 @@
 
 	<div class="dreamspeed-content dreamspeed-settings">
 	
-		<p><?php printf( __( '<a href="%s">DreamObjects&#153;</a> is an inexpensive, scalable object storage service that was developed from the ground up to provide a reliable, flexible cloud storage solution for entrepreneurs and developers. It provides a perfect, scalable storage solution for your WordPress site.', dreamobjects ), 'https://www.dreamhost.com/cloud/storage/' ); ?></p>
+		<p><?php printf( __( '<a href="%s">DreamObjects&#153;</a> is an inexpensive, scalable object storage service that was developed from the ground up to provide a reliable, flexible cloud storage solution for entrepreneurs and developers. It provides a perfect, scalable storage solution for your WordPress site.', 'dreamspeed-cdn' ), 'https://www.dreamhost.com/cloud/storage/' ); ?></p>
 		
-		<p><?php printf( __( '<a href="%s">DreamSpeed CDN</a> is a content delivery network fully integrated with DreamObjects.', dreamobjects ), 'https://www.dreamhost.com/cloud/cdn/' ); ?></p>
+		<p><?php printf( __( '<a href="%s">DreamSpeed CDN</a> is a content delivery network fully integrated with DreamObjects.', 'dreamspeed-cdn' ), 'https://www.dreamhost.com/cloud/cdn/' ); ?></p>
 	
 		<h3>Access Keys</h3>
 		
