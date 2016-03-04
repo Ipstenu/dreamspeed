@@ -27,6 +27,7 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * Client to interact with Auto Scaling
  *
  * @method Model attachInstances(array $args = array()) {@command AutoScaling AttachInstances}
+ * @method Model attachLoadBalancers(array $args = array()) {@command AutoScaling AttachLoadBalancers}
  * @method Model completeLifecycleAction(array $args = array()) {@command AutoScaling CompleteLifecycleAction}
  * @method Model createAutoScalingGroup(array $args = array()) {@command AutoScaling CreateAutoScalingGroup}
  * @method Model createLaunchConfiguration(array $args = array()) {@command AutoScaling CreateLaunchConfiguration}
@@ -46,6 +47,7 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method Model describeLaunchConfigurations(array $args = array()) {@command AutoScaling DescribeLaunchConfigurations}
  * @method Model describeLifecycleHookTypes(array $args = array()) {@command AutoScaling DescribeLifecycleHookTypes}
  * @method Model describeLifecycleHooks(array $args = array()) {@command AutoScaling DescribeLifecycleHooks}
+ * @method Model describeLoadBalancers(array $args = array()) {@command AutoScaling DescribeLoadBalancers}
  * @method Model describeMetricCollectionTypes(array $args = array()) {@command AutoScaling DescribeMetricCollectionTypes}
  * @method Model describeNotificationConfigurations(array $args = array()) {@command AutoScaling DescribeNotificationConfigurations}
  * @method Model describePolicies(array $args = array()) {@command AutoScaling DescribePolicies}
@@ -55,6 +57,7 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method Model describeTags(array $args = array()) {@command AutoScaling DescribeTags}
  * @method Model describeTerminationPolicyTypes(array $args = array()) {@command AutoScaling DescribeTerminationPolicyTypes}
  * @method Model detachInstances(array $args = array()) {@command AutoScaling DetachInstances}
+ * @method Model detachLoadBalancers(array $args = array()) {@command AutoScaling DetachLoadBalancers}
  * @method Model disableMetricsCollection(array $args = array()) {@command AutoScaling DisableMetricsCollection}
  * @method Model enableMetricsCollection(array $args = array()) {@command AutoScaling EnableMetricsCollection}
  * @method Model enterStandby(array $args = array()) {@command AutoScaling EnterStandby}
@@ -80,8 +83,8 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method ResourceIteratorInterface getDescribeScheduledActionsIterator(array $args = array()) The input array uses the parameters of the DescribeScheduledActions operation
  * @method ResourceIteratorInterface getDescribeTagsIterator(array $args = array()) The input array uses the parameters of the DescribeTags operation
  *
- * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/service-autoscaling.html User guide
- * @link http://docs.aws.amazon.com/aws-sdk-php/latest/class-Aws.AutoScaling.AutoScalingClient.html API docs
+ * @link http://docs.aws.amazon.com/aws-sdk-php/v2/guide/service-autoscaling.html User guide
+ * @link http://docs.aws.amazon.com/aws-sdk-php/v2/api/class-Aws.AutoScaling.AutoScalingClient.html API docs
  */
 class AutoScalingClient extends AbstractClient
 {
@@ -93,7 +96,7 @@ class AutoScalingClient extends AbstractClient
      * @param array|Collection $config Client configuration data
      *
      * @return self
-     * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/configuration.html#client-configuration-options
+     * @link http://docs.aws.amazon.com/aws-sdk-php/v2/guide/configuration.html#client-configuration-options
      */
     public static function factory($config = array())
     {

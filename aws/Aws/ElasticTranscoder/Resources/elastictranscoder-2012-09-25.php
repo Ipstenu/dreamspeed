@@ -144,8 +144,27 @@ return array (
                                 ),
                                 'InitializationVector' => array(
                                     'type' => 'string',
-                                    'minLength' => 1,
                                     'maxLength' => 255,
+                                ),
+                            ),
+                        ),
+                        'DetectedProperties' => array(
+                            'type' => 'object',
+                            'properties' => array(
+                                'Width' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'Height' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'FrameRate' => array(
+                                    'type' => 'string',
+                                ),
+                                'FileSize' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'DurationMillis' => array(
+                                    'type' => 'numeric',
                                 ),
                             ),
                         ),
@@ -177,7 +196,6 @@ return array (
                                 ),
                                 'InitializationVector' => array(
                                     'type' => 'string',
-                                    'minLength' => 1,
                                     'maxLength' => 255,
                                 ),
                             ),
@@ -221,7 +239,6 @@ return array (
                                             ),
                                             'InitializationVector' => array(
                                                 'type' => 'string',
-                                                'minLength' => 1,
                                                 'maxLength' => 255,
                                             ),
                                         ),
@@ -275,7 +292,6 @@ return array (
                                                     ),
                                                     'InitializationVector' => array(
                                                         'type' => 'string',
-                                                        'minLength' => 1,
                                                         'maxLength' => 255,
                                                     ),
                                                 ),
@@ -350,7 +366,6 @@ return array (
                                                     ),
                                                     'InitializationVector' => array(
                                                         'type' => 'string',
-                                                        'minLength' => 1,
                                                         'maxLength' => 255,
                                                     ),
                                                 ),
@@ -385,7 +400,6 @@ return array (
                                                     ),
                                                     'InitializationVector' => array(
                                                         'type' => 'string',
-                                                        'minLength' => 1,
                                                         'maxLength' => 255,
                                                     ),
                                                 ),
@@ -409,7 +423,6 @@ return array (
                                 ),
                                 'InitializationVector' => array(
                                     'type' => 'string',
-                                    'minLength' => 1,
                                     'maxLength' => 255,
                                 ),
                             ),
@@ -446,7 +459,6 @@ return array (
                                     ),
                                     'InitializationVector' => array(
                                         'type' => 'string',
-                                        'minLength' => 1,
                                         'maxLength' => 255,
                                     ),
                                 ),
@@ -490,7 +502,6 @@ return array (
                                                 ),
                                                 'InitializationVector' => array(
                                                     'type' => 'string',
-                                                    'minLength' => 1,
                                                     'maxLength' => 255,
                                                 ),
                                             ),
@@ -544,7 +555,6 @@ return array (
                                                         ),
                                                         'InitializationVector' => array(
                                                             'type' => 'string',
-                                                            'minLength' => 1,
                                                             'maxLength' => 255,
                                                         ),
                                                     ),
@@ -619,7 +629,6 @@ return array (
                                                         ),
                                                         'InitializationVector' => array(
                                                             'type' => 'string',
-                                                            'minLength' => 1,
                                                             'maxLength' => 255,
                                                         ),
                                                     ),
@@ -654,7 +663,6 @@ return array (
                                                         ),
                                                         'InitializationVector' => array(
                                                             'type' => 'string',
-                                                            'minLength' => 1,
                                                             'maxLength' => 255,
                                                         ),
                                                     ),
@@ -678,7 +686,6 @@ return array (
                                     ),
                                     'InitializationVector' => array(
                                         'type' => 'string',
-                                        'minLength' => 1,
                                         'maxLength' => 255,
                                     ),
                                 ),
@@ -718,6 +725,67 @@ return array (
                                     'maxLength' => 255,
                                 ),
                             ),
+                            'HlsContentProtection' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'Method' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'Key' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'KeyMd5' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'InitializationVector' => array(
+                                        'type' => 'string',
+                                        'maxLength' => 255,
+                                    ),
+                                    'LicenseAcquisitionUrl' => array(
+                                        'type' => 'string',
+                                        'maxLength' => 512,
+                                    ),
+                                    'KeyStoragePolicy' => array(
+                                        'type' => 'string',
+                                    ),
+                                ),
+                            ),
+                            'PlayReadyDrm' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'Format' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'Key' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'KeyMd5' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'KeyId' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'InitializationVector' => array(
+                                        'type' => 'string',
+                                        'maxLength' => 255,
+                                    ),
+                                    'LicenseAcquisitionUrl' => array(
+                                        'type' => 'string',
+                                        'minLength' => 1,
+                                        'maxLength' => 512,
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'UserMetadata' => array(
+                    'type' => 'object',
+                    'location' => 'json',
+                    'additionalProperties' => array(
+                        'type' => 'string',
+                        'data' => array(
+                            'shape_name' => 'String',
                         ),
                     ),
                 ),
@@ -1039,10 +1107,22 @@ return array (
                         'Channels' => array(
                             'type' => 'string',
                         ),
+                        'AudioPackingMode' => array(
+                            'type' => 'string',
+                        ),
                         'CodecOptions' => array(
                             'type' => 'object',
                             'properties' => array(
                                 'Profile' => array(
+                                    'type' => 'string',
+                                ),
+                                'BitDepth' => array(
+                                    'type' => 'string',
+                                ),
+                                'BitOrder' => array(
+                                    'type' => 'string',
+                                ),
+                                'Signed' => array(
                                     'type' => 'string',
                                 ),
                             ),
@@ -1805,6 +1885,26 @@ return array (
                                         ),
                                     ),
                                 ),
+                                'DetectedProperties' => array(
+                                    'type' => 'object',
+                                    'properties' => array(
+                                        'Width' => array(
+                                            'type' => 'numeric',
+                                        ),
+                                        'Height' => array(
+                                            'type' => 'numeric',
+                                        ),
+                                        'FrameRate' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'FileSize' => array(
+                                            'type' => 'numeric',
+                                        ),
+                                        'DurationMillis' => array(
+                                            'type' => 'numeric',
+                                        ),
+                                    ),
+                                ),
                             ),
                         ),
                         'Output' => array(
@@ -1858,6 +1958,15 @@ return array (
                                     'type' => 'numeric',
                                 ),
                                 'Height' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'FrameRate' => array(
+                                    'type' => 'string',
+                                ),
+                                'FileSize' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'DurationMillis' => array(
                                     'type' => 'numeric',
                                 ),
                                 'Watermarks' => array(
@@ -2059,6 +2168,9 @@ return array (
                                         ),
                                     ),
                                 ),
+                                'AppliedColorSpaceConversion' => array(
+                                    'type' => 'string',
+                                ),
                             ),
                         ),
                         'Outputs' => array(
@@ -2115,6 +2227,15 @@ return array (
                                         'type' => 'numeric',
                                     ),
                                     'Height' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'FrameRate' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'FileSize' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'DurationMillis' => array(
                                         'type' => 'numeric',
                                     ),
                                     'Watermarks' => array(
@@ -2316,6 +2437,9 @@ return array (
                                             ),
                                         ),
                                     ),
+                                    'AppliedColorSpaceConversion' => array(
+                                        'type' => 'string',
+                                    ),
                                 ),
                             ),
                         ),
@@ -2341,6 +2465,52 @@ return array (
                                             'type' => 'string',
                                         ),
                                     ),
+                                    'HlsContentProtection' => array(
+                                        'type' => 'object',
+                                        'properties' => array(
+                                            'Method' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'Key' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'KeyMd5' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'InitializationVector' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'LicenseAcquisitionUrl' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'KeyStoragePolicy' => array(
+                                                'type' => 'string',
+                                            ),
+                                        ),
+                                    ),
+                                    'PlayReadyDrm' => array(
+                                        'type' => 'object',
+                                        'properties' => array(
+                                            'Format' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'Key' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'KeyMd5' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'KeyId' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'InitializationVector' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'LicenseAcquisitionUrl' => array(
+                                                'type' => 'string',
+                                            ),
+                                        ),
+                                    ),
                                     'Status' => array(
                                         'type' => 'string',
                                     ),
@@ -2352,6 +2522,26 @@ return array (
                         ),
                         'Status' => array(
                             'type' => 'string',
+                        ),
+                        'UserMetadata' => array(
+                            'type' => 'object',
+                            'additionalProperties' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                        'Timing' => array(
+                            'type' => 'object',
+                            'properties' => array(
+                                'SubmitTimeMillis' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'StartTimeMillis' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'FinishTimeMillis' => array(
+                                    'type' => 'numeric',
+                                ),
+                            ),
                         ),
                     ),
                 ),
@@ -2474,6 +2664,22 @@ return array (
                         ),
                     ),
                 ),
+                'Warnings' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'Warning',
+                        'type' => 'object',
+                        'properties' => array(
+                            'Code' => array(
+                                'type' => 'string',
+                            ),
+                            'Message' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
             ),
         ),
         'CreatePresetResponse' => array(
@@ -2514,10 +2720,22 @@ return array (
                                 'Channels' => array(
                                     'type' => 'string',
                                 ),
+                                'AudioPackingMode' => array(
+                                    'type' => 'string',
+                                ),
                                 'CodecOptions' => array(
                                     'type' => 'object',
                                     'properties' => array(
                                         'Profile' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'BitDepth' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'BitOrder' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'Signed' => array(
                                             'type' => 'string',
                                         ),
                                     ),
@@ -2711,6 +2929,26 @@ return array (
                                             ),
                                         ),
                                     ),
+                                    'DetectedProperties' => array(
+                                        'type' => 'object',
+                                        'properties' => array(
+                                            'Width' => array(
+                                                'type' => 'numeric',
+                                            ),
+                                            'Height' => array(
+                                                'type' => 'numeric',
+                                            ),
+                                            'FrameRate' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'FileSize' => array(
+                                                'type' => 'numeric',
+                                            ),
+                                            'DurationMillis' => array(
+                                                'type' => 'numeric',
+                                            ),
+                                        ),
+                                    ),
                                 ),
                             ),
                             'Output' => array(
@@ -2764,6 +3002,15 @@ return array (
                                         'type' => 'numeric',
                                     ),
                                     'Height' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'FrameRate' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'FileSize' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'DurationMillis' => array(
                                         'type' => 'numeric',
                                     ),
                                     'Watermarks' => array(
@@ -2965,6 +3212,9 @@ return array (
                                             ),
                                         ),
                                     ),
+                                    'AppliedColorSpaceConversion' => array(
+                                        'type' => 'string',
+                                    ),
                                 ),
                             ),
                             'Outputs' => array(
@@ -3021,6 +3271,15 @@ return array (
                                             'type' => 'numeric',
                                         ),
                                         'Height' => array(
+                                            'type' => 'numeric',
+                                        ),
+                                        'FrameRate' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'FileSize' => array(
+                                            'type' => 'numeric',
+                                        ),
+                                        'DurationMillis' => array(
                                             'type' => 'numeric',
                                         ),
                                         'Watermarks' => array(
@@ -3222,6 +3481,9 @@ return array (
                                                 ),
                                             ),
                                         ),
+                                        'AppliedColorSpaceConversion' => array(
+                                            'type' => 'string',
+                                        ),
                                     ),
                                 ),
                             ),
@@ -3247,6 +3509,52 @@ return array (
                                                 'type' => 'string',
                                             ),
                                         ),
+                                        'HlsContentProtection' => array(
+                                            'type' => 'object',
+                                            'properties' => array(
+                                                'Method' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'Key' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'KeyMd5' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'InitializationVector' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'LicenseAcquisitionUrl' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'KeyStoragePolicy' => array(
+                                                    'type' => 'string',
+                                                ),
+                                            ),
+                                        ),
+                                        'PlayReadyDrm' => array(
+                                            'type' => 'object',
+                                            'properties' => array(
+                                                'Format' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'Key' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'KeyMd5' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'KeyId' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'InitializationVector' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'LicenseAcquisitionUrl' => array(
+                                                    'type' => 'string',
+                                                ),
+                                            ),
+                                        ),
                                         'Status' => array(
                                             'type' => 'string',
                                         ),
@@ -3258,6 +3566,26 @@ return array (
                             ),
                             'Status' => array(
                                 'type' => 'string',
+                            ),
+                            'UserMetadata' => array(
+                                'type' => 'object',
+                                'additionalProperties' => array(
+                                    'type' => 'string',
+                                ),
+                            ),
+                            'Timing' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'SubmitTimeMillis' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'StartTimeMillis' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'FinishTimeMillis' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                ),
                             ),
                         ),
                     ),
@@ -3326,6 +3654,26 @@ return array (
                                             ),
                                         ),
                                     ),
+                                    'DetectedProperties' => array(
+                                        'type' => 'object',
+                                        'properties' => array(
+                                            'Width' => array(
+                                                'type' => 'numeric',
+                                            ),
+                                            'Height' => array(
+                                                'type' => 'numeric',
+                                            ),
+                                            'FrameRate' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'FileSize' => array(
+                                                'type' => 'numeric',
+                                            ),
+                                            'DurationMillis' => array(
+                                                'type' => 'numeric',
+                                            ),
+                                        ),
+                                    ),
                                 ),
                             ),
                             'Output' => array(
@@ -3379,6 +3727,15 @@ return array (
                                         'type' => 'numeric',
                                     ),
                                     'Height' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'FrameRate' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'FileSize' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'DurationMillis' => array(
                                         'type' => 'numeric',
                                     ),
                                     'Watermarks' => array(
@@ -3580,6 +3937,9 @@ return array (
                                             ),
                                         ),
                                     ),
+                                    'AppliedColorSpaceConversion' => array(
+                                        'type' => 'string',
+                                    ),
                                 ),
                             ),
                             'Outputs' => array(
@@ -3636,6 +3996,15 @@ return array (
                                             'type' => 'numeric',
                                         ),
                                         'Height' => array(
+                                            'type' => 'numeric',
+                                        ),
+                                        'FrameRate' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'FileSize' => array(
+                                            'type' => 'numeric',
+                                        ),
+                                        'DurationMillis' => array(
                                             'type' => 'numeric',
                                         ),
                                         'Watermarks' => array(
@@ -3837,6 +4206,9 @@ return array (
                                                 ),
                                             ),
                                         ),
+                                        'AppliedColorSpaceConversion' => array(
+                                            'type' => 'string',
+                                        ),
                                     ),
                                 ),
                             ),
@@ -3862,6 +4234,52 @@ return array (
                                                 'type' => 'string',
                                             ),
                                         ),
+                                        'HlsContentProtection' => array(
+                                            'type' => 'object',
+                                            'properties' => array(
+                                                'Method' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'Key' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'KeyMd5' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'InitializationVector' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'LicenseAcquisitionUrl' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'KeyStoragePolicy' => array(
+                                                    'type' => 'string',
+                                                ),
+                                            ),
+                                        ),
+                                        'PlayReadyDrm' => array(
+                                            'type' => 'object',
+                                            'properties' => array(
+                                                'Format' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'Key' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'KeyMd5' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'KeyId' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'InitializationVector' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'LicenseAcquisitionUrl' => array(
+                                                    'type' => 'string',
+                                                ),
+                                            ),
+                                        ),
                                         'Status' => array(
                                             'type' => 'string',
                                         ),
@@ -3873,6 +4291,26 @@ return array (
                             ),
                             'Status' => array(
                                 'type' => 'string',
+                            ),
+                            'UserMetadata' => array(
+                                'type' => 'object',
+                                'additionalProperties' => array(
+                                    'type' => 'string',
+                                ),
+                            ),
+                            'Timing' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'SubmitTimeMillis' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'StartTimeMillis' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'FinishTimeMillis' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                ),
                             ),
                         ),
                     ),
@@ -4051,10 +4489,22 @@ return array (
                                     'Channels' => array(
                                         'type' => 'string',
                                     ),
+                                    'AudioPackingMode' => array(
+                                        'type' => 'string',
+                                    ),
                                     'CodecOptions' => array(
                                         'type' => 'object',
                                         'properties' => array(
                                             'Profile' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'BitDepth' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'BitOrder' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'Signed' => array(
                                                 'type' => 'string',
                                             ),
                                         ),
@@ -4246,6 +4696,26 @@ return array (
                                         ),
                                     ),
                                 ),
+                                'DetectedProperties' => array(
+                                    'type' => 'object',
+                                    'properties' => array(
+                                        'Width' => array(
+                                            'type' => 'numeric',
+                                        ),
+                                        'Height' => array(
+                                            'type' => 'numeric',
+                                        ),
+                                        'FrameRate' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'FileSize' => array(
+                                            'type' => 'numeric',
+                                        ),
+                                        'DurationMillis' => array(
+                                            'type' => 'numeric',
+                                        ),
+                                    ),
+                                ),
                             ),
                         ),
                         'Output' => array(
@@ -4299,6 +4769,15 @@ return array (
                                     'type' => 'numeric',
                                 ),
                                 'Height' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'FrameRate' => array(
+                                    'type' => 'string',
+                                ),
+                                'FileSize' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'DurationMillis' => array(
                                     'type' => 'numeric',
                                 ),
                                 'Watermarks' => array(
@@ -4500,6 +4979,9 @@ return array (
                                         ),
                                     ),
                                 ),
+                                'AppliedColorSpaceConversion' => array(
+                                    'type' => 'string',
+                                ),
                             ),
                         ),
                         'Outputs' => array(
@@ -4556,6 +5038,15 @@ return array (
                                         'type' => 'numeric',
                                     ),
                                     'Height' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'FrameRate' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'FileSize' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'DurationMillis' => array(
                                         'type' => 'numeric',
                                     ),
                                     'Watermarks' => array(
@@ -4757,6 +5248,9 @@ return array (
                                             ),
                                         ),
                                     ),
+                                    'AppliedColorSpaceConversion' => array(
+                                        'type' => 'string',
+                                    ),
                                 ),
                             ),
                         ),
@@ -4782,6 +5276,52 @@ return array (
                                             'type' => 'string',
                                         ),
                                     ),
+                                    'HlsContentProtection' => array(
+                                        'type' => 'object',
+                                        'properties' => array(
+                                            'Method' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'Key' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'KeyMd5' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'InitializationVector' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'LicenseAcquisitionUrl' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'KeyStoragePolicy' => array(
+                                                'type' => 'string',
+                                            ),
+                                        ),
+                                    ),
+                                    'PlayReadyDrm' => array(
+                                        'type' => 'object',
+                                        'properties' => array(
+                                            'Format' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'Key' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'KeyMd5' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'KeyId' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'InitializationVector' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'LicenseAcquisitionUrl' => array(
+                                                'type' => 'string',
+                                            ),
+                                        ),
+                                    ),
                                     'Status' => array(
                                         'type' => 'string',
                                     ),
@@ -4793,6 +5333,26 @@ return array (
                         ),
                         'Status' => array(
                             'type' => 'string',
+                        ),
+                        'UserMetadata' => array(
+                            'type' => 'object',
+                            'additionalProperties' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                        'Timing' => array(
+                            'type' => 'object',
+                            'properties' => array(
+                                'SubmitTimeMillis' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'StartTimeMillis' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'FinishTimeMillis' => array(
+                                    'type' => 'numeric',
+                                ),
+                            ),
                         ),
                     ),
                 ),
@@ -4915,6 +5475,22 @@ return array (
                         ),
                     ),
                 ),
+                'Warnings' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'Warning',
+                        'type' => 'object',
+                        'properties' => array(
+                            'Code' => array(
+                                'type' => 'string',
+                            ),
+                            'Message' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
             ),
         ),
         'ReadPresetResponse' => array(
@@ -4955,10 +5531,22 @@ return array (
                                 'Channels' => array(
                                     'type' => 'string',
                                 ),
+                                'AudioPackingMode' => array(
+                                    'type' => 'string',
+                                ),
                                 'CodecOptions' => array(
                                     'type' => 'object',
                                     'properties' => array(
                                         'Profile' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'BitDepth' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'BitOrder' => array(
+                                            'type' => 'string',
+                                        ),
+                                        'Signed' => array(
                                             'type' => 'string',
                                         ),
                                     ),
@@ -5221,6 +5809,22 @@ return array (
                                         ),
                                     ),
                                 ),
+                            ),
+                        ),
+                    ),
+                ),
+                'Warnings' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'Warning',
+                        'type' => 'object',
+                        'properties' => array(
+                            'Code' => array(
+                                'type' => 'string',
+                            ),
+                            'Message' => array(
+                                'type' => 'string',
                             ),
                         ),
                     ),

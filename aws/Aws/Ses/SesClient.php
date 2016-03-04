@@ -26,20 +26,41 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
 /**
  * Client to interact with Amazon Simple Email Service
  *
+ * @method Model cloneReceiptRuleSet(array $args = array()) {@command Ses CloneReceiptRuleSet}
+ * @method Model createReceiptFilter(array $args = array()) {@command Ses CreateReceiptFilter}
+ * @method Model createReceiptRule(array $args = array()) {@command Ses CreateReceiptRule}
+ * @method Model createReceiptRuleSet(array $args = array()) {@command Ses CreateReceiptRuleSet}
  * @method Model deleteIdentity(array $args = array()) {@command Ses DeleteIdentity}
+ * @method Model deleteIdentityPolicy(array $args = array()) {@command Ses DeleteIdentityPolicy}
+ * @method Model deleteReceiptFilter(array $args = array()) {@command Ses DeleteReceiptFilter}
+ * @method Model deleteReceiptRule(array $args = array()) {@command Ses DeleteReceiptRule}
+ * @method Model deleteReceiptRuleSet(array $args = array()) {@command Ses DeleteReceiptRuleSet}
  * @method Model deleteVerifiedEmailAddress(array $args = array()) {@command Ses DeleteVerifiedEmailAddress}
+ * @method Model describeActiveReceiptRuleSet(array $args = array()) {@command Ses DescribeActiveReceiptRuleSet}
+ * @method Model describeReceiptRule(array $args = array()) {@command Ses DescribeReceiptRule}
+ * @method Model describeReceiptRuleSet(array $args = array()) {@command Ses DescribeReceiptRuleSet}
  * @method Model getIdentityDkimAttributes(array $args = array()) {@command Ses GetIdentityDkimAttributes}
  * @method Model getIdentityNotificationAttributes(array $args = array()) {@command Ses GetIdentityNotificationAttributes}
+ * @method Model getIdentityPolicies(array $args = array()) {@command Ses GetIdentityPolicies}
  * @method Model getIdentityVerificationAttributes(array $args = array()) {@command Ses GetIdentityVerificationAttributes}
  * @method Model getSendQuota(array $args = array()) {@command Ses GetSendQuota}
  * @method Model getSendStatistics(array $args = array()) {@command Ses GetSendStatistics}
  * @method Model listIdentities(array $args = array()) {@command Ses ListIdentities}
+ * @method Model listIdentityPolicies(array $args = array()) {@command Ses ListIdentityPolicies}
+ * @method Model listReceiptFilters(array $args = array()) {@command Ses ListReceiptFilters}
+ * @method Model listReceiptRuleSets(array $args = array()) {@command Ses ListReceiptRuleSets}
  * @method Model listVerifiedEmailAddresses(array $args = array()) {@command Ses ListVerifiedEmailAddresses}
+ * @method Model putIdentityPolicy(array $args = array()) {@command Ses PutIdentityPolicy}
+ * @method Model reorderReceiptRuleSet(array $args = array()) {@command Ses ReorderReceiptRuleSet}
+ * @method Model sendBounce(array $args = array()) {@command Ses SendBounce}
  * @method Model sendEmail(array $args = array()) {@command Ses SendEmail}
  * @method Model sendRawEmail(array $args = array()) {@command Ses SendRawEmail}
+ * @method Model setActiveReceiptRuleSet(array $args = array()) {@command Ses SetActiveReceiptRuleSet}
  * @method Model setIdentityDkimEnabled(array $args = array()) {@command Ses SetIdentityDkimEnabled}
  * @method Model setIdentityFeedbackForwardingEnabled(array $args = array()) {@command Ses SetIdentityFeedbackForwardingEnabled}
  * @method Model setIdentityNotificationTopic(array $args = array()) {@command Ses SetIdentityNotificationTopic}
+ * @method Model setReceiptRulePosition(array $args = array()) {@command Ses SetReceiptRulePosition}
+ * @method Model updateReceiptRule(array $args = array()) {@command Ses UpdateReceiptRule}
  * @method Model verifyDomainDkim(array $args = array()) {@command Ses VerifyDomainDkim}
  * @method Model verifyDomainIdentity(array $args = array()) {@command Ses VerifyDomainIdentity}
  * @method Model verifyEmailAddress(array $args = array()) {@command Ses VerifyEmailAddress}
@@ -48,8 +69,8 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method ResourceIteratorInterface getListIdentitiesIterator(array $args = array()) The input array uses the parameters of the ListIdentities operation
  * @method ResourceIteratorInterface getListVerifiedEmailAddressesIterator(array $args = array()) The input array uses the parameters of the ListVerifiedEmailAddresses operation
  *
- * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/service-ses.html User guide
- * @link http://docs.aws.amazon.com/aws-sdk-php/latest/class-Aws.Ses.SesClient.html API docs
+ * @link http://docs.aws.amazon.com/aws-sdk-php/v2/guide/service-ses.html User guide
+ * @link http://docs.aws.amazon.com/aws-sdk-php/v2/api/class-Aws.Ses.SesClient.html API docs
  */
 class SesClient extends AbstractClient
 {
@@ -61,7 +82,7 @@ class SesClient extends AbstractClient
      * @param array|Collection $config Client configuration data
      *
      * @return self
-     * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/configuration.html#client-configuration-options
+     * @link http://docs.aws.amazon.com/aws-sdk-php/v2/guide/configuration.html#client-configuration-options
      */
     public static function factory($config = array())
     {

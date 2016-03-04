@@ -75,6 +75,58 @@ return array (
                 ),
             ),
         ),
+        'DeleteTagsForDomain' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'Route53Domains_v20140515.DeleteTagsForDomain',
+                ),
+                'DomainName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'json',
+                    'maxLength' => 255,
+                ),
+                'TagsToDelete' => array(
+                    'required' => true,
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'TagKey',
+                        'type' => 'string',
+                    ),
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
+                    'class' => 'OperationLimitExceededException',
+                ),
+                array(
+                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
+                    'class' => 'UnsupportedTLDException',
+                ),
+            ),
+        ),
         'DisableDomainAutoRenew' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -107,6 +159,10 @@ return array (
                 array(
                     'reason' => 'The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.',
                     'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
+                    'class' => 'UnsupportedTLDException',
                 ),
             ),
         ),
@@ -155,6 +211,10 @@ return array (
                     'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
                     'class' => 'OperationLimitExceededException',
                 ),
+                array(
+                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
+                    'class' => 'UnsupportedTLDException',
+                ),
             ),
         ),
         'EnableDomainAutoRenew' => array(
@@ -189,6 +249,10 @@ return array (
                 array(
                     'reason' => 'The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.',
                     'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
+                    'class' => 'UnsupportedTLDException',
                 ),
             ),
         ),
@@ -237,6 +301,10 @@ return array (
                     'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
                     'class' => 'OperationLimitExceededException',
                 ),
+                array(
+                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
+                    'class' => 'UnsupportedTLDException',
+                ),
             ),
         ),
         'GetDomainDetail' => array(
@@ -271,6 +339,10 @@ return array (
                 array(
                     'reason' => 'The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.',
                     'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
+                    'class' => 'UnsupportedTLDException',
                 ),
             ),
         ),
@@ -384,6 +456,49 @@ return array (
                 array(
                     'reason' => 'The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.',
                     'class' => 'InvalidInputException',
+                ),
+            ),
+        ),
+        'ListTagsForDomain' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'ListTagsForDomainResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'Route53Domains_v20140515.ListTagsForDomain',
+                ),
+                'DomainName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'json',
+                    'maxLength' => 255,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
+                    'class' => 'OperationLimitExceededException',
+                ),
+                array(
+                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
+                    'class' => 'UnsupportedTLDException',
                 ),
             ),
         ),
@@ -732,6 +847,10 @@ return array (
                     'reason' => 'The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.',
                     'class' => 'InvalidInputException',
                 ),
+                array(
+                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
+                    'class' => 'UnsupportedTLDException',
+                ),
             ),
         ),
         'TransferDomain' => array(
@@ -774,7 +893,6 @@ return array (
                     'maximum' => 10,
                 ),
                 'Nameservers' => array(
-                    'required' => true,
                     'type' => 'array',
                     'location' => 'json',
                     'items' => array(
@@ -1342,6 +1460,10 @@ return array (
                     'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
                     'class' => 'OperationLimitExceededException',
                 ),
+                array(
+                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
+                    'class' => 'UnsupportedTLDException',
+                ),
             ),
         ),
         'UpdateDomainContactPrivacy' => array(
@@ -1404,6 +1526,10 @@ return array (
                     'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
                     'class' => 'OperationLimitExceededException',
                 ),
+                array(
+                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
+                    'class' => 'UnsupportedTLDException',
+                ),
             ),
         ),
         'UpdateDomainNameservers' => array(
@@ -1432,6 +1558,10 @@ return array (
                     'type' => 'string',
                     'location' => 'json',
                     'maxLength' => 255,
+                ),
+                'FIAuthKey' => array(
+                    'type' => 'string',
+                    'location' => 'json',
                 ),
                 'Nameservers' => array(
                     'required' => true,
@@ -1474,6 +1604,69 @@ return array (
                 array(
                     'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
                     'class' => 'OperationLimitExceededException',
+                ),
+                array(
+                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
+                    'class' => 'UnsupportedTLDException',
+                ),
+            ),
+        ),
+        'UpdateTagsForDomain' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'Route53Domains_v20140515.UpdateTagsForDomain',
+                ),
+                'DomainName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'json',
+                    'maxLength' => 255,
+                ),
+                'TagsToUpdate' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'Tag',
+                        'type' => 'object',
+                        'properties' => array(
+                            'Key' => array(
+                                'type' => 'string',
+                            ),
+                            'Value' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
+                    'class' => 'OperationLimitExceededException',
+                ),
+                array(
+                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
+                    'class' => 'UnsupportedTLDException',
                 ),
             ),
         ),
@@ -1885,6 +2078,28 @@ return array (
                 ),
             ),
         ),
+        'ListTagsForDomainResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'TagList' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'Tag',
+                        'type' => 'object',
+                        'properties' => array(
+                            'Key' => array(
+                                'type' => 'string',
+                            ),
+                            'Value' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
         'RegisterDomainResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -1944,6 +2159,20 @@ return array (
                     'location' => 'json',
                 ),
             ),
+        ),
+    ),
+    'iterators' => array(
+        'ListDomains' => array(
+            'limit_key' => 'MaxItems',
+            'input_token' => 'Marker',
+            'output_token' => 'NextPageMarker',
+            'result_key' => 'Domains',
+        ),
+        'ListOperations' => array(
+            'limit_key' => 'MaxItems',
+            'input_token' => 'Marker',
+            'output_token' => 'NextPageMarker',
+            'result_key' => 'Operations',
         ),
     ),
 );

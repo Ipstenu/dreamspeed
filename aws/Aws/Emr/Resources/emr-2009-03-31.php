@@ -678,6 +678,15 @@ return array (
                         'type' => 'string',
                     ),
                 ),
+                'StepIds' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'XmlString',
+                        'type' => 'string',
+                        'maxLength' => 10280,
+                    ),
+                ),
                 'Marker' => array(
                     'type' => 'string',
                     'location' => 'json',
@@ -918,6 +927,30 @@ return array (
                         'Ec2SubnetId' => array(
                             'type' => 'string',
                             'maxLength' => 256,
+                        ),
+                        'EmrManagedMasterSecurityGroup' => array(
+                            'type' => 'string',
+                            'maxLength' => 256,
+                        ),
+                        'EmrManagedSlaveSecurityGroup' => array(
+                            'type' => 'string',
+                            'maxLength' => 256,
+                        ),
+                        'AdditionalMasterSecurityGroups' => array(
+                            'type' => 'array',
+                            'items' => array(
+                                'name' => 'XmlStringMaxLen256',
+                                'type' => 'string',
+                                'maxLength' => 256,
+                            ),
+                        ),
+                        'AdditionalSlaveSecurityGroups' => array(
+                            'type' => 'array',
+                            'items' => array(
+                                'name' => 'XmlStringMaxLen256',
+                                'type' => 'string',
+                                'maxLength' => 256,
+                            ),
                         ),
                     ),
                 ),
@@ -1312,6 +1345,26 @@ return array (
                                 'IamInstanceProfile' => array(
                                     'type' => 'string',
                                 ),
+                                'EmrManagedMasterSecurityGroup' => array(
+                                    'type' => 'string',
+                                ),
+                                'EmrManagedSlaveSecurityGroup' => array(
+                                    'type' => 'string',
+                                ),
+                                'AdditionalMasterSecurityGroups' => array(
+                                    'type' => 'array',
+                                    'items' => array(
+                                        'name' => 'String',
+                                        'type' => 'string',
+                                    ),
+                                ),
+                                'AdditionalSlaveSecurityGroups' => array(
+                                    'type' => 'array',
+                                    'items' => array(
+                                        'name' => 'String',
+                                        'type' => 'string',
+                                    ),
+                                ),
                             ),
                         ),
                         'LogUri' => array(
@@ -1376,6 +1429,12 @@ return array (
                             ),
                         ),
                         'ServiceRole' => array(
+                            'type' => 'string',
+                        ),
+                        'NormalizedInstanceHours' => array(
+                            'type' => 'numeric',
+                        ),
+                        'MasterPublicDnsName' => array(
                             'type' => 'string',
                         ),
                     ),
@@ -1812,6 +1871,9 @@ return array (
                                     ),
                                 ),
                             ),
+                            'NormalizedInstanceHours' => array(
+                                'type' => 'numeric',
+                            ),
                         ),
                     ),
                 ),
@@ -1984,6 +2046,33 @@ return array (
                                 'type' => 'string',
                             ),
                             'Name' => array(
+                                'type' => 'string',
+                            ),
+                            'Config' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'Jar' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'Properties' => array(
+                                        'type' => 'object',
+                                        'additionalProperties' => array(
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                    'MainClass' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'Args' => array(
+                                        'type' => 'array',
+                                        'items' => array(
+                                            'name' => 'String',
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            'ActionOnFailure' => array(
                                 'type' => 'string',
                             ),
                             'Status' => array(

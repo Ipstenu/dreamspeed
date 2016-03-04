@@ -26,6 +26,7 @@ use Guzzle\Service\Resource\Model;
 /**
  * Client to interact with AWS Key Management Service
  *
+ * @method Model cancelKeyDeletion(array $args = array()) {@command Kms CancelKeyDeletion}
  * @method Model createAlias(array $args = array()) {@command Kms CreateAlias}
  * @method Model createGrant(array $args = array()) {@command Kms CreateGrant}
  * @method Model createKey(array $args = array()) {@command Kms CreateKey}
@@ -46,14 +47,21 @@ use Guzzle\Service\Resource\Model;
  * @method Model listGrants(array $args = array()) {@command Kms ListGrants}
  * @method Model listKeyPolicies(array $args = array()) {@command Kms ListKeyPolicies}
  * @method Model listKeys(array $args = array()) {@command Kms ListKeys}
+ * @method Model listRetirableGrants(array $args = array()) {@command Kms ListRetirableGrants}
  * @method Model putKeyPolicy(array $args = array()) {@command Kms PutKeyPolicy}
  * @method Model reEncrypt(array $args = array()) {@command Kms ReEncrypt}
  * @method Model retireGrant(array $args = array()) {@command Kms RetireGrant}
  * @method Model revokeGrant(array $args = array()) {@command Kms RevokeGrant}
+ * @method Model scheduleKeyDeletion(array $args = array()) {@command Kms ScheduleKeyDeletion}
+ * @method Model updateAlias(array $args = array()) {@command Kms UpdateAlias}
  * @method Model updateKeyDescription(array $args = array()) {@command Kms UpdateKeyDescription}
+ * @method ResourceIteratorInterface getListAliasesIterator(array $args = array()) The input array uses the parameters of the ListAliases operation
+ * @method ResourceIteratorInterface getListGrantsIterator(array $args = array()) The input array uses the parameters of the ListGrants operation
+ * @method ResourceIteratorInterface getListKeyPoliciesIterator(array $args = array()) The input array uses the parameters of the ListKeyPolicies operation
+ * @method ResourceIteratorInterface getListKeysIterator(array $args = array()) The input array uses the parameters of the ListKeys operation
  *
- * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/service-kms.html User guide
- * @link http://docs.aws.amazon.com/aws-sdk-php/latest/class-Aws.Kms.KmsClient.html API docs
+ * @link http://docs.aws.amazon.com/aws-sdk-php/v2/guide/service-kms.html User guide
+ * @link http://docs.aws.amazon.com/aws-sdk-php/v2/api/class-Aws.Kms.KmsClient.html API docs
  */
 class KmsClient extends AbstractClient
 {
@@ -62,12 +70,12 @@ class KmsClient extends AbstractClient
     /**
      * Factory method to create a new AWS KMS client using an array of configuration options.
      *
-     * See http://docs.aws.amazon.com/aws-sdk-php/guide/latest/configuration.html#client-configuration-options
+     * See http://docs.aws.amazon.com/aws-sdk-php/v2/guide/configuration.html#client-configuration-options
      *
      * @param array|Collection $config Client configuration data
      *
      * @return self
-     * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/configuration.html#client-configuration-options
+     * @link http://docs.aws.amazon.com/aws-sdk-php/v2/guide/configuration.html#client-configuration-options
      */
     public static function factory($config = array())
     {

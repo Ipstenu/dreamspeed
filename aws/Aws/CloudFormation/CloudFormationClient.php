@@ -29,6 +29,7 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method Model cancelUpdateStack(array $args = array()) {@command CloudFormation CancelUpdateStack}
  * @method Model createStack(array $args = array()) {@command CloudFormation CreateStack}
  * @method Model deleteStack(array $args = array()) {@command CloudFormation DeleteStack}
+ * @method Model describeAccountLimits(array $args = array()) {@command CloudFormation DescribeAccountLimits}
  * @method Model describeStackEvents(array $args = array()) {@command CloudFormation DescribeStackEvents}
  * @method Model describeStackResource(array $args = array()) {@command CloudFormation DescribeStackResource}
  * @method Model describeStackResources(array $args = array()) {@command CloudFormation DescribeStackResources}
@@ -49,8 +50,8 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method ResourceIteratorInterface getListStackResourcesIterator(array $args = array()) The input array uses the parameters of the ListStackResources operation
  * @method ResourceIteratorInterface getListStacksIterator(array $args = array()) The input array uses the parameters of the ListStacks operation
  *
- * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/service-cloudformation.html User guide
- * @link http://docs.aws.amazon.com/aws-sdk-php/latest/class-Aws.CloudFormation.CloudFormationClient.html API docs
+ * @link http://docs.aws.amazon.com/aws-sdk-php/v2/guide/service-cloudformation.html User guide
+ * @link http://docs.aws.amazon.com/aws-sdk-php/v2/api/class-Aws.CloudFormation.CloudFormationClient.html API docs
  */
 class CloudFormationClient extends AbstractClient
 {
@@ -62,7 +63,7 @@ class CloudFormationClient extends AbstractClient
      * @param array|Collection $config Client configuration data
      *
      * @return self
-     * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/configuration.html#client-configuration-options
+     * @link http://docs.aws.amazon.com/aws-sdk-php/v2/guide/configuration.html#client-configuration-options
      */
     public static function factory($config = array())
     {

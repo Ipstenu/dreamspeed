@@ -46,6 +46,7 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method Model getStreamingDistributionConfig(array $args = array()) {@command CloudFront GetStreamingDistributionConfig}
  * @method Model listCloudFrontOriginAccessIdentities(array $args = array()) {@command CloudFront ListCloudFrontOriginAccessIdentities}
  * @method Model listDistributions(array $args = array()) {@command CloudFront ListDistributions}
+ * @method Model listDistributionsByWebACLId(array $args = array()) {@command CloudFront ListDistributionsByWebACLId}
  * @method Model listInvalidations(array $args = array()) {@command CloudFront ListInvalidations}
  * @method Model listStreamingDistributions(array $args = array()) {@command CloudFront ListStreamingDistributions}
  * @method Model updateCloudFrontOriginAccessIdentity(array $args = array()) {@command CloudFront UpdateCloudFrontOriginAccessIdentity}
@@ -59,12 +60,12 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method ResourceIteratorInterface getListInvalidationsIterator(array $args = array()) The input array uses the parameters of the ListInvalidations operation
  * @method ResourceIteratorInterface getListStreamingDistributionsIterator(array $args = array()) The input array uses the parameters of the ListStreamingDistributions operation
  *
- * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/service-cloudfront.html User guide
- * @link http://docs.aws.amazon.com/aws-sdk-php/latest/class-Aws.CloudFront.CloudFrontClient.html API docs
+ * @link http://docs.aws.amazon.com/aws-sdk-php/v2/guide/service-cloudfront.html User guide
+ * @link http://docs.aws.amazon.com/aws-sdk-php/v2/api/class-Aws.CloudFront.CloudFrontClient.html API docs
  */
 class CloudFrontClient extends AbstractClient
 {
-    const LATEST_API_VERSION = '2014-10-21';
+    const LATEST_API_VERSION = '2015-07-27';
 
     /**
      * Factory method to create a new Amazon CloudFront client using an array of configuration options.
@@ -76,7 +77,7 @@ class CloudFrontClient extends AbstractClient
      * @param array|Collection $config Client configuration data
      *
      * @return self
-     * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/configuration.html#client-configuration-options
+     * @link http://docs.aws.amazon.com/aws-sdk-php/v2/guide/configuration.html#client-configuration-options
      */
     public static function factory($config = array())
     {
@@ -213,9 +214,14 @@ class CloudFrontClient extends AbstractClient
         } elseif ($scheme == 'rtmp') {
             $parts = parse_url($url);
             $pathParts = pathinfo($parts['path']);
-            // Add path leading to file, strip file extension, and add a query string if present
-            $resource = ltrim($pathParts['dirname'] . '/' . $pathParts['basename'], '/')
-                . (isset($parts['query']) ? "?{$parts['query']}" : '');
+            // Add path leading to file, strip file extension, and add a query
+            // string if present.
+            $resource = ltrim($pathParts['dirname']
+                . '/'
+                . $pathParts['basename'], '/\\');
+            if (isset($parts['query'])) {
+                $resource .= "?{$parts['query']}";
+            }
         } else {
             throw new InvalidArgumentException("Invalid URI scheme: {$scheme}. Must be one of http or rtmp.");
         }

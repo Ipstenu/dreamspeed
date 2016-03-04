@@ -28,11 +28,7 @@ class Aws extends ServiceBuilder
     /**
      * @var string Current version of the SDK
      */
-<<<<<<< HEAD
-    const VERSION = '2.6.12';
-=======
-    const VERSION = '2.7.9';
->>>>>>> REL_0.5.3
+    const VERSION = '2.8.24';
 
     /**
      * Create a new service locator for the AWS SDK
@@ -99,6 +95,7 @@ class Aws extends ServiceBuilder
      * @param string|null $namespace The namespace that the facades should be mounted to. Defaults to global namespace
      *
      * @return Aws
+     * @deprecated "Facades" are being removed in version 3.0 of the SDK.
      */
     public function enableFacades($namespace = null)
     {

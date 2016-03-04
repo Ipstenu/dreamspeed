@@ -25,6 +25,42 @@ return array (
     'signatureVersion' => 'v4',
     'namespace' => 'ConfigService',
     'operations' => array(
+        'DeleteConfigRule' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'StarlingDoveService.DeleteConfigRule',
+                ),
+                'ConfigRuleName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'json',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.',
+                    'class' => 'NoSuchConfigRuleException',
+                ),
+            ),
+        ),
         'DeleteDeliveryChannel' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -100,12 +136,216 @@ return array (
                     'class' => 'NoSuchDeliveryChannelException',
                 ),
                 array(
-                    'reason' => 'There are no configuration recorders available to provide the role needed to describe your resources.',
+                    'reason' => 'There are no configuration recorders available to provide the role needed to describe your resources. Create a configuration recorder.',
                     'class' => 'NoAvailableConfigurationRecorderException',
                 ),
                 array(
                     'reason' => 'There is no configuration recorder running.',
                     'class' => 'NoRunningConfigurationRecorderException',
+                ),
+            ),
+        ),
+        'DescribeComplianceByConfigRule' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'DescribeComplianceByConfigRuleResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'StarlingDoveService.DescribeComplianceByConfigRule',
+                ),
+                'ConfigRuleNames' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'maxItems' => 25,
+                    'items' => array(
+                        'name' => 'StringWithCharLimit64',
+                        'type' => 'string',
+                        'minLength' => 1,
+                        'maxLength' => 64,
+                    ),
+                ),
+                'ComplianceTypes' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'maxItems' => 3,
+                    'items' => array(
+                        'name' => 'ComplianceType',
+                        'type' => 'string',
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.',
+                    'class' => 'NoSuchConfigRuleException',
+                ),
+            ),
+        ),
+        'DescribeComplianceByResource' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'DescribeComplianceByResourceResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'StarlingDoveService.DescribeComplianceByResource',
+                ),
+                'ResourceType' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                    'minLength' => 1,
+                    'maxLength' => 256,
+                ),
+                'ResourceId' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                    'minLength' => 1,
+                    'maxLength' => 256,
+                ),
+                'ComplianceTypes' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'maxItems' => 3,
+                    'items' => array(
+                        'name' => 'ComplianceType',
+                        'type' => 'string',
+                    ),
+                ),
+                'Limit' => array(
+                    'type' => 'numeric',
+                    'location' => 'json',
+                    'maximum' => 100,
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'The specified next token is invalid. Specify the nextToken string that was returned in the previous response to get the next page of results.',
+                    'class' => 'InvalidNextTokenException',
+                ),
+            ),
+        ),
+        'DescribeConfigRuleEvaluationStatus' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'DescribeConfigRuleEvaluationStatusResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'StarlingDoveService.DescribeConfigRuleEvaluationStatus',
+                ),
+                'ConfigRuleNames' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'maxItems' => 25,
+                    'items' => array(
+                        'name' => 'StringWithCharLimit64',
+                        'type' => 'string',
+                        'minLength' => 1,
+                        'maxLength' => 64,
+                    ),
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.',
+                    'class' => 'NoSuchConfigRuleException',
+                ),
+            ),
+        ),
+        'DescribeConfigRules' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'DescribeConfigRulesResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'StarlingDoveService.DescribeConfigRules',
+                ),
+                'ConfigRuleNames' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'maxItems' => 25,
+                    'items' => array(
+                        'name' => 'StringWithCharLimit64',
+                        'type' => 'string',
+                        'minLength' => 1,
+                        'maxLength' => 64,
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.',
+                    'class' => 'NoSuchConfigRuleException',
                 ),
             ),
         ),
@@ -265,6 +505,187 @@ return array (
                 ),
             ),
         ),
+        'GetComplianceDetailsByConfigRule' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'GetComplianceDetailsByConfigRuleResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'StarlingDoveService.GetComplianceDetailsByConfigRule',
+                ),
+                'ConfigRuleName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'json',
+                    'minLength' => 1,
+                    'maxLength' => 64,
+                ),
+                'ComplianceTypes' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'maxItems' => 3,
+                    'items' => array(
+                        'name' => 'ComplianceType',
+                        'type' => 'string',
+                    ),
+                ),
+                'Limit' => array(
+                    'type' => 'numeric',
+                    'location' => 'json',
+                    'maximum' => 100,
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'The specified next token is invalid. Specify the nextToken string that was returned in the previous response to get the next page of results.',
+                    'class' => 'InvalidNextTokenException',
+                ),
+                array(
+                    'reason' => 'One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.',
+                    'class' => 'NoSuchConfigRuleException',
+                ),
+            ),
+        ),
+        'GetComplianceDetailsByResource' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'GetComplianceDetailsByResourceResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'StarlingDoveService.GetComplianceDetailsByResource',
+                ),
+                'ResourceType' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'json',
+                    'minLength' => 1,
+                    'maxLength' => 256,
+                ),
+                'ResourceId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'json',
+                    'minLength' => 1,
+                    'maxLength' => 256,
+                ),
+                'ComplianceTypes' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'maxItems' => 3,
+                    'items' => array(
+                        'name' => 'ComplianceType',
+                        'type' => 'string',
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+            ),
+        ),
+        'GetComplianceSummaryByConfigRule' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'GetComplianceSummaryByConfigRuleResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'StarlingDoveService.GetComplianceSummaryByConfigRule',
+                ),
+            ),
+        ),
+        'GetComplianceSummaryByResourceType' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'GetComplianceSummaryByResourceTypeResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'StarlingDoveService.GetComplianceSummaryByResourceType',
+                ),
+                'ResourceTypes' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'maxItems' => 100,
+                    'items' => array(
+                        'name' => 'StringWithCharLimit256',
+                        'type' => 'string',
+                        'minLength' => 1,
+                        'maxLength' => 256,
+                    ),
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+            ),
+        ),
         'GetResourceConfigHistory' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -338,20 +759,222 @@ return array (
                     'class' => 'InvalidTimeRangeException',
                 ),
                 array(
-                    'reason' => 'You have reached the limit on the pagination.',
+                    'reason' => 'The specified limit is outside the allowable range.',
                     'class' => 'InvalidLimitException',
                 ),
                 array(
-                    'reason' => 'The specified nextToken for pagination is not valid.',
+                    'reason' => 'The specified next token is invalid. Specify the nextToken string that was returned in the previous response to get the next page of results.',
                     'class' => 'InvalidNextTokenException',
                 ),
                 array(
-                    'reason' => 'There are no configuration recorders available to provide the role needed to describe your resources.',
+                    'reason' => 'There are no configuration recorders available to provide the role needed to describe your resources. Create a configuration recorder.',
                     'class' => 'NoAvailableConfigurationRecorderException',
                 ),
                 array(
                     'reason' => 'You have specified a resource that is either unknown or has not been discovered.',
                     'class' => 'ResourceNotDiscoveredException',
+                ),
+            ),
+        ),
+        'ListDiscoveredResources' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'ListDiscoveredResourcesResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'StarlingDoveService.ListDiscoveredResources',
+                ),
+                'resourceType' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+                'resourceIds' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'ResourceId',
+                        'type' => 'string',
+                    ),
+                ),
+                'resourceName' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+                'limit' => array(
+                    'type' => 'numeric',
+                    'location' => 'json',
+                    'maximum' => 100,
+                ),
+                'includeDeletedResources' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'json',
+                ),
+                'nextToken' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'The requested action is not valid.',
+                    'class' => 'ValidationException',
+                ),
+                array(
+                    'reason' => 'The specified limit is outside the allowable range.',
+                    'class' => 'InvalidLimitException',
+                ),
+                array(
+                    'reason' => 'The specified next token is invalid. Specify the nextToken string that was returned in the previous response to get the next page of results.',
+                    'class' => 'InvalidNextTokenException',
+                ),
+                array(
+                    'reason' => 'There are no configuration recorders available to provide the role needed to describe your resources. Create a configuration recorder.',
+                    'class' => 'NoAvailableConfigurationRecorderException',
+                ),
+            ),
+        ),
+        'PutConfigRule' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'EmptyOutput',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'StarlingDoveService.PutConfigRule',
+                ),
+                'ConfigRule' => array(
+                    'required' => true,
+                    'type' => 'object',
+                    'location' => 'json',
+                    'properties' => array(
+                        'ConfigRuleName' => array(
+                            'type' => 'string',
+                            'minLength' => 1,
+                            'maxLength' => 64,
+                        ),
+                        'ConfigRuleArn' => array(
+                            'type' => 'string',
+                        ),
+                        'ConfigRuleId' => array(
+                            'type' => 'string',
+                        ),
+                        'Description' => array(
+                            'type' => 'string',
+                            'maxLength' => 256,
+                        ),
+                        'Scope' => array(
+                            'type' => 'object',
+                            'properties' => array(
+                                'ComplianceResourceTypes' => array(
+                                    'type' => 'array',
+                                    'maxItems' => 100,
+                                    'items' => array(
+                                        'name' => 'StringWithCharLimit256',
+                                        'type' => 'string',
+                                        'minLength' => 1,
+                                        'maxLength' => 256,
+                                    ),
+                                ),
+                                'TagKey' => array(
+                                    'type' => 'string',
+                                    'minLength' => 1,
+                                    'maxLength' => 128,
+                                ),
+                                'TagValue' => array(
+                                    'type' => 'string',
+                                    'minLength' => 1,
+                                    'maxLength' => 256,
+                                ),
+                                'ComplianceResourceId' => array(
+                                    'type' => 'string',
+                                    'minLength' => 1,
+                                    'maxLength' => 256,
+                                ),
+                            ),
+                        ),
+                        'Source' => array(
+                            'required' => true,
+                            'type' => 'object',
+                            'properties' => array(
+                                'Owner' => array(
+                                    'type' => 'string',
+                                ),
+                                'SourceIdentifier' => array(
+                                    'type' => 'string',
+                                    'minLength' => 1,
+                                    'maxLength' => 256,
+                                ),
+                                'SourceDetails' => array(
+                                    'type' => 'array',
+                                    'maxItems' => 25,
+                                    'items' => array(
+                                        'name' => 'SourceDetail',
+                                        'type' => 'object',
+                                        'properties' => array(
+                                            'EventSource' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'MessageType' => array(
+                                                'type' => 'string',
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                        'InputParameters' => array(
+                            'type' => 'string',
+                            'minLength' => 1,
+                            'maxLength' => 256,
+                        ),
+                        'MaximumExecutionFrequency' => array(
+                            'type' => 'string',
+                        ),
+                        'ConfigRuleState' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'Failed to add the AWS Config rule because the account already contains the maximum number of 25 rules. Consider deleting any deactivated rules before adding new rules.',
+                    'class' => 'MaxNumberOfConfigRulesExceededException',
+                ),
+                array(
+                    'reason' => 'The rule is currently being deleted. Wait for a while and try again.',
+                    'class' => 'ResourceInUseException',
                 ),
             ),
         ),
@@ -389,6 +1012,22 @@ return array (
                         'roleARN' => array(
                             'type' => 'string',
                         ),
+                        'recordingGroup' => array(
+                            'type' => 'object',
+                            'properties' => array(
+                                'allSupported' => array(
+                                    'type' => 'boolean',
+                                    'format' => 'boolean-string',
+                                ),
+                                'resourceTypes' => array(
+                                    'type' => 'array',
+                                    'items' => array(
+                                        'name' => 'ResourceType',
+                                        'type' => 'string',
+                                    ),
+                                ),
+                            ),
+                        ),
                     ),
                 ),
             ),
@@ -404,6 +1043,10 @@ return array (
                 array(
                     'reason' => 'You have provided a null or empty role ARN.',
                     'class' => 'InvalidRoleException',
+                ),
+                array(
+                    'reason' => 'AWS Config throws an exception if the recording group does not contain a valid list of resource types. Invalid values could also be incorrectly formatted.',
+                    'class' => 'InvalidRecordingGroupException',
                 ),
             ),
         ),
@@ -447,6 +1090,14 @@ return array (
                         'snsTopicARN' => array(
                             'type' => 'string',
                         ),
+                        'configSnapshotDeliveryProperties' => array(
+                            'type' => 'object',
+                            'properties' => array(
+                                'deliveryFrequency' => array(
+                                    'type' => 'string',
+                                ),
+                            ),
+                        ),
                     ),
                 ),
             ),
@@ -456,7 +1107,7 @@ return array (
                     'class' => 'MaxNumberOfDeliveryChannelsExceededException',
                 ),
                 array(
-                    'reason' => 'There are no configuration recorders available to provide the role needed to describe your resources.',
+                    'reason' => 'There are no configuration recorders available to provide the role needed to describe your resources. Create a configuration recorder.',
                     'class' => 'NoAvailableConfigurationRecorderException',
                 ),
                 array(
@@ -478,6 +1129,89 @@ return array (
                 array(
                     'reason' => 'Your Amazon S3 bucket policy does not permit AWS Config to write to it.',
                     'class' => 'InsufficientDeliveryPolicyException',
+                ),
+            ),
+        ),
+        'PutEvaluations' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'responseClass' => 'PutEvaluationsResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Content-Type' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'application/x-amz-json-1.1',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/json',
+                ),
+                'X-Amz-Target' => array(
+                    'static' => true,
+                    'location' => 'header',
+                    'default' => 'StarlingDoveService.PutEvaluations',
+                ),
+                'Evaluations' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'maxItems' => 100,
+                    'items' => array(
+                        'name' => 'Evaluation',
+                        'type' => 'object',
+                        'properties' => array(
+                            'ComplianceResourceType' => array(
+                                'required' => true,
+                                'type' => 'string',
+                                'minLength' => 1,
+                                'maxLength' => 256,
+                            ),
+                            'ComplianceResourceId' => array(
+                                'required' => true,
+                                'type' => 'string',
+                                'minLength' => 1,
+                                'maxLength' => 256,
+                            ),
+                            'ComplianceType' => array(
+                                'required' => true,
+                                'type' => 'string',
+                            ),
+                            'Annotation' => array(
+                                'type' => 'string',
+                                'minLength' => 1,
+                                'maxLength' => 256,
+                            ),
+                            'OrderingTimestamp' => array(
+                                'required' => true,
+                                'type' => array(
+                                    'object',
+                                    'string',
+                                    'integer',
+                                ),
+                                'format' => 'date-time',
+                            ),
+                        ),
+                    ),
+                ),
+                'ResultToken' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.',
+                    'class' => 'InvalidParameterValueException',
+                ),
+                array(
+                    'reason' => 'The result token is invalid.',
+                    'class' => 'InvalidResultTokenException',
+                ),
+                array(
+                    'reason' => 'One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.',
+                    'class' => 'NoSuchConfigRuleException',
                 ),
             ),
         ),
@@ -573,6 +1307,221 @@ return array (
                 ),
             ),
         ),
+        'DescribeComplianceByConfigRuleResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ComplianceByConfigRules' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'ComplianceByConfigRule',
+                        'type' => 'object',
+                        'properties' => array(
+                            'ConfigRuleName' => array(
+                                'type' => 'string',
+                            ),
+                            'Compliance' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'ComplianceType' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'ComplianceContributorCount' => array(
+                                        'type' => 'object',
+                                        'properties' => array(
+                                            'CappedCount' => array(
+                                                'type' => 'numeric',
+                                            ),
+                                            'CapExceeded' => array(
+                                                'type' => 'boolean',
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+        ),
+        'DescribeComplianceByResourceResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ComplianceByResources' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'ComplianceByResource',
+                        'type' => 'object',
+                        'properties' => array(
+                            'ResourceType' => array(
+                                'type' => 'string',
+                            ),
+                            'ResourceId' => array(
+                                'type' => 'string',
+                            ),
+                            'Compliance' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'ComplianceType' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'ComplianceContributorCount' => array(
+                                        'type' => 'object',
+                                        'properties' => array(
+                                            'CappedCount' => array(
+                                                'type' => 'numeric',
+                                            ),
+                                            'CapExceeded' => array(
+                                                'type' => 'boolean',
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+        ),
+        'DescribeConfigRuleEvaluationStatusResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ConfigRulesEvaluationStatus' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'ConfigRuleEvaluationStatus',
+                        'type' => 'object',
+                        'properties' => array(
+                            'ConfigRuleName' => array(
+                                'type' => 'string',
+                            ),
+                            'ConfigRuleArn' => array(
+                                'type' => 'string',
+                            ),
+                            'ConfigRuleId' => array(
+                                'type' => 'string',
+                            ),
+                            'LastSuccessfulInvocationTime' => array(
+                                'type' => 'string',
+                            ),
+                            'LastFailedInvocationTime' => array(
+                                'type' => 'string',
+                            ),
+                            'FirstActivatedTime' => array(
+                                'type' => 'string',
+                            ),
+                            'LastErrorCode' => array(
+                                'type' => 'string',
+                            ),
+                            'LastErrorMessage' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'DescribeConfigRulesResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ConfigRules' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'ConfigRule',
+                        'type' => 'object',
+                        'properties' => array(
+                            'ConfigRuleName' => array(
+                                'type' => 'string',
+                            ),
+                            'ConfigRuleArn' => array(
+                                'type' => 'string',
+                            ),
+                            'ConfigRuleId' => array(
+                                'type' => 'string',
+                            ),
+                            'Description' => array(
+                                'type' => 'string',
+                            ),
+                            'Scope' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'ComplianceResourceTypes' => array(
+                                        'type' => 'array',
+                                        'items' => array(
+                                            'name' => 'StringWithCharLimit256',
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                    'TagKey' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'TagValue' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'ComplianceResourceId' => array(
+                                        'type' => 'string',
+                                    ),
+                                ),
+                            ),
+                            'Source' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'Owner' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'SourceIdentifier' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'SourceDetails' => array(
+                                        'type' => 'array',
+                                        'items' => array(
+                                            'name' => 'SourceDetail',
+                                            'type' => 'object',
+                                            'properties' => array(
+                                                'EventSource' => array(
+                                                    'type' => 'string',
+                                                ),
+                                                'MessageType' => array(
+                                                    'type' => 'string',
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            'InputParameters' => array(
+                                'type' => 'string',
+                            ),
+                            'MaximumExecutionFrequency' => array(
+                                'type' => 'string',
+                            ),
+                            'ConfigRuleState' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+        ),
         'DescribeConfigurationRecorderStatusResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -630,6 +1579,21 @@ return array (
                             'roleARN' => array(
                                 'type' => 'string',
                             ),
+                            'recordingGroup' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'allSupported' => array(
+                                        'type' => 'boolean',
+                                    ),
+                                    'resourceTypes' => array(
+                                        'type' => 'array',
+                                        'items' => array(
+                                            'name' => 'ResourceType',
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),
@@ -667,6 +1631,9 @@ return array (
                                     'lastSuccessfulTime' => array(
                                         'type' => 'string',
                                     ),
+                                    'nextDeliveryTime' => array(
+                                        'type' => 'string',
+                                    ),
                                 ),
                             ),
                             'configHistoryDeliveryInfo' => array(
@@ -685,6 +1652,9 @@ return array (
                                         'type' => 'string',
                                     ),
                                     'lastSuccessfulTime' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'nextDeliveryTime' => array(
                                         'type' => 'string',
                                     ),
                                 ),
@@ -734,6 +1704,214 @@ return array (
                             'snsTopicARN' => array(
                                 'type' => 'string',
                             ),
+                            'configSnapshotDeliveryProperties' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'deliveryFrequency' => array(
+                                        'type' => 'string',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'GetComplianceDetailsByConfigRuleResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'EvaluationResults' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'EvaluationResult',
+                        'type' => 'object',
+                        'properties' => array(
+                            'EvaluationResultIdentifier' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'EvaluationResultQualifier' => array(
+                                        'type' => 'object',
+                                        'properties' => array(
+                                            'ConfigRuleName' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'ResourceType' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'ResourceId' => array(
+                                                'type' => 'string',
+                                            ),
+                                        ),
+                                    ),
+                                    'OrderingTimestamp' => array(
+                                        'type' => 'string',
+                                    ),
+                                ),
+                            ),
+                            'ComplianceType' => array(
+                                'type' => 'string',
+                            ),
+                            'ResultRecordedTime' => array(
+                                'type' => 'string',
+                            ),
+                            'ConfigRuleInvokedTime' => array(
+                                'type' => 'string',
+                            ),
+                            'Annotation' => array(
+                                'type' => 'string',
+                            ),
+                            'ResultToken' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+        ),
+        'GetComplianceDetailsByResourceResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'EvaluationResults' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'EvaluationResult',
+                        'type' => 'object',
+                        'properties' => array(
+                            'EvaluationResultIdentifier' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'EvaluationResultQualifier' => array(
+                                        'type' => 'object',
+                                        'properties' => array(
+                                            'ConfigRuleName' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'ResourceType' => array(
+                                                'type' => 'string',
+                                            ),
+                                            'ResourceId' => array(
+                                                'type' => 'string',
+                                            ),
+                                        ),
+                                    ),
+                                    'OrderingTimestamp' => array(
+                                        'type' => 'string',
+                                    ),
+                                ),
+                            ),
+                            'ComplianceType' => array(
+                                'type' => 'string',
+                            ),
+                            'ResultRecordedTime' => array(
+                                'type' => 'string',
+                            ),
+                            'ConfigRuleInvokedTime' => array(
+                                'type' => 'string',
+                            ),
+                            'Annotation' => array(
+                                'type' => 'string',
+                            ),
+                            'ResultToken' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+        ),
+        'GetComplianceSummaryByConfigRuleResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ComplianceSummary' => array(
+                    'type' => 'object',
+                    'location' => 'json',
+                    'properties' => array(
+                        'CompliantResourceCount' => array(
+                            'type' => 'object',
+                            'properties' => array(
+                                'CappedCount' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'CapExceeded' => array(
+                                    'type' => 'boolean',
+                                ),
+                            ),
+                        ),
+                        'NonCompliantResourceCount' => array(
+                            'type' => 'object',
+                            'properties' => array(
+                                'CappedCount' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'CapExceeded' => array(
+                                    'type' => 'boolean',
+                                ),
+                            ),
+                        ),
+                        'ComplianceSummaryTimestamp' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'GetComplianceSummaryByResourceTypeResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ComplianceSummariesByResourceType' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'ComplianceSummaryByResourceType',
+                        'type' => 'object',
+                        'properties' => array(
+                            'ResourceType' => array(
+                                'type' => 'string',
+                            ),
+                            'ComplianceSummary' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'CompliantResourceCount' => array(
+                                        'type' => 'object',
+                                        'properties' => array(
+                                            'CappedCount' => array(
+                                                'type' => 'numeric',
+                                            ),
+                                            'CapExceeded' => array(
+                                                'type' => 'boolean',
+                                            ),
+                                        ),
+                                    ),
+                                    'NonCompliantResourceCount' => array(
+                                        'type' => 'object',
+                                        'properties' => array(
+                                            'CappedCount' => array(
+                                                'type' => 'numeric',
+                                            ),
+                                            'CapExceeded' => array(
+                                                'type' => 'boolean',
+                                            ),
+                                        ),
+                                    ),
+                                    'ComplianceSummaryTimestamp' => array(
+                                        'type' => 'string',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),
@@ -777,6 +1955,12 @@ return array (
                             'resourceId' => array(
                                 'type' => 'string',
                             ),
+                            'resourceName' => array(
+                                'type' => 'string',
+                            ),
+                            'awsRegion' => array(
+                                'type' => 'string',
+                            ),
                             'availabilityZone' => array(
                                 'type' => 'string',
                             ),
@@ -808,6 +1992,9 @@ return array (
                                         'resourceId' => array(
                                             'type' => 'string',
                                         ),
+                                        'resourceName' => array(
+                                            'type' => 'string',
+                                        ),
                                         'relationshipName' => array(
                                             'type' => 'string',
                                         ),
@@ -825,6 +2012,77 @@ return array (
                     'location' => 'json',
                 ),
             ),
+        ),
+        'ListDiscoveredResourcesResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'resourceIdentifiers' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'ResourceIdentifier',
+                        'type' => 'object',
+                        'properties' => array(
+                            'resourceType' => array(
+                                'type' => 'string',
+                            ),
+                            'resourceId' => array(
+                                'type' => 'string',
+                            ),
+                            'resourceName' => array(
+                                'type' => 'string',
+                            ),
+                            'resourceDeletionTime' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'nextToken' => array(
+                    'type' => 'string',
+                    'location' => 'json',
+                ),
+            ),
+        ),
+        'PutEvaluationsResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'FailedEvaluations' => array(
+                    'type' => 'array',
+                    'location' => 'json',
+                    'items' => array(
+                        'name' => 'Evaluation',
+                        'type' => 'object',
+                        'properties' => array(
+                            'ComplianceResourceType' => array(
+                                'type' => 'string',
+                            ),
+                            'ComplianceResourceId' => array(
+                                'type' => 'string',
+                            ),
+                            'ComplianceType' => array(
+                                'type' => 'string',
+                            ),
+                            'Annotation' => array(
+                                'type' => 'string',
+                            ),
+                            'OrderingTimestamp' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    ),
+    'iterators' => array(
+        'GetResourceConfigHistory' => array(
+            'input_token' => 'nextToken',
+            'output_token' => 'nextToken',
+            'limit_key' => 'limit',
+            'result_key' => 'configurationItems',
         ),
     ),
 );

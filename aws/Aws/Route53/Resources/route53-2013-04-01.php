@@ -446,6 +446,27 @@ return array (
                             'minimum' => 1,
                             'maximum' => 10,
                         ),
+                        'MeasureLatency' => array(
+                            'type' => 'boolean',
+                            'format' => 'boolean-string',
+                        ),
+                        'Inverted' => array(
+                            'type' => 'boolean',
+                            'format' => 'boolean-string',
+                        ),
+                        'HealthThreshold' => array(
+                            'type' => 'numeric',
+                            'maximum' => 256,
+                        ),
+                        'ChildHealthChecks' => array(
+                            'type' => 'array',
+                            'maxItems' => 256,
+                            'items' => array(
+                                'name' => 'ChildHealthCheck',
+                                'type' => 'string',
+                                'maxLength' => 64,
+                            ),
+                        ),
                     ),
                 ),
                 'command.expects' => array(
@@ -1019,6 +1040,25 @@ return array (
                 ),
             ),
         ),
+        'GetHostedZoneCount' => array(
+            'httpMethod' => 'GET',
+            'uri' => '/2013-04-01/hostedzonecount',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'GetHostedZoneCountResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/xml',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
+                    'class' => 'InvalidInputException',
+                ),
+            ),
+        ),
         'GetReusableDelegationSet' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/delegationset/{Id}',
@@ -1172,6 +1212,46 @@ return array (
                 array(
                     'reason' => 'The specified delegation set has not been marked as reusable.',
                     'class' => 'DelegationSetNotReusableException',
+                ),
+            ),
+        ),
+        'ListHostedZonesByName' => array(
+            'httpMethod' => 'GET',
+            'uri' => '/2013-04-01/hostedzonesbyname',
+            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'responseClass' => 'ListHostedZonesByNameResponse',
+            'responseType' => 'model',
+            'parameters' => array(
+                'DNSName' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'dnsname',
+                    'maxLength' => 1024,
+                ),
+                'HostedZoneId' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'hostedzoneid',
+                    'maxLength' => 32,
+                ),
+                'MaxItems' => array(
+                    'type' => 'string',
+                    'location' => 'query',
+                    'sentAs' => 'maxitems',
+                ),
+                'command.expects' => array(
+                    'static' => true,
+                    'default' => 'application/xml',
+                ),
+            ),
+            'errorResponses' => array(
+                array(
+                    'reason' => 'Some value specified in the request is invalid or the XML document is malformed.',
+                    'class' => 'InvalidInputException',
+                ),
+                array(
+                    'reason' => 'This error indicates that the specified domain name is not valid.',
+                    'class' => 'InvalidDomainNameException',
                 ),
             ),
         ),
@@ -1419,6 +1499,26 @@ return array (
                     'minimum' => 1,
                     'maximum' => 10,
                 ),
+                'Inverted' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'xml',
+                ),
+                'HealthThreshold' => array(
+                    'type' => 'numeric',
+                    'location' => 'xml',
+                    'maximum' => 256,
+                ),
+                'ChildHealthChecks' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'maxItems' => 256,
+                    'items' => array(
+                        'name' => 'ChildHealthCheck',
+                        'type' => 'string',
+                        'maxLength' => 64,
+                    ),
+                ),
                 'command.expects' => array(
                     'static' => true,
                     'default' => 'application/xml',
@@ -1587,6 +1687,23 @@ return array (
                                 ),
                                 'FailureThreshold' => array(
                                     'type' => 'numeric',
+                                ),
+                                'MeasureLatency' => array(
+                                    'type' => 'boolean',
+                                ),
+                                'Inverted' => array(
+                                    'type' => 'boolean',
+                                ),
+                                'HealthThreshold' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'ChildHealthChecks' => array(
+                                    'type' => 'array',
+                                    'items' => array(
+                                        'name' => 'ChildHealthCheck',
+                                        'type' => 'string',
+                                        'sentAs' => 'ChildHealthCheck',
+                                    ),
                                 ),
                             ),
                         ),
@@ -1929,6 +2046,23 @@ return array (
                                 'FailureThreshold' => array(
                                     'type' => 'numeric',
                                 ),
+                                'MeasureLatency' => array(
+                                    'type' => 'boolean',
+                                ),
+                                'Inverted' => array(
+                                    'type' => 'boolean',
+                                ),
+                                'HealthThreshold' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'ChildHealthChecks' => array(
+                                    'type' => 'array',
+                                    'items' => array(
+                                        'name' => 'ChildHealthCheck',
+                                        'type' => 'string',
+                                        'sentAs' => 'ChildHealthCheck',
+                                    ),
+                                ),
                             ),
                         ),
                         'HealthCheckVersion' => array(
@@ -2102,6 +2236,20 @@ return array (
                 ),
             ),
         ),
+        'GetHostedZoneCountResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'HostedZoneCount' => array(
+                    'type' => 'numeric',
+                    'location' => 'xml',
+                ),
+                'RequestId' => array(
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-request-id',
+                ),
+            ),
+        ),
         'GetReusableDelegationSetResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -2236,6 +2384,23 @@ return array (
                                     'FailureThreshold' => array(
                                         'type' => 'numeric',
                                     ),
+                                    'MeasureLatency' => array(
+                                        'type' => 'boolean',
+                                    ),
+                                    'Inverted' => array(
+                                        'type' => 'boolean',
+                                    ),
+                                    'HealthThreshold' => array(
+                                        'type' => 'numeric',
+                                    ),
+                                    'ChildHealthChecks' => array(
+                                        'type' => 'array',
+                                        'items' => array(
+                                            'name' => 'ChildHealthCheck',
+                                            'type' => 'string',
+                                            'sentAs' => 'ChildHealthCheck',
+                                        ),
+                                    ),
                                 ),
                             ),
                             'HealthCheckVersion' => array(
@@ -2313,6 +2478,74 @@ return array (
                     'location' => 'xml',
                 ),
                 'NextMarker' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'MaxItems' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'RequestId' => array(
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-request-id',
+                ),
+            ),
+        ),
+        'ListHostedZonesByNameResponse' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'HostedZones' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'items' => array(
+                        'name' => 'HostedZone',
+                        'type' => 'object',
+                        'sentAs' => 'HostedZone',
+                        'properties' => array(
+                            'Id' => array(
+                                'type' => 'string',
+                            ),
+                            'Name' => array(
+                                'type' => 'string',
+                            ),
+                            'CallerReference' => array(
+                                'type' => 'string',
+                            ),
+                            'Config' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'Comment' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'PrivateZone' => array(
+                                        'type' => 'boolean',
+                                    ),
+                                ),
+                            ),
+                            'ResourceRecordSetCount' => array(
+                                'type' => 'numeric',
+                            ),
+                        ),
+                    ),
+                ),
+                'DNSName' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'HostedZoneId' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'IsTruncated' => array(
+                    'type' => 'boolean',
+                    'location' => 'xml',
+                ),
+                'NextDNSName' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'NextHostedZoneId' => array(
                     'type' => 'string',
                     'location' => 'xml',
                 ),
@@ -2604,6 +2837,23 @@ return array (
                                 ),
                                 'FailureThreshold' => array(
                                     'type' => 'numeric',
+                                ),
+                                'MeasureLatency' => array(
+                                    'type' => 'boolean',
+                                ),
+                                'Inverted' => array(
+                                    'type' => 'boolean',
+                                ),
+                                'HealthThreshold' => array(
+                                    'type' => 'numeric',
+                                ),
+                                'ChildHealthChecks' => array(
+                                    'type' => 'array',
+                                    'items' => array(
+                                        'name' => 'ChildHealthCheck',
+                                        'type' => 'string',
+                                        'sentAs' => 'ChildHealthCheck',
+                                    ),
                                 ),
                             ),
                         ),
