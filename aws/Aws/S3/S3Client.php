@@ -69,11 +69,9 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method Model getBucketAcl(array $args = array()) {@command S3 GetBucketAcl}
  * @method Model getBucketCors(array $args = array()) {@command S3 GetBucketCors}
  * @method Model getBucketLifecycle(array $args = array()) {@command S3 GetBucketLifecycle}
- * @method Model getBucketLifecycleConfiguration(array $args = array()) {@command S3 GetBucketLifecycleConfiguration}
  * @method Model getBucketLocation(array $args = array()) {@command S3 GetBucketLocation}
  * @method Model getBucketLogging(array $args = array()) {@command S3 GetBucketLogging}
  * @method Model getBucketNotification(array $args = array()) {@command S3 GetBucketNotification}
- * @method Model getBucketNotificationConfiguration(array $args = array()) {@command S3 GetBucketNotificationConfiguration}
  * @method Model getBucketPolicy(array $args = array()) {@command S3 GetBucketPolicy}
  * @method Model getBucketReplication(array $args = array()) {@command S3 GetBucketReplication}
  * @method Model getBucketRequestPayment(array $args = array()) {@command S3 GetBucketRequestPayment}
@@ -93,10 +91,8 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method Model putBucketAcl(array $args = array()) {@command S3 PutBucketAcl}
  * @method Model putBucketCors(array $args = array()) {@command S3 PutBucketCors}
  * @method Model putBucketLifecycle(array $args = array()) {@command S3 PutBucketLifecycle}
- * @method Model putBucketLifecycleConfiguration(array $args = array()) {@command S3 PutBucketLifecycleConfiguration}
  * @method Model putBucketLogging(array $args = array()) {@command S3 PutBucketLogging}
  * @method Model putBucketNotification(array $args = array()) {@command S3 PutBucketNotification}
- * @method Model putBucketNotificationConfiguration(array $args = array()) {@command S3 PutBucketNotificationConfiguration}
  * @method Model putBucketPolicy(array $args = array()) {@command S3 PutBucketPolicy}
  * @method Model putBucketReplication(array $args = array()) {@command S3 PutBucketReplication}
  * @method Model putBucketRequestPayment(array $args = array()) {@command S3 PutBucketRequestPayment}
@@ -247,13 +243,11 @@ class S3Client extends AbstractClient
     {
         return new BackoffPlugin(
             new TruncatedBackoffStrategy(3,
-                new IncompleteMultipartUploadChecker(
-                    new CurlBackoffStrategy(null,
-                        new HttpBackoffStrategy(null,
-                            new SocketTimeoutChecker(
-                                new ExpiredCredentialsChecker($exceptionParser,
-                                    new ExponentialBackoffStrategy()
-                                )
+                new CurlBackoffStrategy(null,
+                    new HttpBackoffStrategy(null,
+                        new SocketTimeoutChecker(
+                            new ExpiredCredentialsChecker($exceptionParser,
+                                new ExponentialBackoffStrategy()
                             )
                         )
                     )
@@ -349,12 +343,6 @@ class S3Client extends AbstractClient
     /**
      * Returns the URL to an object identified by its bucket and key. If an expiration time is provided, the URL will
      * be signed and set to expire at the provided time.
-     *
-     * Note: This method does not ensure that the generated URL is valid. For example, the bucket referenced may not
-     * exist, the key referenced may not exist, and the URL might include parameters that require it to be signed.
-     * If you need to use parameters that require a signed URL (e.g., ResponseCacheControl), then you must sign the
-     * URL either by providing an $expires argument or by signing the URL returned by this method in some other
-     * manner.
      *
      * @param string $bucket  The name of the bucket where the object is located
      * @param string $key     The key of the object

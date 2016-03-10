@@ -1692,45 +1692,6 @@ return array (
                 ),
             ),
         ),
-        'DeleteSSHPublicKey' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'EmptyOutput',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'DeleteSSHPublicKey',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2010-05-08',
-                ),
-                'UserName' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 64,
-                ),
-                'SSHPublicKeyId' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 20,
-                    'maxLength' => 128,
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
-                    'class' => 'NoSuchEntityException',
-                ),
-            ),
-        ),
         'DeleteServerCertificate' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -2211,38 +2172,6 @@ return array (
                 ),
             ),
         ),
-        'GetAccessKeyLastUsed' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'GetAccessKeyLastUsedResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'GetAccessKeyLastUsed',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2010-05-08',
-                ),
-                'AccessKeyId' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 16,
-                    'maxLength' => 32,
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
-                    'class' => 'NoSuchEntityException',
-                ),
-            ),
-        ),
         'GetAccountAuthorizationDetails' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -2343,90 +2272,6 @@ return array (
                 ),
             ),
         ),
-        'GetContextKeysForCustomPolicy' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'GetContextKeysForPolicyResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'GetContextKeysForCustomPolicy',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2010-05-08',
-                ),
-                'PolicyInputList' => array(
-                    'required' => true,
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'PolicyInputList.member',
-                    'items' => array(
-                        'name' => 'policyDocumentType',
-                        'type' => 'string',
-                        'minLength' => 1,
-                        'maxLength' => 131072,
-                    ),
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
-                    'class' => 'InvalidInputException',
-                ),
-            ),
-        ),
-        'GetContextKeysForPrincipalPolicy' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'GetContextKeysForPolicyResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'GetContextKeysForPrincipalPolicy',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2010-05-08',
-                ),
-                'PolicySourceArn' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 20,
-                    'maxLength' => 2048,
-                ),
-                'PolicyInputList' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'PolicyInputList.member',
-                    'items' => array(
-                        'name' => 'policyDocumentType',
-                        'type' => 'string',
-                        'minLength' => 1,
-                        'maxLength' => 131072,
-                    ),
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
-                    'class' => 'NoSuchEntityException',
-                ),
-                array(
-                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
-                    'class' => 'InvalidInputException',
-                ),
-            ),
-        ),
         'GetCredentialReport' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -2451,7 +2296,7 @@ return array (
                     'class' => 'CredentialReportNotPresentException',
                 ),
                 array(
-                    'reason' => 'The request was rejected because the most recent credential report has expired. To generate a new credential report, use GenerateCredentialReport. For more information about credential report expiration, see Getting Credential Reports in the IAM User Guide.',
+                    'reason' => 'The request was rejected because the most recent credential report has expired. To generate a new credential report, use GenerateCredentialReport. For more information about credential report expiration, see Getting Credential Reports in the Using IAM guide.',
                     'class' => 'CredentialReportExpiredException',
                 ),
                 array(
@@ -2868,54 +2713,6 @@ return array (
                 array(
                     'reason' => 'The request processing has failed because of an unknown error, exception or failure.',
                     'class' => 'ServiceFailureException',
-                ),
-            ),
-        ),
-        'GetSSHPublicKey' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'GetSSHPublicKeyResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'GetSSHPublicKey',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2010-05-08',
-                ),
-                'UserName' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 64,
-                ),
-                'SSHPublicKeyId' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 20,
-                    'maxLength' => 128,
-                ),
-                'Encoding' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
-                    'class' => 'NoSuchEntityException',
-                ),
-                array(
-                    'reason' => 'The request was rejected because the public key encoding format is unsupported or unrecognized.',
-                    'class' => 'UnrecognizedPublicKeyEncodingException',
                 ),
             ),
         ),
@@ -3867,49 +3664,6 @@ return array (
                 ),
             ),
         ),
-        'ListSSHPublicKeys' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'ListSSHPublicKeysResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'ListSSHPublicKeys',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2010-05-08',
-                ),
-                'UserName' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 64,
-                ),
-                'Marker' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 320,
-                ),
-                'MaxItems' => array(
-                    'type' => 'numeric',
-                    'location' => 'aws.query',
-                    'minimum' => 1,
-                    'maximum' => 1000,
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
-                    'class' => 'NoSuchEntityException',
-                ),
-            ),
-        ),
         'ListServerCertificates' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -4555,270 +4309,6 @@ return array (
                 ),
             ),
         ),
-        'SimulateCustomPolicy' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'SimulatePolicyResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'SimulateCustomPolicy',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2010-05-08',
-                ),
-                'PolicyInputList' => array(
-                    'required' => true,
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'PolicyInputList.member',
-                    'items' => array(
-                        'name' => 'policyDocumentType',
-                        'type' => 'string',
-                        'minLength' => 1,
-                        'maxLength' => 131072,
-                    ),
-                ),
-                'ActionNames' => array(
-                    'required' => true,
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'ActionNames.member',
-                    'items' => array(
-                        'name' => 'ActionNameType',
-                        'type' => 'string',
-                        'minLength' => 3,
-                        'maxLength' => 128,
-                    ),
-                ),
-                'ResourceArns' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'ResourceArns.member',
-                    'items' => array(
-                        'name' => 'ResourceNameType',
-                        'type' => 'string',
-                        'minLength' => 1,
-                        'maxLength' => 2048,
-                    ),
-                ),
-                'ResourcePolicy' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 131072,
-                ),
-                'ResourceOwner' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 2048,
-                ),
-                'CallerArn' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 2048,
-                ),
-                'ContextEntries' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'ContextEntries.member',
-                    'items' => array(
-                        'name' => 'ContextEntry',
-                        'type' => 'object',
-                        'properties' => array(
-                            'ContextKeyName' => array(
-                                'type' => 'string',
-                                'minLength' => 5,
-                                'maxLength' => 256,
-                            ),
-                            'ContextKeyValues' => array(
-                                'type' => 'array',
-                                'sentAs' => 'ContextKeyValues.member',
-                                'items' => array(
-                                    'name' => 'ContextKeyValueType',
-                                    'type' => 'string',
-                                ),
-                            ),
-                            'ContextKeyType' => array(
-                                'type' => 'string',
-                            ),
-                        ),
-                    ),
-                ),
-                'ResourceHandlingOption' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 64,
-                ),
-                'MaxItems' => array(
-                    'type' => 'numeric',
-                    'location' => 'aws.query',
-                    'minimum' => 1,
-                    'maximum' => 1000,
-                ),
-                'Marker' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 320,
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
-                    'class' => 'InvalidInputException',
-                ),
-                array(
-                    'reason' => 'The request failed because a provided policy could not be successfully evaluated. An additional detail message indicates the source of the failure.',
-                    'class' => 'PolicyEvaluationException',
-                ),
-            ),
-        ),
-        'SimulatePrincipalPolicy' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'SimulatePolicyResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'SimulatePrincipalPolicy',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2010-05-08',
-                ),
-                'PolicySourceArn' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 20,
-                    'maxLength' => 2048,
-                ),
-                'PolicyInputList' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'PolicyInputList.member',
-                    'items' => array(
-                        'name' => 'policyDocumentType',
-                        'type' => 'string',
-                        'minLength' => 1,
-                        'maxLength' => 131072,
-                    ),
-                ),
-                'ActionNames' => array(
-                    'required' => true,
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'ActionNames.member',
-                    'items' => array(
-                        'name' => 'ActionNameType',
-                        'type' => 'string',
-                        'minLength' => 3,
-                        'maxLength' => 128,
-                    ),
-                ),
-                'ResourceArns' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'ResourceArns.member',
-                    'items' => array(
-                        'name' => 'ResourceNameType',
-                        'type' => 'string',
-                        'minLength' => 1,
-                        'maxLength' => 2048,
-                    ),
-                ),
-                'ResourcePolicy' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 131072,
-                ),
-                'ResourceOwner' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 2048,
-                ),
-                'CallerArn' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 2048,
-                ),
-                'ContextEntries' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'ContextEntries.member',
-                    'items' => array(
-                        'name' => 'ContextEntry',
-                        'type' => 'object',
-                        'properties' => array(
-                            'ContextKeyName' => array(
-                                'type' => 'string',
-                                'minLength' => 5,
-                                'maxLength' => 256,
-                            ),
-                            'ContextKeyValues' => array(
-                                'type' => 'array',
-                                'sentAs' => 'ContextKeyValues.member',
-                                'items' => array(
-                                    'name' => 'ContextKeyValueType',
-                                    'type' => 'string',
-                                ),
-                            ),
-                            'ContextKeyType' => array(
-                                'type' => 'string',
-                            ),
-                        ),
-                    ),
-                ),
-                'ResourceHandlingOption' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 64,
-                ),
-                'MaxItems' => array(
-                    'type' => 'numeric',
-                    'location' => 'aws.query',
-                    'minimum' => 1,
-                    'maximum' => 1000,
-                ),
-                'Marker' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 320,
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
-                    'class' => 'NoSuchEntityException',
-                ),
-                array(
-                    'reason' => 'The request was rejected because an invalid or out-of-range value was supplied for an input parameter.',
-                    'class' => 'InvalidInputException',
-                ),
-                array(
-                    'reason' => 'The request failed because a provided policy could not be successfully evaluated. An additional detail message indicates the source of the failure.',
-                    'class' => 'PolicyEvaluationException',
-                ),
-            ),
-        ),
         'UpdateAccessKey' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -5224,50 +4714,6 @@ return array (
                 ),
             ),
         ),
-        'UpdateSSHPublicKey' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'EmptyOutput',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'UpdateSSHPublicKey',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2010-05-08',
-                ),
-                'UserName' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 64,
-                ),
-                'SSHPublicKeyId' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 20,
-                    'maxLength' => 128,
-                ),
-                'Status' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
-                    'class' => 'NoSuchEntityException',
-                ),
-            ),
-        ),
         'UpdateServerCertificate' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -5435,61 +4881,6 @@ return array (
                 ),
             ),
         ),
-        'UploadSSHPublicKey' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'UploadSSHPublicKeyResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'UploadSSHPublicKey',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2010-05-08',
-                ),
-                'UserName' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 64,
-                ),
-                'SSHPublicKeyBody' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                    'minLength' => 1,
-                    'maxLength' => 16384,
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.',
-                    'class' => 'LimitExceededException',
-                ),
-                array(
-                    'reason' => 'The request was rejected because it referenced an entity that does not exist. The error message describes the entity.',
-                    'class' => 'NoSuchEntityException',
-                ),
-                array(
-                    'reason' => 'The request was rejected because the public key is malformed or otherwise invalid.',
-                    'class' => 'InvalidPublicKeyException',
-                ),
-                array(
-                    'reason' => 'The request was rejected because the SSH public key is already associated with the specified IAM user.',
-                    'class' => 'DuplicateSSHPublicKeyException',
-                ),
-                array(
-                    'reason' => 'The request was rejected because the public key encoding format is unsupported or unrecognized.',
-                    'class' => 'UnrecognizedPublicKeyEncodingException',
-                ),
-            ),
-        ),
         'UploadServerCertificate' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -5613,7 +5004,7 @@ return array (
                     'class' => 'InvalidCertificateException',
                 ),
                 array(
-                    'reason' => 'The request was rejected because the same certificate is associated with an IAM user in the account.',
+                    'reason' => 'The request was rejected because the same certificate is associated to another user under the account.',
                     'class' => 'DuplicateCertificateException',
                 ),
                 array(
@@ -5966,31 +5357,6 @@ return array (
                 'Description' => array(
                     'type' => 'string',
                     'location' => 'xml',
-                ),
-            ),
-        ),
-        'GetAccessKeyLastUsedResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'UserName' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                ),
-                'AccessKeyLastUsed' => array(
-                    'type' => 'object',
-                    'location' => 'xml',
-                    'properties' => array(
-                        'LastUsedDate' => array(
-                            'type' => 'string',
-                        ),
-                        'ServiceName' => array(
-                            'type' => 'string',
-                        ),
-                        'Region' => array(
-                            'type' => 'string',
-                        ),
-                    ),
                 ),
             ),
         ),
@@ -6416,21 +5782,6 @@ return array (
                 ),
             ),
         ),
-        'GetContextKeysForPolicyResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'ContextKeyNames' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'items' => array(
-                        'name' => 'ContextKeyNameType',
-                        'type' => 'string',
-                        'sentAs' => 'member',
-                    ),
-                ),
-            ),
-        ),
         'GetCredentialReportResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -6768,36 +6119,6 @@ return array (
                 'ValidUntil' => array(
                     'type' => 'string',
                     'location' => 'xml',
-                ),
-            ),
-        ),
-        'GetSSHPublicKeyResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'SSHPublicKey' => array(
-                    'type' => 'object',
-                    'location' => 'xml',
-                    'properties' => array(
-                        'UserName' => array(
-                            'type' => 'string',
-                        ),
-                        'SSHPublicKeyId' => array(
-                            'type' => 'string',
-                        ),
-                        'Fingerprint' => array(
-                            'type' => 'string',
-                        ),
-                        'SSHPublicKeyBody' => array(
-                            'type' => 'string',
-                        ),
-                        'Status' => array(
-                            'type' => 'string',
-                        ),
-                        'UploadDate' => array(
-                            'type' => 'string',
-                        ),
-                    ),
                 ),
             ),
         ),
@@ -7576,43 +6897,6 @@ return array (
                 ),
             ),
         ),
-        'ListSSHPublicKeysResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'SSHPublicKeys' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'items' => array(
-                        'name' => 'SSHPublicKeyMetadata',
-                        'type' => 'object',
-                        'sentAs' => 'member',
-                        'properties' => array(
-                            'UserName' => array(
-                                'type' => 'string',
-                            ),
-                            'SSHPublicKeyId' => array(
-                                'type' => 'string',
-                            ),
-                            'Status' => array(
-                                'type' => 'string',
-                            ),
-                            'UploadDate' => array(
-                                'type' => 'string',
-                            ),
-                        ),
-                    ),
-                ),
-                'IsTruncated' => array(
-                    'type' => 'boolean',
-                    'location' => 'xml',
-                ),
-                'Marker' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                ),
-            ),
-        ),
         'ListServerCertificatesResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -7822,206 +7106,6 @@ return array (
                 ),
             ),
         ),
-        'SimulatePolicyResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'EvaluationResults' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'items' => array(
-                        'name' => 'EvaluationResult',
-                        'type' => 'object',
-                        'sentAs' => 'member',
-                        'properties' => array(
-                            'EvalActionName' => array(
-                                'type' => 'string',
-                            ),
-                            'EvalResourceName' => array(
-                                'type' => 'string',
-                            ),
-                            'EvalDecision' => array(
-                                'type' => 'string',
-                            ),
-                            'MatchedStatements' => array(
-                                'type' => 'array',
-                                'items' => array(
-                                    'name' => 'Statement',
-                                    'type' => 'object',
-                                    'sentAs' => 'member',
-                                    'properties' => array(
-                                        'SourcePolicyId' => array(
-                                            'type' => 'string',
-                                        ),
-                                        'SourcePolicyType' => array(
-                                            'type' => 'string',
-                                        ),
-                                        'StartPosition' => array(
-                                            'type' => 'object',
-                                            'properties' => array(
-                                                'Line' => array(
-                                                    'type' => 'numeric',
-                                                ),
-                                                'Column' => array(
-                                                    'type' => 'numeric',
-                                                ),
-                                            ),
-                                        ),
-                                        'EndPosition' => array(
-                                            'type' => 'object',
-                                            'properties' => array(
-                                                'Line' => array(
-                                                    'type' => 'numeric',
-                                                ),
-                                                'Column' => array(
-                                                    'type' => 'numeric',
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            'MissingContextValues' => array(
-                                'type' => 'array',
-                                'items' => array(
-                                    'name' => 'ContextKeyNameType',
-                                    'type' => 'string',
-                                    'sentAs' => 'member',
-                                ),
-                            ),
-                            'EvalDecisionDetails' => array(
-                                'type' => 'array',
-                                'filters' => array(
-                                    array(
-                                        'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
-                                        'args' => array(
-                                            '@value',
-                                            'entry',
-                                            'key',
-                                            'value',
-                                        ),
-                                    ),
-                                ),
-                                'items' => array(
-                                    'name' => 'entry',
-                                    'type' => 'object',
-                                    'sentAs' => 'entry',
-                                    'additionalProperties' => true,
-                                    'properties' => array(
-                                        'key' => array(
-                                            'type' => 'string',
-                                        ),
-                                        'value' => array(
-                                            'type' => 'string',
-                                        ),
-                                    ),
-                                ),
-                                'additionalProperties' => false,
-                            ),
-                            'ResourceSpecificResults' => array(
-                                'type' => 'array',
-                                'items' => array(
-                                    'name' => 'ResourceSpecificResult',
-                                    'type' => 'object',
-                                    'sentAs' => 'member',
-                                    'properties' => array(
-                                        'EvalResourceName' => array(
-                                            'type' => 'string',
-                                        ),
-                                        'EvalResourceDecision' => array(
-                                            'type' => 'string',
-                                        ),
-                                        'MatchedStatements' => array(
-                                            'type' => 'array',
-                                            'items' => array(
-                                                'name' => 'Statement',
-                                                'type' => 'object',
-                                                'sentAs' => 'member',
-                                                'properties' => array(
-                                                    'SourcePolicyId' => array(
-                                                        'type' => 'string',
-                                                    ),
-                                                    'SourcePolicyType' => array(
-                                                        'type' => 'string',
-                                                    ),
-                                                    'StartPosition' => array(
-                                                        'type' => 'object',
-                                                        'properties' => array(
-                                                            'Line' => array(
-                                                                'type' => 'numeric',
-                                                            ),
-                                                            'Column' => array(
-                                                                'type' => 'numeric',
-                                                            ),
-                                                        ),
-                                                    ),
-                                                    'EndPosition' => array(
-                                                        'type' => 'object',
-                                                        'properties' => array(
-                                                            'Line' => array(
-                                                                'type' => 'numeric',
-                                                            ),
-                                                            'Column' => array(
-                                                                'type' => 'numeric',
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        'MissingContextValues' => array(
-                                            'type' => 'array',
-                                            'items' => array(
-                                                'name' => 'ContextKeyNameType',
-                                                'type' => 'string',
-                                                'sentAs' => 'member',
-                                            ),
-                                        ),
-                                        'EvalDecisionDetails' => array(
-                                            'type' => 'array',
-                                            'filters' => array(
-                                                array(
-                                                    'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
-                                                    'args' => array(
-                                                        '@value',
-                                                        'entry',
-                                                        'key',
-                                                        'value',
-                                                    ),
-                                                ),
-                                            ),
-                                            'items' => array(
-                                                'name' => 'entry',
-                                                'type' => 'object',
-                                                'sentAs' => 'entry',
-                                                'additionalProperties' => true,
-                                                'properties' => array(
-                                                    'key' => array(
-                                                        'type' => 'string',
-                                                    ),
-                                                    'value' => array(
-                                                        'type' => 'string',
-                                                    ),
-                                                ),
-                                            ),
-                                            'additionalProperties' => false,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                'IsTruncated' => array(
-                    'type' => 'boolean',
-                    'location' => 'xml',
-                ),
-                'Marker' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                ),
-            ),
-        ),
         'UpdateSAMLProviderResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -8029,36 +7113,6 @@ return array (
                 'SAMLProviderArn' => array(
                     'type' => 'string',
                     'location' => 'xml',
-                ),
-            ),
-        ),
-        'UploadSSHPublicKeyResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'SSHPublicKey' => array(
-                    'type' => 'object',
-                    'location' => 'xml',
-                    'properties' => array(
-                        'UserName' => array(
-                            'type' => 'string',
-                        ),
-                        'SSHPublicKeyId' => array(
-                            'type' => 'string',
-                        ),
-                        'Fingerprint' => array(
-                            'type' => 'string',
-                        ),
-                        'SSHPublicKeyBody' => array(
-                            'type' => 'string',
-                        ),
-                        'Status' => array(
-                            'type' => 'string',
-                        ),
-                        'UploadDate' => array(
-                            'type' => 'string',
-                        ),
-                    ),
                 ),
             ),
         ),
@@ -8121,6 +7175,13 @@ return array (
         ),
     ),
     'iterators' => array(
+        'GetAccountAuthorizationDetails' => array(
+            'input_token' => 'Marker',
+            'output_token' => 'Marker',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxItems',
+            'result_key' => 'UserDetailList || GroupDetailList || RoleDetailList',
+        ),
         'GetGroup' => array(
             'input_token' => 'Marker',
             'output_token' => 'Marker',
@@ -8141,38 +7202,6 @@ return array (
             'more_results' => 'IsTruncated',
             'limit_key' => 'MaxItems',
             'result_key' => 'AccountAliases',
-        ),
-        'ListAttachedGroupPolicies' => array(
-            'input_token' => 'Marker',
-            'output_token' => 'Marker',
-            'more_results' => 'IsTruncated',
-            'limit_key' => 'MaxItems',
-            'result_key' => 'AttachedPolicies',
-        ),
-        'ListAttachedRolePolicies' => array(
-            'input_token' => 'Marker',
-            'output_token' => 'Marker',
-            'more_results' => 'IsTruncated',
-            'limit_key' => 'MaxItems',
-            'result_key' => 'AttachedPolicies',
-        ),
-        'ListAttachedUserPolicies' => array(
-            'input_token' => 'Marker',
-            'output_token' => 'Marker',
-            'more_results' => 'IsTruncated',
-            'limit_key' => 'MaxItems',
-            'result_key' => 'AttachedPolicies',
-        ),
-        'ListEntitiesForPolicy' => array(
-            'input_token' => 'Marker',
-            'output_token' => 'Marker',
-            'more_results' => 'IsTruncated',
-            'limit_key' => 'MaxItems',
-            'result_key' => array(
-                'PolicyGroups',
-                'PolicyUsers',
-                'PolicyRoles',
-            ),
         ),
         'ListGroupPolicies' => array(
             'input_token' => 'Marker',
@@ -8215,13 +7244,6 @@ return array (
             'more_results' => 'IsTruncated',
             'limit_key' => 'MaxItems',
             'result_key' => 'MFADevices',
-        ),
-        'ListPolicies' => array(
-            'input_token' => 'Marker',
-            'output_token' => 'Marker',
-            'more_results' => 'IsTruncated',
-            'limit_key' => 'MaxItems',
-            'result_key' => 'Policies',
         ),
         'ListRolePolicies' => array(
             'input_token' => 'Marker',
@@ -8274,12 +7296,6 @@ return array (
             'more_results' => 'IsTruncated',
             'limit_key' => 'MaxItems',
             'result_key' => 'VirtualMFADevices',
-        ),
-        'GetAccountAuthorizationDetails' => array(
-            'input_token' => 'Marker',
-            'output_token' => 'Marker',
-            'more_results' => 'IsTruncated',
-            'limit_key' => 'MaxItems',
         ),
     ),
 );

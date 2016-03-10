@@ -42,10 +42,9 @@ class CacheableCredentials extends AbstractRefreshableCredentials
      */
     public function __construct(CredentialsInterface $credentials, CacheAdapterInterface $cache, $cacheKey)
     {
+        $this->credentials = $credentials;
         $this->cache = $cache;
         $this->cacheKey = $cacheKey;
-
-        parent::__construct($credentials);
     }
 
     /**

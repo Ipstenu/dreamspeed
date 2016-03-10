@@ -78,9 +78,6 @@ class Marshaler
                     $type = 'M';
                 }
             }
-            if (empty($data) && $type === 'M') {
-                $data = (object) $data;
-            }
             $value = $data;
         } else {
             $type = $type === 'object' ? get_class($value) : $type;

@@ -1107,22 +1107,10 @@ return array (
                         'Channels' => array(
                             'type' => 'string',
                         ),
-                        'AudioPackingMode' => array(
-                            'type' => 'string',
-                        ),
                         'CodecOptions' => array(
                             'type' => 'object',
                             'properties' => array(
                                 'Profile' => array(
-                                    'type' => 'string',
-                                ),
-                                'BitDepth' => array(
-                                    'type' => 'string',
-                                ),
-                                'BitOrder' => array(
-                                    'type' => 'string',
-                                ),
-                                'Signed' => array(
                                     'type' => 'string',
                                 ),
                             ),
@@ -2720,22 +2708,10 @@ return array (
                                 'Channels' => array(
                                     'type' => 'string',
                                 ),
-                                'AudioPackingMode' => array(
-                                    'type' => 'string',
-                                ),
                                 'CodecOptions' => array(
                                     'type' => 'object',
                                     'properties' => array(
                                         'Profile' => array(
-                                            'type' => 'string',
-                                        ),
-                                        'BitDepth' => array(
-                                            'type' => 'string',
-                                        ),
-                                        'BitOrder' => array(
-                                            'type' => 'string',
-                                        ),
-                                        'Signed' => array(
                                             'type' => 'string',
                                         ),
                                     ),
@@ -4489,22 +4465,10 @@ return array (
                                     'Channels' => array(
                                         'type' => 'string',
                                     ),
-                                    'AudioPackingMode' => array(
-                                        'type' => 'string',
-                                    ),
                                     'CodecOptions' => array(
                                         'type' => 'object',
                                         'properties' => array(
                                             'Profile' => array(
-                                                'type' => 'string',
-                                            ),
-                                            'BitDepth' => array(
-                                                'type' => 'string',
-                                            ),
-                                            'BitOrder' => array(
-                                                'type' => 'string',
-                                            ),
-                                            'Signed' => array(
                                                 'type' => 'string',
                                             ),
                                         ),
@@ -5531,22 +5495,10 @@ return array (
                                 'Channels' => array(
                                     'type' => 'string',
                                 ),
-                                'AudioPackingMode' => array(
-                                    'type' => 'string',
-                                ),
                                 'CodecOptions' => array(
                                     'type' => 'object',
                                     'properties' => array(
                                         'Profile' => array(
-                                            'type' => 'string',
-                                        ),
-                                        'BitDepth' => array(
-                                            'type' => 'string',
-                                        ),
-                                        'BitOrder' => array(
-                                            'type' => 'string',
-                                        ),
-                                        'Signed' => array(
                                             'type' => 'string',
                                         ),
                                     ),

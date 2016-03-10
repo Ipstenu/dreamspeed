@@ -121,10 +121,6 @@ return array (
                     'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
                     'class' => 'OperationLimitExceededException',
                 ),
-                array(
-                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
-                    'class' => 'UnsupportedTLDException',
-                ),
             ),
         ),
         'DisableDomainAutoRenew' => array(
@@ -159,10 +155,6 @@ return array (
                 array(
                     'reason' => 'The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.',
                     'class' => 'InvalidInputException',
-                ),
-                array(
-                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
-                    'class' => 'UnsupportedTLDException',
                 ),
             ),
         ),
@@ -211,10 +203,6 @@ return array (
                     'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
                     'class' => 'OperationLimitExceededException',
                 ),
-                array(
-                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
-                    'class' => 'UnsupportedTLDException',
-                ),
             ),
         ),
         'EnableDomainAutoRenew' => array(
@@ -249,10 +237,6 @@ return array (
                 array(
                     'reason' => 'The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.',
                     'class' => 'InvalidInputException',
-                ),
-                array(
-                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
-                    'class' => 'UnsupportedTLDException',
                 ),
             ),
         ),
@@ -301,10 +285,6 @@ return array (
                     'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
                     'class' => 'OperationLimitExceededException',
                 ),
-                array(
-                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
-                    'class' => 'UnsupportedTLDException',
-                ),
             ),
         ),
         'GetDomainDetail' => array(
@@ -339,10 +319,6 @@ return array (
                 array(
                     'reason' => 'The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.',
                     'class' => 'InvalidInputException',
-                ),
-                array(
-                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
-                    'class' => 'UnsupportedTLDException',
                 ),
             ),
         ),
@@ -495,10 +471,6 @@ return array (
                 array(
                     'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
                     'class' => 'OperationLimitExceededException',
-                ),
-                array(
-                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
-                    'class' => 'UnsupportedTLDException',
                 ),
             ),
         ),
@@ -846,10 +818,6 @@ return array (
                 array(
                     'reason' => 'The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.',
                     'class' => 'InvalidInputException',
-                ),
-                array(
-                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
-                    'class' => 'UnsupportedTLDException',
                 ),
             ),
         ),
@@ -1460,10 +1428,6 @@ return array (
                     'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
                     'class' => 'OperationLimitExceededException',
                 ),
-                array(
-                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
-                    'class' => 'UnsupportedTLDException',
-                ),
             ),
         ),
         'UpdateDomainContactPrivacy' => array(
@@ -1525,10 +1489,6 @@ return array (
                 array(
                     'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
                     'class' => 'OperationLimitExceededException',
-                ),
-                array(
-                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
-                    'class' => 'UnsupportedTLDException',
                 ),
             ),
         ),
@@ -1605,10 +1565,6 @@ return array (
                     'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
                     'class' => 'OperationLimitExceededException',
                 ),
-                array(
-                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
-                    'class' => 'UnsupportedTLDException',
-                ),
             ),
         ),
         'UpdateTagsForDomain' => array(
@@ -1663,10 +1619,6 @@ return array (
                 array(
                     'reason' => 'The number of operations or jobs running exceeded the allowed threshold for the account.',
                     'class' => 'OperationLimitExceededException',
-                ),
-                array(
-                    'reason' => 'Amazon Route 53 does not support this top-level domain.',
-                    'class' => 'UnsupportedTLDException',
                 ),
             ),
         ),

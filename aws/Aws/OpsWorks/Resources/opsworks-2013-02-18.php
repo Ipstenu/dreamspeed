@@ -362,10 +362,6 @@ return array (
                     'type' => 'string',
                     'location' => 'json',
                 ),
-                'AgentVersion' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
             ),
             'errorResponses' => array(
                 array(
@@ -751,10 +747,6 @@ return array (
                     'format' => 'boolean-string',
                     'location' => 'json',
                 ),
-                'AgentVersion' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
             ),
             'errorResponses' => array(
                 array(
@@ -819,10 +811,6 @@ return array (
                     ),
                 ),
                 'CustomInstanceProfileArn' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'CustomJson' => array(
                     'type' => 'string',
                     'location' => 'json',
                 ),
@@ -1111,10 +1099,6 @@ return array (
                     'type' => 'string',
                     'location' => 'json',
                 ),
-                'AgentVersion' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
             ),
             'errorResponses' => array(
                 array(
@@ -1370,44 +1354,6 @@ return array (
                 ),
             ),
         ),
-        'DeregisterEcsCluster' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
-            'responseClass' => 'EmptyOutput',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Content-Type' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
-                ),
-                'command.expects' => array(
-                    'static' => true,
-                    'default' => 'application/json',
-                ),
-                'X-Amz-Target' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'OpsWorks_20130218.DeregisterEcsCluster',
-                ),
-                'EcsClusterArn' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'Indicates that a request was invalid.',
-                    'class' => 'ValidationException',
-                ),
-                array(
-                    'reason' => 'Indicates that a resource was not found.',
-                    'class' => 'ResourceNotFoundException',
-                ),
-            ),
-        ),
         'DeregisterElasticIp' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -1560,55 +1506,6 @@ return array (
                 ),
             ),
         ),
-        'DescribeAgentVersions' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
-            'responseClass' => 'DescribeAgentVersionsResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Content-Type' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
-                ),
-                'command.expects' => array(
-                    'static' => true,
-                    'default' => 'application/json',
-                ),
-                'X-Amz-Target' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'OpsWorks_20130218.DescribeAgentVersions',
-                ),
-                'StackId' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'ConfigurationManager' => array(
-                    'type' => 'object',
-                    'location' => 'json',
-                    'properties' => array(
-                        'Name' => array(
-                            'type' => 'string',
-                        ),
-                        'Version' => array(
-                            'type' => 'string',
-                        ),
-                    ),
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'Indicates that a request was invalid.',
-                    'class' => 'ValidationException',
-                ),
-                array(
-                    'reason' => 'Indicates that a resource was not found.',
-                    'class' => 'ResourceNotFoundException',
-                ),
-            ),
-        ),
         'DescribeApps' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -1739,59 +1636,6 @@ return array (
                         'name' => 'String',
                         'type' => 'string',
                     ),
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'Indicates that a request was invalid.',
-                    'class' => 'ValidationException',
-                ),
-                array(
-                    'reason' => 'Indicates that a resource was not found.',
-                    'class' => 'ResourceNotFoundException',
-                ),
-            ),
-        ),
-        'DescribeEcsClusters' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
-            'responseClass' => 'DescribeEcsClustersResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Content-Type' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
-                ),
-                'command.expects' => array(
-                    'static' => true,
-                    'default' => 'application/json',
-                ),
-                'X-Amz-Target' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'OpsWorks_20130218.DescribeEcsClusters',
-                ),
-                'EcsClusterArns' => array(
-                    'type' => 'array',
-                    'location' => 'json',
-                    'items' => array(
-                        'name' => 'String',
-                        'type' => 'string',
-                    ),
-                ),
-                'StackId' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'MaxResults' => array(
-                    'type' => 'numeric',
-                    'location' => 'json',
                 ),
             ),
             'errorResponses' => array(
@@ -2611,50 +2455,6 @@ return array (
                 ),
             ),
         ),
-        'GrantAccess' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
-            'responseClass' => 'GrantAccessResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Content-Type' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
-                ),
-                'command.expects' => array(
-                    'static' => true,
-                    'default' => 'application/json',
-                ),
-                'X-Amz-Target' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'OpsWorks_20130218.GrantAccess',
-                ),
-                'InstanceId' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'ValidForInMinutes' => array(
-                    'type' => 'numeric',
-                    'location' => 'json',
-                    'minimum' => 60,
-                    'maximum' => 1440,
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'Indicates that a request was invalid.',
-                    'class' => 'ValidationException',
-                ),
-                array(
-                    'reason' => 'Indicates that a resource was not found.',
-                    'class' => 'ResourceNotFoundException',
-                ),
-            ),
-        ),
         'RebootInstance' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -2677,49 +2477,6 @@ return array (
                     'default' => 'OpsWorks_20130218.RebootInstance',
                 ),
                 'InstanceId' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'Indicates that a request was invalid.',
-                    'class' => 'ValidationException',
-                ),
-                array(
-                    'reason' => 'Indicates that a resource was not found.',
-                    'class' => 'ResourceNotFoundException',
-                ),
-            ),
-        ),
-        'RegisterEcsCluster' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
-            'responseClass' => 'RegisterEcsClusterResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Content-Type' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
-                ),
-                'command.expects' => array(
-                    'static' => true,
-                    'default' => 'application/json',
-                ),
-                'X-Amz-Target' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'OpsWorks_20130218.RegisterEcsCluster',
-                ),
-                'EcsClusterArn' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'StackId' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'json',
@@ -3001,13 +2758,6 @@ return array (
                         'LoadThreshold' => array(
                             'type' => 'numeric',
                         ),
-                        'Alarms' => array(
-                            'type' => 'array',
-                            'items' => array(
-                                'name' => 'String',
-                                'type' => 'string',
-                            ),
-                        ),
                     ),
                 ),
                 'DownScaling' => array(
@@ -3035,13 +2785,6 @@ return array (
                         ),
                         'LoadThreshold' => array(
                             'type' => 'numeric',
-                        ),
-                        'Alarms' => array(
-                            'type' => 'array',
-                            'items' => array(
-                                'name' => 'String',
-                                'type' => 'string',
-                            ),
                         ),
                     ),
                 ),
@@ -3718,10 +3461,6 @@ return array (
                     'format' => 'boolean-string',
                     'location' => 'json',
                 ),
-                'AgentVersion' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
             ),
             'errorResponses' => array(
                 array(
@@ -3779,10 +3518,6 @@ return array (
                     ),
                 ),
                 'CustomInstanceProfileArn' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'CustomJson' => array(
                     'type' => 'string',
                     'location' => 'json',
                 ),
@@ -4143,10 +3878,6 @@ return array (
                     'format' => 'boolean-string',
                     'location' => 'json',
                 ),
-                'AgentVersion' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
             ),
             'errorResponses' => array(
                 array(
@@ -4329,36 +4060,6 @@ return array (
                 'IamUserArn' => array(
                     'type' => 'string',
                     'location' => 'json',
-                ),
-            ),
-        ),
-        'DescribeAgentVersionsResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'AgentVersions' => array(
-                    'type' => 'array',
-                    'location' => 'json',
-                    'items' => array(
-                        'name' => 'AgentVersion',
-                        'type' => 'object',
-                        'properties' => array(
-                            'Version' => array(
-                                'type' => 'string',
-                            ),
-                            'ConfigurationManager' => array(
-                                'type' => 'object',
-                                'properties' => array(
-                                    'Name' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'Version' => array(
-                                        'type' => 'string',
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
                 ),
             ),
         ),
@@ -4605,38 +4306,6 @@ return array (
                 ),
             ),
         ),
-        'DescribeEcsClustersResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'EcsClusters' => array(
-                    'type' => 'array',
-                    'location' => 'json',
-                    'items' => array(
-                        'name' => 'EcsCluster',
-                        'type' => 'object',
-                        'properties' => array(
-                            'EcsClusterArn' => array(
-                                'type' => 'string',
-                            ),
-                            'EcsClusterName' => array(
-                                'type' => 'string',
-                            ),
-                            'StackId' => array(
-                                'type' => 'string',
-                            ),
-                            'RegisteredAt' => array(
-                                'type' => 'string',
-                            ),
-                        ),
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-            ),
-        ),
         'DescribeElasticIpsResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -4734,19 +4403,96 @@ return array (
                         'name' => 'Instance',
                         'type' => 'object',
                         'properties' => array(
-                            'AgentVersion' => array(
+                            'InstanceId' => array(
+                                'type' => 'string',
+                            ),
+                            'Ec2InstanceId' => array(
+                                'type' => 'string',
+                            ),
+                            'VirtualizationType' => array(
+                                'type' => 'string',
+                            ),
+                            'Hostname' => array(
+                                'type' => 'string',
+                            ),
+                            'StackId' => array(
+                                'type' => 'string',
+                            ),
+                            'LayerIds' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'String',
+                                    'type' => 'string',
+                                ),
+                            ),
+                            'SecurityGroupIds' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'String',
+                                    'type' => 'string',
+                                ),
+                            ),
+                            'InstanceType' => array(
+                                'type' => 'string',
+                            ),
+                            'InstanceProfileArn' => array(
+                                'type' => 'string',
+                            ),
+                            'Status' => array(
+                                'type' => 'string',
+                            ),
+                            'Os' => array(
                                 'type' => 'string',
                             ),
                             'AmiId' => array(
                                 'type' => 'string',
                             ),
-                            'Architecture' => array(
+                            'AvailabilityZone' => array(
+                                'type' => 'string',
+                            ),
+                            'SubnetId' => array(
+                                'type' => 'string',
+                            ),
+                            'PublicDns' => array(
+                                'type' => 'string',
+                            ),
+                            'PrivateDns' => array(
+                                'type' => 'string',
+                            ),
+                            'PublicIp' => array(
+                                'type' => 'string',
+                            ),
+                            'PrivateIp' => array(
+                                'type' => 'string',
+                            ),
+                            'ElasticIp' => array(
                                 'type' => 'string',
                             ),
                             'AutoScalingType' => array(
                                 'type' => 'string',
                             ),
-                            'AvailabilityZone' => array(
+                            'SshKeyName' => array(
+                                'type' => 'string',
+                            ),
+                            'SshHostRsaKeyFingerprint' => array(
+                                'type' => 'string',
+                            ),
+                            'SshHostDsaKeyFingerprint' => array(
+                                'type' => 'string',
+                            ),
+                            'CreatedAt' => array(
+                                'type' => 'string',
+                            ),
+                            'LastServiceErrorId' => array(
+                                'type' => 'string',
+                            ),
+                            'Architecture' => array(
+                                'type' => 'string',
+                            ),
+                            'RootDeviceType' => array(
+                                'type' => 'string',
+                            ),
+                            'RootDeviceVolumeId' => array(
                                 'type' => 'string',
                             ),
                             'BlockDeviceMappings' => array(
@@ -4787,72 +4533,11 @@ return array (
                                     ),
                                 ),
                             ),
-                            'CreatedAt' => array(
-                                'type' => 'string',
-                            ),
-                            'EbsOptimized' => array(
-                                'type' => 'boolean',
-                            ),
-                            'Ec2InstanceId' => array(
-                                'type' => 'string',
-                            ),
-                            'EcsClusterArn' => array(
-                                'type' => 'string',
-                            ),
-                            'EcsContainerInstanceArn' => array(
-                                'type' => 'string',
-                            ),
-                            'ElasticIp' => array(
-                                'type' => 'string',
-                            ),
-                            'Hostname' => array(
-                                'type' => 'string',
-                            ),
-                            'InfrastructureClass' => array(
-                                'type' => 'string',
-                            ),
                             'InstallUpdatesOnBoot' => array(
                                 'type' => 'boolean',
                             ),
-                            'InstanceId' => array(
-                                'type' => 'string',
-                            ),
-                            'InstanceProfileArn' => array(
-                                'type' => 'string',
-                            ),
-                            'InstanceType' => array(
-                                'type' => 'string',
-                            ),
-                            'LastServiceErrorId' => array(
-                                'type' => 'string',
-                            ),
-                            'LayerIds' => array(
-                                'type' => 'array',
-                                'items' => array(
-                                    'name' => 'String',
-                                    'type' => 'string',
-                                ),
-                            ),
-                            'Os' => array(
-                                'type' => 'string',
-                            ),
-                            'Platform' => array(
-                                'type' => 'string',
-                            ),
-                            'PrivateDns' => array(
-                                'type' => 'string',
-                            ),
-                            'PrivateIp' => array(
-                                'type' => 'string',
-                            ),
-                            'PublicDns' => array(
-                                'type' => 'string',
-                            ),
-                            'PublicIp' => array(
-                                'type' => 'string',
-                            ),
-                            'RegisteredBy' => array(
-                                'type' => 'string',
+                            'EbsOptimized' => array(
+                                'type' => 'boolean',
                             ),
                             'ReportedAgentVersion' => array(
                                 'type' => 'string',
@@ -4871,38 +4556,10 @@ return array (
                                     ),
                                 ),
                             ),
-                            'RootDeviceType' => array(
+                            'InfrastructureClass' => array(
                                 'type' => 'string',
                             ),
-                            'RootDeviceVolumeId' => array(
-                                'type' => 'string',
-                            ),
-                            'SecurityGroupIds' => array(
-                                'type' => 'array',
-                                'items' => array(
-                                    'name' => 'String',
-                                    'type' => 'string',
-                                ),
-                            ),
-                            'SshHostDsaKeyFingerprint' => array(
-                                'type' => 'string',
-                            ),
-                            'SshHostRsaKeyFingerprint' => array(
-                                'type' => 'string',
-                            ),
-                            'SshKeyName' => array(
-                                'type' => 'string',
-                            ),
-                            'StackId' => array(
-                                'type' => 'string',
-                            ),
-                            'Status' => array(
-                                'type' => 'string',
-                            ),
-                            'SubnetId' => array(
-                                'type' => 'string',
-                            ),
-                            'VirtualizationType' => array(
+                            'RegisteredBy' => array(
                                 'type' => 'string',
                             ),
                         ),
@@ -4943,9 +4600,6 @@ return array (
                                 ),
                             ),
                             'CustomInstanceProfileArn' => array(
-                                'type' => 'string',
-                            ),
-                            'CustomJson' => array(
                                 'type' => 'string',
                             ),
                             'CustomSecurityGroupIds' => array(
@@ -5153,13 +4807,6 @@ return array (
                                     'LoadThreshold' => array(
                                         'type' => 'numeric',
                                     ),
-                                    'Alarms' => array(
-                                        'type' => 'array',
-                                        'items' => array(
-                                            'name' => 'String',
-                                            'type' => 'string',
-                                        ),
-                                    ),
                                 ),
                             ),
                             'DownScaling' => array(
@@ -5182,13 +4829,6 @@ return array (
                                     ),
                                     'LoadThreshold' => array(
                                         'type' => 'numeric',
-                                    ),
-                                    'Alarms' => array(
-                                        'type' => 'array',
-                                        'items' => array(
-                                            'name' => 'String',
-                                            'type' => 'string',
-                                        ),
                                     ),
                                 ),
                             ),
@@ -5603,9 +5243,6 @@ return array (
                             'DefaultRootDeviceType' => array(
                                 'type' => 'string',
                             ),
-                            'AgentVersion' => array(
-                                'type' => 'string',
-                            ),
                         ),
                     ),
                 ),
@@ -5777,40 +5414,6 @@ return array (
                 ),
             ),
         ),
-        'GrantAccessResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'TemporaryCredential' => array(
-                    'type' => 'object',
-                    'location' => 'json',
-                    'properties' => array(
-                        'Username' => array(
-                            'type' => 'string',
-                        ),
-                        'Password' => array(
-                            'type' => 'string',
-                        ),
-                        'ValidForInMinutes' => array(
-                            'type' => 'numeric',
-                        ),
-                        'InstanceId' => array(
-                            'type' => 'string',
-                        ),
-                    ),
-                ),
-            ),
-        ),
-        'RegisterEcsClusterResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'EcsClusterArn' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-            ),
-        ),
         'RegisterElasticIpResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -5851,12 +5454,6 @@ return array (
         ),
         'DescribeDeployments' => array(
             'result_key' => 'Deployments',
-        ),
-        'DescribeEcsClusters' => array(
-            'input_token' => 'NextToken',
-            'output_token' => 'NextToken',
-            'limit_key' => 'MaxResults',
-            'result_key' => 'EcsClusters',
         ),
         'DescribeElasticIps' => array(
             'result_key' => 'ElasticIps',

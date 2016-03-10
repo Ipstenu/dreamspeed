@@ -15,7 +15,7 @@
  */
 
 return array (
-    'apiVersion' => '2015-10-01',
+    'apiVersion' => '2014-10-01',
     'endpointPrefix' => 'ec2',
     'serviceFullName' => 'Amazon Elastic Compute Cloud',
     'serviceAbbreviation' => 'Amazon EC2',
@@ -90,7 +90,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -118,7 +118,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -146,7 +146,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'NetworkInterfaceId' => array(
                     'required' => true,
@@ -188,7 +188,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -237,7 +237,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -271,7 +271,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -305,7 +305,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -349,7 +349,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -383,7 +383,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -422,7 +422,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -461,7 +461,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -495,7 +495,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -578,18 +578,6 @@ return array (
                                     ),
                                 ),
                             ),
-                            'PrefixListIds' => array(
-                                'type' => 'array',
-                                'items' => array(
-                                    'name' => 'PrefixListId',
-                                    'type' => 'object',
-                                    'properties' => array(
-                                        'PrefixListId' => array(
-                                            'type' => 'string',
-                                        ),
-                                    ),
-                                ),
-                            ),
                         ),
                     ),
                 ),
@@ -610,7 +598,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -696,18 +684,6 @@ return array (
                                     ),
                                 ),
                             ),
-                            'PrefixListIds' => array(
-                                'type' => 'array',
-                                'items' => array(
-                                    'name' => 'PrefixListId',
-                                    'type' => 'object',
-                                    'properties' => array(
-                                        'PrefixListId' => array(
-                                            'type' => 'string',
-                                        ),
-                                    ),
-                                ),
-                            ),
                         ),
                     ),
                 ),
@@ -728,7 +704,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -784,7 +760,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -813,7 +789,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -846,42 +822,10 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'ExportTaskId' => array(
                     'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
-        'CancelImportTask' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'CancelImportTaskResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'CancelImportTask',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'ImportTaskId' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'CancelReason' => array(
                     'type' => 'string',
                     'location' => 'aws.query',
                 ),
@@ -902,51 +846,11 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'ReservedInstancesListingId' => array(
                     'required' => true,
                     'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
-        'CancelSpotFleetRequests' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'CancelSpotFleetRequestsResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'CancelSpotFleetRequests',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'SpotFleetRequestIds' => array(
-                    'required' => true,
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'SpotFleetRequestId',
-                    'items' => array(
-                        'name' => 'SpotFleetRequestId',
-                        'type' => 'string',
-                    ),
-                ),
-                'TerminateInstances' => array(
-                    'required' => true,
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
                     'location' => 'aws.query',
                 ),
             ),
@@ -966,7 +870,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1000,7 +904,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1034,7 +938,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1081,7 +985,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1110,15 +1014,6 @@ return array (
                     'type' => 'string',
                     'location' => 'aws.query',
                 ),
-                'Encrypted' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'KmsKeyId' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
             ),
         ),
         'CreateCustomerGateway' => array(
@@ -1136,7 +1031,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1176,7 +1071,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1208,59 +1103,6 @@ return array (
                 ),
             ),
         ),
-        'CreateFlowLogs' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'CreateFlowLogsResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'CreateFlowLogs',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'ResourceIds' => array(
-                    'required' => true,
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'ResourceId',
-                    'items' => array(
-                        'name' => 'ResourceId',
-                        'type' => 'string',
-                    ),
-                ),
-                'ResourceType' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'TrafficType' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'LogGroupName' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'DeliverLogsPermissionArn' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'ClientToken' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
         'CreateImage' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -1276,7 +1118,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1364,7 +1206,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'Description' => array(
                     'type' => 'string',
@@ -1415,7 +1257,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1439,7 +1281,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1468,7 +1310,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1497,7 +1339,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1577,7 +1419,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'SubnetId' => array(
                     'required' => true,
@@ -1645,7 +1487,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1679,7 +1521,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'ReservedInstancesId' => array(
                     'required' => true,
@@ -1722,7 +1564,7 @@ return array (
             'httpMethod' => 'POST',
             'uri' => '/',
             'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'CreateRouteResult',
+            'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
                 'Action' => array(
@@ -1733,7 +1575,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1783,7 +1625,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1812,7 +1654,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1851,7 +1693,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1884,7 +1726,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1917,7 +1759,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1955,7 +1797,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2007,7 +1849,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2061,7 +1903,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2074,57 +1916,6 @@ return array (
                     'location' => 'aws.query',
                 ),
                 'InstanceTenancy' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
-        'CreateVpcEndpoint' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'CreateVpcEndpointResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'CreateVpcEndpoint',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'VpcId' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'ServiceName' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'PolicyDocument' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'RouteTableIds' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'RouteTableId',
-                    'items' => array(
-                        'name' => 'RouteTableId',
-                        'type' => 'string',
-                    ),
-                ),
-                'ClientToken' => array(
                     'type' => 'string',
                     'location' => 'aws.query',
                 ),
@@ -2145,7 +1936,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2181,7 +1972,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2230,7 +2021,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'VpnConnectionId' => array(
                     'required' => true,
@@ -2259,7 +2050,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2292,7 +2083,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2321,7 +2112,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2332,35 +2123,6 @@ return array (
                     'required' => true,
                     'type' => 'string',
                     'location' => 'aws.query',
-                ),
-            ),
-        ),
-        'DeleteFlowLogs' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'DeleteFlowLogsResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'DeleteFlowLogs',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'FlowLogIds' => array(
-                    'required' => true,
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'FlowLogId',
-                    'items' => array(
-                        'name' => 'FlowLogId',
-                        'type' => 'string',
-                    ),
                 ),
             ),
         ),
@@ -2379,7 +2141,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2408,7 +2170,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2437,7 +2199,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2466,7 +2228,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2506,7 +2268,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2535,7 +2297,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2564,7 +2326,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2598,7 +2360,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2627,7 +2389,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2659,7 +2421,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2688,7 +2450,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2712,7 +2474,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2741,7 +2503,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2792,7 +2554,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2821,7 +2583,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2832,40 +2594,6 @@ return array (
                     'required' => true,
                     'type' => 'string',
                     'location' => 'aws.query',
-                ),
-            ),
-        ),
-        'DeleteVpcEndpoints' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'DeleteVpcEndpointsResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'DeleteVpcEndpoints',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'VpcEndpointIds' => array(
-                    'required' => true,
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'VpcEndpointId',
-                    'items' => array(
-                        'name' => 'VpcEndpointId',
-                        'type' => 'string',
-                    ),
                 ),
             ),
         ),
@@ -2884,7 +2612,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2913,7 +2641,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2942,7 +2670,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'VpnConnectionId' => array(
                     'required' => true,
@@ -2971,7 +2699,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3000,7 +2728,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3029,7 +2757,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3062,7 +2790,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3126,7 +2854,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3181,7 +2909,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3236,7 +2964,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3299,7 +3027,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3354,7 +3082,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3409,7 +3137,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3464,7 +3192,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'ExportTaskIds' => array(
                     'type' => 'array',
@@ -3474,63 +3202,6 @@ return array (
                         'name' => 'ExportTaskId',
                         'type' => 'string',
                     ),
-                ),
-            ),
-        ),
-        'DescribeFlowLogs' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'DescribeFlowLogsResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'DescribeFlowLogs',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'FlowLogIds' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'FlowLogId',
-                    'items' => array(
-                        'name' => 'FlowLogId',
-                        'type' => 'string',
-                    ),
-                ),
-                'Filter' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'items' => array(
-                        'name' => 'Filter',
-                        'type' => 'object',
-                        'properties' => array(
-                            'Name' => array(
-                                'type' => 'string',
-                            ),
-                            'Values' => array(
-                                'type' => 'array',
-                                'sentAs' => 'Value',
-                                'items' => array(
-                                    'name' => 'Value',
-                                    'type' => 'string',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'MaxResults' => array(
-                    'type' => 'numeric',
-                    'location' => 'aws.query',
                 ),
             ),
         ),
@@ -3549,7 +3220,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3583,7 +3254,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3641,130 +3312,6 @@ return array (
                 ),
             ),
         ),
-        'DescribeImportImageTasks' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'DescribeImportImageTasksResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'DescribeImportImageTasks',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'ImportTaskIds' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'ImportTaskId',
-                    'items' => array(
-                        'name' => 'ImportTaskId',
-                        'type' => 'string',
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'MaxResults' => array(
-                    'type' => 'numeric',
-                    'location' => 'aws.query',
-                ),
-                'Filters' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'items' => array(
-                        'name' => 'Filter',
-                        'type' => 'object',
-                        'properties' => array(
-                            'Name' => array(
-                                'type' => 'string',
-                            ),
-                            'Values' => array(
-                                'type' => 'array',
-                                'sentAs' => 'Value',
-                                'items' => array(
-                                    'name' => 'Value',
-                                    'type' => 'string',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-        'DescribeImportSnapshotTasks' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'DescribeImportSnapshotTasksResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'DescribeImportSnapshotTasks',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'ImportTaskIds' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'ImportTaskId',
-                    'items' => array(
-                        'name' => 'ImportTaskId',
-                        'type' => 'string',
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'MaxResults' => array(
-                    'type' => 'numeric',
-                    'location' => 'aws.query',
-                ),
-                'Filters' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'items' => array(
-                        'name' => 'Filter',
-                        'type' => 'object',
-                        'properties' => array(
-                            'Name' => array(
-                                'type' => 'string',
-                            ),
-                            'Values' => array(
-                                'type' => 'array',
-                                'sentAs' => 'Value',
-                                'items' => array(
-                                    'name' => 'Value',
-                                    'type' => 'string',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
         'DescribeInstanceAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -3780,7 +3327,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3814,7 +3361,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3882,7 +3429,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3945,7 +3492,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4000,7 +3547,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4040,69 +3587,6 @@ return array (
                 ),
             ),
         ),
-        'DescribeMovingAddresses' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'DescribeMovingAddressesResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'DescribeMovingAddresses',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'PublicIps' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'PublicIp',
-                    'items' => array(
-                        'name' => 'PublicIp',
-                        'type' => 'string',
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'Filters' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'Filter',
-                    'items' => array(
-                        'name' => 'Filter',
-                        'type' => 'object',
-                        'properties' => array(
-                            'Name' => array(
-                                'type' => 'string',
-                            ),
-                            'Values' => array(
-                                'type' => 'array',
-                                'sentAs' => 'Value',
-                                'items' => array(
-                                    'name' => 'Value',
-                                    'type' => 'string',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                'MaxResults' => array(
-                    'type' => 'numeric',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
         'DescribeNetworkAcls' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -4118,7 +3602,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4173,7 +3657,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4206,7 +3690,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4261,7 +3745,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4301,69 +3785,6 @@ return array (
                 ),
             ),
         ),
-        'DescribePrefixLists' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'DescribePrefixListsResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'DescribePrefixLists',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'PrefixListIds' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'PrefixListId',
-                    'items' => array(
-                        'name' => 'PrefixListId',
-                        'type' => 'string',
-                    ),
-                ),
-                'Filters' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'Filter',
-                    'items' => array(
-                        'name' => 'Filter',
-                        'type' => 'object',
-                        'properties' => array(
-                            'Name' => array(
-                                'type' => 'string',
-                            ),
-                            'Values' => array(
-                                'type' => 'array',
-                                'sentAs' => 'Value',
-                                'items' => array(
-                                    'name' => 'Value',
-                                    'type' => 'string',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                'MaxResults' => array(
-                    'type' => 'numeric',
-                    'location' => 'aws.query',
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
         'DescribeRegions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -4379,7 +3800,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4434,7 +3855,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4493,7 +3914,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'ReservedInstancesId' => array(
                     'type' => 'string',
@@ -4541,7 +3962,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'ReservedInstancesModificationIds' => array(
                     'type' => 'array',
@@ -4595,7 +4016,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4695,7 +4116,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4750,7 +4171,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4814,7 +4235,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4848,7 +4269,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4929,135 +4350,11 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
                     'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
-        'DescribeSpotFleetInstances' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'DescribeSpotFleetInstancesResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'DescribeSpotFleetInstances',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'SpotFleetRequestId' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'MaxResults' => array(
-                    'type' => 'numeric',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
-        'DescribeSpotFleetRequestHistory' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'DescribeSpotFleetRequestHistoryResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'DescribeSpotFleetRequestHistory',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'SpotFleetRequestId' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'EventType' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'StartTime' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'MaxResults' => array(
-                    'type' => 'numeric',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
-        'DescribeSpotFleetRequests' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'DescribeSpotFleetRequestsResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'DescribeSpotFleetRequests',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'SpotFleetRequestIds' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'SpotFleetRequestId',
-                    'items' => array(
-                        'name' => 'SpotFleetRequestId',
-                        'type' => 'string',
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'MaxResults' => array(
-                    'type' => 'numeric',
                     'location' => 'aws.query',
                 ),
             ),
@@ -5077,7 +4374,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5132,7 +4429,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5226,7 +4523,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5281,7 +4578,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5335,7 +4632,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5368,7 +4665,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5431,7 +4728,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5494,7 +4791,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5527,7 +4824,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5567,101 +4864,6 @@ return array (
                 ),
             ),
         ),
-        'DescribeVpcEndpointServices' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'DescribeVpcEndpointServicesResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'DescribeVpcEndpointServices',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'MaxResults' => array(
-                    'type' => 'numeric',
-                    'location' => 'aws.query',
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
-        'DescribeVpcEndpoints' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'DescribeVpcEndpointsResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'DescribeVpcEndpoints',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'VpcEndpointIds' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'VpcEndpointId',
-                    'items' => array(
-                        'name' => 'VpcEndpointId',
-                        'type' => 'string',
-                    ),
-                ),
-                'Filters' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'Filter',
-                    'items' => array(
-                        'name' => 'Filter',
-                        'type' => 'object',
-                        'properties' => array(
-                            'Name' => array(
-                                'type' => 'string',
-                            ),
-                            'Values' => array(
-                                'type' => 'array',
-                                'sentAs' => 'Value',
-                                'items' => array(
-                                    'name' => 'Value',
-                                    'type' => 'string',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                'MaxResults' => array(
-                    'type' => 'numeric',
-                    'location' => 'aws.query',
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
         'DescribeVpcPeeringConnections' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -5677,7 +4879,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5732,7 +4934,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5787,7 +4989,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5842,7 +5044,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5897,7 +5099,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5931,7 +5133,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5965,7 +5167,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5999,7 +5201,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6041,7 +5243,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6075,7 +5277,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'RouteTableId' => array(
                     'required' => true,
@@ -6104,7 +5306,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6133,7 +5335,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6165,7 +5367,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6194,7 +5396,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'RouteTableId' => array(
                     'required' => true,
@@ -6223,7 +5425,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6252,7 +5454,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6281,7 +5483,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6310,7 +5512,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6319,123 +5521,6 @@ return array (
                 ),
                 'InstanceId' => array(
                     'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
-        'ImportImage' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'ImportImageResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'ImportImage',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'Description' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'DiskContainers' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'DiskContainer',
-                    'items' => array(
-                        'name' => 'DiskContainer',
-                        'type' => 'object',
-                        'properties' => array(
-                            'Description' => array(
-                                'type' => 'string',
-                            ),
-                            'Format' => array(
-                                'type' => 'string',
-                            ),
-                            'Url' => array(
-                                'type' => 'string',
-                            ),
-                            'UserBucket' => array(
-                                'type' => 'object',
-                                'properties' => array(
-                                    'S3Bucket' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'S3Key' => array(
-                                        'type' => 'string',
-                                    ),
-                                ),
-                            ),
-                            'DeviceName' => array(
-                                'type' => 'string',
-                            ),
-                            'SnapshotId' => array(
-                                'type' => 'string',
-                            ),
-                        ),
-                    ),
-                ),
-                'LicenseType' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'Hypervisor' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'Architecture' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'Platform' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'ClientData' => array(
-                    'type' => 'object',
-                    'location' => 'aws.query',
-                    'properties' => array(
-                        'UploadStart' => array(
-                            'type' => array(
-                                'object',
-                                'string',
-                                'integer',
-                            ),
-                            'format' => 'date-time',
-                        ),
-                        'UploadEnd' => array(
-                            'type' => array(
-                                'object',
-                                'string',
-                                'integer',
-                            ),
-                            'format' => 'date-time',
-                        ),
-                        'UploadSize' => array(
-                            'type' => 'numeric',
-                        ),
-                        'Comment' => array(
-                            'type' => 'string',
-                        ),
-                    ),
-                ),
-                'ClientToken' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'RoleName' => array(
                     'type' => 'string',
                     'location' => 'aws.query',
                 ),
@@ -6456,7 +5541,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6595,7 +5680,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6617,96 +5702,6 @@ return array (
                 ),
             ),
         ),
-        'ImportSnapshot' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'ImportSnapshotResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'ImportSnapshot',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'Description' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'DiskContainer' => array(
-                    'type' => 'object',
-                    'location' => 'aws.query',
-                    'properties' => array(
-                        'Description' => array(
-                            'type' => 'string',
-                        ),
-                        'Format' => array(
-                            'type' => 'string',
-                        ),
-                        'Url' => array(
-                            'type' => 'string',
-                        ),
-                        'UserBucket' => array(
-                            'type' => 'object',
-                            'properties' => array(
-                                'S3Bucket' => array(
-                                    'type' => 'string',
-                                ),
-                                'S3Key' => array(
-                                    'type' => 'string',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                'ClientData' => array(
-                    'type' => 'object',
-                    'location' => 'aws.query',
-                    'properties' => array(
-                        'UploadStart' => array(
-                            'type' => array(
-                                'object',
-                                'string',
-                                'integer',
-                            ),
-                            'format' => 'date-time',
-                        ),
-                        'UploadEnd' => array(
-                            'type' => array(
-                                'object',
-                                'string',
-                                'integer',
-                            ),
-                            'format' => 'date-time',
-                        ),
-                        'UploadSize' => array(
-                            'type' => 'numeric',
-                        ),
-                        'Comment' => array(
-                            'type' => 'string',
-                        ),
-                    ),
-                ),
-                'ClientToken' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'RoleName' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
         'ImportVolume' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -6722,7 +5717,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6785,7 +5780,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6898,7 +5893,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7060,7 +6055,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7130,7 +6125,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'ClientToken' => array(
                     'type' => 'string',
@@ -7187,7 +6182,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7263,38 +6258,6 @@ return array (
                 ),
             ),
         ),
-        'ModifySpotFleetRequest' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'ModifySpotFleetRequestResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'ModifySpotFleetRequest',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'SpotFleetRequestId' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'TargetCapacity' => array(
-                    'type' => 'numeric',
-                    'location' => 'aws.query',
-                ),
-                'ExcessCapacityTerminationPolicy' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
         'ModifySubnetAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -7310,7 +6273,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'SubnetId' => array(
                     'required' => true,
@@ -7344,7 +6307,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7383,7 +6346,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'VpcId' => array(
                     'required' => true,
@@ -7412,62 +6375,6 @@ return array (
                 ),
             ),
         ),
-        'ModifyVpcEndpoint' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'ModifyVpcEndpointResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'ModifyVpcEndpoint',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'VpcEndpointId' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'ResetPolicy' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'PolicyDocument' => array(
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'AddRouteTableIds' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'AddRouteTableId',
-                    'items' => array(
-                        'name' => 'AddRouteTableId',
-                        'type' => 'string',
-                    ),
-                ),
-                'RemoveRouteTableIds' => array(
-                    'type' => 'array',
-                    'location' => 'aws.query',
-                    'sentAs' => 'RemoveRouteTableId',
-                    'items' => array(
-                        'name' => 'RemoveRouteTableId',
-                        'type' => 'string',
-                    ),
-                ),
-            ),
-        ),
         'MonitorInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -7483,7 +6390,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7502,35 +6409,6 @@ return array (
                 ),
             ),
         ),
-        'MoveAddressToVpc' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'MoveAddressToVpcResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'MoveAddressToVpc',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'PublicIp' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
         'PurchaseReservedInstancesOffering' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -7546,7 +6424,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7592,7 +6470,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7626,7 +6504,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7732,7 +6610,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7761,7 +6639,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7793,7 +6671,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7827,7 +6705,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7907,7 +6785,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7957,7 +6835,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7991,7 +6869,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -8047,266 +6925,6 @@ return array (
                 ),
             ),
         ),
-        'RequestSpotFleet' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'RequestSpotFleetResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'RequestSpotFleet',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'SpotFleetRequestConfig' => array(
-                    'required' => true,
-                    'type' => 'object',
-                    'location' => 'aws.query',
-                    'properties' => array(
-                        'ClientToken' => array(
-                            'type' => 'string',
-                        ),
-                        'SpotPrice' => array(
-                            'required' => true,
-                            'type' => 'string',
-                        ),
-                        'TargetCapacity' => array(
-                            'required' => true,
-                            'type' => 'numeric',
-                        ),
-                        'ValidFrom' => array(
-                            'type' => 'string',
-                        ),
-                        'ValidUntil' => array(
-                            'type' => 'string',
-                        ),
-                        'TerminateInstancesWithExpiration' => array(
-                            'type' => 'boolean',
-                            'format' => 'boolean-string',
-                        ),
-                        'IamFleetRole' => array(
-                            'required' => true,
-                            'type' => 'string',
-                        ),
-                        'LaunchSpecifications' => array(
-                            'required' => true,
-                            'type' => 'array',
-                            'minItems' => 1,
-                            'items' => array(
-                                'name' => 'SpotFleetLaunchSpecification',
-                                'type' => 'object',
-                                'properties' => array(
-                                    'ImageId' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'KeyName' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'SecurityGroups' => array(
-                                        'type' => 'array',
-                                        'sentAs' => 'GroupSet',
-                                        'items' => array(
-                                            'name' => 'GroupSet',
-                                            'type' => 'object',
-                                            'properties' => array(
-                                                'GroupName' => array(
-                                                    'type' => 'string',
-                                                ),
-                                                'GroupId' => array(
-                                                    'type' => 'string',
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    'UserData' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'AddressingType' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'InstanceType' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'Placement' => array(
-                                        'type' => 'object',
-                                        'properties' => array(
-                                            'AvailabilityZone' => array(
-                                                'type' => 'string',
-                                            ),
-                                            'GroupName' => array(
-                                                'type' => 'string',
-                                            ),
-                                        ),
-                                    ),
-                                    'KernelId' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'RamdiskId' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'BlockDeviceMappings' => array(
-                                        'type' => 'array',
-                                        'sentAs' => 'BlockDeviceMapping',
-                                        'items' => array(
-                                            'name' => 'BlockDeviceMapping',
-                                            'type' => 'object',
-                                            'properties' => array(
-                                                'VirtualName' => array(
-                                                    'type' => 'string',
-                                                ),
-                                                'DeviceName' => array(
-                                                    'type' => 'string',
-                                                ),
-                                                'Ebs' => array(
-                                                    'type' => 'object',
-                                                    'properties' => array(
-                                                        'SnapshotId' => array(
-                                                            'type' => 'string',
-                                                        ),
-                                                        'VolumeSize' => array(
-                                                            'type' => 'numeric',
-                                                        ),
-                                                        'DeleteOnTermination' => array(
-                                                            'type' => 'boolean',
-                                                            'format' => 'boolean-string',
-                                                        ),
-                                                        'VolumeType' => array(
-                                                            'type' => 'string',
-                                                        ),
-                                                        'Iops' => array(
-                                                            'type' => 'numeric',
-                                                        ),
-                                                        'Encrypted' => array(
-                                                            'type' => 'boolean',
-                                                            'format' => 'boolean-string',
-                                                        ),
-                                                    ),
-                                                ),
-                                                'NoDevice' => array(
-                                                    'type' => 'string',
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    'Monitoring' => array(
-                                        'type' => 'object',
-                                        'properties' => array(
-                                            'Enabled' => array(
-                                                'type' => 'boolean',
-                                                'format' => 'boolean-string',
-                                            ),
-                                        ),
-                                    ),
-                                    'SubnetId' => array(
-                                        'type' => 'string',
-                                    ),
-                                    'NetworkInterfaces' => array(
-                                        'type' => 'array',
-                                        'sentAs' => 'NetworkInterfaceSet',
-                                        'items' => array(
-                                            'name' => 'NetworkInterfaceSet',
-                                            'type' => 'object',
-                                            'properties' => array(
-                                                'NetworkInterfaceId' => array(
-                                                    'type' => 'string',
-                                                ),
-                                                'DeviceIndex' => array(
-                                                    'type' => 'numeric',
-                                                ),
-                                                'SubnetId' => array(
-                                                    'type' => 'string',
-                                                ),
-                                                'Description' => array(
-                                                    'type' => 'string',
-                                                ),
-                                                'PrivateIpAddress' => array(
-                                                    'type' => 'string',
-                                                ),
-                                                'Groups' => array(
-                                                    'type' => 'array',
-                                                    'sentAs' => 'SecurityGroupId',
-                                                    'items' => array(
-                                                        'name' => 'SecurityGroupId',
-                                                        'type' => 'string',
-                                                    ),
-                                                ),
-                                                'DeleteOnTermination' => array(
-                                                    'type' => 'boolean',
-                                                    'format' => 'boolean-string',
-                                                ),
-                                                'PrivateIpAddresses' => array(
-                                                    'type' => 'array',
-                                                    'sentAs' => 'PrivateIpAddressesSet',
-                                                    'items' => array(
-                                                        'name' => 'PrivateIpAddressesSet',
-                                                        'type' => 'object',
-                                                        'properties' => array(
-                                                            'PrivateIpAddress' => array(
-                                                                'required' => true,
-                                                                'type' => 'string',
-                                                            ),
-                                                            'Primary' => array(
-                                                                'type' => 'boolean',
-                                                                'format' => 'boolean-string',
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                'SecondaryPrivateIpAddressCount' => array(
-                                                    'type' => 'numeric',
-                                                ),
-                                                'AssociatePublicIpAddress' => array(
-                                                    'type' => 'boolean',
-                                                    'format' => 'boolean-string',
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    'IamInstanceProfile' => array(
-                                        'type' => 'object',
-                                        'properties' => array(
-                                            'Arn' => array(
-                                                'type' => 'string',
-                                            ),
-                                            'Name' => array(
-                                                'type' => 'string',
-                                            ),
-                                        ),
-                                    ),
-                                    'EbsOptimized' => array(
-                                        'type' => 'boolean',
-                                        'format' => 'boolean-string',
-                                    ),
-                                    'WeightedCapacity' => array(
-                                        'type' => 'numeric',
-                                    ),
-                                    'SpotPrice' => array(
-                                        'type' => 'string',
-                                    ),
-                                ),
-                            ),
-                        ),
-                        'ExcessCapacityTerminationPolicy' => array(
-                            'type' => 'string',
-                        ),
-                        'AllocationStrategy' => array(
-                            'type' => 'string',
-                        ),
-                    ),
-                ),
-            ),
-        ),
         'RequestSpotInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -8322,7 +6940,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -8331,10 +6949,6 @@ return array (
                 ),
                 'SpotPrice' => array(
                     'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'ClientToken' => array(
                     'type' => 'string',
                     'location' => 'aws.query',
                 ),
@@ -8370,10 +6984,6 @@ return array (
                 ),
                 'AvailabilityZoneGroup' => array(
                     'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-                'BlockDurationMinutes' => array(
-                    'type' => 'numeric',
                     'location' => 'aws.query',
                 ),
                 'LaunchSpecification' => array(
@@ -8580,7 +7190,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -8614,7 +7224,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -8648,7 +7258,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -8681,7 +7291,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -8694,35 +7304,6 @@ return array (
                     'location' => 'aws.query',
                 ),
                 'Attribute' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'aws.query',
-                ),
-            ),
-        ),
-        'RestoreAddressToClassic' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'RestoreAddressToClassicResult',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Action' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => 'RestoreAddressToClassic',
-                ),
-                'Version' => array(
-                    'static' => true,
-                    'location' => 'aws.query',
-                    'default' => '2015-10-01',
-                ),
-                'DryRun' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'aws.query',
-                ),
-                'PublicIp' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'aws.query',
@@ -8744,7 +7325,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -8827,18 +7408,6 @@ return array (
                                     ),
                                 ),
                             ),
-                            'PrefixListIds' => array(
-                                'type' => 'array',
-                                'items' => array(
-                                    'name' => 'PrefixListId',
-                                    'type' => 'object',
-                                    'properties' => array(
-                                        'PrefixListId' => array(
-                                            'type' => 'string',
-                                        ),
-                                    ),
-                                ),
-                            ),
                         ),
                     ),
                 ),
@@ -8859,7 +7428,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -8945,18 +7514,6 @@ return array (
                                     ),
                                 ),
                             ),
-                            'PrefixListIds' => array(
-                                'type' => 'array',
-                                'items' => array(
-                                    'name' => 'PrefixListId',
-                                    'type' => 'object',
-                                    'properties' => array(
-                                        'PrefixListId' => array(
-                                            'type' => 'string',
-                                        ),
-                                    ),
-                                ),
-                            ),
                         ),
                     ),
                 ),
@@ -8977,7 +7534,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -9229,7 +7786,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'InstanceIds' => array(
                     'required' => true,
@@ -9267,7 +7824,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -9306,7 +7863,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -9340,7 +7897,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'NetworkInterfaceId' => array(
                     'required' => true,
@@ -9374,7 +7931,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2015-10-01',
+                    'default' => '2014-10-01',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -9773,27 +8330,6 @@ return array (
                 ),
             ),
         ),
-        'CancelImportTaskResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'ImportTaskId' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'importTaskId',
-                ),
-                'State' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'state',
-                ),
-                'PreviousState' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'previousState',
-                ),
-            ),
-        ),
         'CancelReservedInstancesListingResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -9905,66 +8441,6 @@ return array (
                 ),
             ),
         ),
-        'CancelSpotFleetRequestsResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'UnsuccessfulFleetRequests' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'unsuccessfulFleetRequestSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'SpotFleetRequestId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'spotFleetRequestId',
-                            ),
-                            'Error' => array(
-                                'type' => 'object',
-                                'sentAs' => 'error',
-                                'properties' => array(
-                                    'Code' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'code',
-                                    ),
-                                    'Message' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'message',
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                'SuccessfulFleetRequests' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'successfulFleetRequestSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'SpotFleetRequestId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'spotFleetRequestId',
-                            ),
-                            'CurrentSpotFleetRequestState' => array(
-                                'type' => 'string',
-                                'sentAs' => 'currentSpotFleetRequestState',
-                            ),
-                            'PreviousSpotFleetRequestState' => array(
-                                'type' => 'string',
-                                'sentAs' => 'previousSpotFleetRequestState',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
         'CancelSpotInstanceRequestsResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -9999,11 +8475,6 @@ return array (
                     'type' => 'string',
                     'location' => 'xml',
                     'sentAs' => 'ownerId',
-                ),
-                'Return' => array(
-                    'type' => 'boolean',
-                    'location' => 'xml',
-                    'sentAs' => 'return',
                 ),
             ),
         ),
@@ -10133,57 +8604,6 @@ return array (
                                     'Value' => array(
                                         'type' => 'string',
                                         'sentAs' => 'value',
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-        'CreateFlowLogsResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'FlowLogIds' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'flowLogIdSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'string',
-                        'sentAs' => 'item',
-                    ),
-                ),
-                'ClientToken' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'clientToken',
-                ),
-                'Unsuccessful' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'unsuccessful',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'ResourceId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'resourceId',
-                            ),
-                            'Error' => array(
-                                'type' => 'object',
-                                'sentAs' => 'error',
-                                'properties' => array(
-                                    'Code' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'code',
-                                    ),
-                                    'Message' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'message',
                                     ),
                                 ),
                             ),
@@ -10793,17 +9213,6 @@ return array (
                 ),
             ),
         ),
-        'CreateRouteResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'Return' => array(
-                    'type' => 'boolean',
-                    'location' => 'xml',
-                    'sentAs' => 'return',
-                ),
-            ),
-        ),
         'CreateRouteTableResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -10832,10 +9241,6 @@ return array (
                                     'DestinationCidrBlock' => array(
                                         'type' => 'string',
                                         'sentAs' => 'destinationCidrBlock',
-                                    ),
-                                    'DestinationPrefixListId' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'destinationPrefixListId',
                                     ),
                                     'GatewayId' => array(
                                         'type' => 'string',
@@ -10963,11 +9368,6 @@ return array (
                     'location' => 'xml',
                     'sentAs' => 'status',
                 ),
-                'StateMessage' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'statusMessage',
-                ),
                 'StartTime' => array(
                     'type' => 'string',
                     'location' => 'xml',
@@ -11007,11 +9407,6 @@ return array (
                     'type' => 'string',
                     'location' => 'xml',
                     'sentAs' => 'kmsKeyId',
-                ),
-                'DataEncryptionKeyId' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'dataEncryptionKeyId',
                 ),
             ),
         ),
@@ -11290,57 +9685,6 @@ return array (
                 ),
             ),
         ),
-        'CreateVpcEndpointResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'VpcEndpoint' => array(
-                    'type' => 'object',
-                    'location' => 'xml',
-                    'sentAs' => 'vpcEndpoint',
-                    'properties' => array(
-                        'VpcEndpointId' => array(
-                            'type' => 'string',
-                            'sentAs' => 'vpcEndpointId',
-                        ),
-                        'VpcId' => array(
-                            'type' => 'string',
-                            'sentAs' => 'vpcId',
-                        ),
-                        'ServiceName' => array(
-                            'type' => 'string',
-                            'sentAs' => 'serviceName',
-                        ),
-                        'State' => array(
-                            'type' => 'string',
-                            'sentAs' => 'state',
-                        ),
-                        'PolicyDocument' => array(
-                            'type' => 'string',
-                            'sentAs' => 'policyDocument',
-                        ),
-                        'RouteTableIds' => array(
-                            'type' => 'array',
-                            'sentAs' => 'routeTableIdSet',
-                            'items' => array(
-                                'name' => 'item',
-                                'type' => 'string',
-                                'sentAs' => 'item',
-                            ),
-                        ),
-                        'CreationTimestamp' => array(
-                            'type' => 'string',
-                            'sentAs' => 'creationTimestamp',
-                        ),
-                    ),
-                ),
-                'ClientToken' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'clientToken',
-                ),
-            ),
-        ),
         'CreateVpcPeeringConnectionResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -11610,78 +9954,6 @@ return array (
                                     'Value' => array(
                                         'type' => 'string',
                                         'sentAs' => 'value',
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-        'DeleteFlowLogsResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'Unsuccessful' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'unsuccessful',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'ResourceId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'resourceId',
-                            ),
-                            'Error' => array(
-                                'type' => 'object',
-                                'sentAs' => 'error',
-                                'properties' => array(
-                                    'Code' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'code',
-                                    ),
-                                    'Message' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'message',
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-        'DeleteVpcEndpointsResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'Unsuccessful' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'unsuccessful',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'ResourceId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'resourceId',
-                            ),
-                            'Error' => array(
-                                'type' => 'object',
-                                'sentAs' => 'error',
-                                'properties' => array(
-                                    'Code' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'code',
-                                    ),
-                                    'Message' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'message',
                                     ),
                                 ),
                             ),
@@ -12372,65 +10644,6 @@ return array (
                 ),
             ),
         ),
-        'DescribeFlowLogsResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'FlowLogs' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'flowLogSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'CreationTime' => array(
-                                'type' => 'string',
-                                'sentAs' => 'creationTime',
-                            ),
-                            'FlowLogId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'flowLogId',
-                            ),
-                            'FlowLogStatus' => array(
-                                'type' => 'string',
-                                'sentAs' => 'flowLogStatus',
-                            ),
-                            'ResourceId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'resourceId',
-                            ),
-                            'TrafficType' => array(
-                                'type' => 'string',
-                                'sentAs' => 'trafficType',
-                            ),
-                            'LogGroupName' => array(
-                                'type' => 'string',
-                                'sentAs' => 'logGroupName',
-                            ),
-                            'DeliverLogsStatus' => array(
-                                'type' => 'string',
-                                'sentAs' => 'deliverLogsStatus',
-                            ),
-                            'DeliverLogsErrorMessage' => array(
-                                'type' => 'string',
-                                'sentAs' => 'deliverLogsErrorMessage',
-                            ),
-                            'DeliverLogsPermissionArn' => array(
-                                'type' => 'string',
-                                'sentAs' => 'deliverLogsPermissionArn',
-                            ),
-                        ),
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'nextToken',
-                ),
-            ),
-        ),
         'imageAttribute' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -12776,213 +10989,6 @@ return array (
                             ),
                         ),
                     ),
-                ),
-            ),
-        ),
-        'DescribeImportImageTasksResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'ImportImageTasks' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'importImageTaskSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'ImportTaskId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'importTaskId',
-                            ),
-                            'Architecture' => array(
-                                'type' => 'string',
-                                'sentAs' => 'architecture',
-                            ),
-                            'LicenseType' => array(
-                                'type' => 'string',
-                                'sentAs' => 'licenseType',
-                            ),
-                            'Platform' => array(
-                                'type' => 'string',
-                                'sentAs' => 'platform',
-                            ),
-                            'Hypervisor' => array(
-                                'type' => 'string',
-                                'sentAs' => 'hypervisor',
-                            ),
-                            'Description' => array(
-                                'type' => 'string',
-                                'sentAs' => 'description',
-                            ),
-                            'SnapshotDetails' => array(
-                                'type' => 'array',
-                                'sentAs' => 'snapshotDetailSet',
-                                'items' => array(
-                                    'name' => 'item',
-                                    'type' => 'object',
-                                    'sentAs' => 'item',
-                                    'properties' => array(
-                                        'DiskImageSize' => array(
-                                            'type' => 'numeric',
-                                            'sentAs' => 'diskImageSize',
-                                        ),
-                                        'Description' => array(
-                                            'type' => 'string',
-                                            'sentAs' => 'description',
-                                        ),
-                                        'Format' => array(
-                                            'type' => 'string',
-                                            'sentAs' => 'format',
-                                        ),
-                                        'Url' => array(
-                                            'type' => 'string',
-                                            'sentAs' => 'url',
-                                        ),
-                                        'UserBucket' => array(
-                                            'type' => 'object',
-                                            'sentAs' => 'userBucket',
-                                            'properties' => array(
-                                                'S3Bucket' => array(
-                                                    'type' => 'string',
-                                                    'sentAs' => 's3Bucket',
-                                                ),
-                                                'S3Key' => array(
-                                                    'type' => 'string',
-                                                    'sentAs' => 's3Key',
-                                                ),
-                                            ),
-                                        ),
-                                        'DeviceName' => array(
-                                            'type' => 'string',
-                                            'sentAs' => 'deviceName',
-                                        ),
-                                        'SnapshotId' => array(
-                                            'type' => 'string',
-                                            'sentAs' => 'snapshotId',
-                                        ),
-                                        'Progress' => array(
-                                            'type' => 'string',
-                                            'sentAs' => 'progress',
-                                        ),
-                                        'StatusMessage' => array(
-                                            'type' => 'string',
-                                            'sentAs' => 'statusMessage',
-                                        ),
-                                        'Status' => array(
-                                            'type' => 'string',
-                                            'sentAs' => 'status',
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            'ImageId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'imageId',
-                            ),
-                            'Progress' => array(
-                                'type' => 'string',
-                                'sentAs' => 'progress',
-                            ),
-                            'StatusMessage' => array(
-                                'type' => 'string',
-                                'sentAs' => 'statusMessage',
-                            ),
-                            'Status' => array(
-                                'type' => 'string',
-                                'sentAs' => 'status',
-                            ),
-                        ),
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'nextToken',
-                ),
-            ),
-        ),
-        'DescribeImportSnapshotTasksResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'ImportSnapshotTasks' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'importSnapshotTaskSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'ImportTaskId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'importTaskId',
-                            ),
-                            'SnapshotTaskDetail' => array(
-                                'type' => 'object',
-                                'sentAs' => 'snapshotTaskDetail',
-                                'properties' => array(
-                                    'DiskImageSize' => array(
-                                        'type' => 'numeric',
-                                        'sentAs' => 'diskImageSize',
-                                    ),
-                                    'Description' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'description',
-                                    ),
-                                    'Format' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'format',
-                                    ),
-                                    'Url' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'url',
-                                    ),
-                                    'UserBucket' => array(
-                                        'type' => 'object',
-                                        'sentAs' => 'userBucket',
-                                        'properties' => array(
-                                            'S3Bucket' => array(
-                                                'type' => 'string',
-                                                'sentAs' => 's3Bucket',
-                                            ),
-                                            'S3Key' => array(
-                                                'type' => 'string',
-                                                'sentAs' => 's3Key',
-                                            ),
-                                        ),
-                                    ),
-                                    'SnapshotId' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'snapshotId',
-                                    ),
-                                    'Progress' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'progress',
-                                    ),
-                                    'StatusMessage' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'statusMessage',
-                                    ),
-                                    'Status' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'status',
-                                    ),
-                                ),
-                            ),
-                            'Description' => array(
-                                'type' => 'string',
-                                'sentAs' => 'description',
-                            ),
-                        ),
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'nextToken',
                 ),
             ),
         ),
@@ -13901,37 +11907,6 @@ return array (
                 ),
             ),
         ),
-        'DescribeMovingAddressesResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'MovingAddressStatuses' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'movingAddressStatusSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'PublicIp' => array(
-                                'type' => 'string',
-                                'sentAs' => 'publicIp',
-                            ),
-                            'MoveStatus' => array(
-                                'type' => 'string',
-                                'sentAs' => 'moveStatus',
-                            ),
-                        ),
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'nextToken',
-                ),
-            ),
-        ),
         'DescribeNetworkAclsResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -14395,46 +12370,6 @@ return array (
                             ),
                         ),
                     ),
-                ),
-            ),
-        ),
-        'DescribePrefixListsResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'PrefixLists' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'prefixListSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'PrefixListId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'prefixListId',
-                            ),
-                            'PrefixListName' => array(
-                                'type' => 'string',
-                                'sentAs' => 'prefixListName',
-                            ),
-                            'Cidrs' => array(
-                                'type' => 'array',
-                                'sentAs' => 'cidrSet',
-                                'items' => array(
-                                    'name' => 'item',
-                                    'type' => 'string',
-                                    'sentAs' => 'item',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'nextToken',
                 ),
             ),
         ),
@@ -14928,10 +12863,6 @@ return array (
                                             'type' => 'string',
                                             'sentAs' => 'destinationCidrBlock',
                                         ),
-                                        'DestinationPrefixListId' => array(
-                                            'type' => 'string',
-                                            'sentAs' => 'destinationPrefixListId',
-                                        ),
                                         'GatewayId' => array(
                                             'type' => 'string',
                                             'sentAs' => 'gatewayId',
@@ -15116,21 +13047,6 @@ return array (
                                                 ),
                                             ),
                                         ),
-                                        'PrefixListIds' => array(
-                                            'type' => 'array',
-                                            'sentAs' => 'prefixListIds',
-                                            'items' => array(
-                                                'name' => 'item',
-                                                'type' => 'object',
-                                                'sentAs' => 'item',
-                                                'properties' => array(
-                                                    'PrefixListId' => array(
-                                                        'type' => 'string',
-                                                        'sentAs' => 'prefixListId',
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
                                     ),
                                 ),
                             ),
@@ -15188,21 +13104,6 @@ return array (
                                                     'CidrIp' => array(
                                                         'type' => 'string',
                                                         'sentAs' => 'cidrIp',
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        'PrefixListIds' => array(
-                                            'type' => 'array',
-                                            'sentAs' => 'prefixListIds',
-                                            'items' => array(
-                                                'name' => 'item',
-                                                'type' => 'object',
-                                                'sentAs' => 'item',
-                                                'properties' => array(
-                                                    'PrefixListId' => array(
-                                                        'type' => 'string',
-                                                        'sentAs' => 'prefixListId',
                                                     ),
                                                 ),
                                             ),
@@ -15314,10 +13215,6 @@ return array (
                                 'type' => 'string',
                                 'sentAs' => 'status',
                             ),
-                            'StateMessage' => array(
-                                'type' => 'string',
-                                'sentAs' => 'statusMessage',
-                            ),
                             'StartTime' => array(
                                 'type' => 'string',
                                 'sentAs' => 'startTime',
@@ -15369,10 +13266,6 @@ return array (
                                 'type' => 'string',
                                 'sentAs' => 'kmsKeyId',
                             ),
-                            'DataEncryptionKeyId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'dataEncryptionKeyId',
-                            ),
                         ),
                     ),
                 ),
@@ -15423,423 +13316,6 @@ return array (
                             ),
                         ),
                     ),
-                ),
-            ),
-        ),
-        'DescribeSpotFleetInstancesResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'SpotFleetRequestId' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'spotFleetRequestId',
-                ),
-                'ActiveInstances' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'activeInstanceSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'InstanceType' => array(
-                                'type' => 'string',
-                                'sentAs' => 'instanceType',
-                            ),
-                            'InstanceId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'instanceId',
-                            ),
-                            'SpotInstanceRequestId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'spotInstanceRequestId',
-                            ),
-                        ),
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'nextToken',
-                ),
-            ),
-        ),
-        'DescribeSpotFleetRequestHistoryResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'SpotFleetRequestId' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'spotFleetRequestId',
-                ),
-                'StartTime' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'startTime',
-                ),
-                'LastEvaluatedTime' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'lastEvaluatedTime',
-                ),
-                'HistoryRecords' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'historyRecordSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'Timestamp' => array(
-                                'type' => 'string',
-                                'sentAs' => 'timestamp',
-                            ),
-                            'EventType' => array(
-                                'type' => 'string',
-                                'sentAs' => 'eventType',
-                            ),
-                            'EventInformation' => array(
-                                'type' => 'object',
-                                'sentAs' => 'eventInformation',
-                                'properties' => array(
-                                    'InstanceId' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'instanceId',
-                                    ),
-                                    'EventSubType' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'eventSubType',
-                                    ),
-                                    'EventDescription' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'eventDescription',
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'nextToken',
-                ),
-            ),
-        ),
-        'DescribeSpotFleetRequestsResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'SpotFleetRequestConfigs' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'spotFleetRequestConfigSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'SpotFleetRequestId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'spotFleetRequestId',
-                            ),
-                            'SpotFleetRequestState' => array(
-                                'type' => 'string',
-                                'sentAs' => 'spotFleetRequestState',
-                            ),
-                            'SpotFleetRequestConfig' => array(
-                                'type' => 'object',
-                                'sentAs' => 'spotFleetRequestConfig',
-                                'properties' => array(
-                                    'ClientToken' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'clientToken',
-                                    ),
-                                    'SpotPrice' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'spotPrice',
-                                    ),
-                                    'TargetCapacity' => array(
-                                        'type' => 'numeric',
-                                        'sentAs' => 'targetCapacity',
-                                    ),
-                                    'ValidFrom' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'validFrom',
-                                    ),
-                                    'ValidUntil' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'validUntil',
-                                    ),
-                                    'TerminateInstancesWithExpiration' => array(
-                                        'type' => 'boolean',
-                                        'sentAs' => 'terminateInstancesWithExpiration',
-                                    ),
-                                    'IamFleetRole' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'iamFleetRole',
-                                    ),
-                                    'LaunchSpecifications' => array(
-                                        'type' => 'array',
-                                        'sentAs' => 'launchSpecifications',
-                                        'items' => array(
-                                            'name' => 'item',
-                                            'type' => 'object',
-                                            'sentAs' => 'item',
-                                            'properties' => array(
-                                                'ImageId' => array(
-                                                    'type' => 'string',
-                                                    'sentAs' => 'imageId',
-                                                ),
-                                                'KeyName' => array(
-                                                    'type' => 'string',
-                                                    'sentAs' => 'keyName',
-                                                ),
-                                                'SecurityGroups' => array(
-                                                    'type' => 'array',
-                                                    'sentAs' => 'groupSet',
-                                                    'items' => array(
-                                                        'name' => 'item',
-                                                        'type' => 'object',
-                                                        'sentAs' => 'item',
-                                                        'properties' => array(
-                                                            'GroupName' => array(
-                                                                'type' => 'string',
-                                                                'sentAs' => 'groupName',
-                                                            ),
-                                                            'GroupId' => array(
-                                                                'type' => 'string',
-                                                                'sentAs' => 'groupId',
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                'UserData' => array(
-                                                    'type' => 'string',
-                                                    'sentAs' => 'userData',
-                                                ),
-                                                'AddressingType' => array(
-                                                    'type' => 'string',
-                                                    'sentAs' => 'addressingType',
-                                                ),
-                                                'InstanceType' => array(
-                                                    'type' => 'string',
-                                                    'sentAs' => 'instanceType',
-                                                ),
-                                                'Placement' => array(
-                                                    'type' => 'object',
-                                                    'sentAs' => 'placement',
-                                                    'properties' => array(
-                                                        'AvailabilityZone' => array(
-                                                            'type' => 'string',
-                                                            'sentAs' => 'availabilityZone',
-                                                        ),
-                                                        'GroupName' => array(
-                                                            'type' => 'string',
-                                                            'sentAs' => 'groupName',
-                                                        ),
-                                                    ),
-                                                ),
-                                                'KernelId' => array(
-                                                    'type' => 'string',
-                                                    'sentAs' => 'kernelId',
-                                                ),
-                                                'RamdiskId' => array(
-                                                    'type' => 'string',
-                                                    'sentAs' => 'ramdiskId',
-                                                ),
-                                                'BlockDeviceMappings' => array(
-                                                    'type' => 'array',
-                                                    'sentAs' => 'blockDeviceMapping',
-                                                    'items' => array(
-                                                        'name' => 'item',
-                                                        'type' => 'object',
-                                                        'sentAs' => 'item',
-                                                        'properties' => array(
-                                                            'VirtualName' => array(
-                                                                'type' => 'string',
-                                                                'sentAs' => 'virtualName',
-                                                            ),
-                                                            'DeviceName' => array(
-                                                                'type' => 'string',
-                                                                'sentAs' => 'deviceName',
-                                                            ),
-                                                            'Ebs' => array(
-                                                                'type' => 'object',
-                                                                'sentAs' => 'ebs',
-                                                                'properties' => array(
-                                                                    'SnapshotId' => array(
-                                                                        'type' => 'string',
-                                                                        'sentAs' => 'snapshotId',
-                                                                    ),
-                                                                    'VolumeSize' => array(
-                                                                        'type' => 'numeric',
-                                                                        'sentAs' => 'volumeSize',
-                                                                    ),
-                                                                    'DeleteOnTermination' => array(
-                                                                        'type' => 'boolean',
-                                                                        'sentAs' => 'deleteOnTermination',
-                                                                    ),
-                                                                    'VolumeType' => array(
-                                                                        'type' => 'string',
-                                                                        'sentAs' => 'volumeType',
-                                                                    ),
-                                                                    'Iops' => array(
-                                                                        'type' => 'numeric',
-                                                                        'sentAs' => 'iops',
-                                                                    ),
-                                                                    'Encrypted' => array(
-                                                                        'type' => 'boolean',
-                                                                        'sentAs' => 'encrypted',
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                            'NoDevice' => array(
-                                                                'type' => 'string',
-                                                                'sentAs' => 'noDevice',
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                'Monitoring' => array(
-                                                    'type' => 'object',
-                                                    'sentAs' => 'monitoring',
-                                                    'properties' => array(
-                                                        'Enabled' => array(
-                                                            'type' => 'boolean',
-                                                            'sentAs' => 'enabled',
-                                                        ),
-                                                    ),
-                                                ),
-                                                'SubnetId' => array(
-                                                    'type' => 'string',
-                                                    'sentAs' => 'subnetId',
-                                                ),
-                                                'NetworkInterfaces' => array(
-                                                    'type' => 'array',
-                                                    'sentAs' => 'networkInterfaceSet',
-                                                    'items' => array(
-                                                        'name' => 'item',
-                                                        'type' => 'object',
-                                                        'sentAs' => 'item',
-                                                        'properties' => array(
-                                                            'NetworkInterfaceId' => array(
-                                                                'type' => 'string',
-                                                                'sentAs' => 'networkInterfaceId',
-                                                            ),
-                                                            'DeviceIndex' => array(
-                                                                'type' => 'numeric',
-                                                                'sentAs' => 'deviceIndex',
-                                                            ),
-                                                            'SubnetId' => array(
-                                                                'type' => 'string',
-                                                                'sentAs' => 'subnetId',
-                                                            ),
-                                                            'Description' => array(
-                                                                'type' => 'string',
-                                                                'sentAs' => 'description',
-                                                            ),
-                                                            'PrivateIpAddress' => array(
-                                                                'type' => 'string',
-                                                                'sentAs' => 'privateIpAddress',
-                                                            ),
-                                                            'Groups' => array(
-                                                                'type' => 'array',
-                                                                'sentAs' => 'SecurityGroupId',
-                                                                'items' => array(
-                                                                    'name' => 'SecurityGroupId',
-                                                                    'type' => 'string',
-                                                                    'sentAs' => 'SecurityGroupId',
-                                                                ),
-                                                            ),
-                                                            'DeleteOnTermination' => array(
-                                                                'type' => 'boolean',
-                                                                'sentAs' => 'deleteOnTermination',
-                                                            ),
-                                                            'PrivateIpAddresses' => array(
-                                                                'type' => 'array',
-                                                                'sentAs' => 'privateIpAddressesSet',
-                                                                'items' => array(
-                                                                    'name' => 'item',
-                                                                    'type' => 'object',
-                                                                    'sentAs' => 'item',
-                                                                    'properties' => array(
-                                                                        'PrivateIpAddress' => array(
-                                                                            'type' => 'string',
-                                                                            'sentAs' => 'privateIpAddress',
-                                                                        ),
-                                                                        'Primary' => array(
-                                                                            'type' => 'boolean',
-                                                                            'sentAs' => 'primary',
-                                                                        ),
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                            'SecondaryPrivateIpAddressCount' => array(
-                                                                'type' => 'numeric',
-                                                                'sentAs' => 'secondaryPrivateIpAddressCount',
-                                                            ),
-                                                            'AssociatePublicIpAddress' => array(
-                                                                'type' => 'boolean',
-                                                                'sentAs' => 'associatePublicIpAddress',
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                'IamInstanceProfile' => array(
-                                                    'type' => 'object',
-                                                    'sentAs' => 'iamInstanceProfile',
-                                                    'properties' => array(
-                                                        'Arn' => array(
-                                                            'type' => 'string',
-                                                            'sentAs' => 'arn',
-                                                        ),
-                                                        'Name' => array(
-                                                            'type' => 'string',
-                                                            'sentAs' => 'name',
-                                                        ),
-                                                    ),
-                                                ),
-                                                'EbsOptimized' => array(
-                                                    'type' => 'boolean',
-                                                    'sentAs' => 'ebsOptimized',
-                                                ),
-                                                'WeightedCapacity' => array(
-                                                    'type' => 'numeric',
-                                                    'sentAs' => 'weightedCapacity',
-                                                ),
-                                                'SpotPrice' => array(
-                                                    'type' => 'string',
-                                                    'sentAs' => 'spotPrice',
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    'ExcessCapacityTerminationPolicy' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'excessCapacityTerminationPolicy',
-                                    ),
-                                    'AllocationStrategy' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 'allocationStrategy',
-                                    ),
-                                ),
-                            ),
-                            'CreateTime' => array(
-                                'type' => 'string',
-                                'sentAs' => 'createTime',
-                            ),
-                        ),
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'nextToken',
                 ),
             ),
         ),
@@ -16148,14 +13624,6 @@ return array (
                             'ProductDescription' => array(
                                 'type' => 'string',
                                 'sentAs' => 'productDescription',
-                            ),
-                            'BlockDurationMinutes' => array(
-                                'type' => 'numeric',
-                                'sentAs' => 'blockDurationMinutes',
-                            ),
-                            'ActualBlockHourlyPrice' => array(
-                                'type' => 'string',
-                                'sentAs' => 'actualBlockHourlyPrice',
                             ),
                             'Tags' => array(
                                 'type' => 'array',
@@ -16691,83 +14159,6 @@ return array (
                 ),
             ),
         ),
-        'DescribeVpcEndpointServicesResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'ServiceNames' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'serviceNameSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'string',
-                        'sentAs' => 'item',
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'nextToken',
-                ),
-            ),
-        ),
-        'DescribeVpcEndpointsResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'VpcEndpoints' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'vpcEndpointSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'VpcEndpointId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'vpcEndpointId',
-                            ),
-                            'VpcId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'vpcId',
-                            ),
-                            'ServiceName' => array(
-                                'type' => 'string',
-                                'sentAs' => 'serviceName',
-                            ),
-                            'State' => array(
-                                'type' => 'string',
-                                'sentAs' => 'state',
-                            ),
-                            'PolicyDocument' => array(
-                                'type' => 'string',
-                                'sentAs' => 'policyDocument',
-                            ),
-                            'RouteTableIds' => array(
-                                'type' => 'array',
-                                'sentAs' => 'routeTableIdSet',
-                                'items' => array(
-                                    'name' => 'item',
-                                    'type' => 'string',
-                                    'sentAs' => 'item',
-                                ),
-                            ),
-                            'CreationTimestamp' => array(
-                                'type' => 'string',
-                                'sentAs' => 'creationTimestamp',
-                            ),
-                        ),
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'nextToken',
-                ),
-            ),
-        ),
         'DescribeVpcPeeringConnectionsResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -17196,124 +14587,6 @@ return array (
                 ),
             ),
         ),
-        'ImportImageResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'ImportTaskId' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'importTaskId',
-                ),
-                'Architecture' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'architecture',
-                ),
-                'LicenseType' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'licenseType',
-                ),
-                'Platform' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'platform',
-                ),
-                'Hypervisor' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'hypervisor',
-                ),
-                'Description' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'description',
-                ),
-                'SnapshotDetails' => array(
-                    'type' => 'array',
-                    'location' => 'xml',
-                    'sentAs' => 'snapshotDetailSet',
-                    'items' => array(
-                        'name' => 'item',
-                        'type' => 'object',
-                        'sentAs' => 'item',
-                        'properties' => array(
-                            'DiskImageSize' => array(
-                                'type' => 'numeric',
-                                'sentAs' => 'diskImageSize',
-                            ),
-                            'Description' => array(
-                                'type' => 'string',
-                                'sentAs' => 'description',
-                            ),
-                            'Format' => array(
-                                'type' => 'string',
-                                'sentAs' => 'format',
-                            ),
-                            'Url' => array(
-                                'type' => 'string',
-                                'sentAs' => 'url',
-                            ),
-                            'UserBucket' => array(
-                                'type' => 'object',
-                                'sentAs' => 'userBucket',
-                                'properties' => array(
-                                    'S3Bucket' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 's3Bucket',
-                                    ),
-                                    'S3Key' => array(
-                                        'type' => 'string',
-                                        'sentAs' => 's3Key',
-                                    ),
-                                ),
-                            ),
-                            'DeviceName' => array(
-                                'type' => 'string',
-                                'sentAs' => 'deviceName',
-                            ),
-                            'SnapshotId' => array(
-                                'type' => 'string',
-                                'sentAs' => 'snapshotId',
-                            ),
-                            'Progress' => array(
-                                'type' => 'string',
-                                'sentAs' => 'progress',
-                            ),
-                            'StatusMessage' => array(
-                                'type' => 'string',
-                                'sentAs' => 'statusMessage',
-                            ),
-                            'Status' => array(
-                                'type' => 'string',
-                                'sentAs' => 'status',
-                            ),
-                        ),
-                    ),
-                ),
-                'ImageId' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'imageId',
-                ),
-                'Progress' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'progress',
-                ),
-                'StatusMessage' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'statusMessage',
-                ),
-                'Status' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'status',
-                ),
-            ),
-        ),
         'ImportInstanceResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -17517,75 +14790,6 @@ return array (
                 ),
             ),
         ),
-        'ImportSnapshotResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'ImportTaskId' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'importTaskId',
-                ),
-                'SnapshotTaskDetail' => array(
-                    'type' => 'object',
-                    'location' => 'xml',
-                    'sentAs' => 'snapshotTaskDetail',
-                    'properties' => array(
-                        'DiskImageSize' => array(
-                            'type' => 'numeric',
-                            'sentAs' => 'diskImageSize',
-                        ),
-                        'Description' => array(
-                            'type' => 'string',
-                            'sentAs' => 'description',
-                        ),
-                        'Format' => array(
-                            'type' => 'string',
-                            'sentAs' => 'format',
-                        ),
-                        'Url' => array(
-                            'type' => 'string',
-                            'sentAs' => 'url',
-                        ),
-                        'UserBucket' => array(
-                            'type' => 'object',
-                            'sentAs' => 'userBucket',
-                            'properties' => array(
-                                'S3Bucket' => array(
-                                    'type' => 'string',
-                                    'sentAs' => 's3Bucket',
-                                ),
-                                'S3Key' => array(
-                                    'type' => 'string',
-                                    'sentAs' => 's3Key',
-                                ),
-                            ),
-                        ),
-                        'SnapshotId' => array(
-                            'type' => 'string',
-                            'sentAs' => 'snapshotId',
-                        ),
-                        'Progress' => array(
-                            'type' => 'string',
-                            'sentAs' => 'progress',
-                        ),
-                        'StatusMessage' => array(
-                            'type' => 'string',
-                            'sentAs' => 'statusMessage',
-                        ),
-                        'Status' => array(
-                            'type' => 'string',
-                            'sentAs' => 'status',
-                        ),
-                    ),
-                ),
-                'Description' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'description',
-                ),
-            ),
-        ),
         'ImportVolumeResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -17784,28 +14988,6 @@ return array (
                 ),
             ),
         ),
-        'ModifySpotFleetRequestResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'Return' => array(
-                    'type' => 'boolean',
-                    'location' => 'xml',
-                    'sentAs' => 'return',
-                ),
-            ),
-        ),
-        'ModifyVpcEndpointResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'Return' => array(
-                    'type' => 'boolean',
-                    'location' => 'xml',
-                    'sentAs' => 'return',
-                ),
-            ),
-        ),
         'MonitorInstancesResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -17835,22 +15017,6 @@ return array (
                             ),
                         ),
                     ),
-                ),
-            ),
-        ),
-        'MoveAddressToVpcResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'AllocationId' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'allocationId',
-                ),
-                'Status' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'status',
                 ),
             ),
         ),
@@ -17906,17 +15072,6 @@ return array (
                     'type' => 'string',
                     'location' => 'xml',
                     'sentAs' => 'newAssociationId',
-                ),
-            ),
-        ),
-        'RequestSpotFleetResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'SpotFleetRequestId' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'spotFleetRequestId',
                 ),
             ),
         ),
@@ -18226,14 +15381,6 @@ return array (
                                 'type' => 'string',
                                 'sentAs' => 'productDescription',
                             ),
-                            'BlockDurationMinutes' => array(
-                                'type' => 'numeric',
-                                'sentAs' => 'blockDurationMinutes',
-                            ),
-                            'ActualBlockHourlyPrice' => array(
-                                'type' => 'string',
-                                'sentAs' => 'actualBlockHourlyPrice',
-                            ),
                             'Tags' => array(
                                 'type' => 'array',
                                 'sentAs' => 'tagSet',
@@ -18259,22 +15406,6 @@ return array (
                             ),
                         ),
                     ),
-                ),
-            ),
-        ),
-        'RestoreAddressToClassicResult' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'Status' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'status',
-                ),
-                'PublicIp' => array(
-                    'type' => 'string',
-                    'location' => 'xml',
-                    'sentAs' => 'publicIp',
                 ),
             ),
         ),
@@ -19011,11 +16142,6 @@ return array (
             'limit_key' => 'MaxResults',
             'result_key' => 'ReservedInstancesOfferings',
         ),
-        'DescribeReservedInstancesModifications' => array(
-            'input_token' => 'NextToken',
-            'output_token' => 'NextToken',
-            'result_key' => 'ReservedInstancesModifications',
-        ),
         'DescribeRouteTables' => array(
             'result_key' => 'RouteTables',
         ),
@@ -19041,9 +16167,6 @@ return array (
             'result_key' => 'Subnets',
         ),
         'DescribeTags' => array(
-            'input_token' => 'NextToken',
-            'output_token' => 'NextToken',
-            'limit_key' => 'MaxResults',
             'result_key' => 'Tags',
         ),
         'DescribeVolumeStatus' => array(

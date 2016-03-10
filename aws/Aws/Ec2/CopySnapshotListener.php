@@ -35,7 +35,7 @@ class CopySnapshotListener implements EventSubscriberInterface
 
     public function onCommandBeforePrepare(Event $event)
     {
-        /** @var CommandInterface $command */
+        /** @var $command \Guzzle\Service\Command\CommandInterface */
         $command = $event['command'];
 
         if ($command->getName() !== 'CopySnapshot') {
@@ -46,7 +46,7 @@ class CopySnapshotListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var AwsClientInterface $client */
+        /** @var $client \Aws\Common\Client\AwsClientInterface */
         $client = $command->getClient();
         $presignedUrl = $this->createPresignedUrl($client, $command);
         $command['DestinationRegion'] = $client->getRegion();
@@ -59,9 +59,10 @@ class CopySnapshotListener implements EventSubscriberInterface
     ) {
         // Create a temporary client used to generate the presigned URL
         $newClient = Ec2Client::factory(array(
-            'region'      => $command['SourceRegion'],
-            'signature'   => 'v4',
-            'credentials' => $client->getCredentials(),
+            'region'    => $command['SourceRegion'],
+            'signature' => 'v4',
+            'key'       => $client->getCredentials()->getAccessKeyId(),
+            'secret'    => $client->getCredentials()->getSecretKey()
         ));
 
         $preCommand = $newClient->getCommand(

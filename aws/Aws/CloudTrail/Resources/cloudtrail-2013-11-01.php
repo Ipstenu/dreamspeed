@@ -67,85 +67,6 @@ return array (
         ),
     ),
     'operations' => array(
-        'AddTags' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
-            'responseClass' => 'EmptyOutput',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Content-Type' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
-                ),
-                'command.expects' => array(
-                    'static' => true,
-                    'default' => 'application/json',
-                ),
-                'X-Amz-Target' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101.AddTags',
-                ),
-                'ResourceId' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'TagsList' => array(
-                    'type' => 'array',
-                    'location' => 'json',
-                    'items' => array(
-                        'name' => 'Tag',
-                        'type' => 'object',
-                        'properties' => array(
-                            'Key' => array(
-                                'required' => true,
-                                'type' => 'string',
-                            ),
-                            'Value' => array(
-                                'type' => 'string',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'This exception is thrown when the specified resource is not found.',
-                    'class' => 'ResourceNotFoundException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when an operation is called with an invalid trail ARN. The format of a trail ARN is arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail.',
-                    'class' => 'CloudTrailARNInvalidException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the specified resource type is not supported by CloudTrail.',
-                    'class' => 'ResourceTypeNotSupportedException',
-                ),
-                array(
-                    'reason' => 'The number of tags per trail has exceeded the permitted amount. Currently, the limit is 10.',
-                    'class' => 'TagsLimitExceededException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:    Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-) Start with a letter or number, and end with a letter or number Be between 3 and 128 characters Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid. Not be in IP address format (for example, 192.168.5.4)',
-                    'class' => 'InvalidTrailNameException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the key or value specified for the tag does not match the regular expression ^([\\\\p_.:/=+\\\\-@]*)$.',
-                    'class' => 'InvalidTagParameterException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.',
-                    'class' => 'UnsupportedOperationException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not permitted.',
-                    'class' => 'OperationNotPermittedException',
-                ),
-            ),
-        ),
         'CreateTrail' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -190,20 +111,11 @@ return array (
                     'format' => 'boolean-string',
                     'location' => 'json',
                 ),
-                'EnableLogFileValidation' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'json',
-                ),
                 'CloudWatchLogsLogGroupArn' => array(
                     'type' => 'string',
                     'location' => 'json',
                 ),
                 'CloudWatchLogsRoleArn' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'KmsKeyId' => array(
                     'type' => 'string',
                     'location' => 'json',
                 ),
@@ -230,10 +142,6 @@ return array (
                     'class' => 'InsufficientSnsTopicPolicyException',
                 ),
                 array(
-                    'reason' => 'This exception is thrown when the policy on the S3 bucket or KMS key is not sufficient.',
-                    'class' => 'InsufficientEncryptionPolicyException',
-                ),
-                array(
                     'reason' => 'This exception is thrown when the provided S3 bucket name is not valid.',
                     'class' => 'InvalidS3BucketNameException',
                 ),
@@ -246,24 +154,8 @@ return array (
                     'class' => 'InvalidSnsTopicNameException',
                 ),
                 array(
-                    'reason' => 'This exception is thrown when the KMS key ARN is invalid.',
-                    'class' => 'InvalidKmsKeyIdException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:    Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-) Start with a letter or number, and end with a letter or number Be between 3 and 128 characters Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid. Not be in IP address format (for example, 192.168.5.4)',
+                    'reason' => 'This exception is thrown when the provided trail name is not valid.',
                     'class' => 'InvalidTrailNameException',
-                ),
-                array(
-                    'reason' => 'This exception is deprecated.',
-                    'class' => 'TrailNotProvidedException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the KMS key does not exist, or when the S3 bucket and the KMS key are not in the same region.',
-                    'class' => 'KmsKeyNotFoundException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the KMS key is disabled.',
-                    'class' => 'KmsKeyDisabledException',
                 ),
                 array(
                     'reason' => 'This exception is thrown when the provided CloudWatch log group is not valid.',
@@ -276,14 +168,6 @@ return array (
                 array(
                     'reason' => 'Cannot set a CloudWatch Logs delivery for this region.',
                     'class' => 'CloudWatchLogsDeliveryUnavailableException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.',
-                    'class' => 'UnsupportedOperationException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not permitted.',
-                    'class' => 'OperationNotPermittedException',
                 ),
             ),
         ),
@@ -320,7 +204,7 @@ return array (
                     'class' => 'TrailNotFoundException',
                 ),
                 array(
-                    'reason' => 'This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:    Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-) Start with a letter or number, and end with a letter or number Be between 3 and 128 characters Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid. Not be in IP address format (for example, 192.168.5.4)',
+                    'reason' => 'This exception is thrown when the provided trail name is not valid.',
                     'class' => 'InvalidTrailNameException',
                 ),
             ),
@@ -353,16 +237,6 @@ return array (
                         'name' => 'String',
                         'type' => 'string',
                     ),
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.',
-                    'class' => 'UnsupportedOperationException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not permitted.',
-                    'class' => 'OperationNotPermittedException',
                 ),
             ),
         ),
@@ -399,137 +273,8 @@ return array (
                     'class' => 'TrailNotFoundException',
                 ),
                 array(
-                    'reason' => 'This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:    Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-) Start with a letter or number, and end with a letter or number Be between 3 and 128 characters Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid. Not be in IP address format (for example, 192.168.5.4)',
+                    'reason' => 'This exception is thrown when the provided trail name is not valid.',
                     'class' => 'InvalidTrailNameException',
-                ),
-            ),
-        ),
-        'ListPublicKeys' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
-            'responseClass' => 'ListPublicKeysResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Content-Type' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
-                ),
-                'command.expects' => array(
-                    'static' => true,
-                    'default' => 'application/json',
-                ),
-                'X-Amz-Target' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101.ListPublicKeys',
-                ),
-                'StartTime' => array(
-                    'type' => array(
-                        'object',
-                        'string',
-                        'integer',
-                    ),
-                    'format' => 'date-time',
-                    'location' => 'json',
-                ),
-                'EndTime' => array(
-                    'type' => array(
-                        'object',
-                        'string',
-                        'integer',
-                    ),
-                    'format' => 'date-time',
-                    'location' => 'json',
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'Occurs if the timestamp values are invalid. Either the start time occurs after the end time or the time range is outside the range of possible values.',
-                    'class' => 'InvalidTimeRangeException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.',
-                    'class' => 'UnsupportedOperationException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not permitted.',
-                    'class' => 'OperationNotPermittedException',
-                ),
-                array(
-                    'reason' => 'Reserved for future use.',
-                    'class' => 'InvalidTokenException',
-                ),
-            ),
-        ),
-        'ListTags' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
-            'responseClass' => 'ListTagsResponse',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Content-Type' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
-                ),
-                'command.expects' => array(
-                    'static' => true,
-                    'default' => 'application/json',
-                ),
-                'X-Amz-Target' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101.ListTags',
-                ),
-                'ResourceIdList' => array(
-                    'required' => true,
-                    'type' => 'array',
-                    'location' => 'json',
-                    'items' => array(
-                        'name' => 'String',
-                        'type' => 'string',
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'This exception is thrown when the specified resource is not found.',
-                    'class' => 'ResourceNotFoundException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when an operation is called with an invalid trail ARN. The format of a trail ARN is arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail.',
-                    'class' => 'CloudTrailARNInvalidException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the specified resource type is not supported by CloudTrail.',
-                    'class' => 'ResourceTypeNotSupportedException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:    Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-) Start with a letter or number, and end with a letter or number Be between 3 and 128 characters Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid. Not be in IP address format (for example, 192.168.5.4)',
-                    'class' => 'InvalidTrailNameException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.',
-                    'class' => 'UnsupportedOperationException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not permitted.',
-                    'class' => 'OperationNotPermittedException',
-                ),
-                array(
-                    'reason' => 'Reserved for future use.',
-                    'class' => 'InvalidTokenException',
                 ),
             ),
         ),
@@ -620,81 +365,6 @@ return array (
                 ),
             ),
         ),
-        'RemoveTags' => array(
-            'httpMethod' => 'POST',
-            'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
-            'responseClass' => 'EmptyOutput',
-            'responseType' => 'model',
-            'parameters' => array(
-                'Content-Type' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
-                ),
-                'command.expects' => array(
-                    'static' => true,
-                    'default' => 'application/json',
-                ),
-                'X-Amz-Target' => array(
-                    'static' => true,
-                    'location' => 'header',
-                    'default' => 'com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101.RemoveTags',
-                ),
-                'ResourceId' => array(
-                    'required' => true,
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'TagsList' => array(
-                    'type' => 'array',
-                    'location' => 'json',
-                    'items' => array(
-                        'name' => 'Tag',
-                        'type' => 'object',
-                        'properties' => array(
-                            'Key' => array(
-                                'required' => true,
-                                'type' => 'string',
-                            ),
-                            'Value' => array(
-                                'type' => 'string',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'errorResponses' => array(
-                array(
-                    'reason' => 'This exception is thrown when the specified resource is not found.',
-                    'class' => 'ResourceNotFoundException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when an operation is called with an invalid trail ARN. The format of a trail ARN is arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail.',
-                    'class' => 'CloudTrailARNInvalidException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the specified resource type is not supported by CloudTrail.',
-                    'class' => 'ResourceTypeNotSupportedException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:    Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-) Start with a letter or number, and end with a letter or number Be between 3 and 128 characters Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid. Not be in IP address format (for example, 192.168.5.4)',
-                    'class' => 'InvalidTrailNameException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the key or value specified for the tag does not match the regular expression ^([\\\\p_.:/=+\\\\-@]*)$.',
-                    'class' => 'InvalidTagParameterException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.',
-                    'class' => 'UnsupportedOperationException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not permitted.',
-                    'class' => 'OperationNotPermittedException',
-                ),
-            ),
-        ),
         'StartLogging' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -728,7 +398,7 @@ return array (
                     'class' => 'TrailNotFoundException',
                 ),
                 array(
-                    'reason' => 'This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:    Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-) Start with a letter or number, and end with a letter or number Be between 3 and 128 characters Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid. Not be in IP address format (for example, 192.168.5.4)',
+                    'reason' => 'This exception is thrown when the provided trail name is not valid.',
                     'class' => 'InvalidTrailNameException',
                 ),
             ),
@@ -766,7 +436,7 @@ return array (
                     'class' => 'TrailNotFoundException',
                 ),
                 array(
-                    'reason' => 'This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:    Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-) Start with a letter or number, and end with a letter or number Be between 3 and 128 characters Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid. Not be in IP address format (for example, 192.168.5.4)',
+                    'reason' => 'This exception is thrown when the provided trail name is not valid.',
                     'class' => 'InvalidTrailNameException',
                 ),
             ),
@@ -814,20 +484,11 @@ return array (
                     'format' => 'boolean-string',
                     'location' => 'json',
                 ),
-                'EnableLogFileValidation' => array(
-                    'type' => 'boolean',
-                    'format' => 'boolean-string',
-                    'location' => 'json',
-                ),
                 'CloudWatchLogsLogGroupArn' => array(
                     'type' => 'string',
                     'location' => 'json',
                 ),
                 'CloudWatchLogsRoleArn' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'KmsKeyId' => array(
                     'type' => 'string',
                     'location' => 'json',
                 ),
@@ -846,10 +507,6 @@ return array (
                     'class' => 'InsufficientSnsTopicPolicyException',
                 ),
                 array(
-                    'reason' => 'This exception is thrown when the policy on the S3 bucket or KMS key is not sufficient.',
-                    'class' => 'InsufficientEncryptionPolicyException',
-                ),
-                array(
                     'reason' => 'This exception is thrown when the trail with the given name is not found.',
                     'class' => 'TrailNotFoundException',
                 ),
@@ -866,24 +523,8 @@ return array (
                     'class' => 'InvalidSnsTopicNameException',
                 ),
                 array(
-                    'reason' => 'This exception is thrown when the KMS key ARN is invalid.',
-                    'class' => 'InvalidKmsKeyIdException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:    Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-) Start with a letter or number, and end with a letter or number Be between 3 and 128 characters Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid. Not be in IP address format (for example, 192.168.5.4)',
+                    'reason' => 'This exception is thrown when the provided trail name is not valid.',
                     'class' => 'InvalidTrailNameException',
-                ),
-                array(
-                    'reason' => 'This exception is deprecated.',
-                    'class' => 'TrailNotProvidedException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the KMS key does not exist, or when the S3 bucket and the KMS key are not in the same region.',
-                    'class' => 'KmsKeyNotFoundException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the KMS key is disabled.',
-                    'class' => 'KmsKeyDisabledException',
                 ),
                 array(
                     'reason' => 'This exception is thrown when the provided CloudWatch log group is not valid.',
@@ -897,22 +538,10 @@ return array (
                     'reason' => 'Cannot set a CloudWatch Logs delivery for this region.',
                     'class' => 'CloudWatchLogsDeliveryUnavailableException',
                 ),
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not supported. For example, this exception will occur if an attempt is made to tag a trail and tagging is not supported in the current region.',
-                    'class' => 'UnsupportedOperationException',
-                ),
-                array(
-                    'reason' => 'This exception is thrown when the requested operation is not permitted.',
-                    'class' => 'OperationNotPermittedException',
-                ),
             ),
         ),
     ),
     'models' => array(
-        'EmptyOutput' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-        ),
         'CreateTrailResponse' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -937,14 +566,6 @@ return array (
                     'type' => 'boolean',
                     'location' => 'json',
                 ),
-                'TrailARN' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'LogFileValidationEnabled' => array(
-                    'type' => 'boolean',
-                    'location' => 'json',
-                ),
                 'CloudWatchLogsLogGroupArn' => array(
                     'type' => 'string',
                     'location' => 'json',
@@ -953,11 +574,11 @@ return array (
                     'type' => 'string',
                     'location' => 'json',
                 ),
-                'KmsKeyId' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
             ),
+        ),
+        'EmptyOutput' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
         ),
         'DescribeTrailsResponse' => array(
             'type' => 'object',
@@ -985,19 +606,10 @@ return array (
                             'IncludeGlobalServiceEvents' => array(
                                 'type' => 'boolean',
                             ),
-                            'TrailARN' => array(
-                                'type' => 'string',
-                            ),
-                            'LogFileValidationEnabled' => array(
-                                'type' => 'boolean',
-                            ),
                             'CloudWatchLogsLogGroupArn' => array(
                                 'type' => 'string',
                             ),
                             'CloudWatchLogsRoleArn' => array(
-                                'type' => 'string',
-                            ),
-                            'KmsKeyId' => array(
                                 'type' => 'string',
                             ),
                         ),
@@ -1042,111 +654,6 @@ return array (
                     'location' => 'json',
                 ),
                 'LatestCloudWatchLogsDeliveryTime' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'LatestDigestDeliveryTime' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'LatestDigestDeliveryError' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'LatestDeliveryAttemptTime' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'LatestNotificationAttemptTime' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'LatestNotificationAttemptSucceeded' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'LatestDeliveryAttemptSucceeded' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'TimeLoggingStarted' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'TimeLoggingStopped' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-            ),
-        ),
-        'ListPublicKeysResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'PublicKeyList' => array(
-                    'type' => 'array',
-                    'location' => 'json',
-                    'items' => array(
-                        'name' => 'PublicKey',
-                        'type' => 'object',
-                        'properties' => array(
-                            'Value' => array(
-                                'type' => 'string',
-                                'filters' => array(
-                                    'base64_decode',
-                                ),
-                            ),
-                            'ValidityStartTime' => array(
-                                'type' => 'string',
-                            ),
-                            'ValidityEndTime' => array(
-                                'type' => 'string',
-                            ),
-                            'Fingerprint' => array(
-                                'type' => 'string',
-                            ),
-                        ),
-                    ),
-                ),
-                'NextToken' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-            ),
-        ),
-        'ListTagsResponse' => array(
-            'type' => 'object',
-            'additionalProperties' => true,
-            'properties' => array(
-                'ResourceTagList' => array(
-                    'type' => 'array',
-                    'location' => 'json',
-                    'items' => array(
-                        'name' => 'ResourceTag',
-                        'type' => 'object',
-                        'properties' => array(
-                            'ResourceId' => array(
-                                'type' => 'string',
-                            ),
-                            'TagsList' => array(
-                                'type' => 'array',
-                                'items' => array(
-                                    'name' => 'Tag',
-                                    'type' => 'object',
-                                    'properties' => array(
-                                        'Key' => array(
-                                            'type' => 'string',
-                                        ),
-                                        'Value' => array(
-                                            'type' => 'string',
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                'NextToken' => array(
                     'type' => 'string',
                     'location' => 'json',
                 ),
@@ -1226,23 +733,11 @@ return array (
                     'type' => 'boolean',
                     'location' => 'json',
                 ),
-                'TrailARN' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'LogFileValidationEnabled' => array(
-                    'type' => 'boolean',
-                    'location' => 'json',
-                ),
                 'CloudWatchLogsLogGroupArn' => array(
                     'type' => 'string',
                     'location' => 'json',
                 ),
                 'CloudWatchLogsRoleArn' => array(
-                    'type' => 'string',
-                    'location' => 'json',
-                ),
-                'KmsKeyId' => array(
                     'type' => 'string',
                     'location' => 'json',
                 ),

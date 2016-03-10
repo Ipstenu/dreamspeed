@@ -243,7 +243,7 @@ class ClientBuilder
             $this->addBackoffLogger($backoff, $config);
         }
 
-        /** @var AwsClientInterface $client */
+        /** @var $client AwsClientInterface */
         $client = new $this->clientClass($credentials, $signature, $config);
         $client->setDescription($description);
 

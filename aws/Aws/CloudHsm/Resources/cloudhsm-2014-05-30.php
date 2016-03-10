@@ -20,8 +20,7 @@ return array (
     'serviceFullName' => 'Amazon CloudHSM',
     'serviceAbbreviation' => 'CloudHSM',
     'serviceType' => 'json',
-    'jsonVersion' => '1.1',
-    'targetPrefix' => 'CloudHsmFrontendService.',
+    'targetPrefix' => 'cloudhsm.',
     'signatureVersion' => 'v4',
     'namespace' => 'CloudHsm',
     'operations' => array(
@@ -35,7 +34,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -44,7 +43,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.CreateHapg',
+                    'default' => 'cloudhsm.CreateHapg',
                 ),
                 'Label' => array(
                     'required' => true,
@@ -77,7 +76,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -86,7 +85,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.CreateHsm',
+                    'default' => 'cloudhsm.CreateHsm',
                 ),
                 'SubnetId' => array(
                     'required' => true,
@@ -150,7 +149,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -159,7 +158,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.CreateLunaClient',
+                    'default' => 'cloudhsm.CreateLunaClient',
                 ),
                 'Label' => array(
                     'type' => 'string',
@@ -198,7 +197,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -207,7 +206,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.DeleteHapg',
+                    'default' => 'cloudhsm.DeleteHapg',
                 ),
                 'HapgArn' => array(
                     'required' => true,
@@ -240,7 +239,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -249,7 +248,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.DeleteHsm',
+                    'default' => 'cloudhsm.DeleteHsm',
                 ),
                 'HsmArn' => array(
                     'required' => true,
@@ -282,7 +281,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -291,7 +290,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.DeleteLunaClient',
+                    'default' => 'cloudhsm.DeleteLunaClient',
                 ),
                 'ClientArn' => array(
                     'required' => true,
@@ -324,7 +323,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -333,7 +332,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.DescribeHapg',
+                    'default' => 'cloudhsm.DescribeHapg',
                 ),
                 'HapgArn' => array(
                     'required' => true,
@@ -366,7 +365,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -375,7 +374,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.DescribeHsm',
+                    'default' => 'cloudhsm.DescribeHsm',
                 ),
                 'HsmArn' => array(
                     'type' => 'string',
@@ -411,7 +410,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -420,7 +419,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.DescribeLunaClient',
+                    'default' => 'cloudhsm.DescribeLunaClient',
                 ),
                 'ClientArn' => array(
                     'type' => 'string',
@@ -456,7 +455,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -465,7 +464,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.GetConfig',
+                    'default' => 'cloudhsm.GetConfig',
                 ),
                 'ClientArn' => array(
                     'required' => true,
@@ -512,7 +511,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -521,7 +520,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.ListAvailableZones',
+                    'default' => 'cloudhsm.ListAvailableZones',
                 ),
             ),
             'errorResponses' => array(
@@ -549,7 +548,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -558,7 +557,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.ListHapgs',
+                    'default' => 'cloudhsm.ListHapgs',
                 ),
                 'NextToken' => array(
                     'type' => 'string',
@@ -590,7 +589,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -599,7 +598,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.ListHsms',
+                    'default' => 'cloudhsm.ListHsms',
                 ),
                 'NextToken' => array(
                     'type' => 'string',
@@ -631,7 +630,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -640,7 +639,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.ListLunaClients',
+                    'default' => 'cloudhsm.ListLunaClients',
                 ),
                 'NextToken' => array(
                     'type' => 'string',
@@ -672,7 +671,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -681,7 +680,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.ModifyHapg',
+                    'default' => 'cloudhsm.ModifyHapg',
                 ),
                 'HapgArn' => array(
                     'required' => true,
@@ -726,7 +725,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -735,7 +734,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.ModifyHsm',
+                    'default' => 'cloudhsm.ModifyHsm',
                 ),
                 'HsmArn' => array(
                     'required' => true,
@@ -788,7 +787,7 @@ return array (
                 'Content-Type' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'application/x-amz-json-1.1',
+                    'default' => 'application/x-amz-json-',
                 ),
                 'command.expects' => array(
                     'static' => true,
@@ -797,7 +796,7 @@ return array (
                 'X-Amz-Target' => array(
                     'static' => true,
                     'location' => 'header',
-                    'default' => 'CloudHsmFrontendService.ModifyLunaClient',
+                    'default' => 'cloudhsm.ModifyLunaClient',
                 ),
                 'ClientArn' => array(
                     'required' => true,

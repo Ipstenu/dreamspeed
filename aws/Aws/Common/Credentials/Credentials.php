@@ -87,22 +87,14 @@ class Credentials implements CredentialsInterface, FromConfigInterface
             }
         }
 
-        // Set up the cache
-        $cache = $config[Options::CREDENTIALS_CACHE];
-        $cacheKey = $config[Options::CREDENTIALS_CACHE_KEY] ?:
-            'credentials_' . ($config[Options::KEY] ?: crc32(gethostname()));
-
-        if (
-            $cacheKey &&
-            $cache instanceof CacheAdapterInterface &&
-            $cached = self::createFromCache($cache, $cacheKey)
-        ) {
-            return $cached;
-        }
+        // Start tracking the cache key
+        $cacheKey = $config[Options::CREDENTIALS_CACHE_KEY];
 
         // Create the credentials object
         if (!$config[Options::KEY] || !$config[Options::SECRET]) {
             $credentials = self::createFromEnvironment($config);
+            // If no cache key was set, use the crc32 hostname of the server
+            $cacheKey = $cacheKey ?: 'credentials_' . crc32(gethostname());
         } else {
             // Instantiate using short or long term credentials
             $credentials = new static(
@@ -111,6 +103,8 @@ class Credentials implements CredentialsInterface, FromConfigInterface
                 $config[Options::TOKEN],
                 $config[Options::TOKEN_TTD]
             );
+            // If no cache key was set, use the access key ID
+            $cacheKey = $cacheKey ?: 'credentials_' . $config[Options::KEY];
         }
 
         // Check if the credentials are refreshable, and if so, configure caching
@@ -149,11 +143,11 @@ class Credentials implements CredentialsInterface, FromConfigInterface
             $profile = self::getEnvVar(self::ENV_PROFILE) ?: 'default';
         }
 
-        if (!is_readable($filename) || ($data = parse_ini_file($filename, true)) === false) {
+        if (!file_exists($filename) || !($data = parse_ini_file($filename, true))) {
             throw new \RuntimeException("Invalid AWS credentials file: {$filename}.");
         }
 
-        if (!isset($data[$profile]['aws_access_key_id']) || !isset($data[$profile]['aws_secret_access_key'])) {
+        if (empty($data[$profile])) {
             throw new \RuntimeException("Invalid AWS credentials profile {$profile} in {$filename}.");
         }
 
@@ -268,7 +262,7 @@ class Credentials implements CredentialsInterface, FromConfigInterface
         // Get key and secret from ENV variables
         $envKey = self::getEnvVar(self::ENV_KEY);
         if (!($envSecret = self::getEnvVar(self::ENV_SECRET))) {
-            // Use AWS_SECRET_ACCESS_KEY if AWS_SECRET_KEY was not set
+            // Use AWS_SECRET_ACCESS_KEY if AWS_SECRET_KEY was not set.
             $envSecret = self::getEnvVar(self::ENV_SECRET_ACCESS_KEY);
         }
 
@@ -277,26 +271,17 @@ class Credentials implements CredentialsInterface, FromConfigInterface
             return new static($envKey, $envSecret);
         }
 
-        try {
-            // Use credentials from the INI file in HOME directory if available
-            return self::fromIni($config[Options::PROFILE]);
-        } catch (\RuntimeException $e) {
-            // Otherwise, try using instance profile credentials (available on EC2 instances)
-            return new RefreshableInstanceProfileCredentials(
-                new static('', '', '', 1),
-                $config[Options::CREDENTIALS_CLIENT]
-            );
-        }
-    }
-
-    private static function createFromCache(CacheAdapterInterface $cache, $cacheKey)
-    {
-        $cached = $cache->fetch($cacheKey);
-        if ($cached instanceof CredentialsInterface && !$cached->isExpired()) {
-            return new CacheableCredentials($cached, $cache, $cacheKey);
+        // Use credentials from the ini file in HOME directory if available
+        $home = self::getHomeDir();
+        if ($home && file_exists("{$home}/.aws/credentials")) {
+            return self::fromIni($config[Options::PROFILE], "{$home}/.aws/credentials");
         }
 
-        return null;
+        // Use instance profile credentials (available on EC2 instances)
+        return new RefreshableInstanceProfileCredentials(
+            new static('', '', '', 1),
+            $config[Options::CREDENTIALS_CLIENT]
+        );
     }
 
     private static function createCache(CredentialsInterface $credentials, $cache, $cacheKey)

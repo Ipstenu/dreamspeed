@@ -97,8 +97,8 @@
 			<input type="text" name="cloudfront" value="<?php echo esc_attr( $this->get_setting( 'cloudfront' ) ); ?>" size="50" />
 			<p class="description"><?php _e( 'Leave blank if you meet any of the following conditions:', 'dreamspeed-cdn' ); ?></p>
 			
-			<p class="description">&bull; <?php _e( 'You aren\'t using a DNS alias.', 'dreamspeed-cdn' ); ?>
-			<br />&bull; <?php _e( 'You are using SSL.', 'dreamspeed-cdn' ); ?>
+			<p class="description">&bull; <?php _e( 'You are not using a DNS alias.', 'dreamspeed-cdn' ); ?>
+			<br />&bull; <?php _e( 'You are using SSL and have not configured SSL certificates.', 'dreamspeed-cdn' ); ?>
 			</p>
 
 
