@@ -64,7 +64,7 @@
 	<input type="hidden" name="action" value="save" />
 	<?php wp_nonce_field( 'dreamspeed-save-settings' ) ?>
 	<table class="form-table"><tr>
-		<th scope="row">Bucket Name</th>
+		<th scope="row"><?php _e( 'Buckets Names', 'dreamspeed-cdn' ); ?></th>
 		<td><select name="bucket" class="bucket">
 			<option value="">-- <?php _e( 'Select a Bucket', 'dreamspeed-cdn' ); ?> --</option>
 			<?php if ( is_array( $buckets ) ) foreach ( $buckets as $bucket ): ?>
@@ -76,16 +76,16 @@
 		<p class="description"><?php _e( 'You should not change this once set, as it will break any existing CDN uploads', 'dreamspeed-cdn' ); ?></p></td>
 	</tr>
 
-	<tr><th scope="row">Paths</th>
+	<tr><th scope="row"><?php _e( 'Paths', 'dreamspeed-cdn' ); ?></th>
 		<td>
-			<p><strong>Folder Structure</strong></p>
+			<p><strong><?php _e( 'Folder Structure', 'dreamspeed-cdn' ); ?></strong></p>
 			<p><?php _e( 'Determine the name of your folder structure for your media. At this time, you cannot remove the year or month in order to prevent file-name collisions. If you already have folders (aka objects) in your bucket, please make sure to select a new location.', 'dreamspeed-cdn' ); ?></p>
 			<input type="text" name="object-prefix" value="<?php echo esc_attr( $this->get_setting( 'object-prefix' ) ); ?>" size="30" />
 			<label><?php echo trailingslashit( $this->get_dynamic_prefix() ); ?></label></p>
 			<p class="description"><?php _e( 'The default is <code>wp-content/uploads/</code> (or <code>wp-content/uploads/site/#/</code> for Multisite).', 'dreamspeed-cdn' ); ?></p>
 
-			<p><br /><strong>CDN Path</strong></p>			
-			<p><?php _e( 'If you use an alias for your CDN (like http://cdn.example.com) then you can tell DreamSpeed to use that instead of the default http://objects.dreamhost.com/bucketname. Both URLs will always work, but pretty CDN is pretty.', 'dreamspeed-cdn' ); ?></p>
+			<p><br /><strong><?php _e( 'CDN Path', 'dreamspeed-cdn' ); ?></strong></p>			
+			<p><?php _e( 'If you use an alias for your CDN (like http://cdn.example.com) then you can tell DreamSpeed to use that instead of the default http://objects-us-west-1.dream.io/bucketname one. Both URLs will always work, but pretty CDN is pretty.', 'dreamspeed-cdn' ); ?></p>
 		
 				<?php 
 					if (is_ssl()) {
@@ -100,12 +100,10 @@
 			<p class="description">&bull; <?php _e( 'You are not using a DNS alias.', 'dreamspeed-cdn' ); ?>
 			<br />&bull; <?php _e( 'You are using SSL and have not configured SSL certificates.', 'dreamspeed-cdn' ); ?>
 			</p>
-
-
 		</td>
 	</tr>
 
-	<tr><th scope="row">Options</th>
+	<tr><th scope="row"><?php _e( 'Options', 'dreamspeed-cdn' ); ?></th>
 		<td>
 			<input type="checkbox" name="copy-to-s3" value="1" id="copy-to-s3" <?php echo $this->get_setting( 'copy-to-s3' ) ? 'checked="checked" ' : ''; ?> />
 			<label for="copy-to-s3"> <?php _e( 'Copy files to DreamSpeed as they are uploaded to the Media Library (recommended)', 'dreamspeed-cdn' ); ?></label>

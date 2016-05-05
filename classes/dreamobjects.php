@@ -39,9 +39,9 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 	function admin_menu() {
 		$hook_suffixes[] = add_menu_page( $this->plugin_title, $this->plugin_menu_title, $this->plugin_permission, $this->plugin_slug, array( $this, 'render_page' ), 'dashicons-cloud' );
     	
-    	global $submenu;
-    	if ( isset( $submenu[$this->plugin_slug][0][0] ) ) {
-    		$submenu[$this->plugin_slug][0][0] = __( 'Settings', 'dreamspeed-cdn' );
+	    	global $submenu;
+	    	if ( isset( $submenu[$this->plugin_slug][0][0] ) ) {
+	    		$submenu[$this->plugin_slug][0][0] = __( 'Settings', 'dreamspeed-cdn' );
 		}
 
 		$title = __( 'Settings', 'dreamspeed-cdn' );
@@ -98,7 +98,7 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 	function render_page() {
 		if ( empty( $_GET['page'] ) ) {
 			// Not sure why we'd ever end up here, but just in case
-			wp_die( 'What the heck are we doin here?' );
+			wp_die( 'Error, page cannot render.' );
 		}
 
 		$view = 'settings';
@@ -122,7 +122,7 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 			$args = array(
 			    'key'      => $this->get_access_key_id(),
 			    'secret'   => $this->get_secret_access_key(),
-			    'base_url' => 'http://objects.dreamhost.com',
+			    'base_url' => 'http://objects-us-west-1.dream.io',
 			);
 			$args = apply_filters( 'aws_get_client_args', $args );
 			$this->client = AwsCDN::factory( $args );

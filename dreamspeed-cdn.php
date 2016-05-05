@@ -4,7 +4,7 @@ Plugin Name: DreamSpeed CDN
 Plugin URI: https://github.com/Ipstenu/dreamspeed/
 Description: Copies files to DreamSpeed as they are uploaded to the Media Library. Optionally configure a custom domain name as an alias.
 Author: Mika Epstein
-Version: 0.6.0
+Version: 0.7.0
 Author URI: http://dreamhost.com
 Text Domain: dreamspeed-cdn
 
@@ -53,6 +53,7 @@ if ( is_admin() && ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) ) {
 require_once 'classes/plugin-base.php';
 require_once 'classes/dreamobjects.php';
 require_once 'media/media.php';
+require_once 'upgrades.php';
 
 if (false === class_exists('Symfony\Component\ClassLoader\UniversalClassLoader', false)) {
 	require_once 'aws/aws-autoloader.php';
@@ -67,3 +68,8 @@ function dreamspeed_core_init() {
 }
 
 add_action( 'init', 'dreamspeed_core_init' );
+
+if ( ! defined( 'DREAMSPEED_VERSION' ) ) {
+	define( 'DREAMSPEED_VERSION', '0.7.0' );
+}
+

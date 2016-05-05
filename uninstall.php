@@ -17,6 +17,7 @@ if ( !defined( 'WP_UNINSTALL_PLUGIN' ) )
 
 // Deregister
     delete_option( 'dreamspeed_cdn' );
+    delete_option( 'dreamspeed_version' );
     delete_option( 'dreamspeed_settings' );
     delete_option( 'dreamspeed_importer' );
 

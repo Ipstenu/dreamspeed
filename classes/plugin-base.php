@@ -45,7 +45,7 @@ class DreamSpeed_Plugin_Base {
 		extract( $args );
 		include $this->plugin_dir_path . '/view/' . $view . '.php';
 	}
-
+	
 	function set_setting( $key, $value ) {
 		$this->settings[$key] = $value;
 	}

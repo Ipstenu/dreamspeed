@@ -3,7 +3,7 @@ Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, cdn
 Requires at least: 3.8
 Tested up to: 4.5
-Stable tag: 0.6.0
+Stable tag: 0.6.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,6 +37,29 @@ Development happens on <a href="https://github.com/Ipstenu/dreamspeed/">Github</
 1. Watch your site load faster
 
 == Frequently asked questions ==
+
+<strong>What's this 'September 5th' warning I keep seeing?</strong>
+
+As part of ongoing service improvements, DreamHost made a subtle, but critical, change to how we access DreamObjects. Specifically, they changed the DreamObjects hostname to prepare for upcoming enhancements.
+
+Old hostname: `objects.dreamhost.com`
+New hostname: `objects-us-west-1.dream.io`
+
+You should have received an email about this, but just in case you didn't, or if you we're sure what this meant to you, let me explain. If you were ever using the URL `objects.dreamhost.com` in your site, you need to change it. This plugin will do it's utmost best to fix any URLs on your site, however it will *only* fix the ones for images it can detect are on DreamSpeed. I am aware that some people with a phenomenal number of images manually copied their uploads folder to DreamObjects and ran a command like this:
+
+`wp search-replace 'example.com/wp-content/uploads' 'objects.dreamhost.com/bucketname/wp-content/uploads'`
+
+Or perhaps they used the InterconnectDB script, or maybe even Velvet Blues URL replacement.
+
+You have do do it again. And you have to do it before September 5th, 2016 or your images will break.
+
+If you're on DreamHost, you can run the following command:
+
+`wp search-replace objects.dreamhost.com objects-us-west-1.dream.io`
+
+That will upgrade everything for you. If you're not, you'll need to use the search/replace tool of your choice.
+
+I'm sorry about the change, but on the good side, we shouldn't ever need to do this again.
 
 = General Questions =
 
@@ -136,11 +159,11 @@ Of note: Currently the official WordPress importers aren't standardized, so ther
 
 <strong>Why aren't my images found?</strong>
 
-Check if they're failing on the CDN alias, but they do work at the objects.dreamhost.com URL. If so, you somehow goofed your permissions. You have to go into the DreamObjects editor and set permissions from PRIVATE to PUBLIC. This happens usually because the bucket was private when you made it.
+Check if they're failing on the CDN alias, but they do work at the objects-us-west-1.dream.io URL. If so, you somehow goofed your permissions. You have to go into the DreamObjects editor and set permissions from PRIVATE to PUBLIC. This happens usually because the bucket was private when you made it.
 
 <strong>I viewed source and the srcset images are all local. Why is this happening?</strong>
 
-There are weird issues with srcset. Basically it's impossible to be 100% sure that all the media is uploaded to the CDN, so auto-generating the srcset URLs is very tricky. This is being tracked in [Github Issue #20](https://github.com/Ipstenu/dreamspeed/issues/20)
+There are weird issues with srcset. Basically it's impossible to be 100% sure that all the media is uploaded to the CDN, so auto-generating the srcset URLs is very tricky. This is being tracked in [Github Issue #20](https://github.com/Ipstenu/dreamspeed/issues/20) but I don't have an ETA yet.
 
 == Screenshots ==
 
@@ -155,6 +178,11 @@ There are weird issues with srcset. Basically it's impossible to be 100% sure th
 
 == Changelog ==
 
+= 0.7.0 =
+* May 2016 by Ipstenu
+* Change hostname to objects-us-west-1.dream.io
+* Create upgrade feature to force all URLs to be updated
+
 = 0.6.0 =
 * March 2016 by Ipstenu
 * Updating SDK
@@ -163,4 +191,4 @@ There are weird issues with srcset. Basically it's impossible to be 100% sure th
 * Improved sanitization and escaping.
 
 == Upgrade Notice ==
-Version 0.6.0 comes with a re-vamped layout for the settings page, making it look more WordPressy. No functionality was changed.
+Version 0.7.0 upgrades your existing posts to reflect the new URL for hostnames and upcoming regions. If you ever manually edited your image locations to objects.dreamhost.com you MUST change that to objects-us-west-1.dream.io before September 5th, 2016, or your images will break.
