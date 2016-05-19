@@ -24,7 +24,8 @@ class DreamSpeed_Plugin_Base {
 		$this->plugin_basename = plugin_basename( $plugin_file_path );
 	}
 
-	function get_settings( $force = false ) {
+	function get_settings( $force = false) {
+		
 		if ( is_null( $this->settings ) || $force ) {
 			$this->settings = get_option( static::SETTINGS_KEY );
 		}
@@ -32,7 +33,7 @@ class DreamSpeed_Plugin_Base {
 	}
 
 	function get_setting( $key ) {
-		$this->get_settings();
+		$this->get_settings( );
 
 		if ( isset( $this->settings[$key] ) ) {
 			return $this->settings[$key];

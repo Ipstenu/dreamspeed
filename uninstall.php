@@ -28,6 +28,7 @@ $blogs = $wpdb->get_results("SELECT blog_id FROM {$wpdb->blogs}", ARRAY_A);
         foreach($blogs as $blog) {
             switch_to_blog($blog['blog_id']);
             	delete_option( 'dreamspeed_cdn' );
+			delete_option( 'dreamspeed_version' );
             	delete_option( 'dreamspeed_settings' );
             	delete_option( 'dreamspeed_importer' );
 	        }

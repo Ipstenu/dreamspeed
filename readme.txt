@@ -45,11 +45,11 @@ As part of ongoing service improvements, DreamHost made a subtle, but critical, 
 Old hostname: `objects.dreamhost.com`
 New hostname: `objects-us-west-1.dream.io`
 
-You should have received an email about this, but just in case you didn't, or if you we're sure what this meant to you, let me explain. If you were ever using the URL `objects.dreamhost.com` in your site, you need to change it. This plugin will do it's utmost best to fix any URLs on your site, however it will *only* fix the ones for images it can detect are on DreamSpeed. I am aware that some people with a phenomenal number of images manually copied their uploads folder to DreamObjects and ran a command like this:
+You should have received an email about this, but just in case you didn't, or if you we're sure what this meant to you, let me explain. If you were ever using the URL `objects.dreamhost.com` in your site, you need to change it. This plugin will do it's utmost best to fix any URLs on your site, however it will *only* fix the ones for images it can detect are on DreamSpeed. I am aware that some people with a phenomenal number of images manually copied your uploads folder to DreamObjects and ran a command like this:
 
 `wp search-replace 'example.com/wp-content/uploads' 'objects.dreamhost.com/bucketname/wp-content/uploads'`
 
-Or perhaps they used the InterconnectDB script, or maybe even Velvet Blues URL replacement.
+Or perhaps you used the InterconnectDB script, or maybe even the Velvet Blues URL replacement plugin.
 
 You have do do it again. And you have to do it before September 5th, 2016 or your images will break.
 
@@ -57,7 +57,7 @@ If you're on DreamHost, you can run the following command:
 
 `wp search-replace objects.dreamhost.com objects-us-west-1.dream.io`
 
-That will upgrade everything for you. If you're not, you'll need to use the search/replace tool of your choice.
+That will upgrade everything for you. If you're not on DreamHost, you'll need to use the search/replace tool of your choice.
 
 I'm sorry about the change, but on the good side, we shouldn't ever need to do this again.
 

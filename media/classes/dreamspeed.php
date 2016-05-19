@@ -26,11 +26,18 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		$this->aws = $dos;
 		add_action( 'aws_admin_menu', array( $this, 'admin_menu' ) );
 
-		$this->plugin_vars = array( 'bucket', 'virtual-host', 'expires', 'permissions', 'cloudfront', 'object-prefix', 'copy-to-s3', 'serve-from-s3', 'remove-local-file', 'force-ssl', 'fullspeed', 'hidpi-images', 'object-versioning' );
+		$this->plugin_vars = array( 'bucket', 'virtual-host', 'expires', 'permissions', 'cloudfront', 'object-prefix', 'copy-to-s3', 'serve-from-s3', 'remove-local-file', 'force-ssl', 'fullspeed', 'hidpi-images', 'object-versioning', 'region' );
 
 		$this->plugin_title = __( 'DreamSpeed CDN Configuration', 'dreamspeed-cdn' );
 		$this->plugin_menu_title = __( 'CDN', 'dreamspeed-cdn' );
 		$this->plugin_slug = 'dreamspeed-media';
+		
+		// Set default region
+		$myregion = $this->get_setting( 'region' );
+		if ( empty($myregion ) ) { 
+			$this->set_setting( 'region' , 'objects-us-west-1.dream.io' );
+			$this->save_settings();
+		}
 
 		add_action( 'wp_ajax_dreamspeed-create-bucket', array( $this, 'ajax_create_bucket' ) );
 
@@ -49,8 +56,8 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	        $cols["dreamspeed-cdn"] = "CDN";
 	        return $cols;
 	}
-	function media_column_content( $column_name, $id ) {
 
+	function media_column_content( $column_name, $id ) {
 	    switch ($column_name) {
 		    case 'dreamspeed-cdn' :
 		    	$meta = get_post_meta($id, 'amazonS3_info' );
@@ -384,9 +391,9 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
 			$domain_bucket = $dsobject['bucket'] . '.objects.cdn.dream.io';
 		} elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
-			$domain_bucket = 'objects-us-west-1.dream.io:443/' . $dsobject['bucket'];
+			$domain_bucket = $this->get_setting( 'region' ).':443/' . $dsobject['bucket'];
 		} else {
-			$domain_bucket = $dsobject['bucket'] . '.objects-us-west-1.dream.io';
+			$domain_bucket = $dsobject['bucket'] . $this->get_setting( 'region' );
 		}
 
 		$url = $scheme . '://' . $domain_bucket . '/' . $dsobject['key'];
@@ -414,36 +421,6 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		}
 	}
 
-	function ajax_create_bucket() {
-		$this->verify_ajax_request();
-
-		if ( !isset( $_POST['bucket_name'] ) || !$_POST['bucket_name'] ) {
-			wp_die( __( 'No bucket name provided.', 'dreamspeed-cdn' ) );
-		}
-
-		$result = $this->create_bucket( $_POST['bucket_name'] );
-		if ( is_wp_error( $result ) ) {
-			$out = array( 'error' => $result->get_error_message() );
-		}
-		else {
-			$out = array( 'success' => '1', '_nonce' => wp_create_nonce( 'dreamspeed-create-bucket' ) );
-		}
-
-		echo json_encode( $out );
-		exit;
-	}
-
-	function create_bucket( $bucket_name ) {
-		try {
-			$this->get_doclient()->createBucket( array( 'Bucket' => $bucket_name ) );
-		}
-		catch ( Exception $e ) {
-			return new WP_Error( 'exception', $e->getMessage() );
-		}
-
-		return true;
-	}
-
 	function admin_menu( $dos ) {
 		$hook_suffix = $dos->add_page( $this->plugin_title, $this->plugin_menu_title, 'manage_options', $this->plugin_slug, array( $this, 'render_page' ) );
 		add_action( 'load-' . $hook_suffix , array( $this, 'plugin_load' ) );
@@ -465,6 +442,13 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		}
 
 		return $result['Buckets'];
+	}
+
+	function get_regions() {
+		$regions = array(
+			'objects-us-west-1.dream.io'    => __('US West 1', 'dreamobjects'),
+		);
+		return $regions;
 	}
 
 	function plugin_load() {
@@ -625,11 +609,11 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		if ( $this->get_setting( 'cloudfront' ) ) {
 			$domain_base = $this->get_setting( 'cloudfront' );
 		} elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
-			$domain_base = 'objects-us-west-1.dream.io/'.$this->get_setting( 'bucket' );
+			$domain_base = $this->get_setting( 'region' ).'/'.$this->get_setting( 'bucket' );
 		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
 			$domain_base = $this->get_setting( 'bucket' ) . '.objects.cdn.dream.io';
 		} else {
-			$domain_base = $this->get_setting( 'bucket' ) . '.objects-us-west-1.dream.io';
+			$domain_base = $this->get_setting( 'bucket' ) . $this->get_setting( 'region' );
 		}
 
 		$url = $scheme . '://' . $domain_base . '/' . esc_attr( $this->get_setting( 'object-prefix' ) );

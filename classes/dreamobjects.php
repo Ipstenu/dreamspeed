@@ -113,6 +113,11 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 		return $this->get_setting( 'secret_access_key' );
 	}
 
+	function get_my_region() {
+		$options = get_option('dreamspeed_cdn');
+		return $options['region'];
+	}
+
 	function get_client() {
 		if ( !$this->get_access_key_id() || !$this->get_secret_access_key() ) {
 			return new WP_Error( 'access_keys_missing', sprintf( __( '<div class="dashicons dashicons-no"></div> Please <a href="%s">set your access keys</a> first.', 'dreamspeed-cdn' ), 'admin.php?page=' . $this->plugin_slug ) );
@@ -122,7 +127,7 @@ class DreamSpeed_DHO_Services extends DreamSpeed_Plugin_Base {
 			$args = array(
 			    'key'      => $this->get_access_key_id(),
 			    'secret'   => $this->get_secret_access_key(),
-			    'base_url' => 'http://objects-us-west-1.dream.io',
+			    'base_url' => 'http://'.$this->get_my_region().'/',
 			);
 			$args = apply_filters( 'aws_get_client_args', $args );
 			$this->client = AwsCDN::factory( $args );

@@ -22,9 +22,14 @@
 	
 	<?php
 	
+	// Preflight checks
+	
+	$regions	 = $this->get_regions();
+	$myregion = $this->get_setting( 'region' );
+
 	$buckets = $this->get_buckets();
 	
-	if ( is_wp_error( $buckets ) ) {
+	if ( is_wp_error( $buckets ) && !empty($myregion) ) {
 		?>
 		<div class="error">
 			<p>
@@ -52,9 +57,8 @@
 		<div class="error"><p><?php _e( 'Warning. You cannot migrate existing files without that checkbox.', 'dreamspeed-cdn' ); ?></p></div>
 		<?php
 	}
-	
-	?>
 
+	?>
 
 	<h3><?php _e( 'Settings', 'dreamspeed-cdn' ); ?></h3>
 	<p><?php _e( 'Configure your site for CDN by selecting your bucket and path settings.', 'dreamspeed-cdn' ); ?></p>
@@ -63,7 +67,9 @@
 	<form method="post">
 	<input type="hidden" name="action" value="save" />
 	<?php wp_nonce_field( 'dreamspeed-save-settings' ) ?>
-	<table class="form-table"><tr>
+	<table class="form-table">
+		
+	<tr>
 		<th scope="row"><?php _e( 'Buckets Names', 'dreamspeed-cdn' ); ?></th>
 		<td><select name="bucket" class="bucket">
 			<option value="">-- <?php _e( 'Select a Bucket', 'dreamspeed-cdn' ); ?> --</option>
@@ -73,8 +79,32 @@
 		</select>
 		
 		<p class="description"><?php _e( 'Select from pre-existing buckets.', 'dreamspeed-cdn' ); ?></p>
-		<p class="description"><?php _e( 'You should not change this once set, as it will break any existing CDN uploads', 'dreamspeed-cdn' ); ?></p></td>
+		<p class="description"><?php _e( 'You should not change this once set, as it will break any existing CDN uploads. If you must change it, you will need to manually edit your content to the new URL.', 'dreamspeed-cdn' ); ?></p></td>
 	</tr>
+
+<!-- The following section is hidden because RIGHT NOW it's not done. It's not ready. We ony have one region. Once it is done, however, then it can be unhidden and used. -->
+<!--
+	<tr>
+		<th scope="row"><?php _e( 'Region', 'dreamspeed-cdn' ); ?></th>
+		<td>	
+			<select name="region" class="region">
+			<option value="">-- <?php _e( 'Select a Region', 'dreamspeed-cdn' ); ?> --</option>
+			<?php 		
+			if ( is_array( $regions ) ) foreach ( $regions as $key => $value  ): 
+				if ( ( $key == $myregion ) || ( empty($myregion) && $value == $defaultregion ) ) {
+					$selected = 'selected="selected"';
+				} else {
+					$selected = '';
+				}
+				?>
+			    <option value="<?php echo esc_attr( $key ); ?>" <?php echo $selected ?>><?php echo esc_html( $value ); ?></option>
+			<?php endforeach;?>
+		</select>
+		
+		<p class="description"><?php _e( 'Select what DreamObjects region you want to use', 'dreamspeed-cdn' ); ?></p>
+		<p class="description"><?php _e( 'You should not change this once set, as it will break any existing CDN uploads. Resources are not replicated across regions unless you do so specifically.', 'dreamspeed-cdn' ); ?></p></td>
+	</tr>
+-->
 
 	<tr><th scope="row"><?php _e( 'Paths', 'dreamspeed-cdn' ); ?></th>
 		<td>
@@ -85,7 +115,7 @@
 			<p class="description"><?php _e( 'The default is <code>wp-content/uploads/</code> (or <code>wp-content/uploads/site/#/</code> for Multisite).', 'dreamspeed-cdn' ); ?></p>
 
 			<p><br /><strong><?php _e( 'CDN Path', 'dreamspeed-cdn' ); ?></strong></p>			
-			<p><?php _e( 'If you use an alias for your CDN (like http://cdn.example.com) then you can tell DreamSpeed to use that instead of the default http://objects-us-west-1.dream.io/bucketname one. Both URLs will always work, but pretty CDN is pretty.', 'dreamspeed-cdn' ); ?></p>
+			<p><?php _e( 'If you use an alias for your CDN (like http://cdn.example.com) then you can tell DreamSpeed to use that instead of the default. Both URLs will always work, but pretty CDN is pretty.', 'dreamspeed-cdn' ); ?></p>
 		
 				<?php 
 					if (is_ssl()) {
