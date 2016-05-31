@@ -200,4 +200,4 @@ There are weird issues with srcset. Basically it's impossible to be 100% sure th
 * Improved sanitization and escaping.
 
 == Upgrade Notice ==
-Version 0.7.0 upgrades your existing posts to reflect the new URL for hostnames and upcoming regions. If you ever manually edited your image locations to objects.dreamhost.com you MUST change that to objects-us-west-1.dream.io before September 5th, 2016, or your images will break.
+Version 0.7.0 upgrades your existing posts to reflect the new URL for hostnames and upcoming regions. If you ever manually edited your image locations to objects.dreamhost.com you MUST change that to `objects-us-west-1.dream.io` before September 5th, 2016, or your images will break.

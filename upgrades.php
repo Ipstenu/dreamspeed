@@ -192,11 +192,15 @@ function dreamspeed_v070_upgrades() {
         return;
     }
     
-	foreach ( $attachments as $attachment ) {
-		if( $attachment->post_parent > 0  && $parent_post = get_post($attachment->post_parent) ) {
-			$oldobjectpath = 'objects.dreamhost.com';
-			$newobjectpath = 'objects-us-west-1.dream.io';
-        		$parent_post->post_content = str_replace( $oldobjectpath , $newobjectpath, $parent_post->post_content );
+    // Check if the old URL is being used and, if so, replace it in posts.
+	foreach ( $attachments as $attachment ) {	
+		$attachment_oldurl = wp_get_attachment_url( $attachment->ID );
+		$oldobjectpath = 'objects.dreamhost.com';
+		$newobjectpath = 'objects-us-west-1.dream.io';
+		
+		if( $attachment->post_parent > 0  && $parent_post = get_post($attachment->post_parent) && (strpos($attachment_oldurl, $oldobjectpath) !== false) ) {				
+			$attachment_newurl = str_replace( $oldobjectpath , $newobjectpath , $attachment_oldurl );
+        		$parent_post->post_content = str_replace( $attachment_oldurl , $attachment_newurl, $parent_post->post_content );
             wp_update_post($parent_post);
         }
 	}
