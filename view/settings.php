@@ -19,24 +19,15 @@
 	<h2><?php echo ( isset( $page_title ) ) ? $page_title : __( 'DreamSpeed CDN', 'dreamspeed-cdn' ); ?></h2>
 
 	<div class="dreamspeed-content dreamspeed-settings">
-	
-		<p><?php printf( __( '<a href="%s">DreamObjects&#153;</a> is an inexpensive, scalable object storage service that was developed from the ground up to provide a reliable, flexible cloud storage solution for entrepreneurs and developers. It provides a perfect, scalable storage solution for your WordPress site.', 'dreamspeed-cdn' ), 'https://www.dreamhost.com/cloud/storage/' ); ?></p>
-		
-		<p><?php printf( __( '<a href="%s">DreamSpeed CDN</a> is a content delivery network fully integrated with DreamObjects.', 'dreamspeed-cdn' ), 'https://www.dreamhost.com/cloud/cdn/' ); ?></p>
+
+		<p><?php printf( __( 'DreamSpeed CDN allows WordPress upload all your media to <a href="%s">DreamObjects&#153;</a>, housing your images, MP3s, and more in an inexpensive, scalable object storage service that provides a reliable, flexible cloud solution.', 'dreamobjects'), 'https://www.dreamhost.com/cloud/cdn/' ); ?></p>
+
+		<?php if ( !$this->get_secret_access_key() ) { ?>
+    			<p><?php printf( __( 'DreamObjects&#153; comes with a 30-day trial to evaluate the service and the plugin. To sign up, go to your <a href="%s">DreamObjects Panel for DreamObjects</a> and create a user. You will then be able to click on the Keys button to retrieve your DreamObjects access and secret keys and enable CDN.', 'dreamobjects' ), 'https://panel.dreamhost.com/index.cgi?tree=cloud.objects&' ); ?></p>
+				<p><?php printf( __( 'Once you have your keys, enter them in the form below and save your changes. Your secret key will not be displayed for security. For additional help, please review the official <a href="%s">What is DreamSpeed? help document</a>.', 'dreamobjects' ), 'https://help.dreamhost.com/hc/en-us/articles/215916677-What-is-DreamSpeed-' ); ?></p>
+		<?php } // endif ?>
 	
 		<h3>Access Keys</h3>
-		
-		<?php 
-		if ( !$this->get_secret_access_key() ) { ?>
-	    		<p><?php printf( __( 'If you don\'t have a DreamSpeed CDN and DreamObjects account yet, you need to <a href="%s">sign up for an account</a>.', 'dreamspeed-cdn' ), 'https://www.dreamhost.com/cloud/cdn/' ); ?></p>
-		
-			<p><?php printf( __( 'If you do have DreamObjects, you can find your keys in your <a href="%s">panel</a>.', 'dreamspeed-cdn' ), 'https://panel.dreamhost.com/index.cgi?tree=cloud.objects&' ); ?></p>
-			
-	    <?php } // endif 
-	    else {
-		    
-	    }  
-	    ?>
 		
 		<form method="post">
 	

@@ -3,7 +3,7 @@ Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, cdn
 Requires at least: 3.8
 Tested up to: 4.5
-Stable tag: 0.6.1
+Stable tag: 0.7.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -127,10 +127,16 @@ Keep in mind, you cannot use a custom CDN (like cdn.yourdomain.com) with HTTPs a
 
 <strong>If I wanted to push my existing images up manually, how do I do that?</strong>
 
-First copy it all up via a desktop tool like Cyberduck. Once all the images are in the right place, do a search/replace on your content:
+First copy it all up via a desktop tool like Cyberduck or Transmit. Once all the images are in the right place, do a search/replace on your content:
 
 # Find `example.com/wp-content/uploads/`
-# Replace with `bucketname.objects.cdn.dream.io/wp-content/uploads/`
+# Replace with `NEWPATH/wp-content/uploads/`
+
+The actual path for NEWPATH should be one of the following:
+
+* `bucketname.objects.cdn.dream.io`
+* `objects-us-west-1.dream.io/bucketname`
+* `yourCDN.yourdomain.com`
 
 <strong>I'm tired of this plugin. How do I go back?</strong>
 
@@ -143,7 +149,7 @@ For example, if your DreamSpeed URL was `example.objects.cdn.dream.io` and your 
 
 `wp search-replace example.objects.cdn.dream.io example.com --dry-run`
 
-If that looked 'about right' then run it again without the dry-run flag. I recommend making a DB backup first (`wp db export	`). Keep in mind, if you changed up where it saves images and it wasn't in wp-content, you may need to be more precise with your changes.
+If that looked 'about right' then run it again without the dry-run flag. I recommend making a DB backup first (`wp db export	`). Keep in mind, if you changed up where it saves images and it wasn't in `wp-content`, you may need to be more precise with your changes.
 
 = Errors, Bugs, and Weird Stuff =
 
@@ -153,7 +159,7 @@ Make sure your CDN URL is working. If you have Cloudflare or something proxy-ish
 
 <strong>I have a post and the links still are local, even though the images are on CDN. What gives?</strong>
 
-This is a very rare case, and should no longer happen except in wild conditions where for some reason your OLD image URL doesn't match what WP thought it was. Sadly,  you'll have to search/replace them after the fact for post content. If this happens because of how a plugin is changing the visible domain URL (like WordPress MU Domain Mapping), please let me know which plugin and I'll put in a check to accommodate it as best I can.
+This is a very rare case, and should no longer happen except in wild conditions where for some reason your OLD image URL doesn't match what WP thought it was. Sadly, you'll have to search/replace them after the fact for post content. If this happens because of how a plugin is changing the visible domain URL (like WordPress MU Domain Mapping), please let me know which plugin and I'll put in a check to accommodate it as best I can.
 
 Of note: Currently the official WordPress importers aren't standardized, so there's not 100% safe way to check.
 
@@ -163,7 +169,7 @@ Check if they're failing on the CDN alias, but they do work at the objects-us-we
 
 <strong>I viewed source and the srcset images are all local. Why is this happening?</strong>
 
-There are weird issues with srcset. Basically it's impossible to be 100% sure that all the media is uploaded to the CDN, so auto-generating the srcset URLs is very tricky. This is being tracked in [Github Issue #20](https://github.com/Ipstenu/dreamspeed/issues/20) but I don't have an ETA yet.
+There are weird issues with srcset. Basically it's impossible to be 100% sure that all the media is uploaded to the CDN, so auto-generating the srcset URLs is very tricky. This is being tracked in [Github Issue #20](https://github.com/Ipstenu/dreamspeed/issues/20) but I don't have an ETA yet. All current attempts have resulted in large gallery pages slowing to the point of un-usability.
 
 == Screenshots ==
 
@@ -182,6 +188,9 @@ There are weird issues with srcset. Basically it's impossible to be 100% sure th
 * May 2016 by Ipstenu
 * Change hostname to objects-us-west-1.dream.io
 * Create upgrade feature to force all URLs to be updated
+* Added explanatory descriptions to settings page
+* Hide certain settings if requirements are not met (you can't upload existing media if you don't pick a bucket, for example)
+* Build out framework for future regions
 
 = 0.6.0 =
 * March 2016 by Ipstenu

@@ -646,7 +646,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		}
 
 
-		echo "<p>".__( 'All of your imported media has not <em>YET</em> been uploaded to the Dream Cloud, but it will be soon! The uploads are scheduled via the bulk uploader feature.', 'dreamspeed-cdn')."</p>";
+		echo "<p>".__( 'All of your imported media has not <em>YET</em> been uploaded to the DreamSpeed Cloud, but it will be soon! The uploads are scheduled via the bulk uploader feature.', 'dreamspeed-cdn')."</p>";
 	}
 
 }

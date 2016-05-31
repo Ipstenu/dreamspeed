@@ -65,7 +65,6 @@ function dreamspeed_upgrades_screen() {
 			<div id="dreamspeed-upgrade-status">
 				<p>
 					<?php _e( 'The upgrade process has started, please be patient. This could take several minutes. You will be automatically redirected when the upgrade is finished.', 'dreamspeed-cdn' ); ?>
-					<!-- <img src="<?php echo EDD_PLUGIN_URL . '/assets/images/loading.gif'; ?>" id="dreamspeed-upgrade-loader"/> -->
 				</p>
 			</div>
 			<script type="text/javascript">
@@ -107,9 +106,9 @@ function dreamspeed_show_upgrade_notices() {
 	$dreamspeed_version = preg_replace( '/[^0-9.].*/', '', $dreamspeed_version );
 
 	// Special warning to remind people about the change
-	if ( version_compare( $dreamspeed_version, '0.7.0', '=' ) && empty( get_option( 'dreamspeed-v070-notice-dismissed' ) ) && (new DateTime() < new DateTime("2016-09-05 00:00:00") ) && isset( $_GET['page'] ) && ( $_GET['page'] == 'dreamspeed-media' || $_GET['page'] == 'dreamspeed-cdn' ) ) {
+	if ( version_compare( $dreamspeed_version, '0.7.0', '>=' ) && (new DateTime() < new DateTime("2016-09-05 00:00:00") ) && isset( $_GET['page'] ) && ( $_GET['page'] == 'dreamspeed-media' || $_GET['page'] == 'dreamspeed-cdn' ) ) {
 		printf(
-			'<div class="notice update-nag dreamspeed-v070-notice"><p>' . esc_html__( 'The hostname for DreamObjects has changed. The plugin upgrade to 0.7.0 has performed a search and replace for you, but if you ever manually imported your old images, please review the %splugin FAQ%s and make sure you update before September 5th, 2016.', 'dreamspeed-cdn' ) . '</p></div>',
+			'<div class="notice update-nag dreamspeed-v070-notice"><p>' . esc_html__( 'The hostname for DreamObjects has changed. Version 0.7.0 perform a search and replace on upgrades, but if you ever manually imported your old images, please review the %splugin FAQ%s and make sure you update before September 5th, 2016. This alert will remain in place until then.', 'dreamspeed-cdn' ) . '</p></div>',
 			'<a href="https://wordpress.org/plugins/dreamspeed-cdn/faq/">',
 			'</a>'
 		);
