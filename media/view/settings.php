@@ -82,7 +82,9 @@
 		<p class="description"><?php _e( 'You should not change this once set, as it will break any existing CDN uploads. If you must change it, you will need to manually edit your content to the new URL.', 'dreamspeed-cdn' ); ?></p></td>
 	</tr>
 	
-	<?php if ( !empty($this->get_setting( 'bucket' ) ) ) { ?>
+	<?php 
+		$thisbucket = $this->get_setting( 'bucket' );
+		if ( !empty( $thisbucket ) ) { ?>
 
 <!-- The following section is hidden because RIGHT NOW it's not done. It's not ready. We ony have one region. Once it is done, however, then it can be unhidden and used. -->
 <!--
