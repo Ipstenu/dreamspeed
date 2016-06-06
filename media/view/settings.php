@@ -24,10 +24,13 @@
 	
 	// Preflight checks
 	
-	$regions	 = $this->get_regions();
-	$myregion = $this->get_setting( 'region' );
+	$regions	    = $this->get_regions();
+	$myregion   = $this->get_setting( 'region' );
+	
+	$buckets    = $this->get_buckets();
+	$thisbucket = $this->get_setting( 'bucket' );
 
-	$buckets = $this->get_buckets();
+	$copy_to_s3 = $this->get_setting( 'copy-to-s3' );
 	
 	if ( is_wp_error( $buckets ) && !empty($myregion) ) {
 		?>
@@ -82,9 +85,7 @@
 		<p class="description"><?php _e( 'You should not change this once set, as it will break any existing CDN uploads. If you must change it, you will need to manually edit your content to the new URL.', 'dreamspeed-cdn' ); ?></p></td>
 	</tr>
 	
-	<?php 
-		$thisbucket = $this->get_setting( 'bucket' );
-		if ( !empty( $thisbucket ) ) { ?>
+	<?php if ( !empty( $thisbucket ) ) { ?>
 
 <!-- The following section is hidden because RIGHT NOW it's not done. It's not ready. We ony have one region. Once it is done, however, then it can be unhidden and used. -->
 <!--
@@ -176,10 +177,10 @@
 	<?php 
 		$all_attachments = wp_count_attachments();
 	
-		if ( $this->get_setting( 'copy-to-s3' ) == 1 && !empty($this->get_setting( 'bucket' ) ) ) {
+		if ( $copy_to_s3 == 1 && !empty( $thisbucket ) ) {
 		?><h3><?php _e( 'Migrate Existing Files', 'dreamspeed-cdn' ); ?></h3><?php
 	
-		if ( count($this->get_attachment_without_dreamspeed_info()) != 0 ) {
+		if ( count( $this->get_attachment_without_dreamspeed_info() ) != 0 ) {
 			?>
 			<form method="post">
 			<input type="hidden" name="action" value="migrate" />
