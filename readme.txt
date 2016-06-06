@@ -173,14 +173,13 @@ There are weird issues with srcset. Basically it's impossible to be 100% sure th
 
 == Screenshots ==
 
-1. DreamObjects Keys
-2. DreamObjects Buckets
-3. DreamObjects Bucket Settings
-4. DreamSpeed CDN Key Settings (empty)
-5. DreamSpeed CDN Key Settings (filled in)
-6. DreamSpeed CDN Configuration Settings
-7. Media Library with CDN checkmarks
-8. Migrate Existing Files section (on DreamSpeed CDN Configuration page)
+1. DreamObjects Keys on DreamPress Panel
+2. DreamObjects Buckets on DreamPress Panel
+3. DreamObjects Bucket Settings on DreamPress Panel
+4. DreamSpeed CDN Key Settings
+5. DreamSpeed CDN Configuration Settings
+6. Media Library with CDN checkmarks
+7. Migrate Existing Files section (on DreamSpeed CDN Configuration page)
 
 == Changelog ==
 
