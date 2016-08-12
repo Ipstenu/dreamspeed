@@ -70,7 +70,7 @@ function dreamspeed_core_init() {
 add_action( 'init', 'dreamspeed_core_init' );
 
 if ( ! defined( 'DREAMSPEED_VERSION' ) ) {
-	define( 'DREAMSPEED_VERSION', '0.7.0' );
+	define( 'DREAMSPEED_VERSION', '0.7.1' );
 }
 
 function dreamspeed_cdn_activate() {

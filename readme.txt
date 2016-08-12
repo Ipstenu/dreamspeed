@@ -183,6 +183,11 @@ There are weird issues with srcset. Basically it's impossible to be 100% sure th
 
 == Changelog ==
 
+= 0.7.1 =
+* August 2916 by Ipstenu
+* Fix: Serve files from dream.io points to the right location
+* Run: Upgrade feature to ensure that.
+
 = 0.7.0 =
 * May 2016 by Ipstenu
 * Change hostname to objects-us-west-1.dream.io

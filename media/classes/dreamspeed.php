@@ -389,7 +389,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		} elseif ( $this->get_setting( 'virtual-host' ) ) {
 			$domain_bucket = $dsobject['bucket'];
 		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
-			$domain_bucket = $dsobject['bucket'] . '.objects.cdn.dream.io';
+			$domain_bucket = $dsobject['bucket'] . '.' . $this->get_setting( 'region' );
 		} elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
 			$domain_bucket = $this->get_setting( 'region' ).':443/' . $dsobject['bucket'];
 		} else {
@@ -611,7 +611,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		} elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
 			$domain_base = $this->get_setting( 'region' ).'/'.$this->get_setting( 'bucket' );
 		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
-			$domain_base = $this->get_setting( 'bucket' ) . '.objects.cdn.dream.io';
+			$domain_base = $this->get_setting( 'bucket' ) . '.' . $this->get_setting( 'region' );
 		} else {
 			$domain_base = $this->get_setting( 'bucket' ) . $this->get_setting( 'region' );
 		}
