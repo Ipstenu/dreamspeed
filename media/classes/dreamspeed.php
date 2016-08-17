@@ -384,7 +384,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 			$scheme = 'http';
 		}
 
-		if ( is_null( $expires ) && $this->get_setting( 'cloudfront' ) ) {
+		if ( is_null( $expires ) && $this->get_setting( 'cloudfront' ) && !is_ssl() ) {
 			$domain_bucket = $this->get_setting( 'cloudfront' );
 		} elseif ( $this->get_setting( 'virtual-host' ) ) {
 			$domain_bucket = $dsobject['bucket'];

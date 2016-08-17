@@ -119,21 +119,17 @@
 			<label><?php echo trailingslashit( $this->get_dynamic_prefix() ); ?></label></p>
 			<p class="description"><?php _e( 'The default is <code>wp-content/uploads/</code> (or <code>wp-content/uploads/site/#/</code> for Multisite).', 'dreamspeed-cdn' ); ?></p>
 
-			<p><br /><strong><?php _e( 'CDN Path', 'dreamspeed-cdn' ); ?></strong></p>			
+			<p><br /><strong><?php _e( 'CDN Alias', 'dreamspeed-cdn' ); ?></strong></p>			
 			<p><?php _e( 'If you use an alias for your CDN (like http://cdn.example.com) then you can tell DreamSpeed to use that instead of the default. Both URLs will always work, but pretty CDN is pretty.', 'dreamspeed-cdn' ); ?></p>
-		
-				<?php 
-					if (is_ssl()) {
-							?> https:// <?php
-					} else {
-							?> http:// <?php
-					} 
-				?>
-			<input type="text" name="cloudfront" value="<?php echo esc_attr( $this->get_setting( 'cloudfront' ) ); ?>" size="50" />
-			<p class="description"><?php _e( 'Leave blank if you meet any of the following conditions:', 'dreamspeed-cdn' ); ?></p>
-			
-			<p class="description">&bull; <?php _e( 'You are not using a DNS alias.', 'dreamspeed-cdn' ); ?>
-			<br />&bull; <?php _e( 'You are using SSL and have not configured SSL certificates.', 'dreamspeed-cdn' ); ?>
+			<?php if (is_ssl()) {
+					?> https:// <?php
+				} else {
+					?> http:// <?php
+				} 
+			?>
+			<input type="text" name="cloudfront" value="<?php echo esc_attr( $this->get_setting( 'cloudfront' ) ); ?>" size="50" <?php if (is_ssl()) { echo 'disabled'; } ?>/>
+			<p class="description"><?php _e( 'Make sure to set up a DNS alias and test it first.', 'dreamspeed-cdn' ); ?></p>
+			<p class="description"><em><?php _e( 'This feature will disable itself if you\'re using HTTPS, as you cannot use HTTPS with a CDN Alias at this time.', 'dreamspeed-cdn' ); ?>
 			</p>
 		</td>
 	</tr>

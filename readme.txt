@@ -134,7 +134,7 @@ First copy it all up via a desktop tool like Cyberduck or Transmit. Once all the
 
 The actual path for NEWPATH should be one of the following:
 
-* `bucketname.objects.cdn.dream.io`
+* `bucketname.objects-us-west-1.dream.io`
 * `objects-us-west-1.dream.io/bucketname`
 * `yourCDN.yourdomain.com`
 
@@ -169,7 +169,7 @@ Check if they're failing on the CDN alias, but they do work at the objects-us-we
 
 <strong>I viewed source and the srcset images are all local. Why is this happening?</strong>
 
-There are weird issues with srcset. Basically it's impossible to be 100% sure that all the media is uploaded to the CDN, so auto-generating the srcset URLs is very tricky. This is being tracked in [Github Issue #20](https://github.com/Ipstenu/dreamspeed/issues/20) but I don't have an ETA yet. All current attempts have resulted in large gallery pages slowing to the point of un-usability.
+There are weird issues with `srcset`. Basically it's impossible to be 100% sure that all the media is uploaded to the CDN, so auto-generating the `srcset` URLs is very tricky. This is being tracked in [Github Issue #20](https://github.com/Ipstenu/dreamspeed/issues/20) but I don't have an ETA yet. All current attempts have resulted in large gallery pages slowing to the point of un-usability.
 
 == Screenshots ==
 
@@ -184,9 +184,10 @@ There are weird issues with srcset. Basically it's impossible to be 100% sure th
 == Changelog ==
 
 = 0.7.1 =
-* August 2916 by Ipstenu
+* August 2016 by Ipstenu
 * Fix: Serve files from dream.io points to the right location
 * Run: Upgrade feature to ensure that.
+* Fix: If SSL, don't use CDN Alias as that won't work.
 
 = 0.7.0 =
 * May 2016 by Ipstenu
@@ -204,4 +205,4 @@ There are weird issues with srcset. Basically it's impossible to be 100% sure th
 * Improved sanitization and escaping.
 
 == Upgrade Notice ==
-Version 0.7.0 upgrades your existing posts to reflect the new URL for hostnames and upcoming regions. If you ever manually edited your image locations to objects.dreamhost.com you MUST change that to `objects-us-west-1.dream.io` before September 5th, 2016, or your images will break.
+Version 0.7.0 and 0.7.1 upgrades your existing posts to reflect the new URL for hostnames and upcoming regions. If you ever manually edited your image locations to objects.dreamhost.com you MUST change that to `objects-us-west-1.dream.io` before September 5th, 2016, or your images will break.
