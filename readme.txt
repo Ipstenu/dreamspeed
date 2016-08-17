@@ -186,8 +186,10 @@ There are weird issues with `srcset`. Basically it's impossible to be 100% sure 
 = 0.7.1 =
 * August 2016 by Ipstenu
 * Fix: Serve files from dream.io points to the right location
-* Run: Upgrade feature to ensure that.
-* Fix: If SSL, don't use CDN Alias as that won't work.
+* Run: Upgrade feature to ensure that
+* Fix: If SSL, don't use CDN Alias as that won't work
+* Fix: If SSL, auto-check 'force ssl' because you did already
+* Fix: If using dream.io, don't allow CDN Aliases (you can't have both)
 
 = 0.7.0 =
 * May 2016 by Ipstenu

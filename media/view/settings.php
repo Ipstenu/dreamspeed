@@ -127,32 +127,32 @@
 					?> http:// <?php
 				} 
 			?>
-			<input type="text" name="cloudfront" value="<?php echo esc_attr( $this->get_setting( 'cloudfront' ) ); ?>" size="50" <?php if (is_ssl()) { echo 'disabled'; } ?>/>
+			<input type="text" name="cloudfront" value="<?php echo esc_attr( $this->get_setting( 'cloudfront' ) ); ?>" size="50" <?php if ( is_ssl() || $this->get_setting( 'fullspeed' ) || $this->get_setting( 'force-ssl' ) ) { echo 'disabled'; } ?>/>
 			<p class="description"><?php _e( 'Make sure to set up a DNS alias and test it first.', 'dreamspeed-cdn' ); ?></p>
-			<p class="description"><em><?php _e( 'This feature will disable itself if you\'re using HTTPS, as you cannot use HTTPS with a CDN Alias at this time.', 'dreamspeed-cdn' ); ?>
+			<p class="description"><em><?php _e( 'This feature will disable itself if you\'re using HTTPS as you cannot use HTTPS with a CDN Alias at this time, or if you\'ve selected to use dream.io as you cannot have both.', 'dreamspeed-cdn' ); ?>
 			</p>
 		</td>
 	</tr>
 
 	<tr><th scope="row"><?php _e( 'Options', 'dreamspeed-cdn' ); ?></th>
 		<td>
-			<input type="checkbox" name="copy-to-s3" value="1" id="copy-to-s3" <?php echo $this->get_setting( 'copy-to-s3' ) ? 'checked="checked" ' : ''; ?> />
+			<input type="checkbox" name="copy-to-s3" value="1" id="copy-to-s3" <?php checked( $this->get_setting( 'copy-to-s3' ), 1 ); ?> />
 			<label for="copy-to-s3"> <?php _e( 'Copy files to DreamSpeed as they are uploaded to the Media Library', 'dreamspeed-cdn' ); ?></label>
 			<p class="description"><?php _e( 'Recommended. Required to serve media in posts from DreamSpeed.', 'dreamspeed-cdn' ); ?></p>
 			
-			<input type="checkbox" name="serve-from-s3" value="1" id="serve-from-s3" <?php echo $this->get_setting( 'serve-from-s3' ) ? 'checked="checked" ' : ''; ?> />
+			<input type="checkbox" name="serve-from-s3" value="1" id="serve-from-s3" <?php checked( $this->get_setting( 'serve-from-s3' ), 1 ); ?> />
 			<label for="serve-from-s3"> <?php _e( 'Serve all available files from DreamSpeed', 'dreamspeed-cdn' ); ?></label>
 			<p class="description"><?php _e( 'Recommended. Required to serve media in posts from DreamSpeed.', 'dreamspeed-cdn' ); ?></p>
 
-			<input type="checkbox" name="fullspeed" value="1" id="fullspeed" <?php echo $this->get_setting( 'fullspeed' ) ? 'checked="checked" ' : ''; ?> />
+			<input type="checkbox" name="fullspeed" value="1" id="fullspeed" <?php checked( $this->get_setting( 'fullspeed' ), 1 ); ?> />
 			<label for="fullspeed"> <?php _e( 'Serve files from dream.io', 'dreamspeed-cdn' ); ?></label>
 			<p class="description"><?php _e( 'Recommended. Results in fastest display of content.', 'dreamspeed-cdn' ); ?></p>
 
-			<input type="checkbox" name="force-ssl" value="1" id="force-ssl" <?php echo $this->get_setting( 'force-ssl' ) ? 'checked="checked" ' : ''; ?> />
+			<input type="checkbox" name="force-ssl" value="1" id="force-ssl" <?php checked( $this->get_setting( 'force-ssl' ), 1 ); checked( is_ssl(), 1 ); ?> />
 			<label for="force-ssl"> <?php _e( 'Always serve files over https (SSL)', 'dreamspeed-cdn' ); ?></label>
 			<p class="description"><?php _e( 'Slower but most secure. Overrides any CDN aliases. This will be automatically selected if you use SSL for your site.', 'dreamspeed-cdn' ); ?></p>
 
-			<input type="checkbox" name="expires" value="1" id="expires" <?php echo $this->get_setting( 'expires' ) ? 'checked="checked" ' : ''; ?> />
+			<input type="checkbox" name="expires" value="1" id="expires" <?php checked( $this->get_setting( 'expires' ), 1 ); ?> />
 			<label for="expires"> <?php printf( __( 'Set a <a href="%s" target="_blank">far future HTTP expiration header</a> for uploaded files', 'dreamspeed-cdn' ), 'http://developer.yahoo.com/performance/rules.html#expires' ); ?></label>
 			<p class="description"><?php _e( 'Recommended. Makes Google pagespeed and ySlow tests happiest.', 'dreamspeed-cdn' ); ?></p>
 			
