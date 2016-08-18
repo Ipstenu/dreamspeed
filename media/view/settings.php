@@ -1,5 +1,4 @@
 <?php
-
 /*
     This file is part of DreamSpeed CDN, a plugin for WordPress.
 
@@ -11,7 +10,6 @@
     https://www.gnu.org/licenses/gpl-3.0.html
 
 */
-
 ?>
 
 <div class="wrap dreamspeed-main">
@@ -23,7 +21,6 @@
 	<?php
 	
 	// Preflight checks
-	
 	$regions	    = $this->get_regions();
 	$myregion   = $this->get_setting( 'region' );
 	
@@ -45,19 +42,19 @@
 	
 	if ( isset( $_GET['updated'] ) ) {
 		?>
-		<div class="updated"><p><?php _e( 'Settings saved.', 'dreamspeed-cdn' ); ?></p></div>
+		<div id="message" class="is-dismissible updated"><p><?php _e( 'Settings saved.', 'dreamspeed-cdn' ); ?></p></div>
 		<?php
 	} 
 	
 	if ( isset( $_GET['migrated'] ) ) {
 		?>
-		<div class="updated"><p><?php _e( 'Existing files migrating.', 'dreamspeed-cdn' ); ?></p></div>
+		<div id="message" class="is-dismissible updated"><p><?php _e( 'Existing files migrating.', 'dreamspeed-cdn' ); ?></p></div>
 		<?php
 	}
 	
 	if (isset( $_GET['error'] ) ) {
 		?>
-		<div class="error"><p><?php _e( 'Warning. You cannot migrate existing files without that checkbox.', 'dreamspeed-cdn' ); ?></p></div>
+		<div id="message" class="error"><p><?php _e( 'Warning. You cannot migrate existing files without that checkbox.', 'dreamspeed-cdn' ); ?></p></div>
 		<?php
 	}
 
@@ -82,7 +79,7 @@
 		</select>
 		
 		<p class="description"><?php _e( 'Select from pre-existing buckets.', 'dreamspeed-cdn' ); ?></p>
-		<p class="description"><?php _e( 'You should not change this once set, as it will break any existing CDN uploads. If you must change it, you will need to manually edit your content to the new URL.', 'dreamspeed-cdn' ); ?></p></td>
+		<p class="description"><?php _e( 'You should not change this once set, as it can break any existing CDN uploads. If you must change it, you will need to manually edit your content to the new URL.', 'dreamspeed-cdn' ); ?></p></td>
 	</tr>
 	
 	<?php if ( !empty( $thisbucket ) ) { ?>
@@ -129,7 +126,7 @@
 			?>
 			<input type="text" name="cloudfront" value="<?php echo esc_attr( $this->get_setting( 'cloudfront' ) ); ?>" size="50" <?php if ( is_ssl() || $this->get_setting( 'fullspeed' ) || $this->get_setting( 'force-ssl' ) ) { echo 'disabled'; } ?>/>
 			<p class="description"><?php _e( 'Make sure to set up a DNS alias and test it first.', 'dreamspeed-cdn' ); ?></p>
-			<p class="description"><em><?php _e( 'This feature will disable itself if you\'re using HTTPS as you cannot use HTTPS with a CDN Alias at this time, or if you\'ve selected to use dream.io as you cannot have both.', 'dreamspeed-cdn' ); ?>
+			<p class="description"><em><?php _e( 'This feature will automatically disable itself if you\'re using HTTPS as you can\'t use HTTPS with a CDN Alias at this time, or if you\'ve selected to use dream.io as you can\'t have both.', 'dreamspeed-cdn' ); ?>
 			</p>
 		</td>
 	</tr>
@@ -154,7 +151,7 @@
 
 			<input type="checkbox" name="expires" value="1" id="expires" <?php checked( $this->get_setting( 'expires' ), 1 ); ?> />
 			<label for="expires"> <?php printf( __( 'Set a <a href="%s" target="_blank">far future HTTP expiration header</a> for uploaded files', 'dreamspeed-cdn' ), 'http://developer.yahoo.com/performance/rules.html#expires' ); ?></label>
-			<p class="description"><?php _e( 'Recommended. Makes Google pagespeed and ySlow tests happiest.', 'dreamspeed-cdn' ); ?></p>
+			<p class="description"><?php _e( 'Recommended. Makes Google PageSpeed and ySlow tests happiest.', 'dreamspeed-cdn' ); ?></p>
 			
 		</td>
 	</tr>

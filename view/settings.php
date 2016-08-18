@@ -34,7 +34,7 @@
 		<?php 
 		if ( isset( $_POST['access_key_id'] ) ) {
 			?>
-			<div class="updated"><p><?php _e( 'Settings saved.', 'dreamspeed-cdn' ); ?></p></div>
+			<div id="message" class="is-dismissible updated"><p><?php _e( 'Settings saved.', 'dreamspeed-cdn' ); ?></p></div>
 			<?php
 		}
 		?>

@@ -3,7 +3,7 @@ Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, cdn
 Requires at least: 3.8
 Tested up to: 4.6
-Stable tag: 0.7.0
+Stable tag: 0.7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -190,6 +190,7 @@ There are weird issues with `srcset`. Basically it's impossible to be 100% sure 
 * Fix: If SSL, don't use CDN Alias as that won't work
 * Fix: If SSL, auto-check 'force ssl' because you did already
 * Fix: If using dream.io, don't allow CDN Aliases (you can't have both)
+* Fix: Improved messaging
 
 = 0.7.0 =
 * May 2016 by Ipstenu
