@@ -185,7 +185,7 @@ There are weird issues with `srcset`. Basically it's impossible to be 100% sure 
 
 = 0.7.2 =
 * October 2016 by Ipstenu
-* Fix: Trust fullspeed, even with SSL
+* Fix: Trust fullspeed, even with SSL (resolves #22)
 
 = 0.7.1 =
 * August 2016 by Ipstenu
