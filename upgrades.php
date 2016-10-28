@@ -115,6 +115,10 @@ function dreamspeed_show_upgrade_notices() {
 	}
 
 	// If you upgraded to 0.7.0, please run this. No it won't go away
+	
+	$myoptions = get_option( 'dreamspeed_settings' );
+	$fullspeed = $myoptions['fullspeed'];
+	
 	if ( version_compare( $dreamspeed_version, '0.7.0', '<' ) ) {
 		printf(
 			'<div class="notice update-nag"><p>' . esc_html__( 'The hostname for DreamObjects has changed, click %shere%s to start the upgrade.', 'dreamspeed-cdn' ) . '</p></div>',
@@ -127,8 +131,13 @@ function dreamspeed_show_upgrade_notices() {
 			'<a href="' . esc_url( admin_url( 'options.php?page=dreamspeed-upgrades' ) ) . '">',
 			'</a>'
 		);
+	} elseif ( version_compare( $dreamspeed_version, '0.7.2', '<' ) && $fullspeed == 1 ) {
+		printf(
+			'<div class="notice update-nag"><p>' . esc_html__( 'A database change is required in order to optimize your site fully. Please click %shere%s to start the upgrade.', 'dreamspeed-cdn' ) . '</p></div>',
+			'<a href="' . esc_url( admin_url( 'options.php?page=dreamspeed-upgrades' ) ) . '">',
+			'</a>'
+		);
 	}
-
 }
 add_action( 'admin_notices', 'dreamspeed_show_upgrade_notices' );
 
@@ -159,6 +168,10 @@ function dreamspeed_trigger_upgrades() {
 	}
 
 	if ( version_compare( $dreamspeed_version, '0.7.1', '<' ) ) {
+		dreamspeed_v071_upgrades();
+	}
+
+	if ( version_compare( $dreamspeed_version, '0.7.2', '<' ) ) {
 		dreamspeed_v071_upgrades();
 	}
 
@@ -257,3 +270,50 @@ function dreamspeed_v071_upgrades() {
 	}
 }
 
+/**
+ * Upgrade routine for v0.7.2
+ *
+ * @since 0.7.2
+ * @return void
+ */	 
+function dreamspeed_v072_upgrades() {
+
+	// Early bail if fullspeed isnt set
+	$myoptions = get_option( 'dreamspeed_settings' );
+	$fullspeed = $myoptions['fullspeed'];
+	if ( $fullspeed !== 1 ) {
+		return;
+	}
+
+	// Get a list of all attachments WITH S3 metadata - these will be the only ones uploaded
+	$attachment_array = array(
+			'posts_per_page'   => -1,
+			'meta_query' => array(
+					array(
+							'key' => 'amazonS3_info',
+							'compare' => 'EXISTS'
+					)
+			),
+			'post_type'        => 'attachment',
+	);
+
+    $attachments = get_posts( $attachment_array );
+    
+    // Early bail if attachments isn't set or it's empty
+    if ( !$attachments || empty($attachments) ) {
+        return;
+    }
+    
+    // Check if the old URL is being used and, if so, replace it in posts.
+	foreach ( $attachments as $attachment ) {	
+		$attachment_oldurl = wp_get_attachment_url( $attachment->ID );
+		$oldobjectpath = 'objects-us-west-1.dream.io';
+		$newobjectpath = 'objects.cdn.dream.io';
+		
+		if( $attachment->post_parent > 0  && $parent_post = get_post($attachment->post_parent) && (strpos($attachment_oldurl, $oldobjectpath) !== false) ) {				
+			$attachment_newurl = str_replace( $oldobjectpath , $newobjectpath , $attachment_oldurl );
+        		$parent_post->post_content = str_replace( $attachment_oldurl , $attachment_newurl, $parent_post->post_content );
+            wp_update_post($parent_post);
+        }
+	}
+}

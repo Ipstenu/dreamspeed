@@ -607,13 +607,17 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		}
 
 		if ( $this->get_setting( 'cloudfront' ) ) {
+			// custom.example.io
 			$domain_base = $this->get_setting( 'cloudfront' );
 		} elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
+			// objects-us-west-1.dream.io/BUCKET
 			$domain_base = $this->get_setting( 'region' ).'/'.$this->get_setting( 'bucket' );
 		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
-			$domain_base = $this->get_setting( 'bucket' ) . '.' . $this->get_setting( 'region' );
+			// BUCKET.objects.cdn.dream.io
+			$domain_base = $this->get_setting( 'bucket' ) . '.cdn.dream.io';
 		} else {
-			$domain_base = $this->get_setting( 'bucket' ) . $this->get_setting( 'region' );
+			// BUCKET.objects-us-west-1.dream.io
+			$domain_base = $this->get_setting( 'bucket' ) . '.' . $this->get_setting( 'region' );
 		}
 
 		$url = $scheme . '://' . $domain_base . '/' . esc_attr( $this->get_setting( 'object-prefix' ) );
