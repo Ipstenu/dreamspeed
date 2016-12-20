@@ -116,7 +116,7 @@ function dreamspeed_show_upgrade_notices() {
 
 	// If you upgraded to 0.7.0, please run this. No it won't go away
 	
-	$myoptions = get_option( 'dreamspeed_settings' );
+	$myoptions = get_option( 'dreamspeed_cdn' );
 	$fullspeed = $myoptions['fullspeed'];
 	
 	if ( version_compare( $dreamspeed_version, '0.7.0', '<' ) ) {

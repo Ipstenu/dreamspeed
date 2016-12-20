@@ -126,7 +126,7 @@
 			?>
 			<input type="text" name="cloudfront" value="<?php echo esc_attr( $this->get_setting( 'cloudfront' ) ); ?>" size="50" <?php if ( is_ssl() || $this->get_setting( 'fullspeed' ) || $this->get_setting( 'force-ssl' ) ) { echo 'disabled'; } ?>/>
 			<p class="description"><?php _e( 'Make sure to set up a DNS alias and test it first.', 'dreamspeed-cdn' ); ?></p>
-			<p class="description"><em><?php _e( 'This feature will automatically disable itself if you\'re using HTTPS as you can\'t use HTTPS with a CDN Alias at this time, or if you\'ve selected to use dream.io as you can\'t have both.', 'dreamspeed-cdn' ); ?>
+			<p class="description"><em><?php _e( 'This feature will automatically disable itself if you\'re using HTTPS as you can\'t use HTTPS with a CDN Alias at this time because of SSL Certificates. If you\'ve selected to use our accelerated CDN, it is also disabled to prioritize speed.', 'dreamspeed-cdn' ); ?>
 			</p>
 		</td>
 	</tr>
@@ -142,8 +142,8 @@
 			<p class="description"><?php _e( 'Recommended. Required to serve media in posts from DreamSpeed.', 'dreamspeed-cdn' ); ?></p>
 
 			<input type="checkbox" name="fullspeed" value="1" id="fullspeed" <?php checked( $this->get_setting( 'fullspeed' ), 1 ); ?> />
-			<label for="fullspeed"> <?php _e( 'Serve files from dream.io', 'dreamspeed-cdn' ); ?></label>
-			<p class="description"><?php _e( 'Recommended. Results in fastest display of content.', 'dreamspeed-cdn' ); ?></p>
+			<label for="fullspeed"> <?php _e( 'Serve accelerated files', 'dreamspeed-cdn' ); ?></label>
+			<p class="description"><?php _e( 'Recommended. Results in fastest display of content. Requires you to activate DreamSpeed CDN in panel.', 'dreamspeed-cdn' ); ?></p>
 
 			<input type="checkbox" name="force-ssl" value="1" id="force-ssl" <?php checked( $this->get_setting( 'force-ssl' ), 1 ); checked( is_ssl(), 1 ); ?> />
 			<label for="force-ssl"> <?php _e( 'Always serve files over https (SSL)', 'dreamspeed-cdn' ); ?></label>

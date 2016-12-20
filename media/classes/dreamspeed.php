@@ -389,7 +389,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		} elseif ( $this->get_setting( 'virtual-host' ) ) {
 			$domain_bucket = $dsobject['bucket'];
 		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
-			$domain_bucket = $dsobject['bucket'] . '.' . $this->get_setting( 'region' );
+			$domain_bucket = $dsobject['bucket'] . '.objects.cdn.dream.io';
 		} elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
 			$domain_bucket = $this->get_setting( 'region' ).':443/' . $dsobject['bucket'];
 		} else {
@@ -595,7 +595,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		}
 	}
 
-	function get_base_url( ) {
+	function get_base_url() {
 		if ( !$this->get_setting( 'serve-from-s3' ) ) {
 			return false;
 		}
@@ -609,12 +609,12 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		if ( $this->get_setting( 'cloudfront' ) ) {
 			// custom.example.io
 			$domain_base = $this->get_setting( 'cloudfront' );
+		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
+			// BUCKET.objects.cdn.dream.io - PRIORITY GIVEN TO SPEED
+			$domain_base = $this->get_setting( 'bucket' ) . '.objects.cdn.dream.io';
 		} elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
 			// objects-us-west-1.dream.io/BUCKET
 			$domain_base = $this->get_setting( 'region' ).'/'.$this->get_setting( 'bucket' );
-		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
-			// BUCKET.objects.cdn.dream.io
-			$domain_base = $this->get_setting( 'bucket' ) . '.cdn.dream.io';
 		} else {
 			// BUCKET.objects-us-west-1.dream.io
 			$domain_base = $this->get_setting( 'bucket' ) . '.' . $this->get_setting( 'region' );
