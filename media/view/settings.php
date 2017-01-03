@@ -72,10 +72,7 @@
 		<td><select name="bucket" class="bucket">
 			<option value="">-- <?php _e( 'Select a Bucket', 'dreamspeed-cdn' ); ?> --</option>
 			<?php if ( is_array( $buckets ) ) foreach ( $buckets as $bucket ): 
-			// Tamponade: stop people from breaking SSL by not allowing them to pick a bucket with a period
-			if ( strpos( esc_attr( $bucket['Name'] ) , '.' ) == false) {
 				?><option value="<?php echo esc_attr( $bucket['Name'] ); ?>" <?php echo $bucket['Name'] == $this->get_setting( 'bucket' ) ? 'selected="selected"' : ''; ?>><?php echo esc_html( $bucket['Name'] ); ?></option><?php
-			}
 			endforeach;?>
 		</select>
 		

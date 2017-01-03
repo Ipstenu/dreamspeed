@@ -123,9 +123,7 @@ It does edit. It saves as a post revision, so you can roll back. But there's no 
 
 Yes. If you set your WordPress home/site URLs to https, then the plugin will auto-detect that you're on https and attempt to serve up the files securely. If for any reason that doesn't work, there's an option to activate force SSL on the settings page.
 
-Keep in mind, you cannot use a custom CDN (like cdn.yourdomain.com) with HTTPs at this time, due to issues with certificates outside the control of this plugin. You <em>can</em> use `dream.io` however.
-
-If your bucket name has a period in it, you will be forced to use the non-accelerated version of your path, due to issues with Fastly and subdomains.
+Keep in mind, you cannot use a custom CDN (like cdn.yourdomain.com) with HTTPs at this time, due to issues with certificates outside the control of this plugin. You _can_ use the accelerated version of DreamSpeed (with `objects.cdn.dream.io` as the domain) though.
 
 <strong>If I wanted to push my existing images up manually, how do I do that?</strong>
 
@@ -187,8 +185,7 @@ There are weird issues with `srcset`. Basically it's impossible to be 100% sure 
 
 = 0.7.3 = 
 * January 2017 by Ipstenu
-* Fix: If bucket has a period in the name, do not permit bucket selection (because Fastly is stupid)
-* Fix: If bucket has a period in the name, and fastly is checked, use domain http(s)://objects-REGION.dream.io/BUCKET
+* Fix: If bucket has a period in the name, use domain http(s)://objects(*).dream.io/BUCKET
 * Fix: Cloudfront filters
 * Run: Upgrade feature to Fullspeed is working (part of #22)
 

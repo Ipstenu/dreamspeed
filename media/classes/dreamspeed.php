@@ -393,7 +393,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 			$domain_bucket = $dsobject['cloudfront'];
 		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
 			// http(s)://BUCKET.objects.cdn.dream.io	 OR http(s)://objects-REGION.dream.io/BUCKET	 (becuase Fastly)
-			$domain_bucket = ( $bucket_period == false )? $dsobject['bucket'] . '.objects.cdn.dream.io' :  $this->get_setting( 'region' ) . '/' . $dsobject['bucket'];
+			$domain_bucket = ( $bucket_period == false )? $dsobject['bucket'] . '.objects.cdn.dream.io' :  'objects.cdn.dream.io/' . $dsobject['bucket'];
 		} else {
 			// http(s)://BUCKET.objects-REGION.dream.io OR http(s)://objects-REGION.dream.io/BUCKET
 			$domain_bucket = ( $bucket_period == false )? $dsobject['bucket'] . '.' . $this->get_setting( 'region' ) : $this->get_setting( 'region' ) . '/' . $dsobject['bucket'];
@@ -618,7 +618,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 			$domain_base = $this->get_setting( 'cloudfront' );
 		} elseif ( $this->get_setting( 'fullspeed' ) == 1) {
 			// http(s)://BUCKET.objects.cdn.dream.io	 OR http(s)://objects-REGION.dream.io/BUCKET	 (becuase Fastly)
-			$domain_base = ( $bucket_period == false )? $this->get_setting( 'bucket' ) . '.objects.cdn.dream.io' : $this->get_setting( 'region' ) . '/' . $this->get_setting( 'bucket' );
+			$domain_base = ( $bucket_period == false )? $this->get_setting( 'bucket' ) . '.objects.cdn.dream.io' : 'objects.cdn.dream.io/' . $this->get_setting( 'bucket' );
 		} else {
 			// http(s)://BUCKET.objects-REGION.dream.io OR http(s)://objects-REGION.dream.io/BUCKET
 			$domain_bucket = ( $bucket_period == false )? $this->get_setting['bucket'] . '.' . $this->get_setting( 'region' ) : $this->get_setting( 'region' ) . '/' . $this->get_setting['bucket'];
