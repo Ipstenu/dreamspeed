@@ -41,21 +41,19 @@
 	}
 	
 	if ( isset( $_GET['updated'] ) ) {
-		?>
-		<div id="message" class="is-dismissible updated"><p><?php _e( 'Settings saved.', 'dreamspeed-cdn' ); ?></p></div>
-		<?php
+		?><div id="message" class="is-dismissible updated"><p><?php _e( 'Settings saved.', 'dreamspeed-cdn' ); ?></p></div><?php
 	} 
 	
 	if ( isset( $_GET['migrated'] ) ) {
-		?>
-		<div id="message" class="is-dismissible updated"><p><?php _e( 'Existing files migrating.', 'dreamspeed-cdn' ); ?></p></div>
-		<?php
+		?><div id="message" class="is-dismissible updated"><p><?php _e( 'Existing files migrating.', 'dreamspeed-cdn' ); ?></p></div><?php
 	}
 	
 	if (isset( $_GET['error'] ) ) {
-		?>
-		<div id="message" class="error"><p><?php _e( 'Warning. You cannot migrate existing files without that checkbox.', 'dreamspeed-cdn' ); ?></p></div>
-		<?php
+		?><div id="message" class="error"><p><?php _e( 'Warning. You cannot migrate existing files without that checkbox.', 'dreamspeed-cdn' ); ?></p></div><?php
+	}
+
+	if ( !is_null($thisbucket) && strpos( $this->get_setting( 'bucket' ) , '.' ) !== false  ) {
+		?><div id="message" class="error"><p><?php _e( 'Warning. Your bucket has a period in the name. This can cause serious issues with your side, including SSL certificate errors. Please use another bucket.', 'dreamspeed-cdn' ); ?></p></div><?php
 	}
 
 	?>
@@ -73,9 +71,12 @@
 		<th scope="row"><?php _e( 'Buckets Names', 'dreamspeed-cdn' ); ?></th>
 		<td><select name="bucket" class="bucket">
 			<option value="">-- <?php _e( 'Select a Bucket', 'dreamspeed-cdn' ); ?> --</option>
-			<?php if ( is_array( $buckets ) ) foreach ( $buckets as $bucket ): ?>
-			    <option value="<?php echo esc_attr( $bucket['Name'] ); ?>" <?php echo $bucket['Name'] == $this->get_setting( 'bucket' ) ? 'selected="selected"' : ''; ?>><?php echo esc_html( $bucket['Name'] ); ?></option>
-			<?php endforeach;?>
+			<?php if ( is_array( $buckets ) ) foreach ( $buckets as $bucket ): 
+			// Tamponade: stop people from breaking SSL by not allowing them to pick a bucket with a period
+			if ( strpos( esc_attr( $bucket['Name'] ) , '.' ) == false) {
+				?><option value="<?php echo esc_attr( $bucket['Name'] ); ?>" <?php echo $bucket['Name'] == $this->get_setting( 'bucket' ) ? 'selected="selected"' : ''; ?>><?php echo esc_html( $bucket['Name'] ); ?></option><?php
+			}
+			endforeach;?>
 		</select>
 		
 		<p class="description"><?php _e( 'Select from pre-existing buckets.', 'dreamspeed-cdn' ); ?></p>

@@ -96,7 +96,9 @@ function dreamspeed_show_upgrade_notices() {
 	if ( isset( $_GET['page'] ) && $_GET['page'] == 'dreamspeed-upgrades' )
 		return; // Don't show notices on the upgrades page
 
+	$cdnoptions = get_option( 'dreamspeed_cdn' );
 	$dreamspeed_version = get_option( 'dreamspeed_version' );
+	$fullspeed = ( isset($cdnoptions['fullspeed']) )? $cdnoptions['fullspeed'] : '0';
 
 	if ( ! $dreamspeed_version ) {
 		// 0.7.0 is the first version to use this option so we must add it
@@ -114,11 +116,7 @@ function dreamspeed_show_upgrade_notices() {
 		);
 	}
 
-	// If you upgraded to 0.7.0, please run this. No it won't go away
-	
-	$myoptions = get_option( 'dreamspeed_cdn' );
-	$fullspeed = $myoptions['fullspeed'];
-	
+	// If you upgraded to 0.7.0, please run this. No it won't go away	
 	if ( version_compare( $dreamspeed_version, '0.7.0', '<' ) ) {
 		printf(
 			'<div class="notice update-nag"><p>' . esc_html__( 'The hostname for DreamObjects has changed, click %shere%s to start the upgrade.', 'dreamspeed-cdn' ) . '</p></div>',
