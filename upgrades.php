@@ -4,7 +4,7 @@
  *
  * Forked from Easy Digital Downloads
  * @copyright   Copyright (c) 2015, Pippin Williamson
- * @copyright   Copyright (c) 2016, Mika Epstein
+ * @copyright   Copyright (c) 2017, Mika Epstein
  */
 
 // Exit if accessed directly
@@ -131,7 +131,7 @@ function dreamspeed_show_upgrade_notices() {
 			'<a href="' . esc_url( admin_url( 'options.php?page=dreamspeed-upgrades' ) ) . '">',
 			'</a>'
 		);
-	} elseif ( version_compare( $dreamspeed_version, '0.7.2', '<' ) && $fullspeed == 1 ) {
+	} elseif ( version_compare( $dreamspeed_version, '0.7.3', '<' ) && $fullspeed == 1 ) {
 		printf(
 			'<div class="notice update-nag"><p>' . esc_html__( 'A database change is required in order to optimize your site fully. Please click %shere%s to start the upgrade.', 'dreamspeed-cdn' ) . '</p></div>',
 			'<a href="' . esc_url( admin_url( 'options.php?page=dreamspeed-upgrades' ) ) . '">',
@@ -171,15 +171,9 @@ function dreamspeed_trigger_upgrades() {
 		dreamspeed_v071_upgrades();
 	}
 
-	if ( version_compare( $dreamspeed_version, '0.7.2', '<' ) ) {
-		dreamspeed_v071_upgrades();
+	if ( version_compare( $dreamspeed_version, '0.7.3', '<' ) ) {
+		dreamspeed_v073_upgrades();
 	}
-
-/*
-	if ( version_compare( $dreamspeed_version, '1.4', '<' ) ) {
-		dreamspeed_v14_upgrades();
-	}
-*/
 
 	update_option( 'dreamspeed_version', DREAMSPEED_VERSION );
 
@@ -271,21 +265,21 @@ function dreamspeed_v071_upgrades() {
 }
 
 /**
- * Upgrade routine for v0.7.2
+ * Upgrade routine for v0.7.3
  *
- * @since 0.7.2
+ * @since 0.7.3
  * @return void
  */	 
-function dreamspeed_v072_upgrades() {
+function dreamspeed_v073_upgrades() {
 
-	// Early bail if fullspeed isnt set
+	// Early bail if fullspeed isn't set
 	$myoptions = get_option( 'dreamspeed_settings' );
 	$fullspeed = $myoptions['fullspeed'];
 	if ( $fullspeed !== 1 ) {
 		return;
 	}
 
-	// Get a list of all attachments WITH S3 metadata - these will be the only ones uploaded
+	// Get a list of all attachments WITH S3 metadata - these will be the only ones edited
 	$attachment_array = array(
 			'posts_per_page'   => -1,
 			'meta_query' => array(

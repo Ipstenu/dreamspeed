@@ -378,22 +378,25 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 			return false;
 		}
 
-		if ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
-			$scheme = 'https';
-		} else {
-			$scheme = 'http';
-		}
+		// Is SSL
+		$scheme = ( is_ssl() || $this->get_setting( 'force-ssl' ) )? 'https' : 'http';
+				
+		// Bucket has dot
+		$bucket_dot = ( strpos( $dsobject['bucket'], '.' ) )? true : false;
 
-		if ( is_null( $expires ) && $this->get_setting( 'cloudfront' ) && !is_ssl() && $this->get_setting( 'fullspeed' ) !== 1 ) {
-			$domain_bucket = $this->get_setting( 'cloudfront' );
-		} elseif ( $this->get_setting( 'virtual-host' ) ) {
-			$domain_bucket = $dsobject['bucket'];
-		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
+		// Big If Section
+		if ( $scheme == 'https' && $this->get_setting( 'fullspeed' ) !== 1 ) {
+			// https://objects-us-west-1.dream.io/BUCKET
+			$domain_bucket = $this->get_setting( 'region' ). '/' . $dsobject['bucket'];
+		} elseif ( $this->get_setting( 'cloudfront' ) ) {
+			// http://CUSTOM.example.io
+			$domain_bucket = $dsobject['cloudfront'];
+		} elseif ( $this->get_setting( 'fullspeed' ) == 1 && $bucket_dot == false ) {
+			// http(s)://BUCKET.objects.cdn.dream.io
 			$domain_bucket = $dsobject['bucket'] . '.objects.cdn.dream.io';
-		} elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
-			$domain_bucket = $this->get_setting( 'region' ).':443/' . $dsobject['bucket'];
 		} else {
-			$domain_bucket = $dsobject['bucket'] . $this->get_setting( 'region' );
+			// http(s)://BUCKET.objects-REGION.dream.io OR http(s)://objects-REGION.dream.io/BUCKET
+			$domain_bucket = ( $bucket_dot == false )? $dsobject['bucket'] . $this->get_setting( 'region' ) : $this->get_setting( 'region' ) . '/' . $dsobject['bucket'] ;
 		}
 
 		$url = $scheme . '://' . $domain_bucket . '/' . $dsobject['key'];
@@ -596,28 +599,29 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 	}
 
 	function get_base_url() {
+		// Bail early if we're not using this
 		if ( !$this->get_setting( 'serve-from-s3' ) ) {
 			return false;
 		}
 
-		if ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
-			$scheme = 'https';
-		} else {
-			$scheme = 'http';
-		}
-
-		if ( $this->get_setting( 'cloudfront' ) ) {
-			// custom.example.io
+		// Is SSL
+		$scheme = ( is_ssl() || $this->get_setting( 'force-ssl' ) )? 'https' : 'http';
+				
+		// Bucket has dot
+		$bucket_dot = ( strpos( $dsobject['bucket'], '.' ) )? true : false;
+		
+		if ( $scheme == 'https' && $this->get_setting( 'fullspeed' ) !== 1 ) {
+			// https://objects-us-west-1.dream.io/BUCKET
+			$domain_base = $this->get_setting( 'region' ).'/'.$this->get_setting( 'bucket' );
+		} elseif ( $this->get_setting( 'cloudfront' ) ) {
+			// http://custom.example.io
 			$domain_base = $this->get_setting( 'cloudfront' );
 		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
-			// BUCKET.objects.cdn.dream.io - PRIORITY GIVEN TO SPEED
+			// http(s)://BUCKET.objects.cdn.dream.io
 			$domain_base = $this->get_setting( 'bucket' ) . '.objects.cdn.dream.io';
-		} elseif ( is_ssl() || $this->get_setting( 'force-ssl' ) ) {
-			// objects-us-west-1.dream.io/BUCKET
-			$domain_base = $this->get_setting( 'region' ).'/'.$this->get_setting( 'bucket' );
 		} else {
-			// BUCKET.objects-us-west-1.dream.io
-			$domain_base = $this->get_setting( 'bucket' ) . '.' . $this->get_setting( 'region' );
+			// http(s)://BUCKET.objects-REGION.dream.io OR http(s)://objects-REGION.dream.io/BUCKET
+			$domain_bucket = ( $bucket_dot == false )? $this->get_setting['bucket'] . $this->get_setting( 'region' ) : $this->get_setting( 'region' ) . '/' . $this->get_setting['bucket'] ;
 		}
 
 		$url = $scheme . '://' . $domain_base . '/' . esc_attr( $this->get_setting( 'object-prefix' ) );

@@ -1,9 +1,9 @@
 === DreamSpeed CDN ===
 Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, cdn
-Requires at least: 3.8
+Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 0.7.2
+Stable tag: 0.7.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -13,7 +13,7 @@ Connect your WordPress install to your DreamHost DreamSpeed CDN for supercharged
 
 <em>Note: If you have issues with the plugin, please post in the support forums here. Don't open a support ticket at DreamHost or use LiveChat unless it's for setting up DreamSpeed in your Panel.</em>
 
-DreamHost has its own Cloud - <a href="http://dreamhost.com/cloud/dreamobjects/">DreamObjects&#153;</a> - an inexpensive, scalable object storage service that was developed from the ground up to provide a reliable, flexible cloud storage solution for entrepreneurs and developers. It provides a perfect, scalable storage solution for your WordPress media.
+DreamHost has its own Cloud - <a href="https://dreamhost.com/cloud/dreamobjects/">DreamObjects&#153;</a> - an inexpensive, scalable object storage service that was developed from the ground up to provide a reliable, flexible cloud storage solution for entrepreneurs and developers. It provides a perfect, scalable storage solution for your WordPress media.
 
 This plugin will automatically copy images, videos, documents, and any other media added through WordPress' media uploader to DreamSpeed. It then automatically replaces the URL to each media file with their respective DreamObjects URL or, if you have configured a CDN Alias, the respective custom URL. Image thumbnails are also copied to DreamSpeed and delivered similarly.
 
@@ -183,14 +183,21 @@ There are weird issues with `srcset`. Basically it's impossible to be 100% sure 
 
 == Changelog ==
 
+= 0.7.3 = 
+* January 2017 by Ipstenu
+* Fix: If bucket has a period in the name, DO NOT allow fullspeed or subdomains and https
+* Fix: Cloudfront filters
+* Run: Upgrade feature to Fullspeed is working (part of #22)
+
 = 0.7.2 =
 * October 2016 by Ipstenu
 * Fix: Trust fullspeed, even with SSL (resolves #22)
+* (NB: This was not released as it ended up finding a couple major bugs)
 
 = 0.7.1 =
 * August 2016 by Ipstenu
 * Fix: Serve files from dream.io points to the right location
-* Run: Upgrade feature to ensure that
+* Run: Upgrade feature to ensure the above
 * Fix: If SSL, don't use CDN Alias as that won't work
 * Fix: If SSL, auto-check 'force ssl' because you did already
 * Fix: If using dream.io, don't allow CDN Aliases (you can't have both)

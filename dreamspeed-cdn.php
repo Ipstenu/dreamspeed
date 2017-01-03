@@ -4,15 +4,15 @@ Plugin Name: DreamSpeed CDN
 Plugin URI: https://github.com/Ipstenu/dreamspeed/
 Description: Allows media to be copied to DreamSpeed CDN as they are added to the Media Library. Requires use of DreamObjects.
 Author: Mika Epstein
-Version: 0.7.2
-Author URI: http://dreamhost.com
+Version: 0.7.3
+Author URI: https://dreamhost.com
 Text Domain: dreamspeed-cdn
 
 	Copyright (c) 2013 Brad Touesnard. All rights reserved.
-	Copyright (c) 2014-2016 Mika A Epstein. All rights reserved.
+	Copyright (c) 2014-2017 Mika A Epstein. All rights reserved.
 
 	This plugin is a spork of the following:
-	 * http://wordpress.org/extend/plugins/amazon-web-services/
+	 * https://wordpress.org/extend/plugins/amazon-web-services/
 	 * https://wordpress.org/plugins/amazon-web-services/
 
     This file is part of DreamSpeed CDN, a plugin for WordPress.
@@ -70,7 +70,7 @@ function dreamspeed_core_init() {
 add_action( 'init', 'dreamspeed_core_init' );
 
 if ( ! defined( 'DREAMSPEED_VERSION' ) ) {
-	define( 'DREAMSPEED_VERSION', '0.7.2' );
+	define( 'DREAMSPEED_VERSION', '0.7.3' );
 }
 
 function dreamspeed_cdn_activate() {
