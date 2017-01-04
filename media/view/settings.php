@@ -51,11 +51,6 @@
 	if (isset( $_GET['error'] ) ) {
 		?><div id="message" class="error"><p><?php _e( 'Warning. You cannot migrate existing files without that checkbox.', 'dreamspeed-cdn' ); ?></p></div><?php
 	}
-
-	if ( !is_null($thisbucket) && strpos( $this->get_setting( 'bucket' ) , '.' ) !== false  ) {
-		?><div id="message" class="error"><p><?php _e( 'Warning. Your bucket has a period in the name. This can cause serious issues with your side, including SSL certificate errors. Please use another bucket.', 'dreamspeed-cdn' ); ?></p></div><?php
-	}
-
 	?>
 
 	<h3><?php _e( 'Settings', 'dreamspeed-cdn' ); ?></h3>
