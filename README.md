@@ -19,13 +19,14 @@ This is the development repository for the DreamSpeed CDN plugin.
 8. Push Master
 9. Copy Master to SVN/trunk
 
-
-
 ## Update
 
-* Copy the code from ~/Development/wordpress/plugins-git/dreamspeed to ~/Development/wordpress/plugins-svn/trunk/dreamspeed-cdn
+This is what I do, in case anyone wondered.
+
+* Copy the code from ~/Development/wordpress/plugins-git/dreamspeed to ~/Development/wordpress/plugins-svn/dreamspeed-cdn/trunk
 
 ```
+cd ~/Development/wordpress/plugins-svn/dreamspeed-cdn/trunk
 rsync -va --delete --exclude debug.txt --exclude vendor/ --exclude .git/ --exclude .DS_Store --exclude composer.* --exclude README.md ~/Development/wordpress/plugins-git/dreamspeed/ .
 ```
 
