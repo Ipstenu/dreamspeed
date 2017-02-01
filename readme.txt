@@ -3,7 +3,7 @@ Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, cdn
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 0.7.3
+Stable tag: 0.7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -182,6 +182,10 @@ There are weird issues with `srcset`. Basically it's impossible to be 100% sure 
 7. Migrate Existing Files section (on DreamSpeed CDN Configuration page)
 
 == Changelog ==
+
+= 0.7.4 =
+* February 2017 by Ipstenu
+* Fix: Display image on media library if using a custom CDN
 
 = 0.7.3 = 
 * January 2017 by Ipstenu

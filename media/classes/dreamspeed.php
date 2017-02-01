@@ -382,24 +382,24 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		$scheme = ( is_ssl() || $this->get_setting( 'force-ssl' ) )? 'https' : 'http';
 		
 		// Does the bucket have a period?
-		$bucket_period = ( strpos( $dsobject['bucket'] , ".") == false)? false: true;
+		$bucket_period = ( strpos( $this->get_setting( 'bucket' ) , ".") == false)? false: true;
 		
 		// Big If Section
 		if ( $scheme == 'https' && $this->get_setting( 'fullspeed' ) !== 1 ) {
 			// https://objects-us-west-1.dream.io/BUCKET
-			$domain_bucket = $this->get_setting( 'region' ). '/' . $dsobject['bucket'];
+			$domain_base = $this->get_setting( 'region' ). '/' . $this->get_setting( 'bucket' );
 		} elseif ( $this->get_setting( 'cloudfront' ) ) {
 			// https://CUSTOM.example.io
-			$domain_bucket = $dsobject['cloudfront'];
+			$domain_base = $this->get_setting( 'cloudfront' );
 		} elseif ( $this->get_setting( 'fullspeed' ) == 1 ) {
 			// http(s)://BUCKET.objects.cdn.dream.io	 OR http(s)://objects-REGION.dream.io/BUCKET	 (becuase Fastly)
-			$domain_bucket = ( $bucket_period == false )? $dsobject['bucket'] . '.objects.cdn.dream.io' :  'objects.cdn.dream.io/' . $dsobject['bucket'];
+			$domain_base = ( $bucket_period == false )? $this->get_setting( 'bucket' ) . '.objects.cdn.dream.io' :  'objects.cdn.dream.io/' . $this->get_setting( 'bucket' );
 		} else {
 			// http(s)://BUCKET.objects-REGION.dream.io OR http(s)://objects-REGION.dream.io/BUCKET
-			$domain_bucket = ( $bucket_period == false )? $dsobject['bucket'] . '.' . $this->get_setting( 'region' ) : $this->get_setting( 'region' ) . '/' . $dsobject['bucket'];
+			$domain_base = ( $bucket_period == false )? $this->get_setting( 'bucket' ) . '.' . $this->get_setting( 'region' ) : $this->get_setting( 'region' ) . '/' . $this->get_setting( 'bucket' );
 		}
 
-		$url = $scheme . '://' . $domain_bucket . '/' . $dsobject['key'];
+		$url = $scheme . '://' . $domain_base . '/' . $dsobject['key'];
 
 		if ( !is_null( $expires ) ) {
 			try {
@@ -610,6 +610,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 		// Does the bucket have a period?
 		$bucket_period = ( strpos( $this->get_setting( 'bucket' ), ".") == false)? false: true;
 
+		// Big If Section
 		if ( $scheme == 'https' && $this->get_setting( 'fullspeed' ) !== 1 ) {
 			// https://objects-us-west-1.dream.io/BUCKET
 			$domain_base = $this->get_setting( 'region' ).'/'.$this->get_setting( 'bucket' );
@@ -621,7 +622,7 @@ class DreamSpeed_Services extends DreamSpeed_Plugin_Base {
 			$domain_base = ( $bucket_period == false )? $this->get_setting( 'bucket' ) . '.objects.cdn.dream.io' : 'objects.cdn.dream.io/' . $this->get_setting( 'bucket' );
 		} else {
 			// http(s)://BUCKET.objects-REGION.dream.io OR http(s)://objects-REGION.dream.io/BUCKET
-			$domain_bucket = ( $bucket_period == false )? $this->get_setting['bucket'] . '.' . $this->get_setting( 'region' ) : $this->get_setting( 'region' ) . '/' . $this->get_setting['bucket'];
+			$domain_base = ( $bucket_period == false )? $this->get_setting( 'bucket' ) . '.' . $this->get_setting( 'region' ) : $this->get_setting( 'region' ) . '/' . $this->get_setting( 'bucket' );
 		}
 
 		$url = $scheme . '://' . $domain_base . '/' . esc_attr( $this->get_setting( 'object-prefix' ) );
