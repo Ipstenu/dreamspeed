@@ -2,7 +2,7 @@
 Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, cdn
 Requires at least: 4.0
-Tested up to: 4.7
+Tested up to: 4.8
 Stable tag: 0.7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
