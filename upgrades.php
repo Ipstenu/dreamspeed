@@ -30,14 +30,14 @@ function dreamspeed_upgrades_screen() {
 	$steps  = round( ( $total / $number ), 0 );
 
 	$doing_upgrade_args = array(
-		'page'        => 'dreamspeed-upgrades',
+		'page'               => 'dreamspeed-upgrades',
 		'dreamspeed-upgrade' => $action,
-		'step'        => $step,
-		'total'       => $total,
-		'custom'      => $custom,
-		'steps'       => $steps
+		'step'               => $step,
+		'total'              => $total,
+		'custom'             => $custom,
+		'steps'              => $steps
 	);
-	update_option( 'edd_doing_upgrade', $doing_upgrade_args );
+	update_option( 'dreamspeed_doing_upgrade', $doing_upgrade_args );
 	if ( $step > $steps ) {
 		// Prevent a weird case where the estimate was off. Usually only a couple.
 		$steps = $step;
@@ -135,6 +135,12 @@ function dreamspeed_show_upgrade_notices() {
 			'<a href="' . esc_url( admin_url( 'options.php?page=dreamspeed-upgrades' ) ) . '">',
 			'</a>'
 		);
+	} elseif ( version_compare( $dreamspeed_version, '1.0.0', '<' ) ) {
+		printf(
+			'<div class="notice error"><p>' . esc_html__( 'Due to the end of the DreamSpeed CDN service, this plugin will be retired. As of December 2017, it will no longer supported or developed. On uninstall or deactivation, the plugin will revert your content to the best of it\'s ability. Please %sclick here%s for more information.', 'dreamspeed-cdn' ) . '</p></div>',
+			'<a href="' . esc_url( 'https://dreamhost.com' ) . '">',
+			'</a>'
+		);
 	}
 }
 add_action( 'admin_notices', 'dreamspeed_show_upgrade_notices' );
@@ -171,6 +177,10 @@ function dreamspeed_trigger_upgrades() {
 
 	if ( version_compare( $dreamspeed_version, '0.7.3', '<' ) ) {
 		dreamspeed_v073_upgrades();
+	}
+
+	if ( version_compare( $dreamspeed_version, '1.0.0', '<' ) ) {
+		deactivate_plugins( plugin_basename( __FILE__ ) );
 	}
 
 	update_option( 'dreamspeed_version', DREAMSPEED_VERSION );

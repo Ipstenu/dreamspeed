@@ -70,11 +70,19 @@ function dreamspeed_core_init() {
 add_action( 'init', 'dreamspeed_core_init' );
 
 if ( ! defined( 'DREAMSPEED_VERSION' ) ) {
-	define( 'DREAMSPEED_VERSION', '0.7.3' );
+	define( 'DREAMSPEED_VERSION', '0.9.0' );
 }
 
 function dreamspeed_cdn_activate() {
 	// If the plugin is being activated for the first time, we'll assume there's no need for an upgrade
-	if ( !get_option('dreamspeed_version')) {update_option( 'dreamspeed_version', DREAMSPEED_VERSION );}
+	if ( !get_option('dreamspeed_version')) { update_option( 'dreamspeed_version', DREAMSPEED_VERSION ); }
 }
 register_activation_hook( __FILE__, 'dreamspeed_cdn_activate' );
+
+function dreamspeed_cdn_deactivate() {
+	// Plugin will attempt to deactivate
+	include_once( 'deactivate.php' );
+	dreamspeed_cdn_deactivate_revert();
+	dreamspeed_cdn_deactivate_reset();
+}
+register_deactivation_hook( __FILE__, 'dreamspeed_cdn_deactivate' );

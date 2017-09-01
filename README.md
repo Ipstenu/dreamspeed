@@ -1,11 +1,12 @@
-DreamSpeed CDN
+DreamSpeed CDN (RETIRED)
 ==========
 
-This is the development repository for the DreamSpeed CDN plugin.
+This was the development repository for the DreamSpeed CDN plugin.
 
 * [WP Readme](readme.txt)
 * [Changelog](changelog.txt)
-* [WordPress Repoitory](https://wordpress.org/plugins/dreamspeed-cdn/)
+
+As of December 2018, this plugin is no longer maintained nor supported. Fork as you will.
 
 ## Build Procedure
 
