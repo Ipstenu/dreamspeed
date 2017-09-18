@@ -1,3 +1,42 @@
+= 0.7.4 =
+* February 2017 by Ipstenu
+* Fix: Display image on media library if using a custom CDN
+
+= 0.7.3 = 
+* January 2017 by Ipstenu
+* Fix: If bucket has a period in the name, use domain http(s)://objects(*).dream.io/BUCKET
+* Fix: Cloudfront filters
+* Run: Upgrade feature to Fullspeed is working (part of #22)
+
+= 0.7.2 =
+* October 2016 by Ipstenu
+* Fix: Trust fullspeed, even with SSL (resolves #22)
+* (NB: This was not released as it ended up finding a couple major bugs)
+
+= 0.7.1 =
+* August 2016 by Ipstenu
+* Fix: Serve files from dream.io points to the right location
+* Run: Upgrade feature to ensure the above
+* Fix: If SSL, don't use CDN Alias as that won't work
+* Fix: If SSL, auto-check 'force ssl' because you did already
+* Fix: If using dream.io, don't allow CDN Aliases (you can't have both)
+* Fix: Improved messaging
+
+= 0.7.0 =
+* May 2016 by Ipstenu
+* Change hostname to objects-us-west-1.dream.io
+* Create upgrade feature to force all URLs to be updated
+* Added explanatory descriptions to settings page
+* Hide certain settings if requirements are not met (you can't upload existing media if you don't pick a bucket, for example)
+* Build out framework for future regions
+
+= 0.6.0 =
+* March 2016 by Ipstenu
+* Updating SDK
+* Changing dev environment to use Composer
+* Fixed SSL to work with Dream.io URLs
+* Improved sanitization and escaping.
+
 = 0.5.4 =
 * Nov 02, 2015 by Ipstenu
 * Correction to 'Create a Bucket' script.

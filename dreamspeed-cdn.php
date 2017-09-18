@@ -2,9 +2,9 @@
 /*
 Plugin Name: DreamSpeed CDN
 Plugin URI: https://github.com/Ipstenu/dreamspeed/
-Description: Allows media to be copied to DreamSpeed CDN as they are added to the Media Library. Requires use of DreamObjects.
+Description: RETIRED - Please uninstall this plugin
 Author: Mika Epstein
-Version: 0.7.4
+Version: 1.0.0
 Author URI: https://dreamhost.com
 Text Domain: dreamspeed-cdn
 
@@ -70,7 +70,7 @@ function dreamspeed_core_init() {
 add_action( 'init', 'dreamspeed_core_init' );
 
 if ( ! defined( 'DREAMSPEED_VERSION' ) ) {
-	define( 'DREAMSPEED_VERSION', '0.9.0' );
+	define( 'DREAMSPEED_VERSION', '1.0.0' );
 }
 
 function dreamspeed_cdn_activate() {
