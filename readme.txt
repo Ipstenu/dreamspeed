@@ -7,7 +7,7 @@ Stable tag: 1.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-The DreamSpeed CDN plugin has been retired.
+THE DREAMSPEED CDN PLUGIN HAS BEEN RETIRED.
 
 == Description ==
 
@@ -40,7 +40,7 @@ Because the CDN service it relies on is being retired.
 
 <strong>Couldn't this be changed to just use the cloud instead?</strong>
 
-Yes, but it wouldn't be significantly faster than self-hosting. In fact, in many cases it would be slower. Without actually being a CDN, you're just remote-hosting media and that isn't actually what most people want to do, it turns out.
+Yes, but it wouldn't be significantly faster than self-hosting. In many cases it would be noticably slower. Without actually being a CDN, you're just remote-hosting media and that isn't actually what most people want to do, it turns out.
 
 <strong>Can you recommend a replacement?</strong>
 
