@@ -137,8 +137,8 @@ function dreamspeed_show_upgrade_notices() {
 		);
 	} elseif ( version_compare( $dreamspeed_version, '1.0.0', '<' ) ) {
 		printf(
-			'<div class="notice error"><p>' . esc_html__( 'Due to the end of the DreamSpeed CDN service, this plugin will be retired. As of December 2017, it will no longer supported or developed. On uninstall or deactivation, the plugin will revert your content to the best of it\'s ability. Please %sclick here%s for more information.', 'dreamspeed-cdn' ) . '</p></div>',
-			'<a href="' . esc_url( 'https://dreamhost.com' ) . '">',
+			'<div class="notice error"><p>' . esc_html__( 'Due to the EoL of the DreamSpeed CDN service, this plugin will be retired. As of November 2017, it will no longer supported or actively developed. On uninstall or deactivation, the plugin will revert your content to the best of it\'s ability. Please %sclick here%s for more information.', 'dreamspeed-cdn' ) . '</p></div>',
+			'<a href="' . esc_url( 'https://help.dreamhost.com/hc/en-us/articles/215916677-What-is-DreamSpeed-' ) . '">',
 			'</a>'
 		);
 	}
